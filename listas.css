@@ -1,0 +1,105 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #333;
+    padding: 10px;
+    color: white;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    left: 10px;
+    background-color: #444;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    margin: 5px 0;
+}
+
+.search-bar {
+    padding: 5px;
+    width: 200px;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.buttons button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#listas-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+}
+
+.lista {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 300px;
+    background-color: #f9f9f9;
+}
+
+.lista h2 {
+    text-align: center;
+}
+
+.tarea {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.tarea input {
+    margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+    #listas-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.menu.active {
+    display: flex;
+}

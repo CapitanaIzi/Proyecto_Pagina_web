@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Pendientes</title>
+    <link rel="stylesheet" href="listas.css">
+</head>
+<body>
+    <!-- Menú desplegable -->
+    <header>
+        <button class="menu-btn">Menú</button>
+        <nav class="menu">
+            <a href="#">Inicio</a>
+            <a href="#">Tareas Semanales</a>
+            <a href="#">Mapa Conceptual</a>
+            <a href="#">Planificador de Proyecto</a>
+            <a href="#">Escritura</a>
+            <a href="#">Registrarse</a>
+            <a href="#">Apariencia</a>
+            <a href="#">Opiniones</a>
+        </nav>
+        <input type="text" placeholder="Buscar..." class="search-bar">
+    </header>
+
+    <!-- Título y botones de listas -->
+    <main>
+        <h1>Listas de Pendientes</h1>
+        <div class="buttons">
+            <button id="btn-semanal">Lista Semanal</button>
+            <button id="btn-personal">Lista Personal</button>
+            <button id="btn-mensual">Lista por Mes</button>
+            <button id="btn-calendario">Calendario</button>
+        </div>
+
+        <!-- Contenedor para las listas -->
+        <section id="listas-container">
+            <!-- Aquí se insertarán las listas dinámicamente -->
+        </section>
+    </main>
+
+    <script src="listas.js"></script>
+</body>
+</html>
