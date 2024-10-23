@@ -120,11 +120,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Evento para agregar nuevas listas personales o por mes
-    document.getElementById('agregar-lista-personal').addEventListener('click', () => {
+    document.getElementById('btn-personal').addEventListener('click', () => {
         agregarLista(listaPersonalContainer, 'Lista Personal');
     });
 
-    document.getElementById('agregar-lista-mes').addEventListener('click', () => {
+    document.getElementById('btn-mensual').addEventListener('click', () => {
         agregarLista(listaMesContainer, 'Lista por Mes');
     });
 });
