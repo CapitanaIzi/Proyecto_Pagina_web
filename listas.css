@@ -6,12 +6,14 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #333;
+    color: white;
 }
 
 header {
     display: flex;
     justify-content: space-between;
-    background-color: #333;
+    background-color: #444;
     padding: 10px;
     color: white;
 }
@@ -30,7 +32,7 @@ header {
     position: absolute;
     top: 50px;
     left: 10px;
-    background-color: #444;
+    background-color: #555;
     padding: 10px;
     border-radius: 5px;
 }
@@ -64,41 +66,62 @@ h1 {
     cursor: pointer;
 }
 
-#listas-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
+.container {
+    margin: 0 auto;
+    max-width: 1200px;
     padding: 20px;
+    color: white;
 }
 
-.lista {
-    border: 1px solid #ccc;
+
+.lista-semanal {
+    display: flex;
+    justify-content: space-between;
     padding: 10px;
-    width: 300px;
-    background-color: #f9f9f9;
 }
 
-.lista h2 {
+.lista-basica {
+    width: 13%;
+    padding: 10px;
+    background-color: #333;
+    border-radius: 5px;
+    margin: 0 5px;
+}
+
+.lista-basica h2 {
     text-align: center;
 }
 
 .tarea {
     display: flex;
     justify-content: space-between;
-    padding: 5px;
+    margin-bottom: 5px;
 }
 
-.tarea input {
-    margin-right: 10px;
+.tarea input[type="text"] {
+    background: none;
+    border: none;
+    color: white;
+    width: 80%;
+}
+
+.tarea input[type="checkbox"] {
+    transform: scale(1.5);
 }
 
 @media (max-width: 768px) {
-    #listas-container {
+    .semana {
         flex-direction: column;
         align-items: center;
     }
+
+    .dia {
+        width: 80%;
+        margin: 10px 0;
+    }
+
 }
+
 
 .menu.active {
     display: flex;

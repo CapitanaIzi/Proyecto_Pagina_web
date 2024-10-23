@@ -6,83 +6,82 @@ menuBtn.addEventListener('click', () => {
     menu.classList.toggle('active');
 });
 
-// Funciones POO para las tareas y listas
+
 class Tarea {
-    constructor(texto) {
-        this.texto = texto;
+    constructor(nombre = "Tarea") {
+        this.nombre = nombre;
         this.completada = false;
     }
 
-    marcarCompletada() {
-        this.completada = !this.completada;
+    crearTarea() {
+        
+        const tareaDiv = document.createElement('div');
+        tareaDiv.classList.add('tarea');
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.addEventListener('change', () => {
+            this.completada = checkbox.checked;
+        });
+
+        const inputTexto = document.createElement('input');
+        inputTexto.type = 'text';
+        inputTexto.value = this.nombre;
+        inputTexto.addEventListener('input', (e) => {
+            this.nombre = e.target.value;
+        });
+        
+
+        tareaDiv.appendChild(checkbox);
+        tareaDiv.appendChild(inputTexto);
+        return tareaDiv;
     }
-}
+
+    }
+
 
 class Lista {
-    constructor(titulo) {
+    constructor(titulo = "Título") {
         this.titulo = titulo;
-        this.tareas = [];
+        this.tareas = [new Tarea(), new Tarea(), new Tarea()];
     }
 
-    agregarTarea(texto) {
-        const nuevaTarea = new Tarea(texto);
-        this.tareas.push(nuevaTarea);
-    }
+    crearLista() {
+        const listaDiv = document.createElement('div');
+        listaDiv.classList.add('lista-basica');
 
-    eliminarTarea(index) {
-        this.tareas.splice(index, 1);
-    }
+        const tituloInput = document.createElement('input');
+        tituloInput.type = 'text';
+        tituloInput.value = this.titulo;
+        tituloInput.addEventListener('input', (e) => {
+            this.titulo = e.target.value;
+        });
 
-    duplicarTarea(index) {
-        const tareaDuplicada = Object.assign({}, this.tareas[index]);
-        this.tareas.push(tareaDuplicada);
-    }
+        const titulo = document.createElement('h2');
+        titulo.appendChild(tituloInput);
 
-    destacarTarea(index) {
-        this.tareas[index].destacada = true;
+        listaDiv.appendChild(titulo);
+
+        this.tareas.forEach(tarea => {
+            listaDiv.appendChild(tarea.crearTarea());
+        });
+
+        return listaDiv;
     }
 }
 
-// Crear lista semanal como ejemplo
-const listasContainer = document.getElementById('listas-container');
-
-function crearListaSemanal() {
-    const listaSemanal = new Lista('Semana 1');
-    listaSemanal.agregarTarea('Ejemplo de tarea');
-
-    const listaDiv = document.createElement('div');
-    listaDiv.className = 'lista';
-
-    const titulo = document.createElement('h2');
-    titulo.textContent = listaSemanal.titulo;
-    listaDiv.appendChild(titulo);
-
-    listaSemanal.tareas.forEach((tarea, index) => {
-        const tareaDiv = document.createElement('div');
-        tareaDiv.className = 'tarea';
-        
-        const tareaCheckbox = document.createElement('input');
-        tareaCheckbox.type = 'checkbox';
-        tareaCheckbox.addEventListener('change', () => tarea.marcarCompletada());
-
-        const tareaTexto = document.createElement('span');
-        tareaTexto.textContent = tarea.texto;
-
-        tareaDiv.appendChild(tareaCheckbox);
-        tareaDiv.appendChild(tareaTexto);
-
-        // Agregar tres puntitos con opciones
-        const opciones = document.createElement('span');
-        opciones.textContent = '⋮';
-        opciones.style.cursor = 'pointer';
-        opciones.addEventListener('click', () => mostrarOpciones(tarea, index, listaSemanal));
-
-        tareaDiv.appendChild(opciones);
-        listaDiv.appendChild(tareaDiv);
-    });
-
-    listasContainer.appendChild(listaDiv);
+function agregarLista() {
+    const nuevaLista = new Lista();
+    const listaSemanal = document.getElementById('listaSemanal');
+    listaSemanal.appendChild(nuevaLista.crearLista());
 }
+
+// Inicialmente agregamos una lista semanal de 7 listas
+document.addEventListener('DOMContentLoaded', () => {
+    for (let i = 0; i < 7; i++) {
+        agregarLista();
+    }
+});
 
 function mostrarOpciones(tarea, index, lista) {
     const opciones = prompt('Opciones: (1) Eliminar, (2) Duplicar, (3) Destacar');
@@ -99,5 +98,3 @@ function mostrarOpciones(tarea, index, lista) {
     }
 }
 
-// Botón para crear lista semanal
-document.getElementById('btn-semanal').addEventListener('click', crearListaSemanal);
