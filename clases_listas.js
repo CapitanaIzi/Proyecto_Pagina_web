@@ -1,11 +1,3 @@
-// -------------------- MENU DESPLEGABLE --------------------
-document.querySelector('.menu-btn').addEventListener('click', () => {
-    document.querySelector('.menu').classList.toggle('active');
-});
-
-// -------------------- CLASES --------------------
-
-// Clase Tarea
 class Tarea {
     constructor(nombre = "Tarea") {
         this.nombre = nombre;
@@ -79,52 +71,3 @@ class Lista {
         return listaDiv;
     }
 }
-
-// -------------------- FUNCIONES --------------------
-
-// Función para agregar una lista en la sección correspondiente
-function agregarLista(container, titulo) {
-    const nuevaLista = new Lista(titulo);
-    container.appendChild(nuevaLista.crearLista());
-}
-
-// Función para mostrar las opciones de las tareas (Eliminar, Duplicar, Destacar)
-function mostrarOpciones(tarea) {
-    const opciones = prompt('Opciones: (1) Eliminar, (2) Duplicar, (3) Destacar');
-    switch (opciones) {
-        case '1':
-            tarea.eliminar(); // Implementar método eliminar en la clase Tarea si es necesario
-            break;
-        case '2':
-            tarea.duplicar(); // Implementar método duplicar
-            break;
-        case '3':
-            tarea.destacar(); // Implementar método destacar
-            break;
-    }
-}
-
-// -------------------- EVENTOS --------------------
-
-// Crear una lista semanal al cargar la página
-document.addEventListener('DOMContentLoaded', () => {
-    const listaSemanalContainer = document.getElementById('lista-semanal');
-    const listaPersonalContainer = document.getElementById('listas-personales');
-    const listaMesContainer = document.getElementById('listas-mes');
-
-    const diasDeLaSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
-
-    // Crear 7 listas básicas para la lista semanal
-    diasDeLaSemana.forEach(dia => {
-        agregarLista(listaSemanalContainer, dia);
-    });
-
-    // Evento para agregar nuevas listas personales o por mes
-    document.getElementById('agregar-lista-personal').addEventListener('click', () => {
-        agregarLista(listaPersonalContainer, 'Lista Personal');
-    });
-
-    document.getElementById('agregar-lista-mes').addEventListener('click', () => {
-        agregarLista(listaMesContainer, 'Lista por Mes');
-    });
-});

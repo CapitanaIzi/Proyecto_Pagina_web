@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Pendientes</title>
     <link rel="stylesheet" href="listas.css">
 </head>
+
 <body>
     <!-- Menú desplegable -->
     <header>
@@ -33,19 +35,37 @@
             <button id="btn-calendario">Calendario</button>
         </div>
 
-        <!-- Contenedor para las listas -->
-        <section id="listas-container">
-            <!-- Lista Semanal Predefinida -->
-            <div class="container">
-                <h1>Listas de Pendientes</h1>
-                <div id="listaSemanal" class="lista-semanal">
-                    <!-- Aquí se agregarán las listas dinámicamente -->
-                </div>
-                <button onclick="agregarLista()">Agregar Lista Semanal</button>
+        <div class="container">
+            <!-- Contenedor Lista Personal -->
+            <div class="list-container" id="lista-personal-container">
+                <h2 class="non-editable-title">Lista Personal</h2>
+                <div class="listas-basicas" id="listas-personales"></div>
             </div>
-        </section>
+
+            <!-- Contenedor Lista Semanal -->
+            <div class="list-container">
+                <h2 class="non-editable-title">Lista Semanal</h2>
+                <input class="editable-title" placeholder="Agregue la semana aquí">
+                <div class="listas-basicas" id="lista-semanal">
+                    <!-- Sección de listas básicas para cada día de la semana -->
+                </div>
+            </div>
+
+            <!-- Contenedor Lista por Mes -->
+            <div class="list-container" id="lista-mes-container">
+                <h2 class="non-editable-title">Lista por Mes</h2>
+                <div class="listas-basicas" id="listas-mes"></div>
+            </div>
+
+            <!-- Botones -->
+            <button id="agregar-lista-personal">Lista Personal</button>
+            <button id="agregar-lista-mes">Lista por Mes</button>
+        </div>
+
+
     </main>
 
     <script src="listas.js"></script>
 </body>
+
 </html>
