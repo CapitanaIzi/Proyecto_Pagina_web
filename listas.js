@@ -103,22 +103,49 @@ function mostrarOpciones(tarea) {
             break;
     }
 }
+function crearListaSemanal() {
+     // Obtener el contenedor de "Lista Semanal" donde se añadirán las nuevas listas
+     const listaSemanalGeneral = document.getElementById('lista-semanal');
+    // Crear el contenedor principal para la nueva lista semanal
+    const nuevoContenedor = document.createElement('div');
+    nuevoContenedor.classList.add('container');
+    
+    // Crear el campo de título editable
+    const tituloEditable = document.createElement('input');
+    tituloEditable.classList.add('editable-title');
+    tituloEditable.placeholder = 'Agregue la semana aquí (Ejemplo:21/10 al 27/10)'; // Placeholder para el título editable
+
+    // Crear el contenedor para las listas básicas
+    const listaSemanalContainer = document.createElement('div');
+    listaSemanalContainer.classList.add('listas-basicas');
+
+    // Agregar el título no editable, el campo de título editable y el contenedor de listas al contenedor principal
+    nuevoContenedor.appendChild(tituloEditable); // Añadir el campo de título editable
+    nuevoContenedor.appendChild(listaSemanalContainer);
+    
+    // Crear las 7 listas básicas para cada día de la semana
+    const diasDeLaSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+    diasDeLaSemana.forEach(dia => {
+        agregarLista(listaSemanalContainer, dia); // Usar la función para agregar las listas por día
+    });
+
+    // Añadir el nuevo contenedor al final de la página (o en el contenedor adecuado)
+    listaSemanalGeneral.appendChild(nuevoContenedor); // Cambia esto si necesitas agregarlo a otro contenedor específico
+}
 
 // -------------------- EVENTOS --------------------
 
 // Crear una lista semanal al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
-    const listaSemanalContainer = document.getElementById('lista-semanal');
+   
     const listaPersonalContainer = document.getElementById('listas-personales');
+     crearListaSemanal();
     const listaMesContainer = document.getElementById('listas-mes');
-
-    const diasDeLaSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
-
-    // Crear 7 listas básicas para la lista semanal
-    diasDeLaSemana.forEach(dia => {
-        agregarLista(listaSemanalContainer, dia);
+   
+   
+    document.getElementById('btn-semanal').addEventListener('click', () => {
+        crearListaSemanal();
     });
-
     // Evento para agregar nuevas listas personales o por mes
     document.getElementById('btn-personal').addEventListener('click', () => {
         agregarLista(listaPersonalContainer, 'Lista Personal');

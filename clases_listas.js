@@ -1,3 +1,10 @@
+document.querySelector('.menu-btn').addEventListener('click', () => {
+    document.querySelector('.menu').classList.toggle('active');
+});
+
+// -------------------- CLASES --------------------
+
+// Clase Tarea
 class Tarea {
     constructor(nombre = "Tarea") {
         this.nombre = nombre;
@@ -21,7 +28,6 @@ class Tarea {
             this.nombre = e.target.value;
         });
 
-        // Crear opciones desplegables (Eliminar, Duplicar, Destacar)
         const opcionesBtn = document.createElement('button');
         opcionesBtn.textContent = '⋮';
         opcionesBtn.addEventListener('click', () => mostrarOpciones(this));
@@ -58,7 +64,6 @@ class Lista {
             listaDiv.appendChild(tarea.crearTarea());
         });
 
-        // Botón para agregar más tareas
         const btnAgregarTarea = document.createElement('button');
         btnAgregarTarea.textContent = 'Agregar Tarea';
         btnAgregarTarea.addEventListener('click', () => {
@@ -71,3 +76,69 @@ class Lista {
         return listaDiv;
     }
 }
+
+// -------------------- FUNCIONES --------------------
+
+// Función para agregar listas en la sección correspondiente
+function agregarLista(container, titulo) {
+    const nuevaLista = new Lista(titulo);
+    container.appendChild(nuevaLista.crearLista());
+}
+
+// Función para crear una lista semanal completa con los días de la semana
+function agregarListaSemanal() {
+    const nuevaListaSemanal = document.createElement('div');
+    nuevaListaSemanal.classList.add('lista-semanal');
+
+    const titulo = document.createElement('h3');
+    titulo.textContent = 'Lista Semanal';
+    nuevaListaSemanal.appendChild(titulo);
+
+    diasDeLaSemana.forEach(dia => {
+        agregarLista(nuevaListaSemanal, dia); // Reutilizamos agregarLista para cada día
+    });
+
+    listaSemanalContainer.appendChild(nuevaListaSemanal); // Añadimos la lista al contenedor
+}
+
+// Función para mostrar las opciones de las tareas (Eliminar, Duplicar, Destacar)
+function mostrarOpciones(tarea) {
+    const opciones = prompt('Opciones: (1) Eliminar, (2) Duplicar, (3) Destacar');
+    switch (opciones) {
+        case '1':
+            // Implementar método eliminar
+            break;
+        case '2':
+            // Implementar método duplicar
+            break;
+        case '3':
+            // Implementar método destacar
+            break;
+    }
+}
+
+// -------------------- VARIABLES --------------------
+const diasDeLaSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+const listaSemanalContainer = document.getElementById('lista-semanal');
+const listaPersonalContainer = document.getElementById('listas-personales');
+const listaMesContainer = document.getElementById('listas-mes');
+
+// -------------------- EVENTOS --------------------
+
+// Al cargar la página, crea la primera lista semanal
+document.addEventListener('DOMContentLoaded', () => {
+    agregarListaSemanal();
+
+    document.getElementById('btn-personal').addEventListener('click', () => {
+        agregarLista(listaPersonalContainer, 'Lista Personal');
+    });
+
+    document.getElementById('btn-mensual').addEventListener('click', () => {
+        agregarLista(listaMesContainer, 'Lista por Mes');
+    });
+
+    document.getElementById('btn-semanal').addEventListener('click', function() {
+        agregarListaSemanal();
+    });
+});
+

@@ -157,7 +157,19 @@ button:hover {
 
 }
 
-
+.cuadro-extra {
+    display: block;
+    width: 100%;
+    min-height: 100px;
+    margin-top: 10px;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 14px;
+    resize: vertical; /* Permitir al usuario cambiar el tamaño verticalmente */
+    box-sizing: border-box;
+}
 .menu.active {
     display: flex;
 }
