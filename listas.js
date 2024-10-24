@@ -3,8 +3,6 @@ document.querySelector('.menu-btn').addEventListener('click', () => {
     document.querySelector('.menu').classList.toggle('active');
 });
 
-// -------------------- CLASES --------------------
-
 // Clase Tarea
 class Tarea {
     constructor(nombre = "Tarea") {

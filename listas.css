@@ -121,6 +121,8 @@ button:hover {
     background-color: #333;
     border-radius: 5px;
     margin: 0 5px;
+    
+    
 }
 
 .lista-basica h2 {
@@ -131,17 +133,40 @@ button:hover {
     display: flex;
     justify-content: space-between;
     margin-bottom: 5px;
+    align-items: center; /* Asegura que los elementos estén alineados verticalmente */
+    
+    
+}
+.tarea-texto {
+    word-wrap: break-word;
+    white-space: normal; /* Esto permite que el texto largo se ajuste automáticamente a la línea */
+    max-width: 100%; /* Asegura que no sobrepase el contenedor */
+    overflow-wrap: break-word; /* Asegura que las palabras largas se dividan correctamente */
 }
 
-.tarea input[type="text"] {
+.tarea input[type="text"] {/* aqui editar porq este el contenedor del texto*/
     background: none;
     border: none;
     color: white;
-    width: 80%;
+    width: 90px; /* Ajusta el ancho para que el botón no lo tape */
+    margin-right: 10px; /* Añade un espacio entre el input y el botón de opciones */
+    padding: 5px;
+    
 }
 
 .tarea input[type="checkbox"] {
     transform: scale(1.5);
+    
+}
+
+.tarea button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5em; /* Ajusta el tamaño del botón de opciones */
+    cursor: pointer;
+    margin-right: 10px; 
+    
 }
 
 @media (max-width: 768px) {
