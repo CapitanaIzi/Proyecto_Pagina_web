@@ -20,10 +20,9 @@ class Tarea {
             this.completada = checkbox.checked;
         });
 
-        const inputTexto = document.createElement('input');
-        inputTexto.type = 'text';
-        inputTexto.value = this.nombre;
-        inputTexto.addEventListener('input', (e) => {
+        const textArea = document.createElement('textarea'); // Cambiado de 'input' a 'textarea'
+        textArea.placeholder = this.nombre; // El placeholder ahora muestra 'Tarea'
+        textArea.addEventListener('input', (e) => {
             this.nombre = e.target.value;
         });
 
@@ -33,12 +32,13 @@ class Tarea {
         opcionesBtn.addEventListener('click', () => mostrarOpciones(this));
 
         tareaDiv.appendChild(checkbox);
-        tareaDiv.appendChild(inputTexto);
+        tareaDiv.appendChild(textArea);
         tareaDiv.appendChild(opcionesBtn);
 
         return tareaDiv;
     }
 }
+
 
 // Clase Lista
 class Lista {
@@ -102,16 +102,19 @@ function mostrarOpciones(tarea) {
     }
 }
 function crearListaSemanal() {
-     // Obtener el contenedor de "Lista Semanal" donde se añadirán las nuevas listas
-     const listaSemanalGeneral = document.getElementById('lista-semanal');
+    // Obtener el contenedor de "Lista Semanal" donde se añadirán las nuevas listas
+    const listaSemanalGeneral = document.getElementById('lista-semanal');
     // Crear el contenedor principal para la nueva lista semanal
     const nuevoContenedor = document.createElement('div');
     nuevoContenedor.classList.add('container');
-    
+
     // Crear el campo de título editable
     const tituloEditable = document.createElement('input');
     tituloEditable.classList.add('editable-title');
-    tituloEditable.placeholder = 'Agregue la semana aquí (Ejemplo:21/10 al 27/10)'; // Placeholder para el título editable
+    tituloEditable.placeholder = 'Agregue la semana aquí (Ejemplo: 21/10 al 27/10)';
+
+   
+
 
     // Crear el contenedor para las listas básicas
     const listaSemanalContainer = document.createElement('div');
@@ -120,7 +123,7 @@ function crearListaSemanal() {
     // Agregar el título no editable, el campo de título editable y el contenedor de listas al contenedor principal
     nuevoContenedor.appendChild(tituloEditable); // Añadir el campo de título editable
     nuevoContenedor.appendChild(listaSemanalContainer);
-    
+
     // Crear las 7 listas básicas para cada día de la semana
     const diasDeLaSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
     diasDeLaSemana.forEach(dia => {
@@ -135,12 +138,12 @@ function crearListaSemanal() {
 
 // Crear una lista semanal al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
-   
+
     const listaPersonalContainer = document.getElementById('listas-personales');
-     crearListaSemanal();
+    crearListaSemanal();
     const listaMesContainer = document.getElementById('listas-mes');
-   
-   
+
+
     document.getElementById('btn-semanal').addEventListener('click', () => {
         crearListaSemanal();
     });

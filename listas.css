@@ -1,5 +1,3 @@
-
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -17,11 +15,15 @@ header {
 }
 
 .menu-btn {
-    background: none;
-    border: none;
-    color: white;
+    background-color: #1c2dc2;
+    border: 2px solid #ccc;
+    color: rgb(250, 244, 244);
     font-size: 18px;
     cursor: pointer;
+}
+
+.menu-btn:hover {
+    background-color: #2d31fa;
 }
 
 .menu {
@@ -36,9 +38,14 @@ header {
 }
 
 .menu a {
-    color: white;
+    color: rgb(255, 253, 253);
     text-decoration: none;
     margin: 5px 0;
+}
+
+.menu.active {
+    display: flex;
+    border: 2px solid #faf7f7;
 }
 
 .search-bar {
@@ -83,103 +90,64 @@ h1 {
     padding: 5px;
     border: 1px solid #ccc;
     width: 100%;
-}
 
+    background-color: rgb(114, 110, 110);
+    /* Color de fondo */
+    color: rgb(252, 248, 248);
+}
+.editable-title::placeholder {
+    color: rgb(241, 239, 239); /* Color del placeholder */
+    opacity: 1; /* Asegura que el color tenga la opacidad completa */
+}
 .listas-basicas {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    border: 1px;
 }
 
 
-.lista-basica h3 {
-    font-size: 1em;
-    margin: 0 0 5px;
-}
+
 
 button {
     margin-top: 10px;
     padding: 10px;
-    background-color: #007BFF;
+    background-color: #0e5097;
     color: #fff;
     border: none;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #0056b3;
-}
-.lista-semanal {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
+    background-color: #176eca;
 }
 
-.lista-basica {
-    width: 10%;
-    padding: 10px;
-    background-color: #333;
-    border-radius: 5px;
-    margin: 0 5px;
-    
-    
-}
-
-.lista-basica h2 {
-    text-align: center;
-}
-
-.tarea {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 5px;
-    align-items: center; /* Asegura que los elementos estén alineados verticalmente */
-    
-    
-}
-.tarea-texto {
-    word-wrap: break-word;
-    white-space: normal; /* Esto permite que el texto largo se ajuste automáticamente a la línea */
-    max-width: 100%; /* Asegura que no sobrepase el contenedor */
-    overflow-wrap: break-word; /* Asegura que las palabras largas se dividan correctamente */
-}
-
-.tarea input[type="text"] {/* aqui editar porq este el contenedor del texto*/
+.tarea textarea {
     background: none;
     border: none;
-    color: white;
-    width: 90px; /* Ajusta el ancho para que el botón no lo tape */
-    margin-right: 10px; /* Añade un espacio entre el input y el botón de opciones */
-    padding: 5px;
-    
+    color: rgb(245, 242, 242);
+
 }
 
 .tarea input[type="checkbox"] {
     transform: scale(1.5);
-    
+
 }
 
 .tarea button {
     background: none;
     border: none;
-    color: white;
-    font-size: 1.5em; /* Ajusta el tamaño del botón de opciones */
+    color: rgb(196, 188, 188);
+    font-size: 1.0em;
+    /* Ajusta el tamaño del botón de opciones */
     cursor: pointer;
-    margin-right: 10px; 
-    
+    margin-right: 10px;
+
 }
 
-@media (max-width: 768px) {
-    .semana {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .dia {
-        width: 80%;
-        margin: 10px 0;
-    }
-
+.completed {
+    text-decoration: line-through;
+    color: rgb(119, 121, 118);
 }
 
 .cuadro-extra {
@@ -192,9 +160,7 @@ button:hover {
     border-radius: 5px;
     background-color: #fff;
     font-size: 14px;
-    resize: vertical; /* Permitir al usuario cambiar el tamaño verticalmente */
+    resize: vertical;
+    /* Permitir al usuario cambiar el tamaño verticalmente */
     box-sizing: border-box;
-}
-.menu.active {
-    display: flex;
 }
