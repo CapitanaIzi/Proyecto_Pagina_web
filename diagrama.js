@@ -19,9 +19,9 @@ function configurarEventos(btnInsertar, menuInsertar, btnEditar, menuEditar, btn
         guardarEstado();
         alert('Estado guardado.');
     });
-    configurarMenu(btnInsertar, menuInsertar);
-    configurarMenu(btnEditar, menuEditar);
-    configurarMenu(btnColor, menuColor);
+    configurarMenuDiagrama(btnInsertar, menuInsertar);
+    configurarMenuDiagrama(btnEditar, menuEditar);
+    configurarMenuDiagrama(btnColor, menuColor);
     configurarEventoEliminar(eliminarBtn);
 
     // Eventos para crear cuadros y flechas
@@ -39,7 +39,7 @@ function configurarEventos(btnInsertar, menuInsertar, btnEditar, menuEditar, btn
  * @param {HTMLElement} button - El botón que activa el menú.
  * @param {HTMLElement} menu - El menú cuya visibilidad se alternará.
  */
-function configurarMenu(button, menu) {
+function configurarMenuDiagrama(button, menu) {
     button.addEventListener('click', () => {
         menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
     });

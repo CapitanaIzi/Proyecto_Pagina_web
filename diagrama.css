@@ -19,7 +19,7 @@ body, html {
     background-color: #2d31fa;
 }
 
-.menu {
+.menuPrincipal {
     display: none;
     flex-direction: column;
     position: absolute;
@@ -30,13 +30,13 @@ body, html {
     border-radius: 5px;
 }
 
-.menu a {
+.menuPrincipal a {
     color: rgb(255, 253, 253);
     text-decoration: none;
     margin: 5px 0;
 }
 
-.menu.active {
+.menuPrincipal.active {
     display: flex;
     border: 2px solid #faf7f7;
 }

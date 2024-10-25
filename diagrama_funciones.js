@@ -1,3 +1,7 @@
+
+document.querySelector('.menu-btn').addEventListener('click', () => {
+    document.querySelector('.menuPrincipal').classList.toggle('active');
+});
 /**
  * Guarda el estado del mapa conceptual en localStorage.
  */
