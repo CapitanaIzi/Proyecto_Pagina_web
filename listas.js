@@ -10,33 +10,44 @@ class Tarea {
         this.completada = false;
     }
 
-    crearTarea() {
-        const tareaDiv = document.createElement('div');
-        tareaDiv.classList.add('tarea');
-
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.addEventListener('change', () => {
-            this.completada = checkbox.checked;
-        });
-
-        const textArea = document.createElement('textarea'); // Cambiado de 'input' a 'textarea'
-        textArea.placeholder = this.nombre; // El placeholder ahora muestra 'Tarea'
-        textArea.addEventListener('input', (e) => {
-            this.nombre = e.target.value;
-        });
-
-        // Crear opciones desplegables (Eliminar, Duplicar, Destacar)
-        const opcionesBtn = document.createElement('button');
-        opcionesBtn.textContent = '⋮';
-        opcionesBtn.addEventListener('click', () => mostrarOpciones(this));
-
-        tareaDiv.appendChild(checkbox);
-        tareaDiv.appendChild(textArea);
-        tareaDiv.appendChild(opcionesBtn);
-
-        return tareaDiv;
-    }
+    
+        crearTarea() {
+            const tareaDiv = document.createElement('div');
+            tareaDiv.classList.add('tarea');
+    
+            // Crear el checkbox
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.addEventListener('change', () => {
+                this.completada = checkbox.checked;
+                if (this.completada) {
+                    textArea.classList.add('tachado'); // Añadir clase de tachado
+                } else {
+                    textArea.classList.remove('tachado'); // Quitar clase de tachado
+                }
+            });
+    
+            // Crear el campo de texto (textarea)
+            const textArea = document.createElement('textarea');
+            textArea.placeholder = this.nombre;
+            textArea.addEventListener('input', (e) => {
+                this.nombre = e.target.value;
+            });
+    
+            // Crear el botón de opciones
+            const opcionesBtn = document.createElement('button');
+            opcionesBtn.textContent = '⋮';
+            opcionesBtn.addEventListener('click', () => mostrarOpciones(this));
+    
+            // Añadir elementos a la tarea
+            tareaDiv.appendChild(checkbox);
+            tareaDiv.appendChild(textArea);
+            tareaDiv.appendChild(opcionesBtn);
+    
+            return tareaDiv;
+        }
+    
+    
 }
 
 
@@ -53,7 +64,7 @@ class Lista {
 
         const tituloInput = document.createElement('input');
         tituloInput.type = 'text';
-        tituloInput.value = this.titulo;
+        tituloInput.placeholder = this.titulo; // Usar 'placeholder' en lugar de 'value'
         tituloInput.addEventListener('input', (e) => {
             this.titulo = e.target.value;
         });
@@ -113,9 +124,6 @@ function crearListaSemanal() {
     tituloEditable.classList.add('editable-title');
     tituloEditable.placeholder = 'Agregue la semana aquí (Ejemplo: 21/10 al 27/10)';
 
-   
-
-
     // Crear el contenedor para las listas básicas
     const listaSemanalContainer = document.createElement('div');
     listaSemanalContainer.classList.add('listas-basicas');
@@ -128,7 +136,8 @@ function crearListaSemanal() {
     const diasDeLaSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
     diasDeLaSemana.forEach(dia => {
         agregarLista(listaSemanalContainer, dia); // Usar la función para agregar las listas por día
-    });
+     
+ });
 
     // Añadir el nuevo contenedor al final de la página (o en el contenedor adecuado)
     listaSemanalGeneral.appendChild(nuevoContenedor); // Cambia esto si necesitas agregarlo a otro contenedor específico
@@ -149,10 +158,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     // Evento para agregar nuevas listas personales o por mes
     document.getElementById('btn-personal').addEventListener('click', () => {
-        agregarLista(listaPersonalContainer, 'Lista Personal');
+        agregarLista(listaPersonalContainer, 'Agrege Titulo ');
     });
 
     document.getElementById('btn-mensual').addEventListener('click', () => {
-        agregarLista(listaMesContainer, 'Lista por Mes');
+        agregarLista(listaMesContainer, 'Agosto');
     });
 });

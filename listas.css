@@ -106,6 +106,11 @@ h1 {
     border: 1px;
 }
 
+/* Cambiar el color del placeholder en el campo de título */
+.lista-basica input::placeholder {
+    color: rgb(20, 18, 18); /* Cambia este color al que desees */
+    font-style: italic; /* Opcional: también puedes aplicar otros estilos */
+}
 
 
 
@@ -125,13 +130,12 @@ button:hover {
 .tarea textarea {
     background: none;
     border: none;
-    color: rgb(245, 242, 242);
+    color: rgb(247, 241, 241);
 
 }
-
-.tarea input[type="checkbox"] {
-    transform: scale(1.5);
-
+.tarea textarea.tachado {
+    text-decoration: line-through;
+    color: rgb(161, 158, 158);
 }
 
 .tarea button {
@@ -145,10 +149,6 @@ button:hover {
 
 }
 
-.completed {
-    text-decoration: line-through;
-    color: rgb(119, 121, 118);
-}
 
 .cuadro-extra {
     display: block;
