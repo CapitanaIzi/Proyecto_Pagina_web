@@ -3,51 +3,98 @@ document.querySelector('.menu-btn').addEventListener('click', () => {
     document.querySelector('.menu').classList.toggle('active');
 });
 
-// Clase Tarea
+
+
 class Tarea {
     constructor(nombre = "Tarea") {
         this.nombre = nombre;
         this.completada = false;
     }
 
-    
-        crearTarea() {
-            const tareaDiv = document.createElement('div');
-            tareaDiv.classList.add('tarea');
-    
-            // Crear el checkbox
-            const checkbox = document.createElement('input');
-            checkbox.type = 'checkbox';
-            checkbox.addEventListener('change', () => {
-                this.completada = checkbox.checked;
-                if (this.completada) {
-                    textArea.classList.add('tachado'); // Añadir clase de tachado
-                } else {
-                    textArea.classList.remove('tachado'); // Quitar clase de tachado
-                }
-            });
-    
-            // Crear el campo de texto (textarea)
-            const textArea = document.createElement('textarea');
-            textArea.placeholder = this.nombre;
-            textArea.addEventListener('input', (e) => {
-                this.nombre = e.target.value;
-            });
-    
-            // Crear el botón de opciones
-            const opcionesBtn = document.createElement('button');
-            opcionesBtn.textContent = '⋮';
-            opcionesBtn.addEventListener('click', () => mostrarOpciones(this));
-    
-            // Añadir elementos a la tarea
-            tareaDiv.appendChild(checkbox);
-            tareaDiv.appendChild(textArea);
-            tareaDiv.appendChild(opcionesBtn);
-    
-            return tareaDiv;
-        }
-    
-    
+    crearTarea(listaDiv) {
+        const tareaDiv = document.createElement('div');
+        tareaDiv.classList.add('tarea');
+
+        // Crear el checkbox
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.addEventListener('change', () => {
+            this.completada = checkbox.checked;
+            if (this.completada) {
+                textArea.classList.add('tachado'); // Añadir clase de tachado
+            } else {
+                textArea.classList.remove('tachado'); // Quitar clase de tachado
+            }
+        });
+
+        // Crear el campo de texto (textarea)
+        const textArea = document.createElement('textarea');
+        textArea.placeholder = this.nombre;
+        textArea.addEventListener('input', (e) => {
+            this.nombre = e.target.value;
+        });
+
+        // Crear el botón de opciones
+        const opcionesBtn = document.createElement('button');
+        opcionesBtn.textContent = '⋮';
+        opcionesBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMenu(menuTarea);
+        });
+
+        // Crear el menú desplegable
+        const menuTarea = document.createElement('div');
+        menuTarea.classList.add('menuTarea');
+        menuTarea.style.display = 'none';
+ // Crear opciones del menú
+ const eliminarOpcion = document.createElement('div');
+ eliminarOpcion.textContent = 'Eliminar tarea';
+ eliminarOpcion.addEventListener('click', () => {
+     this.eliminarTarea(tareaDiv);
+ });
+        // Crear opciones del menú
+        const destacarOpcion = document.createElement('div');
+        destacarOpcion.textContent = 'Destacar';
+        destacarOpcion.addEventListener('click', () => {
+            tareaDiv.classList.toggle('destacada'); // Alternar clase de destacada
+        });
+
+        const duplicarOpcion = document.createElement('div');
+        duplicarOpcion.textContent = 'Duplicar';
+        duplicarOpcion.addEventListener('click', () => {
+            this.duplicarTarea(listaDiv);
+        });
+
+        // Añadir opciones al menú
+        menuTarea.appendChild(eliminarOpcion);
+        menuTarea.appendChild(destacarOpcion);
+        menuTarea.appendChild(duplicarOpcion);
+        tareaDiv.appendChild(menuTarea);
+
+        // Añadir elementos a la tarea
+        tareaDiv.appendChild(checkbox);
+        tareaDiv.appendChild(textArea);
+        tareaDiv.appendChild(opcionesBtn);
+        tareaDiv.addEventListener('click', () => {
+            menuTarea.style.display = 'none'; // Ocultar menú al hacer clic fuera
+        });
+
+        return tareaDiv;
+    }
+
+    duplicarTarea(listaDiv) {
+        const nuevaTarea = new Tarea(this.nombre); // Crear una nueva tarea con el mismo nombre
+        const nuevaTareaDiv = nuevaTarea.crearTarea(listaDiv);
+        listaDiv.appendChild(nuevaTareaDiv); // Añadir la nueva tarea a la lista
+    }
+
+    eliminarTarea(tareaDiv) {
+        tareaDiv.remove(); // Eliminar la tarea del DOM
+    }
+}
+
+function toggleMenu(menu) {
+    menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
 }
 
 
@@ -136,8 +183,8 @@ function crearListaSemanal() {
     const diasDeLaSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
     diasDeLaSemana.forEach(dia => {
         agregarLista(listaSemanalContainer, dia); // Usar la función para agregar las listas por día
-     
- });
+
+    });
 
     // Añadir el nuevo contenedor al final de la página (o en el contenedor adecuado)
     listaSemanalGeneral.appendChild(nuevoContenedor); // Cambia esto si necesitas agregarlo a otro contenedor específico

@@ -48,6 +48,7 @@ header {
     border: 2px solid #faf7f7;
 }
 
+
 .search-bar {
     padding: 5px;
     width: 200px;
@@ -148,6 +149,30 @@ button:hover {
     margin-right: 10px;
 
 }
+.destacada {
+    background-color: #1b9636; /* Color de fondo para tareas destacadas */
+}
+
+.menuTarea {
+    position: absolute;
+    background-color: rgb(236, 100, 100);
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 150px; /* Aumenta el ancho del menú */
+    padding: 10px; /* Añadir padding para un contenedor más grande */
+}
+
+.menuTarea div {
+    padding: 5px; /* Reduce el padding de cada opción */
+    cursor: pointer;
+    font-size: 12px; /* Tamaño de letra más pequeño */
+}
+
+.menuTarea div:hover {
+    background-color: #942929;
+}
+
 
 
 .cuadro-extra {
