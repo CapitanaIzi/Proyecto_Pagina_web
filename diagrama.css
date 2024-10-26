@@ -7,6 +7,24 @@ body, html {
     font-family: Arial, sans-serif;
     box-sizing: border-box;
 }
+header {
+    display: flex;
+    justify-content: space-between;
+    background-color:#444;
+    padding: 10px;
+    color: white;
+}
+.search-bar {
+    padding: 5px;
+    width: 200px;
+}
+
+h1 {
+    text-align: center;
+    margin: 0px;
+    background-color: #050c47;
+    color: white;
+}
 .menu-btn {
     background-color: #1c2dc2;
     border: 2px solid #ccc;
@@ -28,6 +46,7 @@ body, html {
     background-color: #555;
     padding: 10px;
     border-radius: 5px;
+    z-index: 100;
 }
 
 .menuPrincipal a {
@@ -43,13 +62,14 @@ body, html {
 /* Barra superior */
 #barra-superior {
     width: 100%;
-    height: 60px;
-    background-color: #333;
-    color: white;
+    height: 50px;
+    background-color:#050c47;
     display: flex;
     align-items: center;
-    padding-left: 20px;
+    padding-left: 0px;
     position: relative;
+    margin-top: 0px;
+
 }
 
 /* Botones en la barra superior */
