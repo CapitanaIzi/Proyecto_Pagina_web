@@ -1,5 +1,6 @@
 /* General */
-body, html {
+body,
+html {
     margin: 0;
     padding: 0;
     width: 100%;
@@ -7,13 +8,15 @@ body, html {
     font-family: Arial, sans-serif;
     box-sizing: border-box;
 }
+
 header {
     display: flex;
     justify-content: space-between;
-    background-color:#444;
+    background-color: #444;
     padding: 10px;
     color: white;
 }
+
 .search-bar {
     padding: 5px;
     width: 200px;
@@ -25,7 +28,9 @@ h1 {
     background-color: #050c47;
     color: white;
 }
+
 .menu-btn {
+    
     background-color: #1c2dc2;
     border: 2px solid #ccc;
     color: rgb(250, 244, 244);
@@ -36,7 +41,7 @@ h1 {
 .menu-btn:hover {
     background-color: #2d31fa;
 }
-
+ 
 .menuPrincipal {
     display: none;
     flex-direction: column;
@@ -59,11 +64,16 @@ h1 {
     display: flex;
     border: 2px solid #faf7f7;
 }
+/* Cambia el fondo al pasar el mouse */
+.menuPrincipal a:hover {
+    display: flex;
+    background-color: #993939;
+  }
 /* Barra superior */
 #barra-superior {
     width: 100%;
     height: 50px;
-    background-color:#050c47;
+    background-color: #050c47;
     display: flex;
     align-items: center;
     padding-left: 0px;
@@ -89,25 +99,37 @@ h1 {
 
 /* Menú desplegable */
 .menu {
-    display: none;
     position: absolute;
-    top: 50px; /* Abajo del botón */
+    display: none;
+    top: 50px;
+    /* Abajo del botón */
     left: 20px;
-    background-color: #fff;
-    border: 1px solid #ccc;
     padding: 10px;
-    box-shadow: 0px 4px 8px rgba(0,0,0,0.1);
-    z-index: 100; /* Asegurarse que esté por encima de otros elementos */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    /* Asegurarse que esté por encima de otros elementos */
+    background-color: rgb(235, 24, 24);
+    border: 1px solid #ccc;
+    width: 80px;
+    /* Aumenta el ancho del menú */
+
 }
 
 .menu button {
     background-color: #007BFF;
     color: white;
     border: none;
-    padding: 5px 10px;
+
     margin-bottom: 5px;
     cursor: pointer;
     border-radius: 5px;
+
+    padding: 5px;
+    /* Reduce el padding de cada opción */
+
+    font-size: 12px;
+    /* Tamaño de letra más pequeño */
+
 }
 
 .menu button:hover {
@@ -116,19 +138,23 @@ h1 {
 
 /* Contenedor del mapa conceptual */
 #mapa-conceptual {
-    width: 100%; /* 100% del ancho de la ventana */
+    width: 100%;
+    /* 100% del ancho de la ventana */
     height: 100%;
     position: relative;
     background-color: #030303;
     overflow: hidden;
 }
+
 /* Estilos para el título editable */
 /* Estilos para el título editable alineado con la barra superior */
 #titulo {
     position: absolute;
-    top: 0; /* Alinear en la parte superior */
+    top: 0;
+    /* Alinear en la parte superior */
     left: 50%;
-    transform: translateX(-50%); /* Centrar horizontalmente */
+    transform: translateX(-50%);
+    /* Centrar horizontalmente */
     font-size: 24px;
     font-weight: bold;
     text-align: center;
@@ -137,16 +163,19 @@ h1 {
     min-width: 200px;
     border-radius: 5px;
     background-color: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    margin-top: 10px; /* Espacio entre la barra superior y el título */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+    /* Espacio entre la barra superior y el título */
 }
 
 #titulo-placeholder {
     position: absolute;
-    top: 25px; /* Alinear en la parte superior */
+    top: 25px;
+    /* Alinear en la parte superior */
     left: 47%;
     color: #8d8a8a;
-    pointer-events: none; /* Para evitar que se pueda seleccionar */
+    pointer-events: none;
+    /* Para evitar que se pueda seleccionar */
 }
 
 /* Botón Eliminar dentro del mapa conceptual */
@@ -168,10 +197,12 @@ h1 {
 
 /* Cuadro creado */
 .cuadro {
-    min-width: 150px; /* Ancho mínimo */
+    min-width: 150px;
+    /* Ancho mínimo */
     padding: 10px;
     border: 2px solid #007BFF;
-    background-color: #FFFFFF; /* Cambia a blanco */
+    background-color: #FFFFFF;
+    /* Cambia a blanco */
     border-radius: 5px;
     position: absolute;
     top: 50%;
@@ -190,34 +221,45 @@ h1 {
 /* Estilo para la flecha (sin cabezal) */
 .flecha {
     position: absolute;
-    width: 200px; /* Longitud de la línea de la flecha */
-    height: 2px; /* Grosor de la línea */
-    background-color: #007BFF; /* Color de la línea */
+    width: 200px;
+    /* Longitud de la línea de la flecha */
+    height: 2px;
+    /* Grosor de la línea */
+    background-color: #007BFF;
+    /* Color de la línea */
     cursor: grab;
-    transform-origin: left; /* El punto de rotación está en la izquierda */
+    transform-origin: left;
+    /* El punto de rotación está en la izquierda */
 }
 
 .control-rotacion {
     position: absolute;
     top: 50%;
-    left: -10px; /* Colocar el control de rotación a la izquierda */
+    left: -10px;
+    /* Colocar el control de rotación a la izquierda */
     width: 10px;
     height: 10px;
-    background-color: blue; /* Color del control de rotación */
+    background-color: blue;
+    /* Color del control de rotación */
     border-radius: 50%;
-    cursor: url('images/rotate-cursor.png'), auto; /* Cambiar el cursor si es necesario */
-    transform: translateY(-50%); /* Centrar verticalmente el control */
+    cursor: url('images/rotate-cursor.png'), auto;
+    /* Cambiar el cursor si es necesario */
+    transform: translateY(-50%);
+    /* Centrar verticalmente el control */
 }
 
 .control-tamano {
     position: absolute;
     top: 50%;
-    left: 100%; /* Mantener el control de tamaño a la derecha */
+    left: 100%;
+    /* Mantener el control de tamaño a la derecha */
     width: 10px;
     height: 10px;
-    background-color: green; /* Color del control de tamaño */
+    background-color: green;
+    /* Color del control de tamaño */
     border-radius: 50%;
-    cursor: nwse-resize; /* Cambiar el cursor para redimensionar */
+    cursor: nwse-resize;
+    /* Cambiar el cursor para redimensionar */
 }
 
 /* Menú de color */
