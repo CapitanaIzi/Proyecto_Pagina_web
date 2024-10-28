@@ -43,7 +43,10 @@ header {
     text-decoration: none;
     margin: 5px 0;
 }
-
+.menu a:hover {
+    display: flex;
+    background-color: #9c9797;
+  }
 .menu.active {
     display: flex;
     border: 2px solid #faf7f7;
@@ -162,6 +165,7 @@ button:hover {
     z-index: 1000;
     width: 150px; /* Aumenta el ancho del menú */
     padding: 10px; /* Añadir padding para un contenedor más grande */
+    margin-left:73px;
 }
 
 .menuTarea div {

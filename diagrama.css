@@ -67,7 +67,7 @@ h1 {
 /* Cambia el fondo al pasar el mouse */
 .menuPrincipal a:hover {
     display: flex;
-    background-color: #993939;
+    background-color:#9c9797;
   }
 /* Barra superior */
 #barra-superior {
@@ -99,20 +99,27 @@ h1 {
 
 /* Menú desplegable */
 .menu {
+    display: none; /* Oculta el menú hasta que se haga clic en el botón */
     position: absolute;
-    display: none;
-    top: 50px;
-    /* Abajo del botón */
-    left: 20px;
+    background-color: #000000;
+    border: 3px solid #fffefe;
     padding: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 1;
-    /* Asegurarse que esté por encima de otros elementos */
-    background-color: rgb(235, 24, 24);
-    border: 1px solid #ccc;
-    width: 80px;
-    /* Aumenta el ancho del menú */
+    z-index: 1000;
+    width: 65px;
+}
 
+#menu-insertar {
+    top: 50px; /* Ajusta la distancia para ubicarlo debajo del botón Insertar */
+    left: 115px; /* Ajusta esta distancia para alinear debajo del botón Insertar */
+}
+
+#menu-editar {
+    top: 50px; /* Ajusta la distancia para ubicarlo debajo del botón Editar */
+    left: 223px; /* Ajusta esta distancia para alinear debajo del botón Editar */
+}
+#menu-color {
+    top: 60px; /* Ajusta la distancia para ubicarlo debajo del botón Editar */
+    left: -3px; /* Ajusta esta distancia para alinear debajo del botón Editar */
 }
 
 .menu button {
@@ -187,14 +194,8 @@ h1 {
     color: white;
     border: none;
     padding: 10px 20px;
-    cursor: pointer;
     border-radius: 5px;
 }
-
-#btn-eliminar:hover {
-    background-color: darkred;
-}
-
 /* Cuadro creado */
 .cuadro {
     min-width: 150px;
@@ -269,6 +270,7 @@ h1 {
     border: 1px solid #000;
     cursor: pointer;
     border-radius: 5px;
+    
 }
 
 .color-grid {
