@@ -1,3 +1,36 @@
+ // Función para agregar los eventos de arrastre y soltado
+ function agregarEventosArrastre(tareaDiv, listaDiv) {
+    // Evento para el inicio de arrastre
+    tareaDiv.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('tarea-id', tareaDiv.id);
+        tareaDiv.classList.add('arrastrando');
+    });
+
+    // Evento para permitir arrastrar sobre otros elementos
+    tareaDiv.addEventListener('dragover', (e) => {
+        e.preventDefault(); // Permitir que el elemento se arrastre sobre esta tarea
+        tareaDiv.classList.add('sobre'); // Visualización durante el arrastre
+    });
+
+    // Evento cuando el arrastre sale del elemento
+    tareaDiv.addEventListener('dragleave', () => {
+        tareaDiv.classList.remove('sobre'); // Quitar clase de visualización
+    });
+
+    // Evento de soltado
+    tareaDiv.addEventListener('drop', (e) => {
+        e.preventDefault();
+        tareaDiv.classList.remove('sobre');
+
+        const tareaId = e.dataTransfer.getData('tarea-id');
+        const tareaArrastrada = document.getElementById(tareaId);
+
+        if (tareaArrastrada && tareaArrastrada !== tareaDiv) {
+            listaDiv.insertBefore(tareaArrastrada, tareaDiv); // Insertar la tarea arrastrada antes de la tarea actual
+            tareaArrastrada.classList.remove('arrastrando');
+        }
+    });
+}
 class Tarea {
     constructor(nombre = "Tarea") {
         this.nombre = nombre;
@@ -7,6 +40,11 @@ class Tarea {
     crearTarea(listaDiv) {
         const tareaDiv = document.createElement('div');
         tareaDiv.classList.add('tarea');
+        tareaDiv.draggable = true; // Hacer la tarea arrastrable
+        // Asigna un ID único
+        tareaDiv.id = `tarea-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        // Llamamos a la función para agregar los eventos de arrastre y soltado
+        agregarEventosArrastre(tareaDiv, listaDiv);
 
         // Crear el checkbox
         const checkbox = document.createElement('input');
@@ -85,11 +123,13 @@ class Tarea {
     eliminarTarea(tareaDiv) {
         tareaDiv.remove();
     }
+   
 }
 
-function toggleMenu(menu) {
+    function toggleMenu(menu) {
     menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
-}
+    }   
+    
 
 class Lista {
     constructor(titulo = "Título") {
@@ -100,7 +140,19 @@ class Lista {
     crearListaElement() {
         const listaDiv = document.createElement('div');
         listaDiv.classList.add('lista-basica');
+        // Permitir arrastrar elementos dentro de esta lista
+        listaDiv.addEventListener('dragover', (e) => {
+            e.preventDefault(); // Permitir el evento de soltado
+        });
 
+        listaDiv.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const tareaId = e.dataTransfer.getData('tarea-id');
+            const tarea = document.getElementById(tareaId);
+            if (tarea) {
+                listaDiv.appendChild(tarea); // Mover la tarea a esta lista
+            }
+        });
         const tituloInput = document.createElement('input');
         tituloInput.type = 'text';
         tituloInput.placeholder = this.titulo;
