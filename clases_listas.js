@@ -54,6 +54,77 @@ class Tarea {
 
         return tareaDiv;
     }
+    /*crearTarea(listaDiv) {
+    const tareaDiv = this.crearDivTarea(listaDiv);
+    const checkbox = this.crearCheckbox(tareaDiv);
+    const textArea = this.crearTextoArea();
+    const opcionesBtn = this.crearBotonOpciones(tareaDiv, listaDiv);
+
+    // Estructura de la tarea
+    tareaDiv.append(checkbox, textArea, opcionesBtn);
+    tareaDiv.addEventListener('click', () => {
+        this.ocultarMenu(menuTarea);
+    });
+
+    return tareaDiv;
+}
+
+crearDivTarea(listaDiv) {
+    const tareaDiv = document.createElement('div');
+    tareaDiv.classList.add('tarea');
+    tareaDiv.draggable = true; // Hacer la tarea arrastrable
+    tareaDiv.id = `tarea-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    tareaDiv.__tarea__ = this; // Asignar la instancia de Tarea
+    agregarEventosArrastre(tareaDiv, listaDiv);
+    return tareaDiv;
+}
+
+crearCheckbox(tareaDiv) {
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.addEventListener('change', () => {
+        this.completada = checkbox.checked;
+        const textArea = tareaDiv.querySelector('textarea');
+        if (this.completada) {
+            textArea.classList.add('tachado');
+        } else {
+            textArea.classList.remove('tachado');
+        }
+    });
+    return checkbox;
+}
+
+crearTextoArea() {
+    const textArea = document.createElement('textarea');
+    textArea.placeholder = this.nombre;
+    textArea.addEventListener('input', (e) => {
+        this.nombre = e.target.value;
+    });
+    return textArea;
+}
+
+crearBotonOpciones(tareaDiv, listaDiv) {
+    const opcionesBtn = document.createElement('button');
+    opcionesBtn.textContent = '⋮';
+    const menuTarea = this.crearMenuOpciones(tareaDiv, listaDiv);
+    
+    opcionesBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleMenu(menuTarea);
+    });
+
+    document.addEventListener('click', () => {
+        menuTarea.style.display = 'none';
+    });
+
+    return opcionesBtn;
+}
+
+ocultarMenu(menuTarea) {
+    menuTarea.style.display = 'none';
+}
+
+     */
 
     // Menú desplegable
     crearMenuOpciones(tareaDiv, listaDiv) {
@@ -241,8 +312,6 @@ class Lista {
     crearBotonOpciones() {
         const opcionesBtn = document.createElement('button');
         opcionesBtn.textContent = '⋮';
-        opcionesBtn.classList.add('opciones-btn');
-
         const menuLista = this.crearMenuOpciones();
         opcionesBtn.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -256,7 +325,7 @@ class Lista {
         opcionesBtn.appendChild(menuLista);
         return opcionesBtn;
     }
-
+   
     // Crear el menú de opciones
     crearMenuOpciones() {
         const menuLista = document.createElement('div');
@@ -270,14 +339,16 @@ class Lista {
         menuLista.append(opcionAgregar, opcionEliminar, opcionExpandirContraer);
         return menuLista;
     }
-
+    agregarTarea(tarea) {
+        this.tareas.push(tarea); // Añadir la tarea al array
+    }
     // Crear cada opción del menú
     crearOpcionAgregar(menuLista) {
         const opcionAgregar = document.createElement('div');
         opcionAgregar.textContent = 'Agregar';
         opcionAgregar.addEventListener('click', () => {
             const nuevaTarea = new Tarea();
-            this.tareas.push(nuevaTarea);
+            this.agregarTarea(nuevaTarea);
             const nuevaTareaElement = nuevaTarea.crearTarea();
             nuevaTarea.element = nuevaTareaElement;
 
