@@ -131,54 +131,129 @@ class Tarea {
     }   
     
 
-class Lista {
-    constructor(titulo = "Título") {
-        this.titulo = titulo;
-        this.tareas = [new Tarea(), new Tarea(), new Tarea()];
+    class Lista {
+        constructor(titulo = "Título") {
+            this.titulo = titulo;
+            this.tareas = [new Tarea(), new Tarea(), new Tarea()];
+            this.expandida = true; // Estado de expansión de la lista
+        }
+    
+        // Crear el contenedor de título y opciones
+        crearTituloContainer() {
+            const tituloContainer = document.createElement('div');
+            tituloContainer.classList.add('titulo-container');
+    
+            const tituloInput = document.createElement('input');
+            tituloInput.type = 'text';
+            tituloInput.placeholder = this.titulo;
+            tituloInput.addEventListener('input', (e) => {
+                this.titulo = e.target.value;
+            });
+    
+            const opcionesBtn = this.crearBotonOpciones();
+            tituloContainer.appendChild(tituloInput);
+            tituloContainer.appendChild(opcionesBtn);
+    
+            return tituloContainer;
+        }
+    
+        // Crear el botón de opciones y su menú
+        crearBotonOpciones() {
+            const opcionesBtn = document.createElement('button');
+            opcionesBtn.textContent = '⋮';
+            opcionesBtn.classList.add('opciones-btn');
+    
+            const menuLista = this.crearMenuOpciones();
+            opcionesBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                menuLista.style.display = menuLista.style.display === 'none' ? 'block' : 'none';
+            });
+    
+            document.addEventListener('click', () => {
+                menuLista.style.display = 'none';
+            });
+    
+            opcionesBtn.appendChild(menuLista);
+            return opcionesBtn;
+        }
+    
+        // Crear el menú de opciones
+        crearMenuOpciones() {
+            const menuLista = document.createElement('div');
+            menuLista.classList.add('menu-lista');
+            menuLista.style.display = 'none';
+    
+            const opcionAgregar = this.crearOpcionAgregar(menuLista);
+            const opcionEliminar = this.crearOpcionEliminar(menuLista);
+            const opcionExpandirContraer = this.crearOpcionExpandirContraer(menuLista);
+    
+            menuLista.append(opcionAgregar, opcionEliminar, opcionExpandirContraer);
+            return menuLista;
+        }
+    
+        // Crear cada opción del menú
+        crearOpcionAgregar(menuLista) {
+            const opcionAgregar = document.createElement('div');
+            opcionAgregar.textContent = 'Agregar';
+            opcionAgregar.addEventListener('click', () => {
+                const nuevaTarea = new Tarea();
+                this.tareas.push(nuevaTarea);
+                const nuevaTareaElement = nuevaTarea.crearTarea();
+                nuevaTarea.element = nuevaTareaElement;
+    
+                // Asegurar que la nueva tarea se expanda o contraiga según el estado actual
+                nuevaTareaElement.style.display = this.expandida ? 'block' : 'none';
+                this.listaDiv.appendChild(nuevaTareaElement);
+                menuLista.style.display = 'none';
+            });
+            return opcionAgregar;
+        }
+    
+        crearOpcionEliminar(menuLista) {
+            const opcionEliminar = document.createElement('div');
+            opcionEliminar.textContent = 'Eliminar';
+            opcionEliminar.addEventListener('click', () => {
+                this.listaDiv.remove();
+            });
+            return opcionEliminar;
+        }
+    
+        crearOpcionExpandirContraer(menuLista) {
+            const opcionExpandirContraer = document.createElement('div');
+            opcionExpandirContraer.textContent = 'Contraer';
+            opcionExpandirContraer.addEventListener('click', () => {
+                this.expandida = !this.expandida;
+                opcionExpandirContraer.textContent = this.expandida ? 'Contraer' : 'Expandir';
+    
+                // Cambiar la visibilidad de todas las tareas según el estado expandida
+                this.tareas.forEach((tarea) => {
+                    tarea.element.style.display = this.expandida ? 'block' : 'none';
+                });
+                menuLista.style.display = 'none';
+            });
+            return opcionExpandirContraer;
+        }
+    
+        // Crear el contenedor de la lista con sus tareas y el título
+        crearListaElement() {
+            this.listaDiv = document.createElement('div');
+            this.listaDiv.classList.add('lista-basica');
+    
+            const tituloContainer = this.crearTituloContainer();
+            this.listaDiv.appendChild(tituloContainer);
+    
+            this.tareas.forEach((tarea) => {
+                const tareaElement = tarea.crearTarea();
+                tarea.element = tareaElement;
+                tareaElement.style.display = this.expandida ? 'block' : 'none';
+                this.listaDiv.appendChild(tareaElement);
+            });
+    
+            return this.listaDiv;
+        }
     }
-
-    crearListaElement() {
-        const listaDiv = document.createElement('div');
-        listaDiv.classList.add('lista-basica');
-        // Permitir arrastrar elementos dentro de esta lista
-        listaDiv.addEventListener('dragover', (e) => {
-            e.preventDefault(); // Permitir el evento de soltado
-        });
-
-        listaDiv.addEventListener('drop', (e) => {
-            e.preventDefault();
-            const tareaId = e.dataTransfer.getData('tarea-id');
-            const tarea = document.getElementById(tareaId);
-            if (tarea) {
-                listaDiv.appendChild(tarea); // Mover la tarea a esta lista
-            }
-        });
-        const tituloInput = document.createElement('input');
-        tituloInput.type = 'text';
-        tituloInput.placeholder = this.titulo;
-        tituloInput.addEventListener('input', (e) => {
-            this.titulo = e.target.value;
-        });
-
-        listaDiv.appendChild(tituloInput);
-
-        this.tareas.forEach(tarea => {
-            listaDiv.appendChild(tarea.crearTarea(listaDiv)); // Asegúrate de pasar listaDiv
-        });
-
-        // Botón para agregar más tareas
-        const btnAgregarTarea = document.createElement('button');
-        btnAgregarTarea.textContent = 'Agregar Tarea';
-        btnAgregarTarea.addEventListener('click', () => {
-            const nuevaTarea = new Tarea();
-            this.tareas.push(nuevaTarea);
-            listaDiv.insertBefore(nuevaTarea.crearTarea(listaDiv), btnAgregarTarea);
-        });
-
-        listaDiv.appendChild(btnAgregarTarea);
-        return listaDiv;
-    }
-}
+    
+     
 
 class ListaSemanal {
     constructor(container) {
