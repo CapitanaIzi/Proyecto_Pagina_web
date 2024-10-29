@@ -1,36 +1,6 @@
-// Función para agregar los eventos de arrastre y soltado
-function agregarEventosArrastre(tareaDiv, listaDiv) {
-    // Evento para el inicio de arrastre
-    tareaDiv.addEventListener('dragstart', (e) => {
-        e.dataTransfer.setData('tarea-id', tareaDiv.id);
-        tareaDiv.classList.add('arrastrando');
-    });
 
-    // Evento para permitir arrastrar sobre otros elementos
-    tareaDiv.addEventListener('dragover', (e) => {
-        e.preventDefault(); // Permitir que el elemento se arrastre sobre esta tarea
-        tareaDiv.classList.add('sobre'); // Visualización durante el arrastre
-    });
+    
 
-    // Evento cuando el arrastre sale del elemento
-    tareaDiv.addEventListener('dragleave', () => {
-        tareaDiv.classList.remove('sobre'); // Quitar clase de visualización
-    });
-
-    // Evento de soltado
-    tareaDiv.addEventListener('drop', (e) => {
-        e.preventDefault();
-        tareaDiv.classList.remove('sobre');
-
-        const tareaId = e.dataTransfer.getData('tarea-id');
-        const tareaArrastrada = document.getElementById(tareaId);
-
-        if (tareaArrastrada && tareaArrastrada !== tareaDiv) {
-            listaDiv.insertBefore(tareaArrastrada, tareaDiv); // Insertar la tarea arrastrada antes de la tarea actual
-            tareaArrastrada.classList.remove('arrastrando');
-        }
-    });
-}
 class Tarea {
     constructor(nombre = "Tarea") {
         this.nombre = nombre;
@@ -44,6 +14,7 @@ class Tarea {
         // Asigna un ID único
         tareaDiv.id = `tarea-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
         // Llamamos a la función para agregar los eventos de arrastre y soltado
+        tareaDiv.__tarea__ = this; // Aquí se asigna la instancia de Tarea
         agregarEventosArrastre(tareaDiv, listaDiv);
 
         // Crear el checkbox
@@ -116,6 +87,12 @@ class Tarea {
     eliminarTarea(tareaDiv) {
         tareaDiv.remove();
     }
+    setVisible(visible) {
+        const tareaDiv = document.getElementById(this.id);
+        if (tareaDiv) {
+            tareaDiv.style.display = visible ? 'block' : 'none';
+        }
+    }
 
 }
 
@@ -123,18 +100,76 @@ function toggleMenu(menu) {
     menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
 }
 
+// Agregar eventos de arrastre y soltado a cada tarea
+function agregarEventosArrastre(tareaDiv, listaDiv) {
+    // Evento para el inicio de arrastre
+    tareaDiv.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('text/plain', tareaDiv.id); // Establecer ID de tarea en dataTransfer
+        tareaDiv.classList.add('arrastrando');
+    });
 
+    // Evento para permitir arrastrar sobre otros elementos
+    tareaDiv.addEventListener('dragover', (e) => {
+        e.preventDefault(); // Permitir que el elemento se arrastre sobre esta tarea
+    });
+
+    // Evento de soltado
+    tareaDiv.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const tareaId = e.dataTransfer.getData('text/plain');
+        const tareaArrastrada = document.getElementById(tareaId);
+
+        if (tareaArrastrada && tareaArrastrada !== tareaDiv) {
+            listaDiv.insertBefore(tareaArrastrada, tareaDiv); // Insertar la tarea arrastrada antes de la tarea actual
+            tareaArrastrada.classList.remove('arrastrando');
+        }
+
+        if (tareaArrastrada && tareaArrastrada !== tareaDiv) {
+            // Insertar la tarea arrastrada en la nueva lista
+            listaDiv.insertBefore(tareaArrastrada, tareaDiv);
+
+            // Ajustar la visibilidad de la tarea arrastrada
+            const listaActual = tareaDiv.closest('.lista-basica');
+            const listaDestino = listaDiv.closest('.lista-basica');
+
+            if (listaDestino && !listaDestino.expandida) {
+                // Si la lista de destino está contraída, ocultar la tarea
+                const tareaInstancia = getTareaById(tareaId);
+                if (tareaInstancia) {
+                    tareaInstancia.setVisible(false);
+                }
+            } else {
+                // Mostrar la tarea si la lista de destino está expandida
+                const tareaInstancia = getTareaById(tareaId);
+                if (tareaInstancia) {
+                    tareaInstancia.setVisible(true);
+                }
+            }
+
+            tareaArrastrada.classList.remove('arrastrando');
+        }
+    });
+}
+
+// Función para obtener la instancia de Tarea por ID
+function getTareaById(id) {
+    const tareaDiv = document.getElementById(id);
+    if (tareaDiv) {
+        return tareaDiv.__tarea__ || null; // Deberías agregar una propiedad en la instancia de Tarea que haga referencia al objeto de tarea
+    }
+    return null;
+}
 class Lista {
     constructor(titulo = "Título") {
         this.titulo = titulo;
         this.tareas = [new Tarea(), new Tarea(), new Tarea()];
         this.listaDiv = this.crearListaElement();
         this.expandida = true; // Estado de expansión de la lista
-         // Crear línea guía
-         this.lineaGuia = document.createElement('div');
-         this.lineaGuia.classList.add('linea-guia');
-         this.listaDiv.appendChild(this.lineaGuia);
- 
+        // Crear línea guía
+        this.lineaGuia = document.createElement('div');
+        this.lineaGuia.classList.add('linea-guia');
+        this.listaDiv.appendChild(this.lineaGuia);
+
         this.agregarComportamientoDeArrastre(); // Llamada al método para agregar comportamiento
     }
     agregarComportamientoDeArrastre() {
@@ -151,15 +186,15 @@ class Lista {
                 this.lineaGuia.style.display = 'none';
             }
         });
-    
+
         this.listaDiv.addEventListener('dragleave', () => {
             // Ocultar línea guía cuando el arrastre sale de la lista
             this.lineaGuia.style.display = 'none';
         });
-    
+
         this.listaDiv.addEventListener('drop', (e) => {
             e.preventDefault();
-            const tareaId = e.dataTransfer.getData('tarea-id');
+            const tareaId = e.dataTransfer.getData('text/plain');
             const tarea = document.getElementById(tareaId);
             if (tarea) {
                 this.listaDiv.appendChild(tarea); // Mover la tarea a esta lista
@@ -171,7 +206,7 @@ class Lista {
     crearListaElement() {
         this.listaDiv = document.createElement('div');
         this.listaDiv.classList.add('lista-basica');
-        
+
         const tituloContainer = this.crearTituloContainer();
         this.listaDiv.appendChild(tituloContainer);
 
@@ -272,7 +307,10 @@ class Lista {
 
             // Cambiar la visibilidad de todas las tareas según el estado expandida
             this.tareas.forEach((tarea) => {
-                tarea.element.style.display = this.expandida ? 'block' : 'none';
+                if (tarea.element) {
+                    ""
+                    tarea.element.style.display = this.expandida ? 'block' : 'none';
+                }
             });
             menuLista.style.display = 'none';
         });
