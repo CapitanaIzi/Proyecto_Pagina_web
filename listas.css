@@ -78,9 +78,11 @@ h1 {
 
 .container {
     margin: 0 auto;
-    max-width: 1200px;
-    padding: 20px;
+    
+    padding: 0px;
     color: white;
+    background-color: rgb(100, 12, 12);
+    width: 90%;
 }
 
 
@@ -109,6 +111,8 @@ h1 {
     flex-wrap: wrap;
     gap: 10px;
     border: 1px;
+    position: relative;
+    background-color: #0e5097;
 }
 
 /* Cambiar el color del placeholder en el campo de título */
@@ -116,7 +120,13 @@ h1 {
     color: rgb(20, 18, 18); /* Cambia este color al que desees */
     font-style: italic; /* Opcional: también puedes aplicar otros estilos */
 }
-
+.lista {
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 10px;
+    min-height: 100px; /* Altura mínima para que se vea la lista */
+    position: relative; /* Para que la línea guía se posicione correctamente */
+}
 
 
 button {
@@ -131,7 +141,14 @@ button {
 button:hover {
     background-color: #176eca;
 }
+.tarea {
+    cursor: grabbing; /* Muestra una mano cuando se posa el mouse */
+}
 
+/* Cambia a 'agarrando' cuando está en el proceso de arrastre */
+.tarea.arrastrando {
+    cursor: grab;
+}
 .tarea textarea {
     background: none;
     border: none;
@@ -178,7 +195,16 @@ button:hover {
     background-color: #942929;
 }
 
-
+.linea-guia {
+    position: absolute;
+    top: 0; /* Se ajustará dinámicamente */
+    left: 0;
+    right: 0;
+    height: 2px; /* Altura de la línea */
+    background-color: #007bff; /* Color de la línea */
+    display: none; /* Oculta por defecto */
+    z-index: 1000;
+}
 
 .cuadro-extra {
     display: block;
