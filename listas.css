@@ -26,7 +26,7 @@ header {
     background-color: #2d31fa;
 }
 
-.menu {
+.menuPrincipal {
     display: none;
     flex-direction: column;
     position: absolute;
@@ -38,16 +38,16 @@ header {
     z-index: 100;
 }
 
-.menu a {
+.menuPrincipal a {
     color: rgb(255, 253, 253);
     text-decoration: none;
     margin: 5px 0;
 }
-.menu a:hover {
+.menuPrincipal a:hover {
     display: flex;
     background-color: #9c9797;
   }
-.menu.active {
+.menuPrincipal.active {
     display: flex;
     border: 2px solid #faf7f7;
 }

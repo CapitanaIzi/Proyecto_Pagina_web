@@ -1,132 +1,116 @@
 
-    
-
 class Tarea {
     constructor(nombre = "Tarea") {
         this.nombre = nombre;
         this.completada = false;
     }
+    agregarEventosArrastre(tareaDiv, listaDiv) {
+        // Evento para el inicio de arrastre
+        tareaDiv.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', tareaDiv.id); // Establecer ID de tarea en dataTransfer
+            tareaDiv.classList.add('arrastrando');
+        });
 
-    crearTarea(listaDiv) {
-        const tareaDiv = document.createElement('div');
-        tareaDiv.classList.add('tarea');
-        tareaDiv.draggable = true; // Hacer la tarea arrastrable
-        // Asigna un ID único
-        tareaDiv.id = `tarea-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-        // Llamamos a la función para agregar los eventos de arrastre y soltado
-        tareaDiv.__tarea__ = this; // Aquí se asigna la instancia de Tarea
-        agregarEventosArrastre(tareaDiv, listaDiv);
+        // Evento para permitir arrastrar sobre otros elementos
+        tareaDiv.addEventListener('dragover', (e) => {
+            e.preventDefault(); // Permitir que el elemento se arrastre sobre esta tarea
+        });
 
-        // Crear el checkbox
+        // Evento de soltado
+        tareaDiv.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const tareaId = e.dataTransfer.getData('text/plain');
+            const tareaArrastrada = document.getElementById(tareaId);
+
+            if (tareaArrastrada && tareaArrastrada !== tareaDiv) {
+                listaDiv.insertBefore(tareaArrastrada, tareaDiv); // Insertar la tarea arrastrada antes de la tarea actual
+                tareaArrastrada.classList.remove('arrastrando');
+            }
+
+            if (tareaArrastrada && tareaArrastrada !== tareaDiv) {
+                // Insertar la tarea arrastrada en la nueva lista
+                listaDiv.insertBefore(tareaArrastrada, tareaDiv);
+
+                // Ajustar la visibilidad de la tarea arrastrada
+                const listaActual = tareaDiv.closest('.lista-basica');
+                const listaDestino = listaDiv.closest('.lista-basica');
+
+                if (listaDestino && !listaDestino.expandida) {
+                    // Si la lista de destino está contraída, ocultar la tarea
+                    const tareaInstancia = getTareaById(tareaId);
+                    if (tareaInstancia) {
+                        tareaInstancia.setVisible(false);
+                    }
+                } else {
+                    // Mostrar la tarea si la lista de destino está expandida
+                    const tareaInstancia = getTareaById(tareaId);
+                    if (tareaInstancia) {
+                        tareaInstancia.setVisible(true);
+                    }
+                }
+
+                tareaArrastrada.classList.remove('arrastrando');
+            }
+        });
+    }
+    crearCheckbox(textArea) {
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.addEventListener('change', () => {
             this.completada = checkbox.checked;
-            if (this.completada) {
-                textArea.classList.add('tachado');
-            } else {
-                textArea.classList.remove('tachado');
-            }
+            textArea.classList.toggle('tachado', this.completada);
         });
+        return checkbox;
+    }
 
-        // Crear el campo de texto (textarea)
+    crearTextArea() {
         const textArea = document.createElement('textarea');
         textArea.placeholder = this.nombre;
         textArea.addEventListener('input', (e) => {
             this.nombre = e.target.value;
         });
+        return textArea;
+    }
 
-        // Crear el botón de opciones
+    crearBotonOpciones(tareaDiv, listaDiv) {
         const opcionesBtn = document.createElement('button');
         opcionesBtn.textContent = '⋮';
         const menuTarea = this.crearMenuOpciones(tareaDiv, listaDiv);
+
         opcionesBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             toggleMenu(menuTarea);
         });
 
-
-        // Estructura de la tarea
-        tareaDiv.append(checkbox, textArea, opcionesBtn, menuTarea);
-        tareaDiv.addEventListener('click', () => {
-            menuTarea.style.display = 'none';
+        // Cerrar el menú cuando se hace clic en cualquier parte de la página
+        document.addEventListener('click', (e) => {
+            if (!tareaDiv.contains(e.target)) {
+                menuTarea.style.display = 'none';
+            }
         });
+
+        return { opcionesBtn, menuTarea };
+    }
+
+    crearTarea(listaDiv) {
+        const tareaDiv = document.createElement('div');
+        tareaDiv.classList.add('tarea');
+        tareaDiv.draggable = true;
+        tareaDiv.id = `tarea-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+
+        this.agregarEventosArrastre(tareaDiv, listaDiv);
+
+        // Crear elementos de la tarea
+        const textArea = this.crearTextArea();
+        const checkbox = this.crearCheckbox(textArea);
+        const { opcionesBtn, menuTarea } = this.crearBotonOpciones(tareaDiv, listaDiv);
+
+        // Ensamblar la estructura de la tarea
+        tareaDiv.append(checkbox, textArea, opcionesBtn, menuTarea);
 
         return tareaDiv;
     }
-    /*crearTarea(listaDiv) {
-    const tareaDiv = this.crearDivTarea(listaDiv);
-    const checkbox = this.crearCheckbox(tareaDiv);
-    const textArea = this.crearTextoArea();
-    const opcionesBtn = this.crearBotonOpciones(tareaDiv, listaDiv);
 
-    // Estructura de la tarea
-    tareaDiv.append(checkbox, textArea, opcionesBtn);
-    tareaDiv.addEventListener('click', () => {
-        this.ocultarMenu(menuTarea);
-    });
-
-    return tareaDiv;
-}
-
-crearDivTarea(listaDiv) {
-    const tareaDiv = document.createElement('div');
-    tareaDiv.classList.add('tarea');
-    tareaDiv.draggable = true; // Hacer la tarea arrastrable
-    tareaDiv.id = `tarea-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-    tareaDiv.__tarea__ = this; // Asignar la instancia de Tarea
-    agregarEventosArrastre(tareaDiv, listaDiv);
-    return tareaDiv;
-}
-
-crearCheckbox(tareaDiv) {
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.addEventListener('change', () => {
-        this.completada = checkbox.checked;
-        const textArea = tareaDiv.querySelector('textarea');
-        if (this.completada) {
-            textArea.classList.add('tachado');
-        } else {
-            textArea.classList.remove('tachado');
-        }
-    });
-    return checkbox;
-}
-
-crearTextoArea() {
-    const textArea = document.createElement('textarea');
-    textArea.placeholder = this.nombre;
-    textArea.addEventListener('input', (e) => {
-        this.nombre = e.target.value;
-    });
-    return textArea;
-}
-
-crearBotonOpciones(tareaDiv, listaDiv) {
-    const opcionesBtn = document.createElement('button');
-    opcionesBtn.textContent = '⋮';
-    const menuTarea = this.crearMenuOpciones(tareaDiv, listaDiv);
-    
-    opcionesBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleMenu(menuTarea);
-    });
-
-    document.addEventListener('click', () => {
-        menuTarea.style.display = 'none';
-    });
-
-    return opcionesBtn;
-}
-
-ocultarMenu(menuTarea) {
-    menuTarea.style.display = 'none';
-}
-
-     */
-
-    // Menú desplegable
     crearMenuOpciones(tareaDiv, listaDiv) {
         const menuTarea = document.createElement('div');
         menuTarea.classList.add('menuTarea');
@@ -169,58 +153,11 @@ ocultarMenu(menuTarea) {
 
 function toggleMenu(menu) {
     menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+
 }
 
 // Agregar eventos de arrastre y soltado a cada tarea
-function agregarEventosArrastre(tareaDiv, listaDiv) {
-    // Evento para el inicio de arrastre
-    tareaDiv.addEventListener('dragstart', (e) => {
-        e.dataTransfer.setData('text/plain', tareaDiv.id); // Establecer ID de tarea en dataTransfer
-        tareaDiv.classList.add('arrastrando');
-    });
 
-    // Evento para permitir arrastrar sobre otros elementos
-    tareaDiv.addEventListener('dragover', (e) => {
-        e.preventDefault(); // Permitir que el elemento se arrastre sobre esta tarea
-    });
-
-    // Evento de soltado
-    tareaDiv.addEventListener('drop', (e) => {
-        e.preventDefault();
-        const tareaId = e.dataTransfer.getData('text/plain');
-        const tareaArrastrada = document.getElementById(tareaId);
-
-        if (tareaArrastrada && tareaArrastrada !== tareaDiv) {
-            listaDiv.insertBefore(tareaArrastrada, tareaDiv); // Insertar la tarea arrastrada antes de la tarea actual
-            tareaArrastrada.classList.remove('arrastrando');
-        }
-
-        if (tareaArrastrada && tareaArrastrada !== tareaDiv) {
-            // Insertar la tarea arrastrada en la nueva lista
-            listaDiv.insertBefore(tareaArrastrada, tareaDiv);
-
-            // Ajustar la visibilidad de la tarea arrastrada
-            const listaActual = tareaDiv.closest('.lista-basica');
-            const listaDestino = listaDiv.closest('.lista-basica');
-
-            if (listaDestino && !listaDestino.expandida) {
-                // Si la lista de destino está contraída, ocultar la tarea
-                const tareaInstancia = getTareaById(tareaId);
-                if (tareaInstancia) {
-                    tareaInstancia.setVisible(false);
-                }
-            } else {
-                // Mostrar la tarea si la lista de destino está expandida
-                const tareaInstancia = getTareaById(tareaId);
-                if (tareaInstancia) {
-                    tareaInstancia.setVisible(true);
-                }
-            }
-
-            tareaArrastrada.classList.remove('arrastrando');
-        }
-    });
-}
 
 // Función para obtener la instancia de Tarea por ID
 function getTareaById(id) {
@@ -325,7 +262,7 @@ class Lista {
         opcionesBtn.appendChild(menuLista);
         return opcionesBtn;
     }
-   
+
     // Crear el menú de opciones
     crearMenuOpciones() {
         const menuLista = document.createElement('div');
@@ -435,8 +372,21 @@ class App {
     }
 
     init() {
-        document.querySelector('.menu-btn').addEventListener('click', () => {
-            document.querySelector('.menu').classList.toggle('active');
+        const menuBtn = document.querySelector('.menu-btn');
+        const menuPrincipal = document.querySelector('.menuPrincipal');
+
+        // Agrega un evento al botón para alternar el menú
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Evita que el evento se propague al documento
+            menuPrincipal.classList.toggle('active');
+        });
+
+        // Agrega un evento al documento para cerrar el menú si se hace clic fuera de él
+        document.addEventListener('click', (e) => {
+            // Verifica si el clic fue fuera del botón y del menú
+            if (!menuBtn.contains(e.target) && !menuPrincipal.contains(e.target)) {
+                menuPrincipal.classList.remove('active'); // Cierra el menú
+            }
         });
 
         document.addEventListener('DOMContentLoaded', () => {

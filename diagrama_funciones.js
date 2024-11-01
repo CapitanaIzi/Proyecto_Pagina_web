@@ -1,7 +1,22 @@
 
-document.querySelector('.menu-btn').addEventListener('click', () => {
-    document.querySelector('.menuPrincipal').classList.toggle('active');
+// Selecciona el botón y el menú
+const menuBtn = document.querySelector('.menu-btn');
+const menuPrincipal = document.querySelector('.menuPrincipal');
+
+// Agrega un evento al botón para alternar el menú
+menuBtn.addEventListener('click', (e) => {
+    e.stopPropagation(); // Evita que el evento se propague al documento
+    menuPrincipal.classList.toggle('active');
 });
+
+// Agrega un evento al documento para cerrar el menú si se hace clic fuera de él
+document.addEventListener('click', (e) => {
+    // Verifica si el clic fue fuera del botón y del menú
+    if (!menuBtn.contains(e.target) && !menuPrincipal.contains(e.target)) {
+        menuPrincipal.classList.remove('active'); // Cierra el menú
+    }
+});
+
 /**
  * Guarda el estado del mapa conceptual en localStorage.
  */

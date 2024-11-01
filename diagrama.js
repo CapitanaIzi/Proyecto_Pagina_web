@@ -32,7 +32,6 @@ function configurarEventos(btnInsertar, menuInsertar, btnEditar, menuEditar, btn
     configurarEventoColor();
     seleccionarCuadroActivo();
 }
-
 /**
  * Configura un evento para alternar la visibilidad de un menú.
  * 
@@ -40,9 +39,19 @@ function configurarEventos(btnInsertar, menuInsertar, btnEditar, menuEditar, btn
  * @param {HTMLElement} menu - El menú cuya visibilidad se alternará.
  */
 function configurarMenuDiagrama(button, menu) {
-    button.addEventListener('click', () => {
+    // Alterna la visibilidad del menú al hacer clic en el botón
+    button.addEventListener('click', (e) => {
+        e.stopPropagation(); // Evita que el evento se propague y cierre el menú inmediatamente
         menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
     });
+
+    // Cierra el menú si se hace clic fuera de él o del botón
+    document.addEventListener('click', (e) => {
+        if (!menu.contains(e.target) && e.target !== button) {
+            menu.style.display = 'none';
+        }
+    });
+
 }
 
 /**
