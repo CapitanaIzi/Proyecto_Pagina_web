@@ -1,223 +1,102 @@
-
-class Tarea {
-    constructor(nombre = "Tarea") {
-        this.nombre = nombre;
-        this.completada = false;
-    }
-    agregarEventosArrastre(tareaDiv, listaDiv) {
-        // Evento para el inicio de arrastre
-        tareaDiv.addEventListener('dragstart', (e) => {
-            e.dataTransfer.setData('text/plain', tareaDiv.id); // Establecer ID de tarea en dataTransfer
-            tareaDiv.classList.add('arrastrando');
-        });
-
-        // Evento para permitir arrastrar sobre otros elementos
-        tareaDiv.addEventListener('dragover', (e) => {
-            e.preventDefault(); // Permitir que el elemento se arrastre sobre esta tarea
-        });
-
-        // Evento de soltado
-        tareaDiv.addEventListener('drop', (e) => {
-            e.preventDefault();
-            const tareaId = e.dataTransfer.getData('text/plain');
-            const tareaArrastrada = document.getElementById(tareaId);
-
-            if (tareaArrastrada && tareaArrastrada !== tareaDiv) {
-                listaDiv.insertBefore(tareaArrastrada, tareaDiv); // Insertar la tarea arrastrada antes de la tarea actual
-                tareaArrastrada.classList.remove('arrastrando');
-            }
-
-            if (tareaArrastrada && tareaArrastrada !== tareaDiv) {
-                // Insertar la tarea arrastrada en la nueva lista
-                listaDiv.insertBefore(tareaArrastrada, tareaDiv);
-
-                // Ajustar la visibilidad de la tarea arrastrada
-                const listaActual = tareaDiv.closest('.lista-basica');
-                const listaDestino = listaDiv.closest('.lista-basica');
-
-                if (listaDestino && !listaDestino.expandida) {
-                    // Si la lista de destino está contraída, ocultar la tarea
-                    const tareaInstancia = getTareaById(tareaId);
-                    if (tareaInstancia) {
-                        tareaInstancia.setVisible(false);
-                    }
-                } else {
-                    // Mostrar la tarea si la lista de destino está expandida
-                    const tareaInstancia = getTareaById(tareaId);
-                    if (tareaInstancia) {
-                        tareaInstancia.setVisible(true);
-                    }
-                }
-
-                tareaArrastrada.classList.remove('arrastrando');
-            }
-        });
-    }
-    crearCheckbox(textArea) {
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.addEventListener('change', () => {
-            this.completada = checkbox.checked;
-            textArea.classList.toggle('tachado', this.completada);
-        });
-        return checkbox;
-    }
-
-    crearTextArea() {
-        const textArea = document.createElement('textarea');
-        textArea.placeholder = this.nombre;
-        textArea.addEventListener('input', (e) => {
-            this.nombre = e.target.value;
-        });
-        return textArea;
-    }
-
-    crearBotonOpciones(tareaDiv, listaDiv) {
-        const opcionesBtn = document.createElement('button');
-        opcionesBtn.textContent = '⋮';
-        const menuTarea = this.crearMenuOpciones(tareaDiv, listaDiv);
-
-        opcionesBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleMenu(menuTarea);
-        });
-
-        // Cerrar el menú cuando se hace clic en cualquier parte de la página
-        document.addEventListener('click', (e) => {
-            if (!tareaDiv.contains(e.target)) {
-                menuTarea.style.display = 'none';
-            }
-        });
-
-        return { opcionesBtn, menuTarea };
-    }
-
-    crearTarea(listaDiv) {
-        const tareaDiv = document.createElement('div');
-        tareaDiv.classList.add('tarea');
-        tareaDiv.draggable = true;
-        tareaDiv.id = `tarea-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-
-        this.agregarEventosArrastre(tareaDiv, listaDiv);
-
-        // Crear elementos de la tarea
-        const textArea = this.crearTextArea();
-        const checkbox = this.crearCheckbox(textArea);
-        const { opcionesBtn, menuTarea } = this.crearBotonOpciones(tareaDiv, listaDiv);
-
-        // Ensamblar la estructura de la tarea
-        tareaDiv.append(checkbox, textArea, opcionesBtn, menuTarea);
-
-        return tareaDiv;
-    }
-
-    crearMenuOpciones(tareaDiv, listaDiv) {
-        const menuTarea = document.createElement('div');
-        menuTarea.classList.add('menuTarea');
-        menuTarea.style.display = 'none';
-
-        const eliminarOpcion = document.createElement('div');
-        eliminarOpcion.textContent = 'Eliminar';
-        eliminarOpcion.addEventListener('click', () => this.eliminarTarea(tareaDiv));
-
-        const destacarOpcion = document.createElement('div');
-        destacarOpcion.textContent = 'Destacar';
-        destacarOpcion.addEventListener('click', () => tareaDiv.classList.toggle('destacada'));
-
-        const duplicarOpcion = document.createElement('div');
-        duplicarOpcion.textContent = 'Duplicar';
-        duplicarOpcion.addEventListener('click', () => this.duplicarTarea(listaDiv));
-
-        menuTarea.append(eliminarOpcion, destacarOpcion, duplicarOpcion);
-        return menuTarea;
-    }
-
-
-    duplicarTarea(listaDiv) {
-        const nuevaTarea = new Tarea(this.nombre);
-        const nuevaTareaDiv = nuevaTarea.crearTarea(listaDiv);
-        listaDiv.appendChild(nuevaTareaDiv);
-    }
-
-    eliminarTarea(tareaDiv) {
-        tareaDiv.remove();
-    }
-    setVisible(visible) {
-        const tareaDiv = document.getElementById(this.id);
-        if (tareaDiv) {
-            tareaDiv.style.display = visible ? 'block' : 'none';
-        }
-    }
-
-}
-
-function toggleMenu(menu) {
-    menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
-
-}
-
-// Agregar eventos de arrastre y soltado a cada tarea
-
-
-// Función para obtener la instancia de Tarea por ID
-function getTareaById(id) {
-    const tareaDiv = document.getElementById(id);
-    if (tareaDiv) {
-        return tareaDiv.__tarea__ || null; // Deberías agregar una propiedad en la instancia de Tarea que haga referencia al objeto de tarea
-    }
-    return null;
-}
 class Lista {
     constructor(titulo = "Título") {
         this.titulo = titulo;
         this.tareas = [new Tarea(), new Tarea(), new Tarea()];
         this.listaDiv = this.crearListaElement();
-        this.expandida = true; // Estado de expansión de la lista
-        // Crear línea guía
+        this.expandida = true;
         this.lineaGuia = document.createElement('div');
         this.lineaGuia.classList.add('linea-guia');
         this.listaDiv.appendChild(this.lineaGuia);
 
-        this.agregarComportamientoDeArrastre(); // Llamada al método para agregar comportamiento
+        this.agregarComportamientoDeArrastre();
     }
+    /**
+     * Configura el comportamiento de arrastre y soltado en la lista.
+     * Permite mover tareas dentro de la lista y muestra una línea guía cuando se arrastra una tarea.
+     */
     agregarComportamientoDeArrastre() {
-        // Permitir arrastrar elementos dentro de esta lista
+        this.configurarArrastreSobreLista();
+        this.configurarSueltaEnLista();
+        this.configurarArrastreFueraDeLista();
+    }
+
+    /**
+     * Configura el evento dragover para permitir el arrastre dentro de la lista.
+     * Muestra la línea guía en la posición de la tarea objetivo.
+     */
+    configurarArrastreSobreLista() {
         this.listaDiv.addEventListener('dragover', (e) => {
-            e.preventDefault(); // Permitir el evento de soltado
-            const tarea = e.target.closest('.tarea'); // Obtener la tarea objetivo
+            e.preventDefault();
+            const tarea = e.target.closest('.tarea');
             if (tarea) {
-                // Posicionar la línea guía antes de la tarea objetivo
-                this.lineaGuia.style.display = 'block';
-                this.lineaGuia.style.top = tarea.offsetTop + 'px'; // Posicionar la línea en la parte superior de la tarea
+                this.mostrarLineaGuia(tarea);
             } else {
-                // Si no hay tarea objetivo, ocultar la línea guía
-                this.lineaGuia.style.display = 'none';
+                this.ocultarLineaGuia();
             }
         });
+    }
 
+    /**
+     * Configura el evento dragleave para ocultar la línea guía cuando se sale de la lista.
+     */
+    configurarArrastreFueraDeLista() {
         this.listaDiv.addEventListener('dragleave', () => {
-            // Ocultar línea guía cuando el arrastre sale de la lista
-            this.lineaGuia.style.display = 'none';
+            this.ocultarLineaGuia();
         });
+    }
 
+    /**
+     * Configura el evento drop para mover la tarea dentro de la lista.
+     */
+    configurarSueltaEnLista() {
         this.listaDiv.addEventListener('drop', (e) => {
             e.preventDefault();
             const tareaId = e.dataTransfer.getData('text/plain');
             const tarea = document.getElementById(tareaId);
             if (tarea) {
-                this.listaDiv.appendChild(tarea); // Mover la tarea a esta lista
+                this.moverTarea(tarea);
             }
-            // Ocultar la línea guía después de soltar
-            this.lineaGuia.style.display = 'none';
+            this.ocultarLineaGuia();
         });
     }
+
+    /**
+     * Muestra la línea guía en la posición de la tarea objetivo.
+     * @param {Element} tarea - La tarea objetivo en la que se debe mostrar la línea guía.
+     */
+    mostrarLineaGuia(tarea) {
+        this.lineaGuia.style.display = 'block';
+        this.lineaGuia.style.top = tarea.offsetTop + 'px';
+    }
+
+    /**
+     * Oculta la línea guía.
+     */
+    ocultarLineaGuia() {
+        this.lineaGuia.style.display = 'none';
+    }
+
+    /**
+     * Mueve la tarea dentro de la lista.
+     * @param {Element} tarea - La tarea a mover.
+     */
+    moverTarea(tarea) {
+        this.listaDiv.appendChild(tarea);
+    }
+    /**
+  * Crea el elemento visual de la lista, que incluye el contenedor de la lista, el título,
+  * y las tareas asociadas a la lista. Este método organiza los elementos en el DOM y los
+  * prepara para ser mostrados.
+  * 
+  * @returns {HTMLDivElement} El contenedor principal de la lista, que incluye el título
+  *                           y las tareas en su interior.
+  */
     crearListaElement() {
         this.listaDiv = document.createElement('div');
         this.listaDiv.classList.add('lista-basica');
 
         const tituloContainer = this.crearTituloContainer();
         this.listaDiv.appendChild(tituloContainer);
-
         this.tareas.forEach((tarea) => {
             const tareaElement = tarea.crearTarea(this.listaDiv);
             tarea.element = tareaElement;
@@ -226,11 +105,17 @@ class Lista {
 
         return this.listaDiv;
     }
-    // Crear el contenedor de título y opciones
+
+    /**
+ * Crea un contenedor para el título de la lista y el botón de opciones.
+ * Este contenedor incluye un campo de entrada para modificar el título y un botón que
+ * despliega un menú de opciones.
+ * 
+ * @returns {HTMLDivElement} El contenedor del título con las opciones asociadas.
+ */
     crearTituloContainer() {
         const tituloContainer = document.createElement('div');
         tituloContainer.classList.add('titulo-container');
-
         const tituloInput = document.createElement('input');
         tituloInput.type = 'text';
         tituloInput.placeholder = this.titulo;
@@ -245,7 +130,13 @@ class Lista {
         return tituloContainer;
     }
 
-    // Crear el botón de opciones y su menú
+    /**
+     * Crea el botón de opciones, que abre un menú al hacer clic.
+     * El botón tendrá un ícono de tres puntos ('⋮') y al hacer clic en él, 
+     * se despliega un menú con varias opciones.
+     * 
+     * @returns {HTMLButtonElement} El botón de opciones.
+     */
     crearBotonOpciones() {
         const opcionesBtn = document.createElement('button');
         opcionesBtn.textContent = '⋮';
@@ -254,7 +145,6 @@ class Lista {
             e.stopPropagation();
             menuLista.style.display = menuLista.style.display === 'none' ? 'block' : 'none';
         });
-
         document.addEventListener('click', () => {
             menuLista.style.display = 'none';
         });
@@ -263,12 +153,16 @@ class Lista {
         return opcionesBtn;
     }
 
-    // Crear el menú de opciones
+    /**
+     * Crea el menú de opciones que se desplegará al hacer clic en el botón de opciones.
+     * Este menú tiene varias acciones, como agregar, eliminar y expandir/contraer la lista.
+     * 
+     * @returns {HTMLDivElement} El contenedor del menú de opciones.
+     */
     crearMenuOpciones() {
         const menuLista = document.createElement('div');
         menuLista.classList.add('menu-lista');
         menuLista.style.display = 'none';
-
         const opcionAgregar = this.crearOpcionAgregar(menuLista);
         const opcionEliminar = this.crearOpcionEliminar(menuLista);
         const opcionExpandirContraer = this.crearOpcionExpandirContraer(menuLista);
@@ -276,138 +170,82 @@ class Lista {
         menuLista.append(opcionAgregar, opcionEliminar, opcionExpandirContraer);
         return menuLista;
     }
+
+    /**
+     * Añade una nueva tarea a la lista de tareas.
+     * 
+     * @param {Tarea} tarea - La tarea que se va a añadir.
+     */
     agregarTarea(tarea) {
-        this.tareas.push(tarea); // Añadir la tarea al array
+        this.tareas.push(tarea);
     }
-    // Crear cada opción del menú
+
+    /**
+     * Crea la opción "Agregar" dentro del menú de opciones. Al hacer clic en esta opción, 
+     * se añadirá una nueva tarea a la lista.
+     * 
+     * @param {HTMLDivElement} menuLista - El contenedor donde se añadirá la opción "Agregar".
+     * @returns {HTMLDivElement} La opción "Agregar" del menú.
+     */
     crearOpcionAgregar(menuLista) {
         const opcionAgregar = document.createElement('div');
         opcionAgregar.textContent = 'Agregar';
+
         opcionAgregar.addEventListener('click', () => {
             const nuevaTarea = new Tarea();
             this.agregarTarea(nuevaTarea);
             const nuevaTareaElement = nuevaTarea.crearTarea();
             nuevaTarea.element = nuevaTareaElement;
 
-            // Asegurar que la nueva tarea se expanda o contraiga según el estado actual
             nuevaTareaElement.style.display = this.expandida ? 'block' : 'none';
             this.listaDiv.appendChild(nuevaTareaElement);
             menuLista.style.display = 'none';
         });
+
         return opcionAgregar;
     }
 
-    crearOpcionEliminar(menuLista) {
+    /**
+     * Crea la opción "Eliminar" dentro del menú de opciones. Al hacer clic en esta opción, 
+     * se eliminará la lista completa.
+     * 
+     * @returns {HTMLDivElement} La opción "Eliminar" del menú.
+     */
+    crearOpcionEliminar() {
         const opcionEliminar = document.createElement('div');
         opcionEliminar.textContent = 'Eliminar';
+
         opcionEliminar.addEventListener('click', () => {
             this.listaDiv.remove();
         });
+
         return opcionEliminar;
     }
 
+    /**
+     * Crea la opción "Expandir/Contraer" dentro del menú de opciones. Al hacer clic en esta opción,
+     * se cambiará el estado de expansión de la lista (expandir o contraer todas las tareas).
+     * 
+     * @param {HTMLDivElement} menuLista - El contenedor donde se añadirá la opción "Expandir/Contraer".
+     * @returns {HTMLDivElement} La opción "Expandir/Contraer" del menú.
+     */
     crearOpcionExpandirContraer(menuLista) {
         const opcionExpandirContraer = document.createElement('div');
         opcionExpandirContraer.textContent = 'Contraer';
+
         opcionExpandirContraer.addEventListener('click', () => {
             this.expandida = !this.expandida;
             opcionExpandirContraer.textContent = this.expandida ? 'Contraer' : 'Expandir';
-
-            // Cambiar la visibilidad de todas las tareas según el estado expandida
             this.tareas.forEach((tarea) => {
                 if (tarea.element) {
-                    ""
                     tarea.element.style.display = this.expandida ? 'block' : 'none';
                 }
             });
+
             menuLista.style.display = 'none';
         });
+
         return opcionExpandirContraer;
     }
 
-
 }
-
-
-
-class ListaSemanal {
-    constructor(container) {
-        this.container = container;
-        this.semanas = [];
-    }
-
-    crearListaSemanal() {
-        const nuevoContenedor = document.createElement('div');
-        nuevoContenedor.classList.add('container');
-
-        const tituloEditable = document.createElement('input');
-        tituloEditable.classList.add('editable-title');
-        tituloEditable.placeholder = 'Agregue la semana aquí (Ejemplo: 21/10 al 27/10)';
-
-        const listaSemanalContainer = document.createElement('div');
-        listaSemanalContainer.classList.add('listas-basicas');
-
-        nuevoContenedor.appendChild(tituloEditable);
-        nuevoContenedor.appendChild(listaSemanalContainer);
-
-        const diasDeLaSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
-        diasDeLaSemana.forEach(dia => {
-            const lista = new Lista(dia);
-            listaSemanalContainer.appendChild(lista.crearListaElement());
-            this.semanas.push(lista);
-        });
-
-        this.container.appendChild(nuevoContenedor);
-    }
-}
-
-class App {
-    constructor() {
-        this.listaSemanalContainer = document.getElementById('lista-semanal');
-        this.listaPersonalContainer = document.getElementById('listas-personales');
-        this.listaMesContainer = document.getElementById('listas-mes');
-
-        this.listaSemanal = new ListaSemanal(this.listaSemanalContainer);
-        this.init();
-    }
-
-    init() {
-        const menuBtn = document.querySelector('.menu-btn');
-        const menuPrincipal = document.querySelector('.menuPrincipal');
-
-        // Agrega un evento al botón para alternar el menú
-        menuBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Evita que el evento se propague al documento
-            menuPrincipal.classList.toggle('active');
-        });
-
-        // Agrega un evento al documento para cerrar el menú si se hace clic fuera de él
-        document.addEventListener('click', (e) => {
-            // Verifica si el clic fue fuera del botón y del menú
-            if (!menuBtn.contains(e.target) && !menuPrincipal.contains(e.target)) {
-                menuPrincipal.classList.remove('active'); // Cierra el menú
-            }
-        });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            this.listaSemanal.crearListaSemanal();
-
-            document.getElementById('btn-semanal').addEventListener('click', () => {
-                this.listaSemanal.crearListaSemanal();
-            });
-
-            document.getElementById('btn-personal').addEventListener('click', () => {
-                const nuevaLista = new Lista('Agregue Titulo');
-                this.listaPersonalContainer.appendChild(nuevaLista.crearListaElement());
-            });
-
-            document.getElementById('btn-mensual').addEventListener('click', () => {
-                const nuevaLista = new Lista('Agosto');
-                this.listaMesContainer.appendChild(nuevaLista.crearListaElement());
-            });
-        });
-    }
-}
-
-// Inicializa la aplicación
-const app = new App();
