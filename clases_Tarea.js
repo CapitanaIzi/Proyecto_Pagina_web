@@ -16,42 +16,50 @@ class Tarea {
             e.dataTransfer.setData('text/plain', tareaDiv.id);
             tareaDiv.classList.add('arrastrando');
         });
-
+    
         tareaDiv.addEventListener('dragover', (e) => {
             e.preventDefault();
         });
-
+    
         tareaDiv.addEventListener('drop', (e) => {
             e.preventDefault();
             const tareaId = e.dataTransfer.getData('text/plain');
             const tareaArrastrada = document.getElementById(tareaId);
-
+    
             if (tareaArrastrada && tareaArrastrada !== tareaDiv) {
                 listaDiv.insertBefore(tareaArrastrada, tareaDiv);
                 tareaArrastrada.classList.remove('arrastrando');
             }
-
-            if (tareaArrastrada && tareaArrastrada !== tareaDiv) {
-                const listaActual = tareaDiv.closest('.lista-basica');
-                const listaDestino = listaDiv.closest('.lista-basica');
-
-                if (listaDestino && !listaDestino.expandida) {
-                    const tareaInstancia = getTareaById(tareaId);
-                    if (tareaInstancia) {
-                        tareaInstancia.setVisible(false);
-                    }
-                } else {
-
-                    const tareaInstancia = getTareaById(tareaId);
-                    if (tareaInstancia) {
-                        tareaInstancia.setVisible(true);
-                    }
+    
+            // Obtén la lista actual y la lista de destino
+            const listaDestino = listaDiv.closest('.lista-basica');
+    
+            // Aquí gestionamos la visibilidad de las tareas de la lista de destino
+            listaDestino.querySelectorAll('.tarea').forEach(tareaDiv => {
+                const tareaInstancia = getTareaById(tareaDiv.id);
+                if (tareaInstancia) {
+                    // Si la lista está expandida, aseguramos que la tarea sea visible
+                    tareaInstancia.setVisible(listaDestino.expandida);
                 }
-                tareaArrastrada.classList.remove('arrastrando');
+            });
+    
+            // Si la lista de destino no está expandida, ocultar la tarea al arrastrarla allí
+            if (listaDestino && !listaDestino.expandida) {
+                const tareaInstancia = getTareaById(tareaId);
+                if (tareaInstancia) {
+                    tareaInstancia.setVisible(false);  // Oculta la tarea si la lista no está expandida
+                }
+            } else {
+                // Si la lista está expandida, mostrar la tarea
+                const tareaInstancia = getTareaById(tareaId);
+                if (tareaInstancia) {
+                    tareaInstancia.setVisible(true);  // Muestra la tarea si la lista está expandida
+                }
             }
         });
     }
-
+    
+    
     /**
      * Crea un checkbox para la tarea, el cual permite marcarla como completada.
      * Al marcar el checkbox, la tarea se tachará si se completa.

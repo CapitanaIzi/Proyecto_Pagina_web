@@ -8,12 +8,6 @@ class Lista {
         this.lineaGuia.classList.add('linea-guia');
         this.listaDiv.appendChild(this.lineaGuia);
 
-        this.tareas.forEach((tarea) => {
-            const tareaElement = tarea.crearTarea();
-            tarea.element = tareaElement;
-            tareaElement.style.display = this.expandida ? 'block' : 'none';
-            this.listaDiv.appendChild(tareaElement);
-        });
 
         this.agregarComportamientoDeArrastre();
     }
@@ -87,23 +81,31 @@ class Lista {
         this.lineaGuia.style.display = 'none';
     }
 
-    /**
-     * Mueve la tarea dentro de la lista.
-     * @param {Element} tarea - La tarea a mover.
+     /**
+     * Mueve una tarea a esta lista y la guarda en el array de tareas.
+     * 
+     * @param {Tarea} tarea - La tarea que se mueve.
      */
-    moverTarea(tarea) {
-        // Encuentra y elimina la tarea del arreglo `tareas` de la lista actual
-        this.tareas = this.tareas.filter(t => t.element !== tarea);
-    
-        // Agrega la tarea a la lista de destino visualmente
-        this.listaDiv.appendChild(tarea);
-    
-        // Actualiza la referencia de la tarea en la nueva lista
-        const tareaObj = this.tareas.find(t => t.element === tarea);
-        if (tareaObj) {
-            tareaObj.element = tarea;
+     moverTarea(tarea, nuevaLista) {
+        // Eliminar la tarea de la lista actual
+        const index = this.tareas.indexOf(tarea);
+        if (index > -1) {
+            this.tareas.splice(index, 1);
         }
+    
+        // Añadir la tarea a la nueva lista
+        nuevaLista.tareas.push(tarea);
+        nuevaLista.listaDiv.appendChild(tarea.element);
+    
+        // Actualizar visibilidad de la tarea según el estado de expansión de la nueva lista
+        tarea.element.style.display = nuevaLista.expandida ? 'block' : 'none';
+    
+        // Asegurarse de que todas las tareas en la nueva lista estén visibles según el estado de expansión
+        nuevaLista.actualizarVisibilidadTareas();
     }
+    
+    
+    
     
     /**
   * Crea el elemento visual de la lista, que incluye el contenedor de la lista, el título,
@@ -120,7 +122,6 @@ class Lista {
         const tituloContainer = this.crearTituloContainer();
         this.listaDiv.appendChild(tituloContainer);
     
-        // Configura visibilidad de las tareas según el estado de expansión
         this.tareas.forEach((tarea) => {
             const tareaElement = tarea.crearTarea(this.listaDiv);
             tarea.element = tareaElement;
@@ -205,11 +206,16 @@ class Lista {
   agregarTarea() {
     const nuevaTarea = new Tarea();
     const tareaElement = nuevaTarea.crearTarea();
-    tareaElement.style.display = this.expandida ? 'block' : 'none';
+    tareaElement.style.display = this.expandida ? 'block' : 'none'; // Establecer visibilidad según el estado de expansión
     nuevaTarea.element = tareaElement;
     this.tareas.push(nuevaTarea);
     this.listaDiv.appendChild(tareaElement);
+    
+    // Asegurarse de que la visibilidad de todas las tareas se actualice
+    this.actualizarVisibilidadTareas();
 }
+
+
 
 
 /**
@@ -225,8 +231,7 @@ crearOpcionAgregar(menuLista) {
 
     opcionAgregar.addEventListener('click', () => {
         const nuevaTarea = new Tarea();
-        this.agregarTarea(nuevaTarea); // Llama a agregarTarea para incluir la nueva tarea correctamente
-
+        this.agregarTarea(nuevaTarea);
         menuLista.style.display = 'none';
     });
 
@@ -261,22 +266,30 @@ crearOpcionAgregar(menuLista) {
     crearOpcionExpandirContraer(menuLista) {
         const opcionExpandirContraer = document.createElement('div');
         opcionExpandirContraer.textContent = 'Contraer';
-
+    
         opcionExpandirContraer.addEventListener('click', () => {
+            // Cambiar el estado de expansión
             this.expandida = !this.expandida;
             opcionExpandirContraer.textContent = this.expandida ? 'Contraer' : 'Expandir';
-
-            // Oculta o muestra cada tarea según el estado de expansión
-            this.tareas.forEach((tarea) => {
-                if (tarea.element && tarea.element.parentElement === this.listaDiv) {
-                    tarea.element.style.display = this.expandida ? 'block' : 'none';
-                }
-            });
-
+    
+            // Aplicar la visibilidad a todas las tareas de la lista
+            this.actualizarVisibilidadTareas();
+            
+            // Ocultar el menú de opciones después de hacer clic
             menuLista.style.display = 'none';
         });
-
+    
         return opcionExpandirContraer;
-    }  
+    }
+    
+    actualizarVisibilidadTareas() {
+        // Iterar sobre todas las tareas y actualizar su visibilidad
+        this.tareas.forEach((tarea) => {
+            if (tarea.element && tarea.element.parentElement === this.listaDiv) {
+                tarea.element.style.display = this.expandida ? 'block' : 'none';
+            }
+        });
+    }
+    
 
 }
