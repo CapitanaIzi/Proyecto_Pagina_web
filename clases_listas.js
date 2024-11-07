@@ -3,13 +3,21 @@ class Lista {
         this.titulo = titulo;
         this.tareas = [new Tarea(), new Tarea(), new Tarea()];
         this.listaDiv = this.crearListaElement();
-        this.expandida = true;
+        this.expandida = true; // Controla si la lista está expandida o contraída
         this.lineaGuia = document.createElement('div');
         this.lineaGuia.classList.add('linea-guia');
         this.listaDiv.appendChild(this.lineaGuia);
 
+        this.tareas.forEach((tarea) => {
+            const tareaElement = tarea.crearTarea();
+            tarea.element = tareaElement;
+            tareaElement.style.display = this.expandida ? 'block' : 'none';
+            this.listaDiv.appendChild(tareaElement);
+        });
+
         this.agregarComportamientoDeArrastre();
     }
+    
     /**
      * Configura el comportamiento de arrastre y soltado en la lista.
      * Permite mover tareas dentro de la lista y muestra una línea guía cuando se arrastra una tarea.
@@ -53,12 +61,15 @@ class Lista {
             e.preventDefault();
             const tareaId = e.dataTransfer.getData('text/plain');
             const tarea = document.getElementById(tareaId);
+            
             if (tarea) {
+                // Llama a `moverTarea` para manejar la tarea correctamente en la nueva lista
                 this.moverTarea(tarea);
             }
             this.ocultarLineaGuia();
         });
     }
+    
 
     /**
      * Muestra la línea guía en la posición de la tarea objetivo.
@@ -81,8 +92,19 @@ class Lista {
      * @param {Element} tarea - La tarea a mover.
      */
     moverTarea(tarea) {
+        // Encuentra y elimina la tarea del arreglo `tareas` de la lista actual
+        this.tareas = this.tareas.filter(t => t.element !== tarea);
+    
+        // Agrega la tarea a la lista de destino visualmente
         this.listaDiv.appendChild(tarea);
+    
+        // Actualiza la referencia de la tarea en la nueva lista
+        const tareaObj = this.tareas.find(t => t.element === tarea);
+        if (tareaObj) {
+            tareaObj.element = tarea;
+        }
     }
+    
     /**
   * Crea el elemento visual de la lista, que incluye el contenedor de la lista, el título,
   * y las tareas asociadas a la lista. Este método organiza los elementos en el DOM y los
@@ -94,17 +116,21 @@ class Lista {
     crearListaElement() {
         this.listaDiv = document.createElement('div');
         this.listaDiv.classList.add('lista-basica');
-
+    
         const tituloContainer = this.crearTituloContainer();
         this.listaDiv.appendChild(tituloContainer);
+    
+        // Configura visibilidad de las tareas según el estado de expansión
         this.tareas.forEach((tarea) => {
             const tareaElement = tarea.crearTarea(this.listaDiv);
             tarea.element = tareaElement;
+            tareaElement.style.display = this.expandida ? 'block' : 'none';
             this.listaDiv.appendChild(tareaElement);
         });
-
+    
         return this.listaDiv;
     }
+    
 
     /**
  * Crea un contenedor para el título de la lista y el botón de opciones.
@@ -171,39 +197,42 @@ class Lista {
         return menuLista;
     }
 
-    /**
-     * Añade una nueva tarea a la lista de tareas.
-     * 
-     * @param {Tarea} tarea - La tarea que se va a añadir.
-     */
-    agregarTarea(tarea) {
-        this.tareas.push(tarea);
-    }
+  /**
+ * Añade una nueva tarea a la lista visualmente y en el array `this.tareas`.
+ * 
+ * @param {Tarea} tarea - La tarea que se va a añadir.
+ */
+  agregarTarea() {
+    const nuevaTarea = new Tarea();
+    const tareaElement = nuevaTarea.crearTarea();
+    tareaElement.style.display = this.expandida ? 'block' : 'none';
+    nuevaTarea.element = tareaElement;
+    this.tareas.push(nuevaTarea);
+    this.listaDiv.appendChild(tareaElement);
+}
 
-    /**
-     * Crea la opción "Agregar" dentro del menú de opciones. Al hacer clic en esta opción, 
-     * se añadirá una nueva tarea a la lista.
-     * 
-     * @param {HTMLDivElement} menuLista - El contenedor donde se añadirá la opción "Agregar".
-     * @returns {HTMLDivElement} La opción "Agregar" del menú.
-     */
-    crearOpcionAgregar(menuLista) {
-        const opcionAgregar = document.createElement('div');
-        opcionAgregar.textContent = 'Agregar';
 
-        opcionAgregar.addEventListener('click', () => {
-            const nuevaTarea = new Tarea();
-            this.agregarTarea(nuevaTarea);
-            const nuevaTareaElement = nuevaTarea.crearTarea();
-            nuevaTarea.element = nuevaTareaElement;
+/**
+ * Crea la opción "Agregar" dentro del menú de opciones. Al hacer clic en esta opción, 
+ * se añade una nueva tarea a la lista.
+ * 
+ * @param {HTMLDivElement} menuLista - El contenedor donde se añadirá la opción "Agregar".
+ * @returns {HTMLDivElement} La opción "Agregar" del menú.
+ */
+crearOpcionAgregar(menuLista) {
+    const opcionAgregar = document.createElement('div');
+    opcionAgregar.textContent = 'Agregar';
 
-            nuevaTareaElement.style.display = this.expandida ? 'block' : 'none';
-            this.listaDiv.appendChild(nuevaTareaElement);
-            menuLista.style.display = 'none';
-        });
+    opcionAgregar.addEventListener('click', () => {
+        const nuevaTarea = new Tarea();
+        this.agregarTarea(nuevaTarea); // Llama a agregarTarea para incluir la nueva tarea correctamente
 
-        return opcionAgregar;
-    }
+        menuLista.style.display = 'none';
+    });
+
+    return opcionAgregar;
+}
+
 
     /**
      * Crea la opción "Eliminar" dentro del menú de opciones. Al hacer clic en esta opción, 
@@ -236,8 +265,10 @@ class Lista {
         opcionExpandirContraer.addEventListener('click', () => {
             this.expandida = !this.expandida;
             opcionExpandirContraer.textContent = this.expandida ? 'Contraer' : 'Expandir';
+
+            // Oculta o muestra cada tarea según el estado de expansión
             this.tareas.forEach((tarea) => {
-                if (tarea.element) {
+                if (tarea.element && tarea.element.parentElement === this.listaDiv) {
                     tarea.element.style.display = this.expandida ? 'block' : 'none';
                 }
             });
@@ -246,6 +277,6 @@ class Lista {
         });
 
         return opcionExpandirContraer;
-    }
+    }  
 
 }
