@@ -93,3 +93,31 @@ class App {
 
 // Inicializa la aplicación
 const app = new App();
+
+document.getElementById('toggleAppearance').addEventListener('click', function(event) {
+    event.preventDefault(); // Previene el comportamiento de enlace
+    
+    // Alterna la clase dark-theme en el body
+    document.body.classList.toggle('dark-theme');
+    
+    // Cambia el texto del enlace según el tema actual
+    const isDarkTheme = document.body.classList.contains('dark-theme');
+    this.textContent = isDarkTheme ? 'Apariencia Clara' : 'Apariencia Oscura';
+    
+    // Guarda la preferencia en localStorage
+    localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
+});
+
+// Al cargar la página, aplica el tema almacenado y ajusta el texto del enlace
+window.addEventListener('load', function() {
+    const savedTheme = localStorage.getItem('theme');
+    const appearanceLink = document.getElementById('toggleAppearance');
+    
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+        appearanceLink.textContent = 'Apariencia Clara';
+    } else {
+        appearanceLink.textContent = 'Apariencia Oscura';
+    }
+});
+
