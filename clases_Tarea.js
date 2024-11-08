@@ -3,7 +3,6 @@ class Tarea {
         this.nombre = nombre;
         this.completada = false;
     }
-
     /**
      * Agrega los eventos necesarios para el comportamiento de arrastre (drag & drop) de las tareas.
      * Permite que las tareas puedan ser arrastradas dentro de la lista o entre listas.

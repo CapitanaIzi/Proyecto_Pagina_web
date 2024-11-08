@@ -103,7 +103,7 @@ h1 {
     width: 100%;
 }
 .editable-title::placeholder {
-    color: rgb(241, 239, 239); /* Color del placeholder */
+    color: rgb(90, 88, 88); /* Color del placeholder */
     opacity: 1; /* Asegura que el color tenga la opacidad completa */
 }
 .listas-basicas {
@@ -144,7 +144,7 @@ h1 {
     margin-left:-13px;
 }
 .menu-lista div:hover {
-    background-color: #942929;
+    background-color: #c45454;
 }
 button {
     margin-top: 10px;
@@ -171,6 +171,10 @@ button:hover {
     border: none;
     color: #333;
 
+}
+.tarea textarea::placeholder {
+    color: #6e6c6c; /* Cambia este color al que prefieras para el placeholder */
+    opacity: 1; /* Ajusta la opacidad si quieres que el texto sea más visible */
 }
 .tarea textarea.tachado {
     text-decoration: line-through;
@@ -211,7 +215,7 @@ button:hover {
 }
 
 .menuTarea div:hover {
-    background-color: #942929;
+    background-color: #c45454;
 }
 
 .linea-guia {
@@ -283,6 +287,10 @@ body.dark-theme {
     background-color: rgb(114, 110, 110);
     color: #0f0f0f;
 }
+.dark-theme .editable-title::placeholder {
+    color: rgb(214, 209, 209); /* Color del placeholder */
+    opacity: 1; /* Asegura que el color tenga la opacidad completa */
+}
 .dark-theme .lista-basica {
     background-color:rgb(114, 109, 109); /* Fondo oscuro */
     color: #0e0d0d; /* Texto claro */
@@ -303,6 +311,10 @@ body.dark-theme {
     border: 1px;
     position: relative;
     background-color: #33373d;
+}
+.dark-theme .tarea textarea::placeholder {
+    color: #c2bbbb; /* Placeholder en tono más claro para destacar */
+    opacity: 1;
 }
 .dark-theme .menu-lista, .dark-theme .menuTarea {
     background-color: rgb(236, 100, 100);
