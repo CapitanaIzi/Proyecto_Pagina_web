@@ -6,7 +6,6 @@ body {
     color: black;
 }
 
-
 header {
     display: flex;
     justify-content: space-between;
@@ -79,13 +78,16 @@ h1 {
 }
 
 .container {
+    
     margin: 0 auto;
-    padding: 0px;
-    background-color: #fff;
+    padding: 5px;
+    background-color: white;
     color: #333;
-    width: 90%;
+    width: 97%;
+    box-sizing: border-box; /* Incluye el padding dentro del tamaño total */
+    display: flex;
+    flex-direction: column;
 }
-
 .editable-title, .non-editable-title {
     background-color: #f0f0f0;
     color: #333;
@@ -93,29 +95,37 @@ h1 {
 .non-editable-title {
     font-size: 1.5em;
     font-weight: bold;
+    padding: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 .editable-title {
     font-size: 1.2em;
-    margin-bottom: 10px;
     padding: 5px;
     border: 1px solid #ccc;
-    width: 100%;
+    width: 99%;
 }
 .editable-title::placeholder {
     color: rgb(90, 88, 88); /* Color del placeholder */
     opacity: 1; /* Asegura que el color tenga la opacidad completa */
 }
 .listas-basicas {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     position: relative;
     background-color: #ffffff; /* Fondo claro */
     color: #000000; /* Texto oscuro */
-    border: 1px solid #ccc; /* Borde claro */
+    border: 1px solid #4e4c4c; /* Borde claro */
+    padding: 5px;
+    margin: 0px;
 }
+
 .lista-basica {
+    position: relative;
     background-color: #f0f0f0; /* Fondo claro */
     color: #333; /* Texto oscuro */
     border: 1px solid #ccc; /* Borde claro */
@@ -279,12 +289,16 @@ body.dark-theme {
 }
 
 .dark-theme .container {
-    background-color: rgb(114, 110, 110);
+    background-color: #1b1b1b;
     color: #f0f0f0;
 }
 
-.dark-theme .editable-title, .dark-theme .non-editable-title {
-    background-color: rgb(114, 110, 110);
+.dark-theme .editable-title {
+    background-color:rgb(158, 152, 152);
+    color: #0f0f0f;
+}
+.dark-theme .non-editable-title {
+    background-color:rgb(114, 110, 110);
     color: #0f0f0f;
 }
 .dark-theme .editable-title::placeholder {
@@ -308,7 +322,7 @@ body.dark-theme {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    border: 1px;
+    border:1px solid #ece9e9;
     position: relative;
     background-color: #33373d;
 }
