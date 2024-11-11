@@ -1,0 +1,42 @@
+#opinionesSection {
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 80%;
+    margin: 20px auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+  
+  button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+  
+  .opinion {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #e8f4e8;
+    border-radius: 5px;
+  }
+  
+  .opinion strong {
+    font-weight: bold;
+  }
+  

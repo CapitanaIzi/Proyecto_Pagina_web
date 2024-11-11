@@ -1,0 +1,171 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f9;
+}
+
+/* Contenedor principal */
+.container {
+    width: 85%; /* Ajustamos el ancho para ser más grande */
+    max-width: 1200px; /* Aumentamos el ancho máximo */
+    padding: 50px; /* Aumentamos el padding */
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Títulos */
+h1, h2 {
+    text-align: center;
+    margin-bottom: 30px; /* Aumentamos el espacio entre el título y el contenido */
+    color: #333;
+}
+
+/* Editor de notas */
+.note-editor {
+    margin-bottom: 30px; /* Aumentamos el margen */
+}
+
+/* Campos de texto */
+input[type="text"], textarea {
+    width: 100%;
+    padding: 15px; /* Aumentamos el padding */
+    font-size: 18px; /* Aumentamos el tamaño de fuente */
+    margin-bottom: 15px; /* Aumentamos el margen entre los campos */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+textarea {
+    height: 300px; /* Aumentamos la altura del textarea */
+    resize: none;
+}
+
+/* Botones */
+button {
+    padding: 15px 30px; /* Aumentamos el padding */
+    font-size: 18px; /* Aumentamos el tamaño de fuente */
+    color: #fff;
+    background-color: #333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+/* Lista de notas */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 20px; /* Aumentamos el padding */
+    margin: 10px 0; /* Aumentamos el margen entre las notas */
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+li:hover {
+    background-color: #e2e2e2;
+}
+
+/* Botón de eliminar */
+.delete-button {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px; /* Aumentamos el tamaño */
+    cursor: pointer;
+    font-size: 16px; /* Aumentamos el tamaño de la fuente */
+    transition: background-color 0.3s;
+}
+
+.delete-button:hover {
+    background-color: #c0392b;
+}
+
+/* Botones de acción */
+.buttons {
+    display: flex;
+    gap: 15px; /* Aumentamos el espacio entre los botones */
+}
+
+.add-button {
+    font-size: 30px; /* Aumentamos el tamaño del icono */
+    color: #fff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 50%;
+    width: 50px; /* Aumentamos el tamaño del botón */
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.add-button:hover {
+    background-color: #218838;
+}
+
+/* Media Query para dispositivos móviles */
+@media (max-width: 600px) {
+    .container {
+        width: 95%; /* Ancho más grande para móviles */
+        padding: 15px; /* Reducimos el padding en móviles */
+    }
+
+    input[type="text"], textarea {
+        font-size: 16px; /* Ajustamos el tamaño de fuente */
+    }
+
+    li {
+        flex-direction: column; /* Colocamos el contenido en columna en móviles */
+        align-items: flex-start;
+    }
+
+    .buttons {
+        flex-direction: column; /* Colocamos los botones en columna en móviles */
+        gap: 5px;
+    }
+
+    button, .delete-button, .add-button {
+        width: 100%; /* Los botones ocupan todo el ancho en móviles */
+        padding: 10px; /* Ajustamos el padding para móviles */
+        font-size: 14px; /* Reducimos el tamaño de fuente de los botones */
+    }
+
+    /* Ajustamos el tamaño de los botones específicos */
+    .add-button {
+        width: 35px; /* Reducimos el tamaño del botón "+" */
+        height: 35px;
+        font-size: 18px; /* Reducimos el tamaño del icono */
+    }
+
+    .delete-button {
+        font-size: 12px; /* Reducimos el tamaño del texto del botón de eliminar */
+        padding: 5px 10px; /* Reducimos el padding */
+    }
+}

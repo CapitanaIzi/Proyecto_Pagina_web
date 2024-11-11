@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloc de Notas</title>
+    <link rel="stylesheet" href="opiniones.css">
+</head>
+<body>
+<!-- Sección de Opiniones (siempre visible) -->
+<div id="opinionesSection">
+    <h2>Opiniones</h2>
+    
+    <!-- Formulario para dejar una opinión -->
+    <form id="opinionForm">
+      <textarea id="opinionText" placeholder="Deja tu opinión aquí..." required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
+  
+    <h3>Opiniones anteriores:</h3>
+    <div id="opinionesList"></div>
+  </div>  
+    <script src="opiniones.js"></script>
+</body>
+</html>
