@@ -3,7 +3,7 @@ class Lista {
         this.titulo = titulo;
         this.tareas = [new Tarea(), new Tarea(), new Tarea()];
         this.listaDiv = this.crearListaElement();
-        this.expandida = true; // Controla si la lista está expandida o contraída
+        this.expandida = true;
         this.lineaGuia = document.createElement('div');
         this.lineaGuia.classList.add('linea-guia');
         this.listaDiv.appendChild(this.lineaGuia);

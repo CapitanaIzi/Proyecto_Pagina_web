@@ -9,60 +9,31 @@ class Diagrama {
         this.menuEditar = document.getElementById('menu-editar');
         this.btnColor = document.getElementById('btn-color');
         this.menuColor = document.getElementById('menu-color');
-
-        this.setupMenuToggle();
-        this.setupDocumentClick();
-        this.setupThemeToggle(); // Configurar el botón de alternancia de tema
-        this.applySavedTheme(); // Aplicar el tema guardado al cargar la página
+        this.titulo = document.getElementById('titulo');
+        
         this.init();
     }
 
-    setupMenuToggle() {
-        const menuBtn = document.querySelector('.menu-btn');
-        const menuPrincipal = document.querySelector('.menuPrincipal');
-
-        menuBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            menuPrincipal.classList.toggle('active');
-        });
+   
+ // Métodos para obtener y cargar el título del mapa conceptual
+    /**
+     * Obtiene el título del mapa conceptual.
+     * @returns {Object} Objeto que representa el título.
+     */
+    obtenerTitulo() {
+        const titulo = this.titulo.innerText || ''; // Obtener el texto del título
+        return {
+            type: 'titulo',
+            content: titulo,
+        };
     }
 
-    setupDocumentClick() {
-        const menuBtn = document.querySelector('.menu-btn');
-        const menuPrincipal = document.querySelector('.menuPrincipal');
-
-        document.addEventListener('click', (e) => {
-            if (!menuBtn.contains(e.target) && !menuPrincipal.contains(e.target)) {
-                menuPrincipal.classList.remove('active');
-            }
-        });
-    }
-
-    setupThemeToggle() {
-        const appearanceLink = document.getElementById('toggleAppearance');
-        
-        appearanceLink.addEventListener('click', (event) => {
-            event.preventDefault();
-            document.body.classList.toggle('dark-theme');
-            
-            const isDarkTheme = document.body.classList.contains('dark-theme');
-            appearanceLink.textContent = isDarkTheme ? 'Apariencia Clara' : 'Apariencia Oscura';
-            
-            // Guardar la preferencia de tema en localStorage
-            localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
-        });
-    }
-
-    applySavedTheme() {
-        const savedTheme = localStorage.getItem('theme');
-        const appearanceLink = document.getElementById('toggleAppearance');
-        
-        if (savedTheme === 'dark') {
-            document.body.classList.add('dark-theme');
-            appearanceLink.textContent = 'Apariencia Clara';
-        } else {
-            appearanceLink.textContent = 'Apariencia Oscura';
-        }
+    /**
+     * Carga el título en el DOM.
+     * @param {string} content - El contenido del título.
+     */
+    cargarTitulo(content) {
+        this.titulo.innerText = content; // Establecer el nuevo texto del título
     }
 
     init() {
@@ -159,8 +130,7 @@ class Diagrama {
     cargarElementos() {
         // Lógica para cargar el estado de los elementos
     }
+
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    new Diagrama();
-});
+
