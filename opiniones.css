@@ -10,8 +10,7 @@ header {
   display: flex;
   justify-content: space-between;
   padding: 5px;
-  background-color: #e4dede;
-  color: #333;
+  background-color: white;
 }
 
 .menu-btn {

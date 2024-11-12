@@ -11,8 +11,7 @@ header {
     display: flex;
     justify-content: space-between;
     padding: 5px;
-    background-color: #e4dede;
-    color: #333;
+    background-color: white;
 }
 
 .menu-btn {
@@ -263,7 +262,7 @@ li:hover {
 
     /* Encabezado en tema oscuro */
     .dark-theme header {
-        background-color: #444444;
+        background-color: #131212;
         /* Fondo oscuro para el header */
         color: #f3eded;
         /* Texto blanco */
