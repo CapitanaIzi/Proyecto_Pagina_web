@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Pendientes</title>
+    <link rel="stylesheet" href="listas.css">
+</head>
+
+<body>
+    <!-- Menú desplegable -->
+    <header>
+        <button class="menu-btn">Menú</button>
+        <nav class="menuPrincipal">
+            <a href="index.html">Inicio</a>
+            <a href="listas.html">Lista de Pendientes</a>
+            <a href="diagrama.html">Mapa Conceptual</a>
+            <a href="#">Planificador de Proyecto</a>
+            <a href="escritura.html">Bloc de Notas</a>
+            <a href="registro.html">Registrarse</a>
+            <a href="#" id="toggleAppearance">Apariencia Oscura</a>
+            <a href="opiniones.html">Opiniones</a>
+        </nav>
+        <input type="text" placeholder="Buscar..." class="search-bar">
+    </header>
+
+    <!-- Título y botones de listas -->
+    <main>
+        <h1>Listas de Pendientes</h1>
+        <div class="buttons">
+            <button id="btn-personal">Lista Personal</button>
+            <button id="btn-semanal">Lista Semanal</button>
+            <button id="btn-mensual">Lista por Mes</button>
+            <button id="btn-calendario">Calendario</button>
+        </div>
+
+        <div class="container">
+            <!-- Contenedor Lista Personal -->
+            <h2 class="non-editable-title">Lista Personal</h2>
+            <div class="listas-basicas" id="listas-personales"></div>
+            <div class="linea-guia"></div>
+        </div>
+
+        <!-- Contenedor Lista Semanal -->
+        <div class="container">
+            <h2 class="non-editable-title">Lista Semanal</h2>
+            <div class="listas-basicas-container">
+                <div class="listas-basicas" id="lista-semanal">
+                    <div class="linea-guia"></div>
+                    <!-- Sección de listas básicas para cada día de la semana -->
+                </div>
+            </div>
+
+            <!-- Contenedor Lista por Mes -->
+            <div class="container">
+                <h2 class="non-editable-title">Lista por Mes</h2>
+                <div class="listas-basicas" id="listas-mes"></div>
+                <div class="linea-guia"></div>
+
+            </div>
+
+        </div>
+
+
+    </main>
+    <script src="clases_listas.js"></script>
+    <script src="clases_Tarea.js"></script>
+    <script src="clases_ListaSemanal.js"></script>
+    <script src="clases_App.js"></script>
+
+
+
+</body>
+
+</html>

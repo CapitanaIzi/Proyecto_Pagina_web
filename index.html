@@ -4,17 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Pendientes</title>
-    <link rel="stylesheet" href="listas.css">
+    <title>Bienvenidos a SENCIEL</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <!-- Menú desplegable -->
+
     <header>
         <button class="menu-btn">Menú</button>
         <nav class="menuPrincipal">
-            <a href="#">Inicio</a>
-            <a href="#">Lista de Pendientes</a>
+            <a href="index.html">Inicio</a>
+            <a href="listas.html">Lista de Pendientes</a>
             <a href="diagrama.html">Mapa Conceptual</a>
             <a href="#">Planificador de Proyecto</a>
             <a href="escritura.html">Bloc de Notas</a>
@@ -25,51 +25,64 @@
         <input type="text" placeholder="Buscar..." class="search-bar">
     </header>
 
-    <!-- Título y botones de listas -->
+    <!-- Contenedor principal -->
     <main>
-        <h1>Listas de Pendientes</h1>
-        <div class="buttons">
-            <button id="btn-personal">Lista Personal</button>
-            <button id="btn-semanal">Lista Semanal</button>
-            <button id="btn-mensual">Lista por Mes</button>
-            <button id="btn-calendario">Calendario</button>
-        </div>
-
         <div class="container">
-            <!-- Contenedor Lista Personal -->
-            <h2 class="non-editable-title">Lista Personal</h2>
-            <div class="listas-basicas" id="listas-personales"></div>
-            <div class="linea-guia"></div>
+            <h1>Bienvenidos a SENCIEL</h1>
+            <p>Esta es una página de organización personal. Muy sencilla y muy útil para la vida diaria, para proyectos
+                a futuro.</p>
         </div>
-
-        <!-- Contenedor Lista Semanal -->
-        <div class="container">
-            <h2 class="non-editable-title">Lista Semanal</h2>
-            <div class="listas-basicas-container">
-                <div class="listas-basicas" id="lista-semanal">
-                    <div class="linea-guia"></div>
-                    <!-- Sección de listas básicas para cada día de la semana -->
-                </div>
-            </div>
-
-            <!-- Contenedor Lista por Mes -->
-            <div class="container">
-                <h2 class="non-editable-title">Lista por Mes</h2>
-                <div class="listas-basicas" id="listas-mes"></div>
-                <div class="linea-guia"></div>
-
-            </div>
-
-        </div>
-
-
     </main>
-    <script src="clases_listas.js"></script>
-    <script src="clases_Tarea.js"></script>
-    <script src="clases_ListaSemanal.js"></script>
-    <script src="clases_App.js"></script>
 
+    <!-- Carrusel fuera del contenedor principal -->
+    <div class="carousel">
+        <!-- Flecha izquierda -->
+        <button class="prev">&#10094;</button>
 
+        <div class="carousel-item">
+            <a href="listas.html">
+                <div class="carousel-content">
+                    <div class="carousel-image">
+                        <img src="lista.jpg" alt="Imagen 1">
+                    </div>
+                    <div class="carousel-description">
+                        <p>Descripción de la imagen 1</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="carousel-item">
+            <a href="diagrama.html">
+                <div class="carousel-content">
+                    <div class="carousel-image">
+                        <img src="diagrama.jpg" alt="Imagen 2">
+                    </div>
+                    <div class="carousel-description">
+                        <p>Descripción de la imagen 2</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="carousel-item">
+            <a href="escritura.html">
+                <div class="carousel-content">
+                    <div class="carousel-image">
+                        <img src="notas.jpg" alt="Imagen 3">
+                    </div>
+                    <div class="carousel-description">
+                        <p>Descripción de la imagen 3</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Flecha derecha -->
+        <button class="next">&#10095;</button>
+    </div>
+
+    <script src="app.js"></script>
 
 </body>
 
