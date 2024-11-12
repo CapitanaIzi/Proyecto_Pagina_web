@@ -1,167 +1,166 @@
-document.addEventListener('DOMContentLoaded', function () {
-    // Inicialización de elementos del DOM
-    const btnInsertar = document.getElementById('btn-insertar');
-    const menuInsertar = document.getElementById('menu-insertar');
-    const btnEditar = document.getElementById('btn-editar');
-    const menuEditar = document.getElementById('menu-editar');
-    const btnColor = document.getElementById('btn-color');
-    const menuColor = document.getElementById('menu-color');
-    const eliminarBtn = document.getElementById('btn-eliminar');
-    const btnGuardar = document.getElementById('btn-guardar');
+class Diagrama {
+    constructor() {
+        this.cuadroActivo = null;
+        this.guardarBtn = document.getElementById('btn-guardar');
+        this.eliminarBtn = document.getElementById('btn-eliminar');
+        this.btnInsertar = document.getElementById('btn-insertar');
+        this.menuInsertar = document.getElementById('menu-insertar');
+        this.btnEditar = document.getElementById('btn-editar');
+        this.menuEditar = document.getElementById('menu-editar');
+        this.btnColor = document.getElementById('btn-color');
+        this.menuColor = document.getElementById('menu-color');
 
-    cargarElementos();
-    configurarEventos(btnInsertar, menuInsertar, btnEditar, menuEditar, btnColor, menuColor, btnGuardar, eliminarBtn);
-});
+        this.setupMenuToggle();
+        this.setupDocumentClick();
+        this.setupThemeToggle(); // Configurar el botón de alternancia de tema
+        this.applySavedTheme(); // Aplicar el tema guardado al cargar la página
+        this.init();
+    }
 
-function configurarEventos(btnInsertar, menuInsertar, btnEditar, menuEditar, btnColor, menuColor, btnGuardar, eliminarBtn) {
-    // Evento para guardar cambios
-    btnGuardar.addEventListener('click', () => {
-        guardarEstado();
-        alert('Estado guardado.');
-    });
-    configurarMenuDiagrama(btnInsertar, menuInsertar);
-    configurarMenuDiagrama(btnEditar, menuEditar);
-    configurarMenuDiagrama(btnColor, menuColor);
-    configurarEventoEliminar(eliminarBtn);
+    setupMenuToggle() {
+        const menuBtn = document.querySelector('.menu-btn');
+        const menuPrincipal = document.querySelector('.menuPrincipal');
 
-    // Eventos para crear cuadros y flechas
-    document.getElementById('insertar-cuadro').addEventListener('click', crearCuadro);
-    document.getElementById('insertar-flecha').addEventListener('click', crearFlecha);
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            menuPrincipal.classList.toggle('active');
+        });
+    }
 
-    // Configurar colores y seleccionar cuadro activo
-    configurarEventoColor();
-    seleccionarCuadroActivo();
-}
-/**
- * Configura un evento para alternar la visibilidad de un menú.
- * 
- * @param {HTMLElement} button - El botón que activa el menú.
- * @param {HTMLElement} menu - El menú cuya visibilidad se alternará.
- */
-function configurarMenuDiagrama(button, menu) {
-    // Alterna la visibilidad del menú al hacer clic en el botón
-    button.addEventListener('click', (e) => {
-        e.stopPropagation(); // Evita que el evento se propague y cierre el menú inmediatamente
-        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-    });
+    setupDocumentClick() {
+        const menuBtn = document.querySelector('.menu-btn');
+        const menuPrincipal = document.querySelector('.menuPrincipal');
 
-    // Cierra el menú si se hace clic fuera de él o del botón
-    document.addEventListener('click', (e) => {
-        if (!menu.contains(e.target) && e.target !== button) {
-            menu.style.display = 'none';
-        }
-    });
-
-}
-
-/**
- * Configura el evento para eliminar elementos cuando el mouse se mueve.
- * 
- * @param {HTMLElement} eliminarBtn - Botón para eliminar elementos.
- */
-function configurarEventoEliminar(eliminarBtn) {
-    document.addEventListener('mousemove', (e) => {
-        const rectEliminarBtn = eliminarBtn.getBoundingClientRect();
-        const elementos = document.querySelectorAll('.cuadro, .flecha');
-
-        elementos.forEach(element => {
-            const rectElemento = element.getBoundingClientRect();
-
-            // Comprobar si el elemento está sobre el botón "Eliminar"
-            if (
-                rectElemento.bottom > rectEliminarBtn.top &&
-                rectElemento.top < rectEliminarBtn.bottom &&
-                rectElemento.right > rectEliminarBtn.left &&
-                rectElemento.left < rectEliminarBtn.right
-            ) {
-                element.remove(); // Eliminar el elemento
-                // Aquí puedes llamar a la función para guardar el estado después de eliminar
+        document.addEventListener('click', (e) => {
+            if (!menuBtn.contains(e.target) && !menuPrincipal.contains(e.target)) {
+                menuPrincipal.classList.remove('active');
             }
         });
-    });
-}
-function crearCuadro() {
-    const nuevoCuadro = new Cuadro();
-    cuadroActivo = nuevoCuadro.element; // Establecer el cuadro recién creado como activo
-}
+    }
 
-function crearFlecha() {
-    new Flecha();
-}
-
-/**
- * Configura los eventos para aplicar colores a los cuadros activos.
- */
-function configurarEventoColor() {
-    document.querySelectorAll('.color-option').forEach(button => {
-        button.addEventListener('click', (e) => {
-            const color = e.target.getAttribute('data-color');
-            if (cuadroActivo) {
-                cuadroActivo.style.backgroundColor = color; // Cambiar el color de fondo del cuadro activo
-            }
+    setupThemeToggle() {
+        const appearanceLink = document.getElementById('toggleAppearance');
+        
+        appearanceLink.addEventListener('click', (event) => {
+            event.preventDefault();
+            document.body.classList.toggle('dark-theme');
+            
+            const isDarkTheme = document.body.classList.contains('dark-theme');
+            appearanceLink.textContent = isDarkTheme ? 'Apariencia Clara' : 'Apariencia Oscura';
+            
+            // Guardar la preferencia de tema en localStorage
+            localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
         });
-    });
-}
+    }
 
-/**
- * Cambia el cuadro activo cuando se hace clic en él.
- */
-function seleccionarCuadroActivo() {
-    document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('cuadro')) {
-            cuadroActivo = e.target; // Establecer el cuadro clickeado como el cuadro activo
-        }
-    });
-
-    /**
-* Cambia la visibilidad del placeholder según el contenido del elemento título.
-* 
-* @param {HTMLElement} tituloElemento - El div editable que representa el título.
-* @param {HTMLElement} placeholder - El elemento span que actúa como el placeholder.
-*/
-    function togglePlaceholder(tituloElemento, placeholder) {
-        if (tituloElemento.innerText.trim() === '') {
-            placeholder.style.display = 'block'; // Mostrar si el título está vacío
+    applySavedTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        const appearanceLink = document.getElementById('toggleAppearance');
+        
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-theme');
+            appearanceLink.textContent = 'Apariencia Clara';
         } else {
-            placeholder.style.display = 'none'; // Ocultar si el título tiene contenido
+            appearanceLink.textContent = 'Apariencia Oscura';
         }
     }
-    const tituloElemento = document.getElementById('titulo');
-    const placeholder = document.getElementById('titulo-placeholder');
-    togglePlaceholder(tituloElemento, placeholder);
 
-    tituloElemento.addEventListener('blur', () => {
-        togglePlaceholder(tituloElemento, placeholder); // Mostrar u ocultar el placeholder según el contenido
-    });
-    tituloElemento.addEventListener('input', () => {
-        togglePlaceholder(tituloElemento, placeholder);
-    });
+    init() {
+        this.configurarEventos();
+        this.cargarElementos();
+        this.configurarMenu();
+        this.configurarColor();
+        this.seleccionarCuadroActivo();
+    }
+
+    configurarEventos() {
+        this.guardarBtn.addEventListener('click', () => {
+            this.guardarEstado();
+            alert('Estado guardado.');
+        });
+
+        document.getElementById('insertar-cuadro').addEventListener('click', () => this.crearCuadro());
+        document.getElementById('insertar-flecha').addEventListener('click', () => this.crearFlecha());
+        this.configurarEventoEliminar();
+    }
+
+    configurarMenu() {
+        this.configurarMenuDiagrama(this.btnInsertar, this.menuInsertar);
+        this.configurarMenuDiagrama(this.btnEditar, this.menuEditar);
+        this.configurarMenuDiagrama(this.btnColor, this.menuColor);
+    }
+
+    configurarMenuDiagrama(button, menu) {
+        button.addEventListener('click', (e) => {
+            e.stopPropagation();
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!menu.contains(e.target) && e.target !== button) {
+                menu.style.display = 'none';
+            }
+        });
+    }
+
+    configurarEventoEliminar() {
+        this.eliminarBtn.addEventListener('mousemove', (e) => {
+            const rectEliminarBtn = this.eliminarBtn.getBoundingClientRect();
+            const elementos = document.querySelectorAll('.cuadro, .flecha');
+
+            elementos.forEach(element => {
+                const rectElemento = element.getBoundingClientRect();
+                if (this.isElementoSobreBotonEliminar(rectElemento, rectEliminarBtn)) {
+                    element.remove();
+                }
+            });
+        });
+    }
+
+    isElementoSobreBotonEliminar(rectElemento, rectEliminarBtn) {
+        return rectElemento.bottom > rectEliminarBtn.top &&
+               rectElemento.top < rectEliminarBtn.bottom &&
+               rectElemento.right > rectEliminarBtn.left &&
+               rectElemento.left < rectEliminarBtn.right;
+    }
+
+    crearCuadro() {
+        const nuevoCuadro = new Cuadro();
+        this.cuadroActivo = nuevoCuadro.element;
+    }
+
+    crearFlecha() {
+        new Flecha();
+    }
+
+    configurarColor() {
+        document.querySelectorAll('.color-option').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const color = e.target.getAttribute('data-color');
+                if (this.cuadroActivo) {
+                    this.cuadroActivo.style.backgroundColor = color;
+                }
+            });
+        });
+    }
+
+    seleccionarCuadroActivo() {
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('cuadro')) {
+                this.cuadroActivo = e.target;
+            }
+        });
+    }
+
+    guardarEstado() {
+        console.log("Estado guardado");
+    }
+
+    cargarElementos() {
+        // Lógica para cargar el estado de los elementos
+    }
 }
 
-
-document.getElementById('toggleAppearance').addEventListener('click', function(event) {
-    event.preventDefault(); // Previene el comportamiento de enlace
-    
-    // Alterna la clase dark-theme en el body
-    document.body.classList.toggle('dark-theme');
-    
-    // Cambia el texto del enlace según el tema actual
-    const isDarkTheme = document.body.classList.contains('dark-theme');
-    this.textContent = isDarkTheme ? 'Apariencia Clara' : 'Apariencia Oscura';
-    
-    // Guarda la preferencia en localStorage
-    localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
-});
-
-// Al cargar la página, aplica el tema almacenado y ajusta el texto del enlace
-window.addEventListener('load', function() {
-    const savedTheme = localStorage.getItem('theme');
-    const appearanceLink = document.getElementById('toggleAppearance');
-    
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-theme');
-        appearanceLink.textContent = 'Apariencia Clara';
-    } else {
-        appearanceLink.textContent = 'Apariencia Oscura';
-    }
+document.addEventListener('DOMContentLoaded', () => {
+    new Diagrama();
 });

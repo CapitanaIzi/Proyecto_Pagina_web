@@ -22,6 +22,8 @@ class App {
         this.setupListaSemanal();  // Configura el evento para crear una nueva lista semanal
         this.setupListaPersonal();  // Configura el evento para crear una nueva lista personal
         this.setupListaMensual();  // Configura el evento para crear una nueva lista mensual
+        this.setupThemeToggle(); // Configurar el botón de alternancia de tema
+        this.applySavedTheme(); // Aplicar el tema guardado al cargar la página
 
         // Llama a la creación de una lista semanal inicial al cargar la página (opcional)
         this.listaSemanal.crearListaSemanal();
@@ -89,35 +91,36 @@ class App {
             this.listaMesContainer.appendChild(nuevaLista.crearListaElement());
         });
     }
+    setupThemeToggle() {
+        const appearanceLink = document.getElementById('toggleAppearance');
+        
+        appearanceLink.addEventListener('click', (event) => {
+            event.preventDefault();
+            document.body.classList.toggle('dark-theme');
+            
+            const isDarkTheme = document.body.classList.contains('dark-theme');
+            appearanceLink.textContent = isDarkTheme ? 'Apariencia Clara' : 'Apariencia Oscura';
+            
+            // Guardar la preferencia de tema en localStorage
+            localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
+        });
+    }
+
+    applySavedTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        const appearanceLink = document.getElementById('toggleAppearance');
+        
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-theme');
+            appearanceLink.textContent = 'Apariencia Clara';
+        } else {
+            appearanceLink.textContent = 'Apariencia Oscura';
+        }
+    }
 }
 
 // Inicializa la aplicación
 const app = new App();
 
-document.getElementById('toggleAppearance').addEventListener('click', function(event) {
-    event.preventDefault(); // Previene el comportamiento de enlace
-    
-    // Alterna la clase dark-theme en el body
-    document.body.classList.toggle('dark-theme');
-    
-    // Cambia el texto del enlace según el tema actual
-    const isDarkTheme = document.body.classList.contains('dark-theme');
-    this.textContent = isDarkTheme ? 'Apariencia Clara' : 'Apariencia Oscura';
-    
-    // Guarda la preferencia en localStorage
-    localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
-});
 
-// Al cargar la página, aplica el tema almacenado y ajusta el texto del enlace
-window.addEventListener('load', function() {
-    const savedTheme = localStorage.getItem('theme');
-    const appearanceLink = document.getElementById('toggleAppearance');
-    
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-theme');
-        appearanceLink.textContent = 'Apariencia Clara';
-    } else {
-        appearanceLink.textContent = 'Apariencia Oscura';
-    }
-});
 
