@@ -43,10 +43,12 @@ header {
   text-decoration: none;
   margin: 5px 0;
 }
+
 .menuPrincipal a:hover {
   display: flex;
   background-color: #e0e0e0;
 }
+
 .menuPrincipal.active {
   display: flex;
   border: 2px solid #faf7f7;
@@ -58,45 +60,204 @@ header {
   color: #333;
   border: 1px solid #ccc;
 }
+
 #opinionesSection {
-    border: 1px solid #ccc;
-    padding: 20px;
-    width: 80%;
-    margin: 20px auto;
-    background-color: #f9f9f9;
-    border-radius: 8px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  width: 80%;
+  margin: 20px auto;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.opinion {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #e8f4e8;
+  border-radius: 5px;
+}
+
+.opinion strong {
+  font-weight: bold;
+}
+
+
+/* Estilos para el tema oscuro */
+.dark-theme {
+  background-color: #131212;
+  /* Fondo oscuro */
+  color: #f3eded;
+  /* Texto claro */
+}
+
+.dark-theme header {
+  background-color: #444444;
+  /* Fondo oscuro para el header */
+  color: #f3eded;
+  /* Texto claro */
+}
+
+.dark-theme .menu-btn,
+.dark-theme button[type="submit"] {
+  background-color: #1c2dc2;
+  /* Fondo azul oscuro para botones */
+  color: white;
+  /* Texto blanco */
+  border: none;
+}
+
+.dark-theme .menu-btn:hover,
+.dark-theme button[type="submit"]:hover {
+  background-color: #2d31fa;
+  /* Azul más claro al hacer hover */
+}
+
+/* Menú desplegable */
+.dark-theme .menuPrincipal {
+  background-color: #333;
+  /* Fondo oscuro para el menú */
+  border-color: #555555;
+  /* Borde oscuro */
+}
+
+.dark-theme .menuPrincipal a {
+  color: #f3eded;
+  /* Texto claro en los enlaces */
+}
+
+.dark-theme .menuPrincipal a:hover {
+  background-color: #666666;
+  /* Fondo gris más oscuro al hacer hover */
+}
+
+/* Barra de búsqueda */
+.dark-theme .search-bar {
+  background-color: #555;
+  /* Fondo gris oscuro para la barra de búsqueda */
+  color: #f3eded;
+  /* Texto blanco */
+  border: 1px solid #444;
+  /* Borde más oscuro */
+}
+
+/* Estilos para las opiniones */
+.dark-theme #opinionesSection {
+  border: 1px solid #555;
+  /* Borde oscuro */
+  padding: 20px;
+  width: 80%;
+  margin: 20px auto;
+  background-color: #222;
+  /* Fondo oscuro */
+  border-radius: 8px;
+}
+
+.dark-theme textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #444;
+  /* Borde oscuro */
+  background-color: #444;
+  /* Fondo oscuro */
+  color: #f3eded;
+  /* Texto claro */
+}
+
+.dark-theme button[type="submit"] {
+  background-color: #4CAF50;
+  /* Verde para el botón de enviar */
+  color: white;
+}
+
+.dark-theme button[type="submit"]:hover {
+  background-color: #45a049;
+  /* Verde más oscuro al hacer hover */
+}
+
+/* Opiniones en tema oscuro */
+.dark-theme .opinion {
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #333;
+  /* Fondo oscuro para las opiniones */
+  color: #f3eded;
+  /* Texto claro */
+  border-radius: 5px;
+}
+
+.dark-theme .opinion strong {
+  font-weight: bold;
+}
+
+/* Media Query para dispositivos móviles */
+@media (max-width: 600px) {
+  .dark-theme .container {
+    width: 95%;
+    /* Ancho más grande para móviles */
+    padding: 15px;
+    /* Reducimos el padding en móviles */
   }
-  
-  textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
+
+  .dark-theme input[type="text"],
+  .dark-theme textarea {
     font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
+    /* Ajustamos el tamaño de fuente */
   }
-  
-  button[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
+
+  .dark-theme li {
+    flex-direction: column;
+    align-items: flex-start;
   }
-  
-  button[type="submit"]:hover {
-    background-color: #45a049;
+
+  .dark-theme .buttons {
+    flex-direction: column;
+    gap: 5px;
   }
-  
-  .opinion {
-    margin-bottom: 15px;
+
+  .dark-theme button,
+  .dark-theme .delete-button,
+  .dark-theme .add-button {
+    width: 100%;
+    /* Los botones ocupan todo el ancho */
     padding: 10px;
-    background-color: #e8f4e8;
-    border-radius: 5px;
+    font-size: 14px;
+    /* Reducimos el tamaño de fuente */
   }
-  
-  .opinion strong {
-    font-weight: bold;
+
+  /* Ajustes específicos para los botones */
+  .dark-theme .add-button {
+    width: 35px;
+    height: 35px;
+    font-size: 18px;
   }
-  
+
+  .dark-theme .delete-button {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+}

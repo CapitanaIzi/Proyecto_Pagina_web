@@ -1,6 +1,6 @@
 /* Variables para tema claro */
 :root {
-    --color-fondo: #52a74a;
+    --color-fondo: white;
     --color-texto: #000000;
     --color-header: #fcf6f6;
     --color-boton: #007BFF;
@@ -36,8 +36,8 @@ header {
 h1 {
     text-align: center;
     margin: 0px;
-    background-color: #050c47;
-    color: white;
+    background-color: white;
+    color: black;
 }
 
 .menu-btn {

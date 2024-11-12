@@ -141,7 +141,16 @@ class NoteApp {
 document.addEventListener('DOMContentLoaded', () => {
     const app = new NoteApp();
 
-    // Agregar eventos de los botones de guardar y limpiar
-    document.getElementById('saveNoteBtn').addEventListener('click', () => app.saveNote());
-    document.getElementById('clearNoteBtn').addEventListener('click', () => app.clearNote());
+    // Agregar eventos de los botones de guardar y limpiar desde la instancia de la clase
+    const saveNoteButton = document.getElementById('saveNoteBtn');
+    const clearNoteButton = document.getElementById('clearNoteBtn');
+    const addNoteButton = document.getElementById('addNoteBtn');  // Este es el botón '+'
+
+    // Conectar los eventos de los botones con las funciones correspondientes
+    saveNoteButton.addEventListener('click', () => app.saveNote());
+    clearNoteButton.addEventListener('click', () => app.clearNote());
+    
+    // Evento para el botón '+', que limpia los campos de la nota para crear una nueva
+    addNoteButton.addEventListener('click', () => app.clearNote());
 });
+

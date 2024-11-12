@@ -44,10 +44,12 @@ header {
     text-decoration: none;
     margin: 5px 0;
 }
+
 .menuPrincipal a:hover {
     display: flex;
     background-color: #e0e0e0;
-  }
+}
+
 .menuPrincipal.active {
     display: flex;
     border: 2px solid #faf7f7;
@@ -62,45 +64,58 @@ header {
 
 /* Contenedor principal */
 .container {
-    width: 85%; /* Ajustamos el ancho para ser más grande */
-    max-width: 1200px; /* Aumentamos el ancho máximo */
-    padding: 50px; /* Aumentamos el padding */
+    width: 85%;
+    /* Ajustamos el ancho para ser más grande */
+    max-width: 1200px;
+    /* Aumentamos el ancho máximo */
+    padding: 50px;
+    /* Aumentamos el padding */
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Títulos */
-h1, h2 {
+h1,
+h2 {
     text-align: center;
-    margin-bottom: 30px; /* Aumentamos el espacio entre el título y el contenido */
+    margin-bottom: 30px;
+    /* Aumentamos el espacio entre el título y el contenido */
     color: #333;
 }
 
 /* Editor de notas */
 .note-editor {
-    margin-bottom: 30px; /* Aumentamos el margen */
+    margin-bottom: 30px;
+    /* Aumentamos el margen */
 }
 
 /* Campos de texto */
-input[type="text"], textarea {
+input[type="text"],
+textarea {
     width: 100%;
-    padding: 15px; /* Aumentamos el padding */
-    font-size: 18px; /* Aumentamos el tamaño de fuente */
-    margin-bottom: 15px; /* Aumentamos el margen entre los campos */
+    padding: 15px;
+    /* Aumentamos el padding */
+    font-size: 18px;
+    /* Aumentamos el tamaño de fuente */
+    margin-bottom: 15px;
+    /* Aumentamos el margen entre los campos */
     border: 1px solid #ddd;
     border-radius: 5px;
 }
 
 textarea {
-    height: 300px; /* Aumentamos la altura del textarea */
+    height: 300px;
+    /* Aumentamos la altura del textarea */
     resize: none;
 }
 
 /* Botones */
 button {
-    padding: 15px 30px; /* Aumentamos el padding */
-    font-size: 18px; /* Aumentamos el tamaño de fuente */
+    padding: 15px 30px;
+    /* Aumentamos el padding */
+    font-size: 18px;
+    /* Aumentamos el tamaño de fuente */
     color: #fff;
     background-color: #333;
     border: none;
@@ -120,8 +135,10 @@ ul {
 }
 
 li {
-    padding: 20px; /* Aumentamos el padding */
-    margin: 10px 0; /* Aumentamos el margen entre las notas */
+    padding: 20px;
+    /* Aumentamos el padding */
+    margin: 10px 0;
+    /* Aumentamos el margen entre las notas */
     background-color: #f4f4f4;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -140,9 +157,11 @@ li:hover {
     color: #fff;
     border: none;
     border-radius: 5px;
-    padding: 8px 15px; /* Aumentamos el tamaño */
+    padding: 8px 15px;
+    /* Aumentamos el tamaño */
     cursor: pointer;
-    font-size: 16px; /* Aumentamos el tamaño de la fuente */
+    font-size: 16px;
+    /* Aumentamos el tamaño de la fuente */
     transition: background-color 0.3s;
 }
 
@@ -153,16 +172,19 @@ li:hover {
 /* Botones de acción */
 .buttons {
     display: flex;
-    gap: 15px; /* Aumentamos el espacio entre los botones */
+    gap: 15px;
+    /* Aumentamos el espacio entre los botones */
 }
 
 .add-button {
-    font-size: 30px; /* Aumentamos el tamaño del icono */
+    font-size: 30px;
+    /* Aumentamos el tamaño del icono */
     color: #fff;
     background-color: #28a745;
     border: none;
     border-radius: 50%;
-    width: 50px; /* Aumentamos el tamaño del botón */
+    width: 50px;
+    /* Aumentamos el tamaño del botón */
     height: 50px;
     cursor: pointer;
     display: flex;
@@ -178,39 +200,241 @@ li:hover {
 /* Media Query para dispositivos móviles */
 @media (max-width: 600px) {
     .container {
-        width: 95%; /* Ancho más grande para móviles */
-        padding: 15px; /* Reducimos el padding en móviles */
+        width: 95%;
+        /* Ancho más grande para móviles */
+        padding: 15px;
+        /* Reducimos el padding en móviles */
     }
 
-    input[type="text"], textarea {
-        font-size: 16px; /* Ajustamos el tamaño de fuente */
+    input[type="text"],
+    textarea {
+        font-size: 16px;
+        /* Ajustamos el tamaño de fuente */
     }
 
     li {
-        flex-direction: column; /* Colocamos el contenido en columna en móviles */
+        flex-direction: column;
+        /* Colocamos el contenido en columna en móviles */
         align-items: flex-start;
     }
 
     .buttons {
-        flex-direction: column; /* Colocamos los botones en columna en móviles */
+        flex-direction: column;
+        /* Colocamos los botones en columna en móviles */
         gap: 5px;
     }
 
-    button, .delete-button, .add-button {
-        width: 100%; /* Los botones ocupan todo el ancho en móviles */
-        padding: 10px; /* Ajustamos el padding para móviles */
-        font-size: 14px; /* Reducimos el tamaño de fuente de los botones */
+    button,
+    .delete-button,
+    .add-button {
+        width: 100%;
+        /* Los botones ocupan todo el ancho en móviles */
+        padding: 10px;
+        /* Ajustamos el padding para móviles */
+        font-size: 14px;
+        /* Reducimos el tamaño de fuente de los botones */
     }
 
     /* Ajustamos el tamaño de los botones específicos */
     .add-button {
-        width: 35px; /* Reducimos el tamaño del botón "+" */
+        width: 35px;
+        /* Reducimos el tamaño del botón "+" */
         height: 35px;
-        font-size: 18px; /* Reducimos el tamaño del icono */
+        font-size: 18px;
+        /* Reducimos el tamaño del icono */
     }
 
     .delete-button {
-        font-size: 12px; /* Reducimos el tamaño del texto del botón de eliminar */
-        padding: 5px 10px; /* Reducimos el padding */
+        font-size: 12px;
+        /* Reducimos el tamaño del texto del botón de eliminar */
+        padding: 5px 10px;
+        /* Reducimos el padding */
     }
 }
+    /* Tema Oscuro - .dark-theme */
+
+    /* Fondo oscuro y texto claro */
+    .dark-theme {
+        background-color: #131212;
+        /* Fondo oscuro */
+        color: #f3eded;
+        /* Texto claro */
+    }
+
+    /* Encabezado en tema oscuro */
+    .dark-theme header {
+        background-color: #444444;
+        /* Fondo oscuro para el header */
+        color: #f3eded;
+        /* Texto blanco */
+    }
+
+    /* Botones */
+    .dark-theme .menu-btn,
+    .dark-theme button {
+        background-color: #1c2dc2;
+        /* Fondo azul oscuro para botones */
+        color: white;
+        /* Texto blanco */
+        border: none;
+    }
+
+    .dark-theme .menu-btn:hover,
+    .dark-theme button:hover {
+        background-color: #2d31fa;
+        /* Azul más claro al hacer hover */
+    }
+
+    /* Menú desplegable */
+    .dark-theme .menuPrincipal {
+        background-color: #333;
+        /* Fondo más oscuro para el menú */
+        border-color: #555555;
+        /* Borde más oscuro */
+    }
+
+    .dark-theme .menuPrincipal a {
+        color: #f3eded;
+        /* Texto claro en los enlaces */
+    }
+
+    .dark-theme .menuPrincipal a:hover {
+        background-color: #666666;
+        /* Fondo gris más oscuro al hacer hover */
+    }
+
+    /* Barra de búsqueda */
+    .dark-theme .search-bar {
+        background-color: #555;
+        /* Fondo gris oscuro para la barra de búsqueda */
+        color: #f3eded;
+        /* Texto blanco */
+        border: 1px solid #444;
+        /* Borde más oscuro */
+    }
+
+    /* Contenedor principal */
+    .dark-theme .container {
+        background-color: #222;
+        /* Fondo oscuro para el contenedor */
+        color: #f3eded;
+        /* Texto claro */
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Títulos */
+    .dark-theme h1,
+    .dark-theme h2 {
+        color: #f3eded;
+        /* Texto claro para los títulos */
+    }
+
+    /* Editor de notas */
+    .dark-theme .note-editor {
+        background-color: #333;
+        /* Fondo oscuro para el editor de notas */
+        color: #f3eded;
+        /* Texto claro */
+    }
+
+    /* Campos de texto */
+    .dark-theme input[type="text"],
+    .dark-theme textarea {
+        background-color: #444;
+        /* Fondo oscuro para los campos */
+        color: #f3eded;
+        /* Texto claro */
+        border: 1px solid #666;
+        /* Borde gris más oscuro */
+    }
+
+    /* Botones de acción */
+    .dark-theme .delete-button {
+        background-color: #e74c3c;
+        /* Rojo para el botón de eliminar */
+        color: #fff;
+        /* Texto blanco */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .dark-theme .delete-button:hover {
+        background-color: #c0392b;
+        /* Rojo más oscuro al hacer hover */
+    }
+
+    /* Lista de notas */
+    .dark-theme li {
+        background-color: #333;
+        /* Fondo oscuro para las notas */
+        color: #f3eded;
+        /* Texto claro */
+        border: 1px solid #555;
+        /* Borde oscuro */
+    }
+
+    .dark-theme li:hover {
+        background-color: #444;
+        /* Fondo un poco más claro al pasar el ratón */
+    }
+
+    /* Botón de agregar */
+    .dark-theme .add-button {
+        background-color: #28a745;
+        /* Verde para el botón de agregar */
+        color: #fff;
+    }
+
+    .dark-theme .add-button:hover {
+        background-color: #218838;
+        /* Verde más oscuro al pasar el ratón */
+    }
+
+    /* Media Queries para dispositivos móviles - Ajustes para el tema oscuro */
+    @media (max-width: 600px) {
+        .dark-theme .container {
+            background-color: #222;
+            /* Fondo oscuro */
+            padding: 15px;
+        }
+
+        .dark-theme input[type="text"],
+        .dark-theme textarea {
+            font-size: 16px;
+            /* Ajustamos el tamaño de fuente */
+        }
+
+        .dark-theme li {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .dark-theme .buttons {
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .dark-theme button,
+        .dark-theme .delete-button,
+        .dark-theme .add-button {
+            width: 100%;
+            /* Los botones ocupan todo el ancho */
+            padding: 10px;
+            font-size: 14px;
+            /* Reducimos el tamaño de fuente */
+        }
+
+        /* Ajustes específicos para los botones */
+        .dark-theme .add-button {
+            width: 35px;
+            height: 35px;
+            font-size: 18px;
+        }
+
+        .dark-theme .delete-button {
+            font-size: 12px;
+            padding: 5px 10px;
+        }
+    }
+

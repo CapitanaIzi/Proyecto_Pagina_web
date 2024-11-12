@@ -44,10 +44,12 @@ header {
     text-decoration: none;
     margin: 5px 0;
 }
+
 .menuPrincipal a:hover {
     display: flex;
     background-color: #e0e0e0;
-  }
+}
+
 .menuPrincipal.active {
     display: flex;
     border: 2px solid #faf7f7;
@@ -59,6 +61,7 @@ header {
     color: #333;
     border: 1px solid #ccc;
 }
+
 /* Contenedor principal */
 .container {
     background-color: #ffffff;
@@ -97,7 +100,8 @@ textarea {
 }
 
 /* Placeholder */
-input::placeholder, textarea::placeholder {
+input::placeholder,
+textarea::placeholder {
     color: #6c9ff1;
 }
 
@@ -120,7 +124,8 @@ button.btn:hover {
 
 /* Sección de contenido */
 .content-section {
-    display: none;  /* Oculto hasta que el usuario inicie sesión */
+    display: none;
+    /* Oculto hasta que el usuario inicie sesión */
     margin-top: 20px;
 }
 
@@ -133,4 +138,138 @@ textarea {
 textarea:focus {
     outline: none;
     border: 1px solid #2e7dff;
+}
+
+/* Estilos para el tema oscuro */
+.dark-theme {
+    background-color: #131212;
+    /* Fondo oscuro */
+    color: #f3eded;
+    /* Texto claro */
+}
+
+/* Header en el tema oscuro */
+.dark-theme header {
+    background-color: #444444;
+    /* Fondo oscuro para el header */
+    color: #f3eded;
+    /* Texto claro */
+}
+
+/* Menú de navegación */
+.dark-theme .menu-btn {
+    background-color: #1c2dc2;
+    /* Azul oscuro para el botón */
+    color: white;
+    border: 2px solid #333;
+}
+
+.dark-theme .menu-btn:hover {
+    background-color: #2d31fa;
+    /* Azul más claro al hacer hover */
+}
+
+/* Menú desplegable */
+.dark-theme .menuPrincipal {
+    background-color: #333;
+    /* Fondo oscuro para el menú */
+    border-color: #555;
+    /* Borde gris más oscuro */
+}
+
+.dark-theme .menuPrincipal a {
+    color: #f3eded;
+    /* Texto claro para los enlaces */
+}
+
+.dark-theme .menuPrincipal a:hover {
+    background-color: #666;
+    /* Fondo gris al hacer hover */
+}
+
+/* Contenedor principal */
+.dark-theme .container {
+    background-color: #222222;
+    /* Fondo oscuro */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    /* Sombra más prominente */
+    padding: 20px;
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Títulos en tema oscuro */
+.dark-theme h2 {
+    text-align: center;
+    color: #2e7dff;
+    /* Color de título brillante */
+    margin-bottom: 20px;
+}
+
+/* Sección de formulario */
+.dark-theme .form-section {
+    margin-bottom: 20px;
+}
+
+/* Campos de entrada en tema oscuro */
+.dark-theme input[type="text"],
+.dark-theme input[type="email"],
+.dark-theme input[type="password"],
+.dark-theme textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #444444;
+    /* Borde gris oscuro */
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #333;
+    /* Fondo oscuro */
+    color: #f3eded;
+    /* Texto claro */
+}
+
+/* Placeholder en el tema oscuro */
+.dark-theme input::placeholder,
+.dark-theme textarea::placeholder {
+    color: #888;
+    /* Color de texto más claro para el placeholder */
+}
+
+/* Botones en tema oscuro */
+.dark-theme button.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #2e7dff;
+    /* Azul brillante */
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.dark-theme button.btn:hover {
+    background-color: #1d5bb2;
+    /* Azul más oscuro al hacer hover */
+}
+
+/* Sección de contenido */
+.dark-theme .content-section {
+    display: none;
+    margin-top: 20px;
+}
+
+.dark-theme textarea {
+    height: 150px;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Estilos para el contenido */
+.dark-theme textarea:focus {
+    outline: none;
+    border: 1px solid #2e7dff;
+    /* Borde azul brillante al hacer foco */
 }
