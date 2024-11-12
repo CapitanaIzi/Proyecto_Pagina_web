@@ -1,4 +1,4 @@
-class OpinionApp {
+class OpinionesApp {
   constructor() {
     this.opinionesList = document.getElementById('opinionesList');
     this.opinionForm = document.getElementById('opinionForm');
@@ -105,5 +105,5 @@ class OpinionApp {
 
 // Inicializar la aplicación de opiniones al cargar la página
 window.onload = () => {
-  new OpinionApp();
+  new OpinionesApp();
 };

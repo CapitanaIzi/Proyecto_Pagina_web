@@ -87,7 +87,12 @@ class Diagrama {
             });
         });
     }
-
+    /**
+     * Evalua si el elemento entra en el rango permitido para eliminar
+     * @param {Object} rectElemento Elemento que va ser eliminado
+     * @param {HTMLButtonElement} rectEliminarBtn Boton para eliminar
+     * @returns true si esta sobre el boton, sino False
+     */
     isElementoSobreBotonEliminar(rectElemento, rectEliminarBtn) {
         return rectElemento.bottom > rectEliminarBtn.top &&
                rectElemento.top < rectEliminarBtn.bottom &&
