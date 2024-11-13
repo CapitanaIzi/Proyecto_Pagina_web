@@ -21,4 +21,5 @@ class Carrusel {
       this.indiceActual = (this.indiceActual + direccion + this.totalElementos) % this.totalElementos; // Mueve al siguiente o anterior
       this.elementos[this.indiceActual].classList.add('active'); // Muestra la nueva imagen
     }
+    
   }
