@@ -108,38 +108,57 @@ p {
 
 .carousel {
     position: relative;
-    width: 80%; /* Ancho del carrusel */
-    height: 500px; /* Ajusta este valor a la altura que necesites */
-    margin: 40px auto; /* Centrado horizontal y distancia con el contenedor superior */
-    overflow: hidden; /* Ocultar contenido fuera del carrusel */
+    width: 50%;
+    height: 400px;
+    margin: 40px auto;
+    overflow: hidden;
+    border-radius: 15px; /* Esquinas redondeadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    background-color: #fff; /* Fondo blanco */
+    border: 2px solid #f0f0f0; /* Borde gris claro */
+    transition: transform 0.3s ease-in-out; /* Transición suave */
 }
 
+.carousel:hover {
+    transform: scale(1.02); /* Efecto de zoom al pasar el cursor */
+}
+
+/* Estilo para la imagen y el contenido */
 .carousel-item {
     display: flex;
     justify-content: center;
-    display: none; /* Esconde las imágenes inicialmente */
+    display: none;
     width: 100%;
     height: 100%; 
     text-align: center;
 }
 
 .carousel-item.active {
-    display: flex; /* Muestra la imagen activa usando flexbox */
+    display: flex;
     justify-content: center;
     align-items: center;
 }
-.carousel-item.active svg {
-    width: 80px; /* Cambia este valor según el tamaño deseado */
-    height: 80px; /* Aumenta este valor también */
+
+/* SVG personalizados */
+.carousel-item.active .svg-top svg {
+    width: 120px;
+    height: 120px;
+    transition: all 0.3s ease;
 }
-.carousel-item img {
-    width: 100px; /* Ajusta el tamaño de las imágenes o SVG según prefieras */
-    height: 100px; /* Limita la imagen a la altura del carrusel */
+
+.carousel-item.active .svg-bottom svg {
+    width: 80px;
+    height: 80px;
+    transition: all 0.3s ease;
 }
-.carousel-image svg {
-    width: 150px; /* Ajusta el tamaño como prefieras */
-    height: 150px;
+
+/* Efecto hover para SVG */
+.carousel-item.active .svg-top svg:hover,
+.carousel-item.active .svg-bottom svg:hover {
+    transform: scale(1.1); /* Zoom ligero en el SVG al pasar el mouse */
 }
+
+/* Contenedor de contenido */
 .carousel-content {
     display: flex;
     justify-content: space-between;
@@ -147,21 +166,24 @@ p {
     width: 100%;
     height: 100%; 
     padding: 20px; 
-}
-
-.svg-top svg {
-    width: 100px; /* Tamaño para el SVG superior */
-    height: 100px;
-}
-
-.svg-bottom svg {
-    width: 70px; /* Tamaño para los SVG inferiores */
-    height: 70px;
+    color: #333; /* Color de texto */
+    font-family: 'Arial', sans-serif; /* Fuente elegante */
 }
 
 .carousel-description {
-    width: 50%; /* La descripción ocupa la otra mitad del carrusel */
-    padding: 20px; /* Espaciado interno alrededor de la descripción */
+    width: 50%;
+    padding: 20px;
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 768px) {
+    .carousel {
+        width: 90%;
+        height: 300px;
+    }
+    .carousel-description {
+        font-size: 0.9rem; /* Texto más pequeño en móviles */
+    }
 }
 
 
@@ -170,7 +192,7 @@ button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    background-color: rgba(119, 49, 49, 0.5); /* Fondo semitransparente */
     color: white;
     border: none;
     padding: 10px;
