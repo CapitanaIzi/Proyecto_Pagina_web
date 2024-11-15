@@ -6,15 +6,6 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 0 10px;
-    padding-top: 0;
-    margin-top: 0;
     color: black;
 }
 
@@ -29,7 +20,7 @@ body {
     /* Aumentamos el padding */
     background-color: #fcf8f8;
     border-radius: 10px;
-    box-shadow: 1px 1px 1px 4px rgba(86, 132, 231, 0.733);
+    box-shadow: 0px 4px 8px rgba(35, 93, 219, 0.733);
 }
 
 h1,
