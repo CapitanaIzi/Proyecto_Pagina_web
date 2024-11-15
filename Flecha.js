@@ -8,7 +8,6 @@ class Flecha {
 
         // Crear el elemento y añadirlo al DOM
         this.element = this.crearElemento();
-        // Habilitar las funcionalidades adicionales
         this.habilitarArrastre();
         this.habilitarRotacion();
         this.habilitarTamano();
@@ -36,9 +35,7 @@ class Flecha {
      */
     habilitarArrastre() {
         this.element.addEventListener('mousedown', (e) => this.iniciarArrastre(e));
-
         document.addEventListener('mousemove', (e) => this.moverElemento(e));
-
         document.addEventListener('mouseup', () => this.terminarArrastre());
     }
 

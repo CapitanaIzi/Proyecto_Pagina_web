@@ -1,11 +1,13 @@
-// Clase para las interacciones de la página
 class InteraccionesPagina {
   constructor() {
     this.configurarCambioTema();
     this.aplicarTemaGuardado();
-    this.setupDocumentClick();
+    this.ConfigurarDocumentoClick();
   }
-  setupDocumentClick() {
+   /**
+     * Configura el menu para q no se vea si se hace click fuera de el
+     */
+  ConfigurarDocumentoClick() {
     const menuPrincipal = document.querySelector('.menuPrincipal');
     const menuCheckbox = document.getElementById('check');
   
@@ -17,8 +19,9 @@ class InteraccionesPagina {
       }
     });
   }
- 
-    // Configura el cambio de tema
+  /**
+     * Aplica el cambio de tema y cambia el color del SVG y logo segun el Tema
+     */
     configurarCambioTema() {
       const enlaceApariencia = document.getElementById('toggleAppearance');
       const logo = document.getElementById('logo');
@@ -47,7 +50,9 @@ class InteraccionesPagina {
       });
     }
   
-    // Aplica el tema guardado en localStorage
+     /**
+     * Aplica el tema guardado en localStorage 
+     */
     aplicarTemaGuardado() {
       const temaGuardado = localStorage.getItem('theme');
       const enlaceApariencia = document.getElementById('toggleAppearance');
@@ -57,22 +62,15 @@ class InteraccionesPagina {
       if (temaGuardado === 'dark') {
         document.body.classList.add('dark-theme');
         enlaceApariencia.textContent = 'Tema Claro';
-        logo.src = 'logo Oscuro.png'; // Logo claro
+        logo.src = 'logo Oscuro.png';
         menuIcon.setAttribute('fill', 'white'); // Cambiar el color del SVG a blanco
       } else {
         enlaceApariencia.textContent = 'Tema Oscuro';
-        logo.src = 'logo terminado.png'; // Logo oscuro
-        menuIcon.setAttribute('fill', 'black'); // Cambiar el color del SVG a negro
+        logo.src = 'logo terminado.png'; 
+        menuIcon.setAttribute('fill', 'black');
       }
     }
   }
-  
-  // Crear instancia de la clase cuando la página se cargue
   document.addEventListener('DOMContentLoaded', () => {
-    new InteraccionesPagina(); // Iniciar la clase
-  
-  // Instancia del carrusel si la clase Carrusel está definida
-  if (typeof Carrusel === 'function') {
-    const carrusel = new Carrusel('.carousel-item');
-  }
+    new InteraccionesPagina();
 });

@@ -214,7 +214,7 @@ function toggleMenu(menu) {
 
 /**
  * Obtiene la instancia de la clase `Tarea` correspondiente al ID de un elemento del DOM.
- * Utiliza una propiedad `__tarea__` que debe haberse agregado previamente a la tarea al crearla,
+ * Utiliza una propiedad `tarea` que debe haberse agregado previamente a la tarea al crearla,
  * para referenciar la instancia de la tarea.
  * 
  * @param {string} id - El ID del `div` que representa la tarea. Este debe ser el ID de un elemento `tarea` en el DOM.

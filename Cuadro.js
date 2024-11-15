@@ -1,15 +1,12 @@
 class Cuadro {
     constructor(content = '', left = '50%', top = '50%', backgroundColor = 'white') {
-        // Atributos del cuadro
         this.type = 'cuadro';
         this.content = content;
         this.left = left;
         this.top = top;
         this.backgroundColor = backgroundColor;
-
-        // Llamada a crear el elemento cuando se inicializa la clase
         this.element = this.crearElemento();
-        this.habilitarArrastre();  // Habilitar la funcionalidad de arrastre
+        this.habilitarArrastre();  
     }
 
     /**
@@ -18,13 +15,12 @@ class Cuadro {
     crearElemento() {
         const cuadro = document.createElement('div');
         cuadro.classList.add('cuadro');
-        cuadro.setAttribute('contenteditable', 'true');  // Permite la edición del contenido
+        cuadro.setAttribute('contenteditable', 'true');
         cuadro.innerText = this.content;
         cuadro.style.left = this.left;
         cuadro.style.top = this.top;
         cuadro.style.backgroundColor = this.backgroundColor;
         
-        // Agregar al DOM
         document.getElementById('mapa-conceptual').appendChild(cuadro);
         return cuadro;
     }

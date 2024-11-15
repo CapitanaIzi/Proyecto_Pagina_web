@@ -1,4 +1,3 @@
-// Clase del carrusel
 class Carrusel {
     constructor(selector) {
       this.elementos = document.querySelectorAll(selector);
@@ -15,11 +14,24 @@ class Carrusel {
       this.botonAnterior.addEventListener('click', () => this.mover(-1));
       this.botonSiguiente.addEventListener('click', () => this.mover(1));
     }
-  
-    mover(direccion) {
+
+  /**
+   * Mueve el carrusel en la dirección que se le indica.
+   * @param {number} direccion - La dirección del movimiento. 1 para siguiente, -1 para anterior.
+   */
+  mover(direccion) {
       this.elementos[this.indiceActual].classList.remove('active'); // Esconde la imagen actual
       this.indiceActual = (this.indiceActual + direccion + this.totalElementos) % this.totalElementos; // Mueve al siguiente o anterior
       this.elementos[this.indiceActual].classList.add('active'); // Muestra la nueva imagen
     }
     
   }
+  
+  // Crear instancia de la clase cuando la página se cargue
+  document.addEventListener('DOMContentLoaded', () => {
+    new InteraccionesPagina(); 
+  // Instancia del carrusel si la clase Carrusel está definida
+  if (typeof Carrusel === 'function') {
+    const carrusel = new Carrusel('.carousel-item');
+  }
+});
