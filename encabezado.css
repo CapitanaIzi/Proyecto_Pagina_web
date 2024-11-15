@@ -1,0 +1,319 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 10px;
+    padding-top: 0;
+    margin-top: 0;
+    
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+
+nav {
+    background-color: white;
+    min-height: 80px;
+    width: 101%;
+    color: #333;
+    z-index: 1000;
+    /* Asegura que el menú esté por encima de todo */
+}
+
+.enlace {
+    position: absolute;
+    padding: 2px 10px 10px 10px;
+}
+
+.logo-container {
+    display: flex;
+}
+
+.logo {
+    height: 80px;
+    width: 80px;
+    /* Ajusta el tamaño del logo según sea necesario */
+    margin-right: 5px;
+}
+
+.nombre-marca {
+    padding: 15px;
+    font-size: 1.5rem;
+    /* Tamaño de fuente que desees */
+    color: black;
+    /* Color del texto */
+    text-shadow: 2px 3px 2px rgba(53, 117, 238, 0.493), 6px 6px 5px rgba(95, 25, 209, 0.2);
+    margin: 0;
+    /* Quita el margen de h1 */
+}
+
+nav a {
+    font-weight: 600;
+    padding-right: 10px;
+    text-transform: uppercase;
+}
+
+nav a:hover {
+    color: rgb(109, 108, 106);
+}
+
+nav ul {
+    float: right;
+    margin-right: 20px;
+}
+
+nav ul li {
+    display: inline-block;
+    line-height: 80px;
+    margin: 0px;
+}
+
+.menuPrincipal {
+    font-size: 30px;
+    float: right;
+    line-height: 80px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+
+}
+
+#check {
+    display: none;
+
+}
+
+@media (max-width: 1185px) {
+    .enlace {
+        padding-left: 20px;
+    }
+
+    nav ul li a {
+        font-size: 16px;
+    }
+    .menuPrincipal {
+        display: block;
+    }
+
+    ul {
+        position: fixed;
+        width: 40%;
+        height: 48%;
+        background-color: whitesmoke;
+        top: 70px;
+        right: -100%;
+        text-align: center;
+        transition: all .5s;
+    }
+
+    nav ul li {
+        display: block;
+        margin: 20px 0;
+        line-height: 24px;border-bottom: 1px solid #ddd; /* Línea de separación */
+        padding-bottom: 10px; /* Espacio para que la línea no toque el texto */
+    }
+    
+    nav ul li:last-child {
+        border-bottom: none; /* Elimina la línea en el último elemento */
+    }
+    nav ul li a {
+        font-size: 30px;
+    }
+    li :hover, li a.active{
+        background:none;
+        color: #807e7e;
+    }
+    #check:checked~ul {
+        right: 0;
+    }
+}
+
+@media (max-width: 858px) {
+    .menuPrincipal {
+        display: block;
+    }
+
+    ul {
+        position: fixed;
+        width: 40%;
+        height: 48%;
+        background-color: whitesmoke;
+        top: 70px;
+        right: -100%;
+        text-align: center;
+        transition: all .5s;
+    }
+
+    nav ul li {
+        display: block;
+        margin: 20px 0;
+        line-height: 24px;border-bottom: 1px solid #ddd; /* Línea de separación */
+        padding-bottom: 10px; /* Espacio para que la línea no toque el texto */
+    }
+    
+    nav ul li:last-child {
+        border-bottom: none; /* Elimina la línea en el último elemento */
+    }
+    nav ul li a {
+        font-size: 30px;
+    }
+    li :hover, li a.active{
+        background:none;
+        color: #807e7e;
+    }
+    #check:checked~ul {
+        right: 0;
+    }
+}
+@media (max-width: 665px) {
+    .menuPrincipal {
+        display: block;
+    }
+
+    ul {
+         width: 65%;
+        height: 50%;
+    
+    }
+}
+@media (max-width: 365px) {
+    .menuPrincipal {
+        display: block;
+    }
+
+    ul {
+        width: 70%;
+        height: 60%;
+       
+    }
+}
+.dark-theme a {
+    color: #ddd;
+}
+.dark-theme nav {
+    background-color: #333;
+    width: 101%;
+    color: #ddd;
+    z-index: 1000;
+    /* Asegura que el menú esté por encima de todo */
+}
+
+.dark-theme .logo {
+    height: 78px;
+    margin-right: 5px;
+}
+
+.dark-theme .nombre-marca {
+    color: #ddd;
+    text-shadow: 4px 3px 2px rgba(212, 204, 204, 0.3), 0 0 5px rgba(0, 0, 0, 0.2);
+  
+}
+.dark-theme nav a {
+    color: #ddd;
+}
+.dark-theme nav a:hover {
+    color: rgb(180, 180, 180);
+}
+.dark-theme .menuPrincipal {
+    color: #ddd;
+}
+.dark-theme .menuPrincipal svg path {
+    stroke: white; /* Cambiar el color del ícono del menú */
+  }
+.dark-theme #check {
+    display: none;
+}
+
+@media (max-width: 1185px) {
+    .dark-theme .enlace {
+        padding-left: 20px;
+    }
+
+    .dark-theme nav ul li a {
+        font-size: 16px;
+    }
+    .dark-theme ul {
+        position: fixed;
+        width: 35%;
+        height: 46vh;
+        background-color: #222;
+        top: 70px;
+        right: -100%;
+        text-align: center;
+        transition: all .5s;
+    }
+
+    .dark-theme nav ul li {
+        display: block;
+        margin: 20px 0;
+        line-height: 24px;
+        border-bottom: 1px solid #444; /* Línea de separación */
+        padding-bottom: 10px; /* Espacio para que la línea no toque el texto */
+    }
+    .dark-theme nav ul li:last-child {
+        border-bottom: none; /* Elimina la línea en el último elemento */
+    }
+}
+
+@media (max-width: 858px) {
+    .dark-theme .menuPrincipal {
+        display: block;
+    }
+
+    .dark-theme ul {
+        position: fixed;
+        width: 60%;
+        height: 50vh;
+        background-color: #222;
+        top: 70px;
+        right: -100%;
+        text-align: center;
+        transition: all .5s;
+    }
+
+    .dark-theme nav ul li {
+        display: block;
+        margin: 20px 0;
+        line-height: 24px;
+        border-bottom: 1px solid #444; /* Línea de separación */
+        padding-bottom: 10px; /* Espacio para que la línea no toque el texto */
+    }
+
+    .dark-theme nav ul li:last-child {
+        border-bottom: none; /* Elimina la línea en el último elemento */
+    }
+    .dark-theme nav ul li a {
+        font-size: 30px;
+        color: #ddd;
+    }
+    .dark-theme li:hover, .dark-theme li a.active {
+        background: none;
+        color: #bbb;
+    }
+    .dark-theme #check:checked ~ ul {
+        right: 0;
+    }
+    
+}
+@media (max-width: 365px) {
+    .dark-theme .menuPrincipal {
+        display: block;
+    }
+
+    .dark-theme ul {
+        width: 70%;
+        height: 60%;
+       
+    }
+}

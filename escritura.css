@@ -1,64 +1,21 @@
-/* Reset */
-body {
-    font-family: Arial, sans-serif;
+* {
     margin: 0;
     padding: 0;
-    background-color: white;
-    color: black;
+    list-style: none;
+    box-sizing: border-box;
 }
 
-header {
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
     display: flex;
-    justify-content: space-between;
-    padding: 5px;
-    background-color: white;
-}
-
-.menu-btn {
-    background-color: #4287f5;
-    border: 2px solid #333;
-    color: white;
-    font-size: 18px;
-    cursor: pointer;
-}
-
-.menu-btn:hover {
-    background-color: #8ba9c9;
-}
-
-.menuPrincipal {
-    display: none;
     flex-direction: column;
-    position: absolute;
-    top: 50px;
-    left: 10px;
-    background-color: #f0f0f0;
-    border: 2px solid #ccc;
-    padding: 10px;
-    z-index: 100;
-}
-
-.menuPrincipal a {
-    color: #333;
-    text-decoration: none;
-    margin: 5px 0;
-}
-
-.menuPrincipal a:hover {
-    display: flex;
-    background-color: #e0e0e0;
-}
-
-.menuPrincipal.active {
-    display: flex;
-    border: 2px solid #faf7f7;
-}
-
-
-.search-bar {
-    background-color: #fff;
-    color: #333;
-    border: 1px solid #ccc;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 10px;
+    padding-top: 0;
+    margin-top: 0;
+    color: black;
 }
 
 /* Contenedor principal */
@@ -67,14 +24,14 @@ header {
     /* Ajustamos el ancho para ser más grande */
     max-width: 1200px;
     /* Aumentamos el ancho máximo */
-    padding: 50px;
+    padding-top: 14px;
+
     /* Aumentamos el padding */
-    background-color: #fff;
+    background-color: #fcf8f8;
     border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 1px 1px 4px rgba(86, 132, 231, 0.733);
 }
 
-/* Títulos */
 h1,
 h2 {
     text-align: center;
@@ -127,18 +84,15 @@ button:hover {
     background-color: #555;
 }
 
-/* Lista de notas */
-ul {
+#notesList {
     list-style-type: none;
     padding: 0;
 }
 
-li {
+#notesList li {
     padding: 20px;
-    /* Aumentamos el padding */
     margin: 10px 0;
-    /* Aumentamos el margen entre las notas */
-    background-color: #f4f4f4;
+    background-color: #f8f0f0;
     border: 1px solid #ddd;
     border-radius: 5px;
     display: flex;
@@ -146,8 +100,8 @@ li {
     align-items: center;
 }
 
-li:hover {
-    background-color: #e2e2e2;
+#notesList li:hover {
+    background-color: #ebe8e8;
 }
 
 /* Botón de eliminar */
@@ -250,190 +204,150 @@ li:hover {
         /* Reducimos el padding */
     }
 }
-    /* Tema Oscuro - .dark-theme */
 
-    /* Fondo oscuro y texto claro */
-    .dark-theme {
-        background-color: #131212;
-        /* Fondo oscuro */
-        color: #f3eded;
-        /* Texto claro */
-    }
+/* Tema Oscuro - .dark-theme */
 
-    /* Encabezado en tema oscuro */
-    .dark-theme header {
-        background-color: #131212;
-        /* Fondo oscuro para el header */
-        color: #f3eded;
-        /* Texto blanco */
-    }
+/* Fondo oscuro y texto claro */
+.dark-theme {
+    background-color: #131212;
+    /* Fondo oscuro */
+    color: #f3eded;
+    /* Texto claro */
+}
 
-    /* Botones */
-    .dark-theme .menu-btn,
-    .dark-theme button {
-        background-color: #1c2dc2;
-        /* Fondo azul oscuro para botones */
-        color: white;
-        /* Texto blanco */
-        border: none;
-    }
+/* Contenedor principal */
+.dark-theme .container {
+    background-color: #222;
+    /* Fondo oscuro para el contenedor */
+    color: #f3eded;
+    /* Texto claro */
+    box-shadow: 0px 4px 8px rgba(221, 216, 216, 0.76);
+}
 
-    .dark-theme .menu-btn:hover,
-    .dark-theme button:hover {
-        background-color: #2d31fa;
-        /* Azul más claro al hacer hover */
-    }
+/* Títulos */
+.dark-theme h1,
+.dark-theme h2 {
+    color: #f3eded;
+    /* Texto claro para los títulos */
+}
 
-    /* Menú desplegable */
-    .dark-theme .menuPrincipal {
-        background-color: #333;
-        /* Fondo más oscuro para el menú */
-        border-color: #555555;
-        /* Borde más oscuro */
-    }
+/* Editor de notas */
+.dark-theme .note-editor {
+    background-color: #333;
+    /* Fondo oscuro para el editor de notas */
+    color: #f3eded;
+    /* Texto claro */
+}
 
-    .dark-theme .menuPrincipal a {
-        color: #f3eded;
-        /* Texto claro en los enlaces */
-    }
+/* Campos de texto */
+.dark-theme input[type="text"],
+.dark-theme textarea {
+    background-color: #444;
+    /* Fondo oscuro para los campos */
+    color: #f3eded;
+    /* Texto claro */
+    border: 1px solid #666;
+    /* Borde gris más oscuro */
+}
 
-    .dark-theme .menuPrincipal a:hover {
-        background-color: #666666;
-        /* Fondo gris más oscuro al hacer hover */
-    }
+/* Botones de acción */
+.dark-theme .delete-button {
+    background-color: #e74c3c;
+    /* Rojo para el botón de eliminar */
+    color: #fff;
+    /* Texto blanco */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
-    /* Barra de búsqueda */
-    .dark-theme .search-bar {
-        background-color: #555;
-        /* Fondo gris oscuro para la barra de búsqueda */
-        color: #f3eded;
-        /* Texto blanco */
-        border: 1px solid #444;
-        /* Borde más oscuro */
-    }
+.dark-theme .delete-button:hover {
+    background-color: #c0392b;
+    /* Rojo más oscuro al hacer hover */
+}
 
-    /* Contenedor principal */
+/* Tema oscuro para la lista de notas */
+.dark-theme #notesList {
+    list-style-type: none;
+    padding: 0;
+}
+
+.dark-theme #notesList li {
+    padding: 20px;
+    margin: 10px 0;
+    background-color: #2c2c2c;
+    /* Fondo oscuro */
+    border: 1px solid #444;
+    /* Borde más oscuro */
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #e0e0e0;
+    /* Texto claro */
+}
+
+.dark-theme #notesList li:hover {
+    background-color: #3a3a3a;
+    /* Color de fondo más oscuro al pasar el mouse */
+}
+
+
+/* Botón de agregar */
+.dark-theme .add-button {
+    background-color: #28a745;
+    /* Verde para el botón de agregar */
+    color: #fff;
+}
+
+.dark-theme .add-button:hover {
+    background-color: #218838;
+    /* Verde más oscuro al pasar el ratón */
+}
+
+/* Media Queries para dispositivos móviles - Ajustes para el tema oscuro */
+@media (max-width: 600px) {
     .dark-theme .container {
         background-color: #222;
-        /* Fondo oscuro para el contenedor */
-        color: #f3eded;
-        /* Texto claro */
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        /* Fondo oscuro */
+        padding: 15px;
     }
 
-    /* Títulos */
-    .dark-theme h1,
-    .dark-theme h2 {
-        color: #f3eded;
-        /* Texto claro para los títulos */
-    }
-
-    /* Editor de notas */
-    .dark-theme .note-editor {
-        background-color: #333;
-        /* Fondo oscuro para el editor de notas */
-        color: #f3eded;
-        /* Texto claro */
-    }
-
-    /* Campos de texto */
     .dark-theme input[type="text"],
     .dark-theme textarea {
-        background-color: #444;
-        /* Fondo oscuro para los campos */
-        color: #f3eded;
-        /* Texto claro */
-        border: 1px solid #666;
-        /* Borde gris más oscuro */
+        font-size: 16px;
+        /* Ajustamos el tamaño de fuente */
     }
 
-    /* Botones de acción */
-    .dark-theme .delete-button {
-        background-color: #e74c3c;
-        /* Rojo para el botón de eliminar */
-        color: #fff;
-        /* Texto blanco */
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .dark-theme .delete-button:hover {
-        background-color: #c0392b;
-        /* Rojo más oscuro al hacer hover */
-    }
-
-    /* Lista de notas */
     .dark-theme li {
-        background-color: #333;
-        /* Fondo oscuro para las notas */
-        color: #f3eded;
-        /* Texto claro */
-        border: 1px solid #555;
-        /* Borde oscuro */
+        flex-direction: column;
+        align-items: flex-start;
     }
 
-    .dark-theme li:hover {
-        background-color: #444;
-        /* Fondo un poco más claro al pasar el ratón */
+    .dark-theme .buttons {
+        flex-direction: column;
+        gap: 5px;
     }
 
-    /* Botón de agregar */
+    .dark-theme button,
+    .dark-theme .delete-button,
     .dark-theme .add-button {
-        background-color: #28a745;
-        /* Verde para el botón de agregar */
-        color: #fff;
+        width: 100%;
+        /* Los botones ocupan todo el ancho */
+        padding: 10px;
+        font-size: 14px;
+        /* Reducimos el tamaño de fuente */
     }
 
-    .dark-theme .add-button:hover {
-        background-color: #218838;
-        /* Verde más oscuro al pasar el ratón */
+    /* Ajustes específicos para los botones */
+    .dark-theme .add-button {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
     }
 
-    /* Media Queries para dispositivos móviles - Ajustes para el tema oscuro */
-    @media (max-width: 600px) {
-        .dark-theme .container {
-            background-color: #222;
-            /* Fondo oscuro */
-            padding: 15px;
-        }
-
-        .dark-theme input[type="text"],
-        .dark-theme textarea {
-            font-size: 16px;
-            /* Ajustamos el tamaño de fuente */
-        }
-
-        .dark-theme li {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .dark-theme .buttons {
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .dark-theme button,
-        .dark-theme .delete-button,
-        .dark-theme .add-button {
-            width: 100%;
-            /* Los botones ocupan todo el ancho */
-            padding: 10px;
-            font-size: 14px;
-            /* Reducimos el tamaño de fuente */
-        }
-
-        /* Ajustes específicos para los botones */
-        .dark-theme .add-button {
-            width: 35px;
-            height: 35px;
-            font-size: 18px;
-        }
-
-        .dark-theme .delete-button {
-            font-size: 12px;
-            padding: 5px 10px;
-        }
+    .dark-theme .delete-button {
+        font-size: 12px;
+        padding: 5px 10px;
     }
-
+}
