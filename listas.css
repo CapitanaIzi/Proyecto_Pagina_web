@@ -45,7 +45,7 @@ header {
 }
 .menuPrincipal a:hover {
     display: flex;
-    background-color: #e0e0e0;
+    background-color: #8a1717;
   }
 .menuPrincipal.active {
     display: flex;

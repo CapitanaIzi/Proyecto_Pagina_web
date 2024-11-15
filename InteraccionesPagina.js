@@ -3,9 +3,20 @@ class InteraccionesPagina {
   constructor() {
     this.configurarCambioTema();
     this.aplicarTemaGuardado();
+    this.setupDocumentClick();
   }
-
-  // Configura el cambio de tema
+  setupDocumentClick() {
+    const menuPrincipal = document.querySelector('.menuPrincipal');
+    const menuCheckbox = document.getElementById('check');
+  
+    // Agrega un evento al documento para cerrar el menú si se hace clic fuera de él
+    document.addEventListener('click', (e) => {
+      // Verifica si el clic fue fuera del menú y del checkbox (el icono)
+      if (!menuCheckbox.contains(e.target) && !menuPrincipal.contains(e.target)) {
+        menuCheckbox.checked = false; // Desmarca el checkbox para cerrar el menú
+      }
+    });
+  }
   configurarCambioTema() {
     const enlaceApariencia = document.getElementById('toggleAppearance');
 
@@ -35,11 +46,13 @@ class InteraccionesPagina {
   }
 }
 
-
-
 // Crear instancias de las clases cuando la página se cargue
 document.addEventListener('DOMContentLoaded', () => {
+  // Instancia de InteraccionesPagina para manejar el tema
+  const interaccionesPagina = new InteraccionesPagina();
 
-  // Instancia del carrusel
-  const carrusel = new Carrusel('.carousel-item');
+  // Instancia del carrusel si la clase Carrusel está definida
+  if (typeof Carrusel === 'function') {
+    const carrusel = new Carrusel('.carousel-item');
+  }
 });
