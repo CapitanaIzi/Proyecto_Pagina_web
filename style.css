@@ -54,7 +54,7 @@ nav {
     /* Tamaño de fuente que desees */
     color: black;
     /* Color del texto */
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3), 0 0 5px rgba(255, 255, 255, 0.2);
+    text-shadow: 2px 3px 2px rgba(53, 117, 238, 0.493), 6px 6px 5px rgba(95, 25, 209, 0.2);
     margin: 0;
     /* Quita el margen de h1 */
 }
@@ -325,10 +325,7 @@ html {
     background-color: #777;
 }
 
-.dark-theme .menuPrincipal {
-    background-color: #2a2a2a;
-    border: 2px solid #555;
-}
+
 
 .dark-theme .menuPrincipal a {
     color: #e0e0e0;
@@ -357,14 +354,16 @@ html {
 .dark-theme .highlight {
     font-weight: bold;
     /* Aumenta la negrita */
-    color: #f39c12;
+    color: #3c90d4;
     /* Color amarillo dorado brillante para destacar la palabra */
 }
 
 .dark-theme p {
-    color: #c0c0c0;
+    color: #cec8c8;
 }
-
+.dark-theme .carousel-description p {
+    color: #1b1b1b; /* Color del texto */
+}
 .dark-theme .carousel {
     background-color: #a5a2a2;
     border: 2px solid #444;
@@ -379,9 +378,6 @@ html {
     color: #e0e0e0;
 }
 
-.dark-theme .carousel-description {
-    color: #0c0c0c;
-}
 
 .dark-theme button {
     background-color: rgba(85, 85, 85, 0.7);
@@ -400,6 +396,7 @@ html {
 
     .dark-theme .carousel-description {
         font-size: 0.9rem;
+
     }
 }
 
@@ -442,7 +439,7 @@ html {
 }
 
 .dark-theme .logo {
-    height: 80px;
+    height: 78px;
     width: 80px;
     /* Ajusta el tamaño del logo según sea necesario */
     margin-right: 5px;
@@ -452,7 +449,7 @@ html {
     padding: 15px;
     font-size: 1.5rem;
     color: #ddd;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3), 0 0 5px rgba(0, 0, 0, 0.2);
+    text-shadow: 4px 3px 2px rgba(212, 204, 204, 0.3), 0 0 5px rgba(0, 0, 0, 0.2);
     margin: 0;
     /* Quita el margen de h1 */
 }
@@ -488,7 +485,9 @@ html {
     display: none;
     color: #ddd;
 }
-
+.dark-theme .menuPrincipal svg path {
+    stroke: white; /* Cambiar el color del ícono del menú */
+  }
 .dark-theme #check {
     display: none;
 }
