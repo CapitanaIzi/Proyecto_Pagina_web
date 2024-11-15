@@ -45,6 +45,8 @@ h1 {
 .editable-title, .non-editable-title {
     background-color: #f0f0f0;
     color: #333;
+    border-radius: 4px;
+
 }
 .non-editable-title {
     font-size: 1.5em;
@@ -76,9 +78,13 @@ h1 {
     border: 1px solid #4e4c4c; /* Borde claro */
     padding: 5px;
     margin: 0px;
+    border-radius: 5px;
+
 }
 
 .lista-basica {
+    border-radius: 5px;
+
     position: relative;
     background-color: #f0f0f0; /* Fondo claro */
     color: #333; /* Texto oscuro */
@@ -93,6 +99,7 @@ h1 {
     background-color: #f9f9f9;
     color: #333;
     border: 1px solid #ccc;
+    
     margin: 10px;
     padding: 10px;
     min-height: 100px; /* Altura mínima para que se vea la lista */
@@ -104,23 +111,27 @@ h1 {
     z-index: 1000;
     width: 80px; /* Aumenta el ancho del menú */
     padding: 5px; /* Añadir padding para un contenedor más grande */
-    top: 40px;
-    margin-left:-13px;
+    top: 35px; /* Ajusta la distancia desde la parte superior */
+    right: 10px;
 }
 .menu-lista div:hover {
-    background-color: #c45454;
+    background-color: #5fadee; /* Color más oscuro al pasar el cursor */
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño */
+    color: #f1f1f1; 
 }
 button {
     margin-top: 10px;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
+    padding: 5px 10px;
+    background-color:#7db9fd;
+    color: rgb(8, 8, 8);
+    border-radius: 3px;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #5fadee;  /* Color más oscuro al pasar el cursor */
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño */
+    color: #f1f1f1; 
 }
 .tarea {
     cursor: grabbing; /* Muestra una mano cuando se posa el mouse */
@@ -156,12 +167,14 @@ button:hover {
 
 }
 .destacada {
-    background-color: #ffc107; /* Color de fondo para tareas destacadas */
+    background-color: #4cd3c1; /* Color de fondo para tareas destacadas */
 }
 .menu-lista, .menuTarea {
-    background-color: #f8d7da;
+    background-color:  #74aae4;
     color: #333;
     border: 1px solid #ccc;
+    border-radius: 3px;
+
 }
 .menuTarea {
     position: absolute;
@@ -169,7 +182,8 @@ button:hover {
     z-index: 1000;
     width: 80px; /* Aumenta el ancho del menú */
     padding: 8px; /* Añadir padding para un contenedor más grande */
-    margin-left:103px;
+    top: auto; /* Ajusta la distancia desde la parte superior */
+    right: 10px;
 }
 
 .menuTarea div {
@@ -179,7 +193,9 @@ button:hover {
 }
 
 .menuTarea div:hover {
-    background-color: #c45454;
+    background-color: #5fadee; /* Color más oscuro al pasar el cursor */
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño */
+    color: #f1f1f1; 
 }
 
 .linea-guia {
@@ -213,106 +229,81 @@ body.dark-theme {
     color: #f0f0f0;
 }
 
-.dark-theme header {
-    background-color: #555; 
-}
-
-.dark-theme .menu-btn {
-    background-color: #1c2dc2;
-    border: 2px solid #ccc;
-    color: rgb(250, 244, 244);
-}
-
-.dark-theme .menuPrincipal {
-    background-color: #555;
-    border: 2px solid #faf7f7;
-}
-
-.dark-theme .menuPrincipal a {
-    color: rgb(255, 253, 253);
-}
-
-.dark-theme .menuPrincipal a:hover {
-    background-color: #9c9797;
-}
-
-.dark-theme .search-bar {
-    background-color: #33373d;
-    color: #f0f0f0;
-    border: 1px solid #888;
-}
-
 .dark-theme .container {
     background-color: #1b1b1b;
     color: #f0f0f0;
 }
 
 .dark-theme .editable-title {
-    background-color:rgb(158, 152, 152);
-    color: #0f0f0f;
+    background-color:rgb(121, 117, 117);
+    color: #141313;
+    border: none; /* Sin borde */
+
 }
 .dark-theme .non-editable-title {
-    background-color:rgb(114, 110, 110);
-    color: #0f0f0f;
+    background-color:#1b1b1b;
+    color: #fff9f9;
 }
 .dark-theme .editable-title::placeholder {
-    color: rgb(214, 209, 209); /* Color del placeholder */
+    color: rgb(41, 40, 40); /* Color del placeholder */
     opacity: 1; /* Asegura que el color tenga la opacidad completa */
 }
 .dark-theme .lista-basica {
-    background-color:rgb(114, 109, 109); /* Fondo oscuro */
-    color: #0e0d0d; /* Texto claro */
-    border: 1px solid #555; /* Borde más oscuro */
+    background-color:rgb(117, 117, 119); /* Fondo oscuro */
+    border: 1px solid #afadad; /* Borde más oscuro */
 }
 .dark-theme .lista-basica input::placeholder {
-    color: rgb(36, 34, 34);
+    color: rgb(37, 35, 35);
 }
 
-.dark-theme .lista {
-    background-color: #307df0;
-    color: #c45050;
-} /* no se nota nada */
 .dark-theme .listas-basicas {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    border:1px solid #ece9e9;
+    border:1px solid #646363;
     position: relative;
-    background-color: #33373d;
+    background-color:#1b1b1b;
+
 }
 .dark-theme .tarea textarea::placeholder {
     color: #c2bbbb; /* Placeholder en tono más claro para destacar */
     opacity: 1;
 }
-.dark-theme .menu-lista, .dark-theme .menuTarea {
-    background-color: rgb(236, 100, 100);
-    color: #f0f0f0;
+.dark-theme .menu-lista, 
+.dark-theme .menuTarea {
+    background-color:  #74aae4;
+    color: #333;
     border: 1px solid #ccc;
+    border-radius: 3px;
 }
 
 .dark-theme button {
-    background-color: #0e5097;
-    color: #fff;
+    background-color:  #5495df;
+    color: rgb(19, 18, 18);
+    border: 1px solid #ccc;
+
 }
 
 .dark-theme button:hover {
-    background-color: #176eca;
+    background-color: #428dca; 
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño */
+    color: #f0eaea; 
 }
-
+.dark-theme .tarea button {
+    color: #f9f9f9; /* Texto claro */
+    background: none; /* Sin fondo para mantener consistencia */
+    border: none; /* Sin borde */
+}
 .dark-theme .tarea textarea {
-    color: rgb(247, 241, 241);
+    color: rgb(10, 10, 10);
 }
 
 .dark-theme .tarea textarea.tachado {
-    color: rgb(161, 158, 158);
-}
-
-.dark-theme .tarea button {
-    color: rgb(196, 188, 188);
+    color: rgb(75, 74, 74);
 }
 
 .dark-theme .destacada {
-    background-color: #1b9636;
+    background-color: #2098dd;
 }
 
 .dark-theme .linea-guia {

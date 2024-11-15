@@ -26,20 +26,27 @@ h1 {
     padding-left: 0px;
     position: relative;
     margin-top: 0px;
-
+    border: none; /* Elimina todos los bordes */
+    border-bottom: 2px solid #706f6f; 
+    z-index: 1000;
 }
 
 /* Botones en la barra superior */
 #barra-superior button {
-    border: none;
     padding: 10px 15px;
     margin-right: 20px;
     cursor: pointer;
     border-radius: 5px;
-    background-color: #86baf5; /* Fondo del menú */
+    background-color:#7db9fd;
+    border: none; /* Elimina todos los bordes */
+    z-index: 1000;
 
 }
-
+#barra-superior button:hover {
+    background-color: #5fadee; /* Color más oscuro al pasar el cursor */
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño */
+    color: #f1f1f1; /* Color de texto más claro */
+}
 /* Menú desplegable */
 .menu {
     display: none; /* Oculta el menú hasta que se haga clic en el botón */
@@ -49,7 +56,7 @@ h1 {
     border-radius: 10px; 
     padding: 10px;
     z-index: 1000;
-    width: 65px;
+    width: 86px;
 }
 
 #menu-insertar {
@@ -70,28 +77,46 @@ h1 {
 }
 
 .menu button {
-    background-color: #3b93f1;
+    background-color:#7db9fd;
     color: white;
     margin-bottom: 5px;
     cursor: pointer;
     border-radius: 5px;
     padding: 5px;
     font-size: 12px;
+    
     /* Tamaño de letra más pequeño */
 }
 .menu button:hover {
-    background-color: #92c2f5;
+    background-color: #5fadee;  /* Color más oscuro al pasar el cursor */
 }
+    
 /* Contenedor del mapa conceptual */
 #mapa-conceptual {
     width: 100%;
     /* 100% del ancho de la ventana */
     height: 100%;
     position: relative;
-    background-color: #fcf6f6;
+    background-color: whitesmoke;
     overflow: hidden;
-}
 
+}
+/* Menú de color */
+.color-option {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border: none; /* Agrega un borde negro */
+    cursor: pointer;
+    border-radius: 5px;
+
+}
+.color-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+
+}
 /* Estilos para el título editable */
 /* Estilos para el título editable alineado con la barra superior */
 #titulo {
@@ -150,7 +175,7 @@ h1 {
     cursor: grab;
     background-color: #f8faf8; /* Fondo del cuadro */
     color: #000000; /* Color del texto */
-    border: 2px solid #007BFF;
+    border: 2px solid #0c0c0c;
 }
 
 /* Edición de texto directo */
@@ -164,9 +189,9 @@ h1 {
     position: absolute;
     width: 200px;
     /* Longitud de la línea de la flecha */
-    height: 2px;
+    height: 2.5px;
     /* Grosor de la línea */
-    background-color: #007BFF;
+    background-color: #030303;
     /* Color de la línea */
     cursor: grab;
     transform-origin: left;
@@ -203,22 +228,7 @@ h1 {
     /* Cambiar el cursor para redimensionar */
 }
 
-/* Menú de color */
-.color-option {
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    border: 4px solid black; /* Agrega un borde negro */
-    cursor: pointer;
-    border-radius: 35px;
 
-}
-.color-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1px;
-
-}
 
 .dark-theme {
     background-color: #121212; /* Fondo oscuro */
@@ -226,20 +236,30 @@ h1 {
 }
 
 .dark-theme h1 {
-    background-color: #1e1e1e; /* Fondo oscuro del título */
+    background-color:#121212;  /* Fondo oscuro del título */
     color: #ffffff; /* Texto claro del título */
 }
+.dark-theme #barra-superior {
+    background-color:#121212; /* Fondo del botón en tema oscuro */
+
+    border: none; /* Elimina todos los bordes */
+    border-bottom: 2px solid #a7a4a4; 
+    z-index: 1000;
+}
 .dark-theme #barra-superior button {
-    background-color: #1276da; /* Fondo del botón en tema oscuro */
-    color: #fff; /* Texto claro */
+    background-color:#7db9fd;/* Fondo del botón en tema oscuro */
+    color: #1a1919; /* Texto claro */
+    border: 1px solid #dfdbdb; /* Borde más claro */
+    z-index: 1000;
 }
 .dark-theme #mapa-conceptual {
     background-color: #1c1c1c; /* Fondo oscuro para el tema oscuro */
     color: #070707;
 
 }
+
 .dark-theme .menu {
-    background-color: #7c7979; /* Fondo oscuro del menú */
+    background-color:  #2d2d2d;  /* Fondo oscuro del menú */
     border: 2px solid #4a4a4a; /* Borde más claro */
     color: #e0e0e0; /* Texto claro */
 }
@@ -256,10 +276,6 @@ h1 {
 
 .dark-theme .menu button:hover {
     background-color: #575757; /* Fondo más claro al pasar el cursor */
-}
-
-.dark-theme #barra-superior {
-    background-color: #1c1c1c; /* Fondo oscuro de la barra superior */
 }
 
 .dark-theme #btn-eliminar {

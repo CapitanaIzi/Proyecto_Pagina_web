@@ -4,11 +4,9 @@ class OpinionesApp {
     this.opinionForm = document.getElementById('opinionForm');
     this.opinionText = document.getElementById('opinionText');
 
-    // Cargar opiniones guardadas al iniciar la página
-    this.setupMenuToggle();
     this.setupDocumentClick();
-    this.setupThemeToggle(); // Configurar el botón de alternancia de tema
-    this.applySavedTheme();
+    this.configurarCambioTema();
+    this.aplicarTemaGuardado();
     this.loadOpinions();
 
     // Configurar el manejo del formulario
@@ -54,53 +52,68 @@ class OpinionesApp {
   clearForm() {
     this.opinionText.value = '';
   }
-  setupMenuToggle() {
-    const menuBtn = document.querySelector('.menu-btn');
-    const menuPrincipal = document.querySelector('.menuPrincipal');
-
-    menuBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      menuPrincipal.classList.toggle('active');
-    });
-  }
-
   setupDocumentClick() {
-    const menuBtn = document.querySelector('.menu-btn');
     const menuPrincipal = document.querySelector('.menuPrincipal');
+    const menuCheckbox = document.getElementById('check');
 
+    // Agrega un evento al documento para cerrar el menú si se hace clic fuera de él
     document.addEventListener('click', (e) => {
-      if (!menuBtn.contains(e.target) && !menuPrincipal.contains(e.target)) {
-        menuPrincipal.classList.remove('active');
+      // Verifica si el clic fue fuera del menú y del checkbox (el icono)
+      if (!menuCheckbox.contains(e.target) && !menuPrincipal.contains(e.target)) {
+        menuCheckbox.checked = false; // Desmarca el checkbox para cerrar el menú
       }
     });
   }
 
-  setupThemeToggle() {
-    const appearanceLink = document.getElementById('toggleAppearance');
+  // Configura el cambio de tema
+  configurarCambioTema() {
+    const enlaceApariencia = document.getElementById('toggleAppearance');
+    const logo = document.getElementById('logo');
+    const menuIcon = document.getElementById('menu-icon');
 
-    appearanceLink.addEventListener('click', (event) => {
-      event.preventDefault();
+    enlaceApariencia.addEventListener('click', (evento) => {
+      evento.preventDefault();
       document.body.classList.toggle('dark-theme');
+      const esTemaOscuro = document.body.classList.contains('dark-theme');
 
-      const isDarkTheme = document.body.classList.contains('dark-theme');
-      appearanceLink.textContent = isDarkTheme ? 'Apariencia Clara' : 'Apariencia Oscura';
+      // Cambiar texto del enlace de apariencia
+      enlaceApariencia.textContent = esTemaOscuro ? 'Tema Claro' : 'Tema Oscuro';
+
+      // Cambiar logo dependiendo del tema
+      logo.src = esTemaOscuro ? 'logo Oscuro.png' : 'logo terminado.png';
+
+      // Cambiar SVG icono del menú
+      if (esTemaOscuro) {
+        menuIcon.setAttribute('fill', 'white'); // Cambiar el color del SVG a blanco
+      } else {
+        menuIcon.setAttribute('fill', 'black'); // Cambiar el color del SVG a negro
+      }
 
       // Guardar la preferencia de tema en localStorage
-      localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
+      localStorage.setItem('theme', esTemaOscuro ? 'dark' : 'light');
     });
   }
 
-  applySavedTheme() {
-    const savedTheme = localStorage.getItem('theme');
-    const appearanceLink = document.getElementById('toggleAppearance');
+  // Aplica el tema guardado en localStorage
+  aplicarTemaGuardado() {
+    const temaGuardado = localStorage.getItem('theme');
+    const enlaceApariencia = document.getElementById('toggleAppearance');
+    const logo = document.getElementById('logo');
+    const menuIcon = document.getElementById('menu-icon');
 
-    if (savedTheme === 'dark') {
+    if (temaGuardado === 'dark') {
       document.body.classList.add('dark-theme');
-      appearanceLink.textContent = 'Apariencia Clara';
+      enlaceApariencia.textContent = 'Tema Claro';
+      logo.src = 'logo Oscuro.png'; // Logo claro
+      menuIcon.setAttribute('fill', 'white'); // Cambiar el color del SVG a blanco
     } else {
-      appearanceLink.textContent = 'Apariencia Oscura';
+      enlaceApariencia.textContent = 'Tema Oscuro';
+      logo.src = 'logo terminado.png'; // Logo oscuro
+      menuIcon.setAttribute('fill', 'black'); // Cambiar el color del SVG a negro
     }
   }
+
+
 }
 
 // Inicializar la aplicación de opiniones al cargar la página
