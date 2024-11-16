@@ -27,9 +27,7 @@ class Carrusel {
     
   }
   
-  // Crear instancia de la clase cuando la página se cargue
   document.addEventListener('DOMContentLoaded', () => {
-    new InteraccionesPagina(); 
   // Instancia del carrusel si la clase Carrusel está definida
   if (typeof Carrusel === 'function') {
     const carrusel = new Carrusel('.carousel-item');

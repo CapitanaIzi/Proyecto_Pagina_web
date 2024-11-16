@@ -236,21 +236,29 @@ h1 {
 }
 
 .dark-theme h1 {
-    background-color:#121212;  /* Fondo oscuro del título */
-    color: #ffffff; /* Texto claro del título */
+    background-color: #333;
 }
+
+.dark-theme #titulo-diagrama {
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    background-color: #121212; /* Fondo oscuro */
+
+}
+
 .dark-theme #barra-superior {
     background-color:#121212; /* Fondo del botón en tema oscuro */
 
     border: none; /* Elimina todos los bordes */
     border-bottom: 2px solid #a7a4a4; 
-    z-index: 1000;
+   
 }
 .dark-theme #barra-superior button {
     background-color:#7db9fd;/* Fondo del botón en tema oscuro */
     color: #1a1919; /* Texto claro */
     border: 1px solid #dfdbdb; /* Borde más claro */
-    z-index: 1000;
+
 }
 .dark-theme #mapa-conceptual {
     background-color: #1c1c1c; /* Fondo oscuro para el tema oscuro */

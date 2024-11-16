@@ -13,6 +13,58 @@ body {
 }
 
 
+main {
+    margin-right: 10px; 
+    width: 100%;  /* Asegura que el main ocupe el 100% del ancho */
+    height: 100%; /* Asegura que el main ocupe el 100% de la altura */
+}
+
+@media (max-width: 660px) {/* hasta 387px*/
+    main {
+        width: 100%;  /* El main ocupa el 100% del ancho en pantallas pequeñas */
+        height: auto; /* Ajusta la altura del main automáticamente */
+        margin-right: 20px; 
+        padding: 0 5px; /* Ajusta el padding en pantallas pequeñas */
+    }
+
+    /* Ajusta otros elementos de la página si es necesario */
+    .contenedor {
+        width: 90%; /* El contenedor ocupa el 100% del ancho en pantallas pequeñas */
+        padding: 10px; /* Ajusta el padding del contenedor */
+        box-sizing: border-box; /* Asegura que el padding no afecte el tamaño */
+    }
+    .buttons {
+        width: 70%;  /* Los botones ocupan el 50% del ancho del contenedor (ajústalo según necesites) */
+        max-width: 250px; /* Limita el tamaño máximo de los botones */
+        margin: 0 auto; /* Centra los botones horizontalmente */
+        display: flex;
+        box-sizing: border-box; /* Asegura que el padding no afecte el tamaño *//
+    }
+
+    /* Estilo para los botones dentro del contenedor */
+    .buttons button {
+        font-size: 10px; /* Cambia el tamaño de la fuente si es necesario */
+        padding: 4px 8px; /* Ajusta el padding para hacer los botones más bajos */
+        width: auto; 
+        line-height: 1.2; 
+        box-sizing: border-box; /* Asegura que el padding no afecte el tamaño del botón */
+    }
+}
+@media (max-width: 387px) {/* hasta 387px*/
+   
+    .buttons {
+        width: 90%;  /* Los botones ocupan el 50% del ancho del contenedor (ajústalo según necesites) */
+        max-width: 150px; /* Limita el tamaño máximo de los botones */
+        margin: 0 auto; /* Centra los botones horizontalmente */
+        display: flex;
+        
+    }
+
+    /* Estilo para los botones dentro del contenedor */
+    .buttons button {
+        width: 60%; 
+    }
+}
 h1 {
     text-align: center;
     margin-bottom: 10px;
@@ -29,6 +81,7 @@ h1 {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+    
 }
 
 .container {
@@ -37,14 +90,34 @@ h1 {
     padding: 5px;
     background-color: white;
     color: #333;
-    width: 97%;
+    width: 100%;
     box-sizing: border-box; /* Incluye el padding dentro del tamaño total */
     display: flex;
     flex-direction: column;
 }
+.listas-basicas {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    position: relative;
+    background-color: none; /* Fondo claro */
+    color: #000000; /* Texto oscuro */
+    padding: 5px;
+    margin: 0px;
+    border-radius: 5px;
+
+}
+.bloque {
+    background-color: white; 
+    border: 1px solid #4e4c4c; 
+    border-radius: 5px;
+
+}
+
 .editable-title, .non-editable-title {
-    background-color: #f0f0f0;
-    color: #333;
+    background-color: #e1eaf5;
+    color: #0c0c0c;
     border-radius: 4px;
 
 }
@@ -67,32 +140,19 @@ h1 {
     color: rgb(90, 88, 88); /* Color del placeholder */
     opacity: 1; /* Asegura que el color tenga la opacidad completa */
 }
-.listas-basicas {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    position: relative;
-    background-color: #ffffff; /* Fondo claro */
-    color: #000000; /* Texto oscuro */
-    border: 1px solid #4e4c4c; /* Borde claro */
-    padding: 5px;
-    margin: 0px;
-    border-radius: 5px;
 
-}
 
 .lista-basica {
     border-radius: 5px;
-
     position: relative;
-    background-color: #f0f0f0; /* Fondo claro */
-    color: #333; /* Texto oscuro */
-    border: 1px solid #ccc; /* Borde claro */
+    background-color: #f0f0f0; 
+    color: #333; 
+    border: 1px solid #ccc; 
 }
+
 /* Cambiar el color del placeholder en el campo de título */
 .lista-basica input::placeholder {
-    color: #666;
+    color: #020202;
     font-style: italic; /* Opcional: también puedes aplicar otros estilos */
 }
 .lista {
@@ -233,16 +293,20 @@ body.dark-theme {
     background-color: #1b1b1b;
     color: #f0f0f0;
 }
-
+.dark-theme .non-editable-title {
+    background-color:#1f1e1e;
+    color: #fff9f9;
+}
+.dark-theme .bloque {
+    background-color: #1b1b1b; 
+    border: 1px solid #7e7c7c; 
+    border-radius: 5px;
+}
 .dark-theme .editable-title {
     background-color:rgb(121, 117, 117);
     color: #141313;
     border: none; /* Sin borde */
 
-}
-.dark-theme .non-editable-title {
-    background-color:#1b1b1b;
-    color: #fff9f9;
 }
 .dark-theme .editable-title::placeholder {
     color: rgb(41, 40, 40); /* Color del placeholder */
@@ -260,7 +324,6 @@ body.dark-theme {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    border:1px solid #646363;
     position: relative;
     background-color:#1b1b1b;
 

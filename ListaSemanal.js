@@ -6,7 +6,7 @@ class ListaSemanal {
 
     crearListaSemanal() {
         const nuevoContenedor = document.createElement('div');
-        nuevoContenedor.classList.add('container');
+        nuevoContenedor.classList.add('bloque');
 
         const tituloEditable = document.createElement('input');
         tituloEditable.classList.add('editable-title');
