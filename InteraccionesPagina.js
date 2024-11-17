@@ -5,22 +5,20 @@ class InteraccionesPagina {
     this.ConfigurarDocumentoClick();
   }
   /**
-    * Configura el menu para q no se vea si se hace click fuera de el
+    * Verifica si el clic fue fuera del menú y del checkbox (el icono) si es asi cierra el menú
     */
   ConfigurarDocumentoClick() {
     const menuPrincipal = document.querySelector('.menuPrincipal');
     const menuCheckbox = document.getElementById('check');
 
-    // Agrega un evento al documento para cerrar el menú si se hace clic fuera de él
     document.addEventListener('click', (e) => {
-      // Verifica si el clic fue fuera del menú y del checkbox (el icono)
       if (!menuCheckbox.contains(e.target) && !menuPrincipal.contains(e.target)) {
-        menuCheckbox.checked = false; // Desmarca el checkbox para cerrar el menú
+        menuCheckbox.checked = false;
       }
     });
   }
   /**
-     * Aplica el cambio de tema y cambia el color del SVG y logo segun el Tema
+     * Aplica el cambio de tema y cambia el color del SVG y logo segun el Tema y Guarda la preferencia de tema en localStorage
      */
   configurarCambioTema() {
     const enlaceApariencia = document.getElementById('toggleAppearance');
@@ -31,21 +29,15 @@ class InteraccionesPagina {
       evento.preventDefault();
       document.body.classList.toggle('dark-theme');
       const esTemaOscuro = document.body.classList.contains('dark-theme');
-
-      // Cambiar texto del enlace de apariencia
       enlaceApariencia.textContent = esTemaOscuro ? 'Tema Claro' : 'Tema Oscuro';
-
-      // Cambiar logo dependiendo del tema
       logo.src = esTemaOscuro ? 'logo Oscuro.png' : 'logo terminado.png';
 
-      // Cambiar SVG icono del menú
       if (esTemaOscuro) {
         menuIcon.setAttribute('fill', 'white'); // Cambiar el color del SVG a blanco
       } else {
-        menuIcon.setAttribute('fill', 'black'); // Cambiar el color del SVG a negro
+        menuIcon.setAttribute('fill', 'black');
       }
 
-      // Guardar la preferencia de tema en localStorage
       localStorage.setItem('theme', esTemaOscuro ? 'dark' : 'light');
     });
   }

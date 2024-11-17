@@ -1,57 +1,79 @@
 class OpinionesApp {
   constructor() {
-    this.opinionesList = document.getElementById('opinionesList');
-    this.opinionForm = document.getElementById('opinionForm');
-    this.opinionText = document.getElementById('opinionText');
+    this.listaDeOpiniones = document.getElementById('listaDeOpiniones');
+    this.formularioOpinion = document.getElementById('formularioOpinion');
+    this.campoOpinion = document.getElementById('campoOpinion');
 
-    this.loadOpinions();
+    this.cargarOpiniones();
 
-    // Configurar el manejo del formulario
-    this.opinionForm.addEventListener('submit', (event) => this.handleFormSubmit(event));
+    // Configurar el manejo del envío del formulario
+    this.formularioOpinion.addEventListener('submit', (evento) => this.manejarEnvioFormulario(evento));
   }
 
-  // Maneja el envío del formulario de opinión
-  handleFormSubmit(event) {
-    event.preventDefault();
+ 
+/**
+ * Maneja el envío del formulario de opiniones.
+ * 
+ * Esta función se ejecuta cuando el usuario envía el formulario. Previene el
+ * comportamiento predeterminado del navegador (recargar la página) y realiza las siguientes acciones:
+ * 1. Valida que el campo de opinión no esté vacío.
+ * 2. Agrega la opinión al DOM.
+ * 3. Guarda la opinión en el almacenamiento local (`localStorage`).
+ * 4. Limpia el formulario para futuras entradas.
+ * 
+ * @param {Event} evento - El evento de envío del formulario (submit).
+ *        Se utiliza para prevenir la acción predeterminada del formulario.
+ */
+manejarEnvioFormulario(evento) {
+  evento.preventDefault(); 
+  const textoOpinion = this.campoOpinion.value;
 
-    const opinionText = this.opinionText.value;
-    if (opinionText) {
-      this.addOpinion(opinionText);
-      this.saveOpinion(opinionText);
-      this.clearForm();
-    }
+  if (textoOpinion) {
+    this.agregarOpinion(textoOpinion); 
+    this.guardarOpinion(textoOpinion); 
+    this.limpiarFormulario();
+  }
+}
+ /**
+ * Agrega una opinión al DOM.
+ * Esta función crea un elemento HTML que contiene el texto y lo añade al contenedor de opiniones en la página.
+ * @param {string} texto - El texto de la opinión que se va a añadir.
+ */
+  agregarOpinion(texto) {
+    const elementoOpinion = document.createElement('div');
+    elementoOpinion.classList.add('opinion');
+    elementoOpinion.innerHTML = `<p>${texto}</p>`;
+    this.listaDeOpiniones.appendChild(elementoOpinion);
   }
 
-  // Añade la opinión al DOM
-  addOpinion(texto) {
-    const opinionElement = document.createElement('div');
-    opinionElement.classList.add('opinion');
-    opinionElement.innerHTML = `<p>${texto}</p>`;
-    this.opinionesList.appendChild(opinionElement);
+  /**
+ * Guarda una nueva opinión en el almacenamiento localStorage.
+ * Esta función agrega la nueva opinión y vuelve a almacenar la lista
+ * actualizada en el `localStorage` para que persista entre recargas de página.
+ * @param {string} texto - El texto de la opinión que se va a guardar.
+ */
+  guardarOpinion(texto) {
+    const opinionesGuardadas = JSON.parse(localStorage.getItem('opiniones')) || [];
+    opinionesGuardadas.push({ texto });
+    localStorage.setItem('opiniones', JSON.stringify(opinionesGuardadas));
   }
-
-  // Guarda la opinión en localStorage
-  saveOpinion(texto) {
-    const savedOpinions = JSON.parse(localStorage.getItem('opiniones')) || [];
-    savedOpinions.push({ texto });
-    localStorage.setItem('opiniones', JSON.stringify(savedOpinions));
-  }
-
-  // Cargar opiniones desde localStorage
-  loadOpinions() {
-    const savedOpinions = JSON.parse(localStorage.getItem('opiniones')) || [];
-    savedOpinions.forEach(opinion => {
-      this.addOpinion(opinion.texto);
+  /**
+   * Carga las opiniones desde localStorage
+   */
+  cargarOpiniones() {
+    const opinionesGuardadas = JSON.parse(localStorage.getItem('opiniones')) || [];
+    opinionesGuardadas.forEach(opinion => {
+      this.agregarOpinion(opinion.texto);
     });
   }
-
-  // Limpiar el campo del formulario
-  clearForm() {
-    this.opinionText.value = '';
+  /**
+   * Limpia el campo del formulario
+   */
+  limpiarFormulario() {
+    this.campoOpinion.value = '';
   }
 }
 
-// Inicializar la aplicación de opiniones al cargar la página
-window.onload = () => {
-  new OpinionesApp();
-};
+document.addEventListener('DOMContentLoaded', () => {
+  const app = new OpinionesApp();
+});

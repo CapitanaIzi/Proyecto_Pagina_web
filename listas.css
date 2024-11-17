@@ -108,12 +108,27 @@ h1 {
     border-radius: 5px;
 
 }
+/* Si el contenedor está colapsado, solo ocultamos los elementos */
+.listas-basicas.colapsada {
+    display: none; /* Ocultar la lista al colapsar */
+}
 .bloque {
+    width: 94%;
+    justify-content: space-between; /* Alinea los elementos al principio y al final del contenedor */
     background-color: white; 
     border: 1px solid #4e4c4c; 
-    border-radius: 5px;
-
+    margin-bottom: 2px;
+    padding: 10px;
+    border: 1px solid #ccc; /* Agregamos un borde opcional */
+    border-radius: 5px; 
 }
+.icono-expandir {
+    font-size: 20px;
+    cursor: pointer;
+    color: #333;
+    margin-left: 10px;
+}
+  
 
 .editable-title, .non-editable-title {
     background-color: #e1eaf5;
@@ -131,10 +146,11 @@ h1 {
 }
 
 .editable-title {
+    padding: 5px;
     font-size: 1.2em;
     padding: 5px;
     border: 1px solid #ccc;
-    width: 99%;
+    width: 95%;
 }
 .editable-title::placeholder {
     color: rgb(90, 88, 88); /* Color del placeholder */

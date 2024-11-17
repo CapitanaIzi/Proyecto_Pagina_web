@@ -112,7 +112,6 @@ class NoteApp {
   }
 }
 
-// Inicializar la aplicación de notas cuando se carga la página
 document.addEventListener('DOMContentLoaded', () => {
   const app = new NoteApp();
 });

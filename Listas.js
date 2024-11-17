@@ -8,7 +8,6 @@ class Lista {
         this.lineaGuia.classList.add('linea-guia');
         this.listaDiv.appendChild(this.lineaGuia);
 
-
         this.agregarComportamientoDeArrastre();
     }
     
