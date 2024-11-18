@@ -140,7 +140,9 @@ h1 {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    align-items: center; /* Centrar verticalmente */
+    gap: 10px; /* Espaciado entre checkbox y texto */
+    margin-bottom: 10px;
     position: relative;
     background-color: none;
     /* Fondo claro */
@@ -162,7 +164,7 @@ h1 {
 
 
 .bloque {
-    width: 94%;
+    width: 100%;
     justify-content: space-between;
     /* Alinea los elementos al principio y al final del contenedor */
     background-color: white;
@@ -178,7 +180,7 @@ h1 {
     font-size: 20px;
     cursor: pointer;
     color: #333;
-    margin-left: 10px;
+    margin-left: 2px;
 }
 
 
@@ -188,7 +190,7 @@ h1 {
     cursor: pointer;
     color: #f44336;
     /* Rojo para indicar eliminación */
-    margin-left: 10px;
+    margin-left: 15px;
     /* Espacio entre el título y el icono */
 }
 
@@ -215,7 +217,7 @@ h1 {
     font-size: 1.2em;
     padding: 5px;
     border: 1px solid #ccc;
-    width: 95%;
+    width: 97%;
 }
 
 .editable-title::placeholder {
@@ -298,19 +300,72 @@ button:hover {
 }
 
 .tarea {
+    width: 100%;
     cursor: grabbing;
-    /* Muestra una mano cuando se posa el mouse */
+    display: flex;
 }
 
 /* Cambia a 'agarrando' cuando está en el proceso de arrastre */
 .tarea.arrastrando {
     cursor: grab;
 }
+.contenido-tarea {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre el checkbox y el texto */
+}
+/* Ocultar el checkbox original */
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.custom-checkbox input {
+    display: none; /* Oculta el checkbox estándar */
+}
+/* Personalización del checkbox */
+.custom-checkbox input[type="checkbox"] {
+    display: none; /* Oculta el checkbox predeterminado */
+}
+.custom-checkbox span {
+    width: 19px;
+    height: 19px;
+    border: 2px solid #555;
+    border-radius: 4px;
+    display: inline-block;
+    background-color: whitesmoke;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.custom-checkbox input:checked + span {
+    background-color: #4caf50; /* Color al marcar */
+  
+}
+/* Estilo cuando el checkbox está marcado */
+.custom-checkbox input[type="checkbox"]:checked + span {
+    background-color: #6eb1fd; /* Cambia aquí el color de fondo */
+    border-color: #0c0c0c; /* Cambia aquí el color del borde */
+}
+/* Estilo opcional para agregar un símbolo o icono al marcar */
+.custom-checkbox input[type="checkbox"]:checked + span::after {
+    content: '✔'; /* Caracter que aparece */
+    color: white;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
 
 .tarea textarea {
     background: none;
     border: none;
     color: #333;
+    width: 100%;
 
 }
 
@@ -333,7 +388,7 @@ button:hover {
     font-size: 1.0em;
     /* Ajusta el tamaño del botón de opciones */
     cursor: pointer;
-    margin-right: 10px;
+    margin-right: 0px;
 
 }
 

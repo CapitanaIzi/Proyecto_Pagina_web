@@ -67,15 +67,29 @@ class Tarea {
      * @returns {HTMLInputElement} El checkbox para la tarea.
      */
     crearCheckbox(textArea) {
+        const label = document.createElement('label');
+        label.classList.add('custom-checkbox');
+    
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
+    
+        const span = document.createElement('span');
+    
+        // Agregar evento para marcar completada y tachar el texto
         checkbox.addEventListener('change', () => {
             this.completada = checkbox.checked;
-            textArea.classList.toggle('tachado', this.completada);
+            if (textArea) {
+                textArea.classList.toggle('tachado', this.completada);
+            }
         });
-        return checkbox;
+    
+        // Estructura del checkbox personalizado
+        label.appendChild(checkbox);
+        label.appendChild(span);
+    
+        return label;
     }
-
+    
     /**
      * Crea el área de texto que permite editar el nombre de la tarea.
      * 
@@ -97,21 +111,33 @@ class Tarea {
  * @param {HTMLDivElement} listaDiv - El contenedor `div` que representa la lista de tareas a la cual se va a agregar la tarea.
  * @returns {HTMLDivElement} El `div` que representa la tarea con todos sus elementos hijos.
  */
-    crearTarea(listaDiv) {
-        const tareaDiv = document.createElement('div');
-        tareaDiv.classList.add('tarea');
-        tareaDiv.draggable = true;
-        tareaDiv.id = `tarea-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+ crearTarea(listaDiv) {
+    const tareaDiv = document.createElement('div');
+    tareaDiv.classList.add('tarea');
+    tareaDiv.draggable = true;
+    tareaDiv.id = `tarea-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
-        this.agregarEventosArrastre(tareaDiv, listaDiv);
-        const textArea = this.crearTextArea();
-        const checkbox = this.crearCheckbox(textArea);
-        const { opcionesBtn, menuTarea } = this.crearBotonOpciones(tareaDiv, listaDiv);
+    this.agregarEventosArrastre(tareaDiv, listaDiv);
 
-        tareaDiv.append(checkbox, textArea, opcionesBtn, menuTarea);
+    // Crear contenedor para checkbox, textarea y botón de opciones
+    const contenidoDiv = document.createElement('div');
+    contenidoDiv.classList.add('contenido-tarea'); // Clase para manejar estilos
 
-        return tareaDiv;
-    }
+    const textArea = this.crearTextArea();
+    const checkbox = this.crearCheckbox(textArea);
+    const { opcionesBtn, menuTarea } = this.crearBotonOpciones(tareaDiv, listaDiv);
+
+    // Añadir checkbox, textarea y botón de opciones al contenedor
+    contenidoDiv.append(checkbox, textArea, opcionesBtn);
+
+    // Agregar contenedor de menú desplegable aparte (si es necesario)
+    tareaDiv.append(contenidoDiv, menuTarea);
+
+    return tareaDiv;
+}
+
+
+
 
 
     /**

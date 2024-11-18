@@ -25,7 +25,7 @@ class ListaSemanal {
         // Crear el título editable
         const tituloEditable = document.createElement('input');
         tituloEditable.classList.add('editable-title');
-        tituloEditable.placeholder = 'Agregue la semana aquí (Ejemplo: 21/10 al 27/10)';
+        tituloEditable.placeholder = 'Agregue la semana aquí     (Ejemplo: 21/10 al 27/10)';
         
         // Crear el contenedor de la lista semanal
         const listaSemanalContainer = document.createElement('div');
