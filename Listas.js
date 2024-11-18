@@ -142,6 +142,7 @@ class Lista {
     crearTituloContainer() {
         const tituloContainer = document.createElement('div');
         tituloContainer.classList.add('titulo-container');
+
         const tituloInput = document.createElement('input');
         tituloInput.type = 'text';
         tituloInput.placeholder = this.titulo;
@@ -149,12 +150,28 @@ class Lista {
             this.titulo = e.target.value;
         });
 
+        // Crear el ícono para expandir/contraer usando Font Awesome
+        const iconoExpandir = document.createElement('span');
+        iconoExpandir.classList.add('icono-expandir');
+        iconoExpandir.classList.add('fas', 'fa-chevron-down');  // Ícono de Font Awesome para expandir
+        iconoExpandir.style.cursor = 'pointer';
+
+        // Cambiar el ícono al hacer clic
+        iconoExpandir.addEventListener('click', () => {
+            this.expandida = !this.expandida;
+            iconoExpandir.classList.toggle('fa-chevron-down', !this.expandida);  // Ícono de expandir
+            iconoExpandir.classList.toggle('fa-chevron-up', this.expandida);     // Ícono de contraer
+            this.actualizarVisibilidadTareas();
+        });
+
         const opcionesBtn = this.crearBotonOpciones();
         tituloContainer.appendChild(tituloInput);
+        tituloContainer.appendChild(iconoExpandir); // Añadir el ícono al contenedor del título
         tituloContainer.appendChild(opcionesBtn);
 
         return tituloContainer;
     }
+
 
     /**
      * Crea el botón de opciones, que abre un menú al hacer clic.
@@ -185,17 +202,7 @@ class Lista {
      * 
      * @returns {HTMLDivElement} El contenedor del menú de opciones.
      */
-    crearMenuOpciones() {
-        const menuLista = document.createElement('div');
-        menuLista.classList.add('menu-lista');
-        menuLista.style.display = 'none';
-        const opcionExpandirContraer = this.crearOpcionExpandirContraer(menuLista);
-        const opcionAgregar = this.crearOpcionAgregar(menuLista);
-        const opcionEliminar = this.crearOpcionEliminar(menuLista);
-
-        menuLista.append(opcionExpandirContraer, opcionEliminar, opcionAgregar);
-        return menuLista;
-    }
+    
 
     /**
    * Añade una nueva tarea a la lista visualmente y en el array `this.tareas`.
@@ -217,70 +224,53 @@ class Lista {
 
 
 
-    /**
-     * Crea la opción "Agregar" dentro del menú de opciones. Al hacer clic en esta opción, 
-     * se añade una nueva tarea a la lista.
-     * 
-     * @param {HTMLDivElement} menuLista - El contenedor donde se añadirá la opción "Agregar".
-     * @returns {HTMLDivElement} La opción "Agregar" del menú.
-     */
+    crearMenuOpciones() {
+        const menuLista = document.createElement('div');
+        menuLista.classList.add('menu-lista');
+        menuLista.style.display = 'none';
+    
+        // Crear la opción "Eliminar" con ícono de tacho de basura
+        const opcionEliminar = this.crearOpcionEliminar(menuLista);
+    
+        // Crear la opción "Agregar" con ícono de más
+        const opcionAgregar = this.crearOpcionAgregar(menuLista);
+    
+        menuLista.append(opcionEliminar, opcionAgregar);
+        return menuLista;
+    }
+    
     crearOpcionAgregar(menuLista) {
         const opcionAgregar = document.createElement('div');
-        opcionAgregar.textContent = 'Agregar';
-
+    
+        // Crear el ícono de agregar (Font Awesome)
+        const iconoAgregar = document.createElement('i');
+        iconoAgregar.classList.add('fas', 'fa-plus'); // Ícono de Font Awesome para agregar
+        opcionAgregar.appendChild(iconoAgregar);
+    
         opcionAgregar.addEventListener('click', () => {
             const nuevaTarea = new Tarea();
             this.agregarTarea(nuevaTarea);
             menuLista.style.display = 'none';
         });
-
+    
         return opcionAgregar;
     }
-
-
-    /**
-     * Crea la opción "Eliminar" dentro del menú de opciones. Al hacer clic en esta opción, 
-     * se eliminará la lista completa.
-     * 
-     * @returns {HTMLDivElement} La opción "Eliminar" del menú.
-     */
+    
     crearOpcionEliminar() {
         const opcionEliminar = document.createElement('div');
-        opcionEliminar.textContent = 'Eliminar';
-
+    
+        // Crear el ícono de eliminar (Font Awesome)
+        const iconoEliminar = document.createElement('i');
+        iconoEliminar.classList.add('fas', 'fa-trash'); // Ícono de Font Awesome para eliminar
+        opcionEliminar.appendChild(iconoEliminar);
+    
         opcionEliminar.addEventListener('click', () => {
             this.listaDiv.remove();
         });
-
+    
         return opcionEliminar;
     }
-
-    /**
-     * Crea la opción "Expandir/Contraer" dentro del menú de opciones. Al hacer clic en esta opción,
-     * se cambiará el estado de expansión de la lista (expandir o contraer todas las tareas).
-     * 
-     * @param {HTMLDivElement} menuLista - El contenedor donde se añadirá la opción "Expandir/Contraer".
-     * @returns {HTMLDivElement} La opción "Expandir/Contraer" del menú.
-     */
-    crearOpcionExpandirContraer(menuLista) {
-        const opcionExpandirContraer = document.createElement('div');
-        opcionExpandirContraer.textContent = 'Contraer';
-
-        opcionExpandirContraer.addEventListener('click', () => {
-            // Cambiar el estado de expansión
-            this.expandida = !this.expandida;
-            opcionExpandirContraer.textContent = this.expandida ? 'Contraer' : 'Expandir';
-
-            // Aplicar la visibilidad a todas las tareas de la lista
-            this.actualizarVisibilidadTareas();
-
-            // Ocultar el menú de opciones después de hacer clic
-            menuLista.style.display = 'none';
-        });
-
-        return opcionExpandirContraer;
-    }
-
+    
     actualizarVisibilidadTareas() {
         // Iterar sobre todas las tareas y actualizar su visibilidad
         this.tareas.forEach((tarea) => {

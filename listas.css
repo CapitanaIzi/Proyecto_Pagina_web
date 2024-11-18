@@ -88,6 +88,20 @@ main {
     .buttons button {
         width: 60%;
     }
+    input[type="text" i] {
+        padding-block: 1px;
+        padding-inline: 2px;
+        position: relative;
+        font-size: 14px; 
+    }
+    .menu-lista {
+        position: absolute;
+        width: 50px;
+        /* Aumenta el ancho del menú */
+        top: -10px;;
+        /* Ajusta la distancia desde la parte superior */
+        right: -180px;
+    }
 }
 
 h1 {
@@ -240,15 +254,16 @@ h1 {
     /* Para que la línea guía se posicione correctamente */
 }
 
+
 .menu-lista {
     position: absolute;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     z-index: 19900;
-    width: 80px;
+    width: 50px;
     /* Aumenta el ancho del menú */
     padding: 5px;
     /* Añadir padding para un contenedor más grande */
-    top: 35px;
+    top:auto;
     /* Ajusta la distancia desde la parte superior */
     right: 10px;
 }
@@ -259,6 +274,10 @@ h1 {
     
     /* Aumenta ligeramente el tamaño */
     color: #f1f1f1;
+}
+.menu-lista div i {
+    margin-right: 8px;  /* Espacio a la derecha del ícono */
+    font-size: 17px;    /* Ajusta el tamaño del ícono */
 }
 
 button {
