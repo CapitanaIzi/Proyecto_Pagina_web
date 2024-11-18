@@ -151,7 +151,7 @@ h1 {
     padding: 5px;
     margin: 0px;
     border-radius: 5px;
-
+   
 }
 
 .listas-basicas-container.colapsada,
@@ -234,6 +234,8 @@ h1 {
     background-color: #f0f0f0;
     color: #333;
     border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Cambiar el color del placeholder en el campo de título */
@@ -247,7 +249,8 @@ h1 {
     background-color: #f9f9f9;
     color: #333;
     border: 1px solid #ccc;
-
+    display: flex;
+    flex-direction: column;
     margin: 10px;
     padding: 10px;
     min-height: 100px;
@@ -300,6 +303,7 @@ button:hover {
     width: 100%;
     cursor: grabbing;
     display: flex;
+    margin: 5px;
 }
 
 /* Cambia a 'agarrando' cuando está en el proceso de arrastre */
@@ -432,21 +436,14 @@ button:hover {
     color: #f1f1f1;
 }
 
-.linea-guia {
-    position: absolute;
-    top: 0;
-    /* Se ajustará dinámicamente */
-    left: 0;
-    right: 0;
+.guia {
     width: 100%;
     height: 2px;
-    /* Altura de la línea */
-    background-color: #007bff;
-    /* Color de la línea */
-    display: none;
-    /* Oculta por defecto */
-    z-index: 1000;
+    background-color: #007BFF;
+    margin-top: 10px;  /* Espacio entre tareas */
+    margin-bottom: 10px;
 }
+
 
 .cuadro-extra {
     display: block;
