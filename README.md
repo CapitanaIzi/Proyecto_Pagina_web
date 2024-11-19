@@ -1,32 +1,110 @@
-# Proyecto_Pagina_web
-README  
+# Proyecto: Página Web de Organización Personal
 
-Hice una sección de lista de pendientes que cuenta con un buscador y con un menú desplegable Y tiene tres secciones una es lista personal donde hay una lista con tareas donde uno puede poner el título que se le guste y luego en otra sección, lista semanal, de lunes a domingo y otra sección de lista por mes es similar a la lista personal. 
+## Descripción
 
-Por ahora hice que cada tarea se puede eliminar y se pueda duplicar y destacar falta mejorar el duplicado y la tarea tiene Placeholder y checkbox. El tamaño del contenedor de la tarea se puede agrandar según el texto pero en sí es pequeño el contenedor y al lado tiene tres botones de opciones desplegables. 
+Este proyecto es una página web diseñada para facilitar la organización personal. Permite a los usuarios crear listas, establecer metas y tomar notas. A futuro, también incluirá funcionalidades avanzadas para planificar proyectos con integración de un calendario mejorado.
 
-Cada lista básica cuenta con un título que se puede editar tiene tres tareas por defecto tiene un botón para agregar más tareas y es una columna. 
+---
 
-El menú es desplegable ya tiene correlación con diagrama conceptual y tiene horver. 
+## Funcionalidades Principales
 
-Aunque esta página cuenta con un botón de buscar y un Calendario, todavía no está en funcionamiento. 
+### Inicio
+- Barra de navegación *responsiva* con un logo y nombre del proyecto.
+- Menú adaptativo que se ajusta al tamaño de la pantalla.
+- Carrusel interactivo con imágenes (SVG) y descripciones de las secciones disponibles. 
+  - *Interactividad*: Se puede hacer clic en las imágenes o descripciones para ir directamente a cada sección.
 
-El diagrama conceptual también ya tiene el menú principal desplegable y  buscador luego tiene otros tres botones de guardar editar e insertar y se insertar, estos dos ultimos tiene un submenú, Insertar  tiene cuadrado y flecha. Y Editar Color 
+---
 
-Al principio puse un cuadrado donde puede ir solamente el título 
+### Sección: *Lista de Pendientes*
+#### Estructura
+- *Menú principal* que organiza la página en tres secciones:
+  1. *Lista Personal*:  
+      - Incluye tareas personalizables y permite editar el título.  
+  2. *Lista Semanal*:  
+      - Organizada de lunes a domingo.  
+  3. *Lista por Mes*:  
+      - Similar a la lista personal pero categorizada por meses.
 
-El cuadrado es un contenedor para poder escribir donde se pueda agrandar el tamaño dependiendo lo que haya de texto dentro del mismo. 
+#### Funcionalidades
+- *Expandir y Contraer*: Cada lista tiene un ícono para mostrar u ocultar sus elementos.
+- *Botón de Guardar* (actualmente sin funcionalidad implementada).
+- *Calendario sencillo* usando la librería FullCalendar, con:
+  - Fecha de hoy resaltada.
+  - Configuración para ocultarse al hacer clic fuera de él.
 
-La flecha tiene para mover en todo el eje rotativo se puede agrandar y achicar con un mínimo de  achicamiento y se puede arrastrar por todo el contenedor de la página. 
+#### Gestión de Tareas
+- Cada tarea incluye:
+  - *Eliminar, duplicar y destacar* tareas con botones desplegables.
+  - *Checkbox* para marcar tareas completadas.
+  - Contenedor ajustable al tamaño del texto.
+- Opciones adicionales:
+  - *Ordenar tareas*: Las completadas se posicionan automáticamente al final.
+  - *Editar título*: Cada lista tiene un título editable.
+  - *Agregar tareas* con un menú interactivo.
 
-Luego al final de la página hay un botón de eliminar donde cualquier elemento que pase sobre él es eliminado. 
+---
 
-Ambas páginas cuentan con tonos oscuros pero en el futuro se va a poder elegir entre tema oscuro y claro. 
+### Sección: *Diagrama Conceptual*
+#### Barra de Herramientas
+- *Botón Guardar*: Pendiente de implementación.
+- *Botón Editar*:  
+  - Submenú para cambiar colores.
+- *Botón Insertar*:  
+  - Submenú para agregar:
+    - *Cuadros*: Contenedores de texto que se ajustan automáticamente según su contenido.
+    - *Flechas*:  
+      - Movibles, rotables y redimensionables.
+      - Configuración para un mínimo tamaño y movimiento libre dentro de la página.
 
- 
+#### Otras Funcionalidades
+- *Eliminación dinámica*:  
+  - Los elementos que pasen sobre el botón "Eliminar" serán eliminados automáticamente.
 
- 
+---
 
- 
+### Sección: *Notas*
+- Crear notas con título y texto.
+- Guardar notas en una lista visible.
+- Funcionalidades de edición y eliminación.
 
- 
+---
+
+### Sección: *Registrarse*
+- Proceso simple con mensaje de confirmación tras un registro exitoso.
+
+---
+
+### Sección: *Opiniones*
+- Espacio para que los usuarios dejen comentarios, sin necesidad de estar registrados.
+
+---
+
+## Estado Actual del Proyecto
+- *Completado*:
+  - Diseño funcional para la mayoría de las secciones.
+  - Interactividad básica implementada.
+- *Pendiente*:
+  - Lógica para el botón de "Guardar".
+  - Ampliación de las funcionalidades del calendario.
+
+---
+
+## Tecnologías Utilizadas
+- *HTML5*: Estructura de la página.
+- *CSS3*: Diseño y estilo.
+- *JavaScript*:  
+  - Funcionalidad dinámica e interacción del usuario.
+  - Librería FullCalendar para el calendario.
+- *SVG*: Imágenes en el carrusel.
+
+---
+
+## Futuras Mejoras
+- Implementación completa del botón "Guardar".
+- Planificación de proyectos con un calendario más avanzado.
+- Mejora de la experiencia de usuario en dispositivos móviles.
+
+---
+
+Este proyecto es un trabajo en progreso diseñado para mejorar la productividad personal mediante herramientas digitales intuitivas y accesibles.
