@@ -4,107 +4,8 @@ class Lista {
         this.tareas = [new Tarea(), new Tarea(), new Tarea()];
         this.listaDiv = this.crearListaElement();
         this.expandida = true;
-        this.lineaGuia = document.createElement('div');
-        this.lineaGuia.classList.add('linea-guia');
-        this.listaDiv.appendChild(this.lineaGuia);
-
-        this.agregarComportamientoDeArrastre();
+    
     }
-
-    /**
-     * Configura el comportamiento de arrastre y soltado en la lista.
-     * Permite mover tareas dentro de la lista y muestra una línea guía cuando se arrastra una tarea.
-     */
-    agregarComportamientoDeArrastre() {
-        this.configurarArrastreSobreLista();
-        this.configurarSueltaEnLista();
-        this.configurarArrastreFueraDeLista();
-    }
-
-    /**
-     * Configura el evento dragover para permitir el arrastre dentro de la lista.
-     * Muestra la línea guía en la posición de la tarea objetivo.
-     */
-    configurarArrastreSobreLista() {
-        this.listaDiv.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            const tarea = e.target.closest('.tarea');
-            if (tarea) {
-                this.mostrarLineaGuia(tarea);
-            } else {
-                this.ocultarLineaGuia();
-            }
-        });
-    }
-
-    /**
-     * Configura el evento dragleave para ocultar la línea guía cuando se sale de la lista.
-     */
-    configurarArrastreFueraDeLista() {
-        this.listaDiv.addEventListener('dragleave', () => {
-            this.ocultarLineaGuia();
-        });
-    }
-
-    /**
-     * Configura el evento drop para mover la tarea dentro de la lista.
-     */
-    configurarSueltaEnLista() {
-        this.listaDiv.addEventListener('drop', (e) => {
-            e.preventDefault();
-            const tareaId = e.dataTransfer.getData('text/plain');
-            const tarea = document.getElementById(tareaId);
-
-            if (tarea) {
-                // Llama a `moverTarea` para manejar la tarea correctamente en la nueva lista
-                this.moverTarea(tarea);
-            }
-            this.ocultarLineaGuia();
-        });
-    }
-
-
-    /**
-     * Muestra la línea guía en la posición de la tarea objetivo.
-     * @param {Element} tarea - La tarea objetivo en la que se debe mostrar la línea guía.
-     */
-    mostrarLineaGuia(tarea) {
-        this.lineaGuia.style.display = 'block';
-        this.lineaGuia.style.top = tarea.offsetTop + 'px';
-    }
-
-    /**
-     * Oculta la línea guía.
-     */
-    ocultarLineaGuia() {
-        this.lineaGuia.style.display = 'none';
-    }
-
-    /**
-    * Mueve una tarea a esta lista y la guarda en el array de tareas.
-    * 
-    * @param {Tarea} tarea - La tarea que se mueve.
-    */
-    moverTarea(tarea, nuevaLista) {
-        // Eliminar la tarea de la lista actual
-        const index = this.tareas.indexOf(tarea);
-        if (index > -1) {
-            this.tareas.splice(index, 1);
-        }
-
-        // Añadir la tarea a la nueva lista
-        nuevaLista.tareas.push(tarea);
-        nuevaLista.listaDiv.appendChild(tarea.element);
-
-        // Actualizar visibilidad de la tarea según el estado de expansión de la nueva lista
-        tarea.element.style.display = nuevaLista.expandida ? 'block' : 'none';
-
-        // Asegurarse de que todas las tareas en la nueva lista estén visibles según el estado de expansión
-        nuevaLista.actualizarVisibilidadTareas();
-    }
-
-
-
 
     /**
   * Crea el elemento visual de la lista, que incluye el contenedor de la lista, el título,
@@ -221,9 +122,6 @@ class Lista {
         this.actualizarVisibilidadTareas();
     }
 
-
-
-
     crearMenuOpciones() {
         const menuLista = document.createElement('div');
         menuLista.classList.add('menu-lista');
@@ -270,7 +168,6 @@ class Lista {
     
         return opcionEliminar;
     }
-    
     actualizarVisibilidadTareas() {
         // Iterar sobre todas las tareas y actualizar su visibilidad
         this.tareas.forEach((tarea) => {
@@ -279,7 +176,4 @@ class Lista {
             }
         });
     }
-
-
-
 }

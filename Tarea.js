@@ -3,60 +3,6 @@ class Tarea {
         this.nombre = nombre;
         this.completada = false;
     }
-    /**
-     * Agrega los eventos necesarios para el comportamiento de arrastre (drag & drop) de las tareas.
-     * Permite que las tareas puedan ser arrastradas dentro de la lista o entre listas.
-     * 
-     * @param {HTMLDivElement} tareaDiv - El elemento `div` que representa la tarea visualmente.
-     * @param {HTMLDivElement} listaDiv - El contenedor `div` que representa la lista en la que se encuentra la tarea.
-     */
-    agregarEventosArrastre(tareaDiv, listaDiv) {
-        tareaDiv.addEventListener('dragstart', (e) => {
-            e.dataTransfer.setData('text/plain', tareaDiv.id);
-            tareaDiv.classList.add('arrastrando');
-        });
-    
-        tareaDiv.addEventListener('dragover', (e) => {
-            e.preventDefault();
-        });
-    
-        tareaDiv.addEventListener('drop', (e) => {
-            e.preventDefault();
-            const tareaId = e.dataTransfer.getData('text/plain');
-            const tareaArrastrada = document.getElementById(tareaId);
-    
-            if (tareaArrastrada && tareaArrastrada !== tareaDiv) {
-                listaDiv.insertBefore(tareaArrastrada, tareaDiv);
-                tareaArrastrada.classList.remove('arrastrando');
-            }
-    
-            // Obtén la lista actual y la lista de destino
-            const listaDestino = listaDiv.closest('.lista-basica');
-    
-            // Aquí gestionamos la visibilidad de las tareas de la lista de destino
-            listaDestino.querySelectorAll('.tarea').forEach(tareaDiv => {
-                const tareaInstancia = getTareaById(tareaDiv.id);
-                if (tareaInstancia) {
-                    // Si la lista está expandida, aseguramos que la tarea sea visible
-                    tareaInstancia.setVisible(listaDestino.expandida);
-                }
-            });
-    
-            // Si la lista de destino no está expandida, ocultar la tarea al arrastrarla allí
-            if (listaDestino && !listaDestino.expandida) {
-                const tareaInstancia = getTareaById(tareaId);
-                if (tareaInstancia) {
-                    tareaInstancia.setVisible(false);  // Oculta la tarea si la lista no está expandida
-                }
-            } else {
-                // Si la lista está expandida, mostrar la tarea
-                const tareaInstancia = getTareaById(tareaId);
-                if (tareaInstancia) {
-                    tareaInstancia.setVisible(true);  // Muestra la tarea si la lista está expandida
-                }
-            }
-        });
-    }
     
     
     /**
@@ -117,8 +63,6 @@ class Tarea {
     tareaDiv.draggable = true;
     tareaDiv.id = `tarea-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
-    this.agregarEventosArrastre(tareaDiv, listaDiv);
-
     // Crear contenedor para checkbox, textarea y botón de opciones
     const contenidoDiv = document.createElement('div');
     contenidoDiv.classList.add('contenido-tarea'); // Clase para manejar estilos
@@ -135,10 +79,6 @@ class Tarea {
 
     return tareaDiv;
 }
-
-
-
-
 
     /**
      * Crea el botón de opciones (⋮) de la tarea, que permite mostrar un menú con acciones como eliminar,

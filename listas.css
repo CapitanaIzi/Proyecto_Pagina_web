@@ -217,7 +217,7 @@ h1 {
     font-size: 1.2em;
     padding: 5px;
     border: 1px solid #ccc;
-    width: 97%;
+    width: 94%;
 }
 
 .editable-title::placeholder {
@@ -435,35 +435,6 @@ button:hover {
     color: #f1f1f1;
 }
 
-.linea-guia {
-    position: absolute;
-    top: 0;
-    /* Se ajustará dinámicamente */
-    left: 0;
-    right: 0;
-    height: 2px;
-    /* Altura de la línea */
-    background-color: #007bff;
-    /* Color de la línea */
-    display: none;
-    /* Oculta por defecto */
-    z-index: 1000;
-}
-
-.cuadro-extra {
-    display: block;
-    width: 100%;
-    min-height: 100px;
-    margin-top: 10px;
-    padding: 10px;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-    font-size: 14px;
-    resize: vertical;
-    /* Permitir al usuario cambiar el tamaño verticalmente */
-    box-sizing: border-box;
-}
 
 /* Estilos específicos para el tema oscuro */
 body.dark-theme {
