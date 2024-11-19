@@ -142,10 +142,25 @@ class Tarea {
      * @param {HTMLDivElement} listaDiv - El contenedor `div` que representa la lista de tareas.
      */
     duplicarTarea(listaDiv) {
+        // Crear una nueva tarea con el mismo nombre
         const nuevaTarea = new Tarea(this.nombre);
+        
+        // Crear el elemento visual para la nueva tarea
         const nuevaTareaDiv = nuevaTarea.crearTarea(listaDiv);
+    
+        // Establecer el texto de la tarea duplicada (no como placeholder)
+        const textArea = nuevaTareaDiv.querySelector('textarea');
+        if (textArea) {
+            textArea.value = this.nombre; // Copiar el texto real de la tarea original
+        }
+    
+        // Asegurarse de que la tarea duplicada tenga su propio ID
+        nuevaTarea.id = `tarea-${Date.now()}-${Math.random()}`; // Generar un ID único
+        
+        // Añadir la nueva tarea al contenedor visual y a la lista de tareas
         listaDiv.appendChild(nuevaTareaDiv);
     }
+    
 
     /**
      * Elimina la tarea del DOM.

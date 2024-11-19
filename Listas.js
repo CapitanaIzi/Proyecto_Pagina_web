@@ -132,8 +132,9 @@ class Lista {
     
         // Crear la opción "Agregar" con ícono de más
         const opcionAgregar = this.crearOpcionAgregar(menuLista);
+        const opcionOrdenar = this.crearOpcionOrdenar(menuLista);
     
-        menuLista.append(opcionEliminar, opcionAgregar);
+        menuLista.append(opcionEliminar, opcionAgregar,opcionOrdenar);
         return menuLista;
     }
     
@@ -168,6 +169,42 @@ class Lista {
     
         return opcionEliminar;
     }
+    crearOpcionOrdenar() {
+        const opcionOrdenar = document.createElement('div');
+    
+        // Crear el ícono de ordenar (Font Awesome)
+        const iconoOrdenar = document.createElement('i');
+        iconoOrdenar.classList.add('fas', 'fa-sort'); // Ícono de Font Awesome para ordenar
+        opcionOrdenar.appendChild(iconoOrdenar);
+    
+        opcionOrdenar.addEventListener('click', () => {
+            this.ordenarTareas();
+        });
+    
+        return opcionOrdenar;
+    }
+    ordenarTareas() {
+        // Ordenar las tareas según si están completadas o no
+        this.tareas.sort((a, b) => a.completada - b.completada);
+    
+        // Limpiar el contenedor de tareas en el DOM
+        this.tareas.forEach((tarea) => {
+            if (tarea.element && tarea.element.parentElement === this.listaDiv) {
+                this.listaDiv.removeChild(tarea.element);
+            }
+        });
+    
+        // Reagregar las tareas en el orden actualizado
+        this.tareas.forEach((tarea) => {
+            // Asegurarse de que se aplique el tachado si la tarea está completada
+            if (tarea.completada) {
+                tarea.element.querySelector('textarea').classList.add('tachado');
+            }
+            this.listaDiv.appendChild(tarea.element);
+        });
+    }
+    
+    
     actualizarVisibilidadTareas() {
         // Iterar sobre todas las tareas y actualizar su visibilidad
         this.tareas.forEach((tarea) => {
