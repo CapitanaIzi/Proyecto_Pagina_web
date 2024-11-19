@@ -4,6 +4,7 @@ class InteraccionesPagina {
     this.aplicarTemaGuardado();
     this.ConfigurarDocumentoClick();
   }
+
   /**
     * Verifica si el clic fue fuera del menú y del checkbox (el icono) si es asi cierra el menú
     */
@@ -17,6 +18,7 @@ class InteraccionesPagina {
       }
     });
   }
+
   /**
      * Aplica el cambio de tema y cambia el color del SVG y logo segun el Tema y Guarda la preferencia de tema en localStorage
      */
@@ -39,19 +41,29 @@ class InteraccionesPagina {
         menuIcon.setAttribute('fill', 'black');
       }
 
+      // Cambiar el tema del calendario, si ya está inicializado
+      if (calendarContainer && calendarContainer.classList.contains('initialized')) {
+        this.aplicarTemaCalendario(esTemaOscuro, calendarContainer);
+      }
+
+      // Guardar la preferencia de tema en localStorage
       localStorage.setItem('theme', esTemaOscuro ? 'dark' : 'light');
     });
-      // Cambiar el tema del calendario
-      if (calendarContainer.classList.contains('initialized')) {
-        // Cambiar clase del calendario si ya está inicializado
-        if (esTemaOscuro) {
-          calendarContainer.classList.add('dark-theme');
-          calendarContainer.classList.remove('light-theme');
-        } else {
-          calendarContainer.classList.add('light-theme');
-          calendarContainer.classList.remove('dark-theme');
-        }
-      }
+  }
+
+  /**
+   * Aplica el tema al calendario
+   * @param {boolean} esTemaOscuro - Si el tema es oscuro o no
+   * @param {HTMLElement} calendarContainer - El contenedor del calendario
+   */
+  aplicarTemaCalendario(esTemaOscuro, calendarContainer) {
+    if (esTemaOscuro) {
+      calendarContainer.classList.add('dark-theme');
+      calendarContainer.classList.remove('light-theme');
+    } else {
+      calendarContainer.classList.add('light-theme');
+      calendarContainer.classList.remove('dark-theme');
+    }
   }
 
   /**
@@ -64,6 +76,7 @@ class InteraccionesPagina {
     const menuIcon = document.getElementById('menu-icon');
     const calendarContainer = document.getElementById('calendar-container');
 
+    // Aplicar el tema al body
     if (temaGuardado === 'dark') {
       document.body.classList.add('dark-theme');
       enlaceApariencia.textContent = 'Tema Claro';
@@ -73,13 +86,15 @@ class InteraccionesPagina {
       enlaceApariencia.textContent = 'Tema Oscuro';
       logo.src = 'logo terminado.png';
       menuIcon.setAttribute('fill', 'black');
-        // Cambiar el tema del calendario
-        calendarContainer.classList.add('light-theme');
-        calendarContainer.classList.remove('dark-theme');
     }
-    
+
+    // Aplicar el tema al calendario si ya está inicializado
+    if (calendarContainer && calendarContainer.classList.contains('initialized')) {
+      this.aplicarTemaCalendario(temaGuardado === 'dark', calendarContainer);
+    }
   }
 }
+
 document.addEventListener('DOMContentLoaded', () => {
   new InteraccionesPagina();
 });

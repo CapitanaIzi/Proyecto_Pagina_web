@@ -743,16 +743,16 @@ body.dark-theme {
 
 /* Estilos del calendario en el tema oscuro */
 .dark-theme #calendar-container {
-    background-color: #2c2f36;
+    background-color: #011a53;
     /* Fondo oscuro */
-    color: #fff;
+    color: #fcf7f7a2;
     /* Texto blanco */
     border-radius: 10px;
     padding: 10px;
 }
 
 .dark-theme .fc-toolbar {
-    background-color: #3a3f47;
+    background-color: #164899;
     /* Barra de herramientas oscura */
     color: #fff;
 }
@@ -770,9 +770,9 @@ body.dark-theme {
 }
 
 .dark-theme .fc-day {
-    background-color: #2c2f36;
+    background-color: #9bb8fc;
     /* Fondo oscuro para los días */
-    color: #fff;
+    color: #111010;
     /* Texto blanco para los días */
 }
 

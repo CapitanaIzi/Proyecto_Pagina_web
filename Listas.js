@@ -3,20 +3,16 @@ let menuListaAbierto = null;
 class Lista {
     constructor(titulo = "Título") {
         this.titulo = titulo;
-        this.tareas = [new Tarea(), new Tarea(), new Tarea()];
-        this.listaDiv = this.crearListaElement();
-        this.expandida = true;
-    
+        this.tareas = [new Tarea(), new Tarea(), new Tarea()]; 
+        this.listaDiv = this.crearListaElement(); 
+        this.expandida = true; 
     }
 
     /**
-  * Crea el elemento visual de la lista, que incluye el contenedor de la lista, el título,
-  * y las tareas asociadas a la lista. Este método organiza los elementos en el DOM y los
-  * prepara para ser mostrados.
-  * 
-  * @returns {HTMLDivElement} El contenedor principal de la lista, que incluye el título
-  *                           y las tareas en su interior.
-  */
+     * Crea el contenedor visual de la lista, incluyendo el título y las tareas.
+     * 
+     * @returns {HTMLDivElement} El contenedor de la lista con título y tareas.
+     */
     crearListaElement() {
         this.listaDiv = document.createElement('div');
         this.listaDiv.classList.add('lista-basica');
@@ -24,24 +20,22 @@ class Lista {
         const tituloContainer = this.crearTituloContainer();
         this.listaDiv.appendChild(tituloContainer);
 
+        // Crear las tareas y agregarlas al contenedor
         this.tareas.forEach((tarea) => {
             const tareaElement = tarea.crearTarea(this.listaDiv);
             tarea.element = tareaElement;
-            tareaElement.style.display = this.expandida ? 'block' : 'none';
+            tareaElement.style.display = this.expandida ? 'block' : 'none'; // Controlar visibilidad
             this.listaDiv.appendChild(tareaElement);
         });
 
         return this.listaDiv;
     }
 
-
     /**
- * Crea un contenedor para el título de la lista y el botón de opciones.
- * Este contenedor incluye un campo de entrada para modificar el título y un botón que
- * despliega un menú de opciones.
- * 
- * @returns {HTMLDivElement} El contenedor del título con las opciones asociadas.
- */
+     * Crea el contenedor del título de la lista y el botón de opciones.
+     * 
+     * @returns {HTMLDivElement} El contenedor del título con el botón de opciones.
+     */
     crearTituloContainer() {
         const tituloContainer = document.createElement('div');
         tituloContainer.classList.add('titulo-container');
@@ -50,13 +44,13 @@ class Lista {
         tituloInput.type = 'text';
         tituloInput.placeholder = this.titulo;
         tituloInput.addEventListener('input', (e) => {
-            this.titulo = e.target.value;
+            this.titulo = e.target.value; // Actualiza el título de la lista
         });
 
-        // Crear el ícono para expandir/contraer usando Font Awesome
+        // Crear el ícono para expandir/contraer la lista
         const iconoExpandir = document.createElement('span');
         iconoExpandir.classList.add('icono-expandir');
-        iconoExpandir.classList.add('fas', 'fa-chevron-down');  // Ícono de Font Awesome para expandir
+        iconoExpandir.classList.add('fas', 'fa-chevron-down');  // Ícono para expandir
         iconoExpandir.style.cursor = 'pointer';
 
         // Cambiar el ícono al hacer clic
@@ -64,41 +58,38 @@ class Lista {
             this.expandida = !this.expandida;
             iconoExpandir.classList.toggle('fa-chevron-down', !this.expandida);  // Ícono de expandir
             iconoExpandir.classList.toggle('fa-chevron-up', this.expandida);     // Ícono de contraer
-            this.actualizarVisibilidadTareas();
+            this.actualizarVisibilidadTareas(); // Actualiza la visibilidad de las tareas
         });
 
-        const opcionesBtn = this.crearBotonOpciones();
+        const opcionesBtn = this.crearBotonOpciones(); // Crear el botón de opciones
         tituloContainer.appendChild(tituloInput);
-        tituloContainer.appendChild(iconoExpandir); // Añadir el ícono al contenedor del título
+        tituloContainer.appendChild(iconoExpandir); // Añadir el ícono al contenedor
         tituloContainer.appendChild(opcionesBtn);
 
         return tituloContainer;
     }
 
-
     /**
-     * Crea el botón de opciones, que abre un menú al hacer clic.
-     * El botón tendrá un ícono de tres puntos ('⋮') y al hacer clic en él, 
-     * se despliega un menú con varias opciones.
+     * Crea el botón de opciones, que despliega un menú al hacer clic.
      * 
      * @returns {HTMLButtonElement} El botón de opciones.
      */
     crearBotonOpciones() {
         const opcionesBtn = document.createElement('button');
-        opcionesBtn.textContent = '⋮';
-        const menuLista = this.crearMenuOpciones();
+        opcionesBtn.textContent = '⋮'; // Ícono de tres puntos para las opciones
+        const menuLista = this.crearMenuOpciones(); // Menú de opciones
     
         opcionesBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            toggleMenu(menuLista); // Usa la función centralizada
+            toggleMenu(menuLista); // Usar la función centralizada de toggleMenu
         });
     
-        // Cierra el menú al hacer clic fuera de él
+        // Cerrar el menú cuando se haga clic fuera de él
         document.addEventListener('click', (e) => {
             if (!this.listaDiv.contains(e.target)) {
-                menuLista.style.display = 'none';
+                menuLista.style.display = 'none'; // Ocultar el menú
                 if (menuListaAbierto === menuLista) {
-                    menuListaAbierto = null; // Limpia la referencia
+                    menuListaAbierto = null; // Limpiar la referencia del menú abierto
                 }
             }
         });
@@ -106,99 +97,94 @@ class Lista {
         opcionesBtn.appendChild(menuLista);
         return opcionesBtn;
     }
-    
 
     /**
-     * Crea el menú de opciones que se desplegará al hacer clic en el botón de opciones.
-     * Este menú tiene varias acciones, como agregar, eliminar y expandir/contraer la lista.
+     * Crea un menú con las opciones disponibles: agregar, eliminar y ordenar.
      * 
-     * @returns {HTMLDivElement} El contenedor del menú de opciones.
+     * @returns {HTMLDivElement} El menú con las opciones.
      */
-    
-
-    /**
-   * Añade una nueva tarea a la lista visualmente y en el array `this.tareas`.
-   * 
-   * @param {Tarea} tarea - La tarea que se va a añadir.
-   */
-    agregarTarea() {
-        const nuevaTarea = new Tarea();
-        const tareaElement = nuevaTarea.crearTarea();
-        tareaElement.style.display = this.expandida ? 'block' : 'none'; // Establecer visibilidad según el estado de expansión
-        nuevaTarea.element = tareaElement;
-        this.tareas.push(nuevaTarea);
-        this.listaDiv.appendChild(tareaElement);
-
-        // Asegurarse de que la visibilidad de todas las tareas se actualice
-        this.actualizarVisibilidadTareas();
-    }
-
     crearMenuOpciones() {
         const menuLista = document.createElement('div');
         menuLista.classList.add('menu-lista');
-        menuLista.style.display = 'none';
+        menuLista.style.display = 'none'; // El menú está oculto por defecto
     
-        // Crear la opción "Eliminar" con ícono de tacho de basura
+        // Crear las opciones del menú
         const opcionEliminar = this.crearOpcionEliminar(menuLista);
-    
-        // Crear la opción "Agregar" con ícono de más
         const opcionAgregar = this.crearOpcionAgregar(menuLista);
         const opcionOrdenar = this.crearOpcionOrdenar(menuLista);
     
-        menuLista.append(opcionEliminar, opcionAgregar,opcionOrdenar);
+        menuLista.append(opcionEliminar, opcionAgregar, opcionOrdenar);
         return menuLista;
     }
     
+    /**
+     * Crea la opción para agregar una tarea en el menú.
+     * 
+     * @param {HTMLDivElement} menuLista - El contenedor del menú.
+     * @returns {HTMLDivElement} El ítem de la opción "Agregar".
+     */
     crearOpcionAgregar(menuLista) {
         const opcionAgregar = document.createElement('div');
-    
-        // Crear el ícono de agregar (Font Awesome)
         const iconoAgregar = document.createElement('i');
-        iconoAgregar.classList.add('fas', 'fa-plus'); // Ícono de Font Awesome para agregar
+        iconoAgregar.classList.add('fas', 'fa-plus'); // Ícono de agregar
         opcionAgregar.appendChild(iconoAgregar);
     
+        // Acción al hacer clic: agregar una nueva tarea
         opcionAgregar.addEventListener('click', () => {
             const nuevaTarea = new Tarea();
             this.agregarTarea(nuevaTarea);
-            menuLista.style.display = 'none';
+            menuLista.style.display = 'none'; // Cerrar el menú después de agregar
         });
     
         return opcionAgregar;
     }
     
+    /**
+     * Crea la opción para eliminar la lista en el menú.
+     * 
+     * @returns {HTMLDivElement} El ítem de la opción "Eliminar".
+     */
     crearOpcionEliminar() {
         const opcionEliminar = document.createElement('div');
-    
-        // Crear el ícono de eliminar (Font Awesome)
         const iconoEliminar = document.createElement('i');
-        iconoEliminar.classList.add('fas', 'fa-trash'); // Ícono de Font Awesome para eliminar
+        iconoEliminar.classList.add('fas', 'fa-trash'); // Ícono de eliminar
         opcionEliminar.appendChild(iconoEliminar);
     
+        // Acción al hacer clic: eliminar la lista
         opcionEliminar.addEventListener('click', () => {
-            this.listaDiv.remove();
+            this.listaDiv.remove(); // Eliminar el contenedor de la lista
         });
     
         return opcionEliminar;
     }
+
+    /**
+     * Crea la opción para ordenar las tareas en el menú.
+     * 
+     * @returns {HTMLDivElement} El ítem de la opción "Ordenar".
+     */
     crearOpcionOrdenar() {
         const opcionOrdenar = document.createElement('div');
-    
-        // Crear el ícono de ordenar (Font Awesome)
         const iconoOrdenar = document.createElement('i');
-        iconoOrdenar.classList.add('fas', 'fa-sort'); // Ícono de Font Awesome para ordenar
+        iconoOrdenar.classList.add('fas', 'fa-sort'); // Ícono de ordenar
         opcionOrdenar.appendChild(iconoOrdenar);
     
+        // Acción al hacer clic: ordenar las tareas
         opcionOrdenar.addEventListener('click', () => {
-            this.ordenarTareas();
+            this.ordenarTareas(); // Ordenar tareas
         });
     
         return opcionOrdenar;
     }
+
+    /**
+     * Ordena las tareas de la lista por su estado de completado.
+     * Las tareas completadas se colocan al final.
+     */
     ordenarTareas() {
-        // Ordenar las tareas según si están completadas o no
-        this.tareas.sort((a, b) => a.completada - b.completada);
+        this.tareas.sort((a, b) => a.completada - b.completada); // Ordenar por estado de completado
     
-        // Limpiar el contenedor de tareas en el DOM
+        // Limpiar las tareas actuales en el DOM
         this.tareas.forEach((tarea) => {
             if (tarea.element && tarea.element.parentElement === this.listaDiv) {
                 this.listaDiv.removeChild(tarea.element);
@@ -207,17 +193,17 @@ class Lista {
     
         // Reagregar las tareas en el orden actualizado
         this.tareas.forEach((tarea) => {
-            // Asegurarse de que se aplique el tachado si la tarea está completada
             if (tarea.completada) {
-                tarea.element.querySelector('textarea').classList.add('tachado');
+                tarea.element.querySelector('textarea').classList.add('tachado'); // Aplicar el estilo de tachado
             }
             this.listaDiv.appendChild(tarea.element);
         });
     }
-    
-    
+
+    /**
+     * Actualiza la visibilidad de las tareas dependiendo del estado de expansión de la lista.
+     */
     actualizarVisibilidadTareas() {
-        // Iterar sobre todas las tareas y actualizar su visibilidad
         this.tareas.forEach((tarea) => {
             if (tarea.element && tarea.element.parentElement === this.listaDiv) {
                 tarea.element.style.display = this.expandida ? 'block' : 'none';
@@ -225,15 +211,21 @@ class Lista {
         });
     }
 }
+
+/**
+ * Alterna la visibilidad de un menú, cerrando cualquier otro menú que esté abierto.
+ * 
+ * @param {HTMLDivElement} menu - El menú que se debe mostrar u ocultar.
+ */
 function toggleMenu(menu) {
     if (menuListaAbierto && menuListaAbierto !== menu) {
-        menuListaAbierto.style.display = 'none'; // Cierra cualquier otro menú abierto
+        menuListaAbierto.style.display = 'none'; // Cerrar el menú previamente abierto
     }
 
-    // Alterna la visibilidad del menú actual
+    // Alternar visibilidad del menú actual
     const isMenuVisible = menu.style.display === 'block';
     menu.style.display = isMenuVisible ? 'none' : 'block';
 
-    // Actualiza la referencia del menú abierto
+    // Actualizar la referencia del menú abierto
     menuListaAbierto = isMenuVisible ? null : menu;
 }
