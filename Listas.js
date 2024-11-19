@@ -199,7 +199,23 @@ class Lista {
             this.listaDiv.appendChild(tarea.element);
         });
     }
+   
+    /**
+   * Añade una nueva tarea a la lista visualmente y en el array `this.tareas`.
+   * 
+   * @param {Tarea} tarea - La tarea que se va a añadir.
+   */
+    agregarTarea() {
+        const nuevaTarea = new Tarea();
+        const tareaElement = nuevaTarea.crearTarea();
+        tareaElement.style.display = this.expandida ? 'block' : 'none'; // Establecer visibilidad según el estado de expansión
+        nuevaTarea.element = tareaElement;
+        this.tareas.push(nuevaTarea);
+        this.listaDiv.appendChild(tareaElement);
 
+        // Asegurarse de que la visibilidad de todas las tareas se actualice
+        this.actualizarVisibilidadTareas();
+    }
     /**
      * Actualiza la visibilidad de las tareas dependiendo del estado de expansión de la lista.
      */
