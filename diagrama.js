@@ -13,6 +13,7 @@ class Diagrama {
         this.isMouseDown = false;
         this.init();
     }
+
     /**
      * Obtiene el título del mapa conceptual.
      * @returns {Object} Objeto que representa el título.
@@ -38,21 +39,18 @@ class Diagrama {
         this.configurarMenu();
         this.configurarColor();
         this.seleccionarCuadroActivo();
-
     }
-        /**
-         * configura los eventos de click respecto a cuadrado, flecha 
-         */
+
+    /**
+     * configura los eventos de click respecto a cuadro, flecha 
+     */
     configurarEventos() {
-        this.guardarBtn.addEventListener('click', () => {
-            this.guardarEstado();
-            alert('Estado guardado.');
-        });
         this.seleccionarCuadroActivo();
         document.getElementById('insertar-cuadro').addEventListener('click', () => this.crearCuadro());
         document.getElementById('insertar-flecha').addEventListener('click', () => this.crearFlecha());
         this.configurarEventoEliminar();
     }
+
     /**
     * configura el menu de Insertar Editar y Color
     */
@@ -63,58 +61,54 @@ class Diagrama {
     }
 
     /**
- * Configura el comportamiento de un menú en el diagrama.
- * Permite mostrar y ocultar el menú al hacer clic sobre un botón,y cerrar el menú si se hace clic fuera de él o del botón que lo activa.
- * @param {HTMLElement} button - El botón que activa la visibilidad del menú.
- * @param {HTMLElement} menu - El menú que se muestra o se oculta.
- */
-configurarMenuDiagrama(button, menu) {
-    // Al hacer clic en el botón, alternamos la visibilidad del menú
-    button.addEventListener('click', (e) => {
-        e.stopPropagation();  // Previene que el evento se propague al documento
-        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-    });
+     * Configura el comportamiento de un menú en el diagrama.
+     * Permite mostrar y ocultar el menú al hacer clic sobre un botón, y cerrar el menú si se hace clic fuera de él o del botón que lo activa.
+     * @param {HTMLElement} button - El botón que activa la visibilidad del menú.
+     * @param {HTMLElement} menu - El menú que se muestra o se oculta.
+     */
+    configurarMenuDiagrama(button, menu) {
+        button.addEventListener('click', (e) => {
+            e.stopPropagation();  // Previene que el evento se propague al documento
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        });
 
-    document.addEventListener('click', (e) => {
-        // Verifica si el clic no ocurrió dentro del menú ni en el botón
-        if (!menu.contains(e.target) && e.target !== button) {
-            menu.style.display = 'none';
-        }
-    });
-}
+        document.addEventListener('click', (e) => {
+            if (!menu.contains(e.target) && e.target !== button) {
+                menu.style.display = 'none';
+            }
+        });
+    }
 
     /**
-    * configura el evento eliminar pata cuando el elemento pase sobre el sea eliminado
-    */
+     * Configura el evento eliminar para cuando el elemento pase sobre el botón de eliminación.
+     */
     configurarEventoEliminar() {
-        // Detecta cuando el mouse está presionado
         document.addEventListener('mousedown', () => {
             this.isMouseDown = true;
         });
 
-        // Detecta cuando el mouse se libera
         document.addEventListener('mouseup', () => {
             this.isMouseDown = false;
         });
 
-        // Detecta el movimiento del mouse para eliminar elementos
         this.eliminarBtn.addEventListener('mousemove', (e) => {
-            if (this.isMouseDown && this.cuadroActivo) {  // Solo eliminar si el clic está presionado
+            if (this.isMouseDown && this.cuadroActivo) {
                 const rectEliminarBtn = this.eliminarBtn.getBoundingClientRect();
                 const rectCuadroActivo = this.cuadroActivo.getBoundingClientRect();
 
                 if (this.ElementoSobreBotonEliminar(rectCuadroActivo, rectEliminarBtn)) {
-                    this.cuadroActivo.remove();  // Elimina el cuadro activo
-                    this.cuadroActivo = null;  // Resetea el cuadro activo
+                    this.cuadroActivo.remove();
+                    this.cuadroActivo = null;
                 }
             }
         });
     }
+
     /**
-     * Evalua si el elemento entra en el rango permitido para eliminar
-     * @param {Object} rectElemento Elemento que va ser eliminado
-     * @param {HTMLButtonElement} rectEliminarBtn Boton para eliminar
-     * @returns true si esta sobre el boton, sino False
+     * Evalúa si el elemento está sobre el botón de eliminar.
+     * @param {Object} rectElemento - Elemento que va a ser eliminado.
+     * @param {HTMLButtonElement} rectEliminarBtn - Botón de eliminación.
+     * @returns true si está sobre el botón, sino False.
      */
     ElementoSobreBotonEliminar(rectElemento, rectEliminarBtn) {
         return rectElemento.bottom > rectEliminarBtn.top &&
@@ -122,22 +116,25 @@ configurarMenuDiagrama(button, menu) {
             rectElemento.right > rectEliminarBtn.left &&
             rectElemento.left < rectEliminarBtn.right;
     }
+
     /**
-   * Crea el cuadro usando Clase Cuadro
-   */
+     * Crea un cuadro usando la clase Cuadro.
+     */
     crearCuadro() {
         const nuevoCuadro = new Cuadro();
         this.cuadroActivo = nuevoCuadro.element;
     }
+
     /**
-   * Crea la flecha usando Clase Flecha
-   */
+     * Crea una flecha usando la clase Flecha.
+     */
     crearFlecha() {
         new Flecha();
     }
+
     /**
-   * Configura el color del cuadro seleccionado
-   */
+     * Configura el color del cuadro seleccionado.
+     */
     configurarColor() {
         document.querySelectorAll('.color-option').forEach(button => {
             button.addEventListener('click', (e) => {
@@ -148,9 +145,10 @@ configurarMenuDiagrama(button, menu) {
             });
         });
     }
+
     /**
-   * Aca selecciona el cuadro que sera modificado el color
-   */
+     * Selecciona el cuadro activo que será modificado en el color.
+     */
     seleccionarCuadroActivo() {
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('cuadro')) {
@@ -158,15 +156,4 @@ configurarMenuDiagrama(button, menu) {
             }
         });
     }
-    /**
-   * guarda el estado de todos los elementos
-   */
-    guardarEstado() {
-        console.log("Estado guardado");
-    }
-  
-  
-
 }
-
-
