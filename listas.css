@@ -546,7 +546,7 @@ button:hover {
     /* Estilo para los botones dentro del contenedor */
     .buttons button {
         width: 100%;
-        padding: 5px 15px;
+        padding: 5px 5px;
         /* Reduce el tamaño del botón */
         font-size: 15px;
         /* Reduce el tamaño de la fuente */
@@ -555,7 +555,7 @@ button:hover {
 
     #btn-guardar {
         background-color: rgb(233, 84, 84);
-        margin-top: 38px;
+        margin-top: 55px;
         width: auto;
         padding: 6px 10px;
         /* Ajusta el tamaño del botón en pantallas pequeñas */
@@ -578,7 +578,7 @@ button:hover {
         position: absolute;
         width: 45px;
         top: 0px;
-        left: 40px;
+        right: -50px;
     }
 
    
