@@ -24,6 +24,7 @@ class InteraccionesPagina {
     const enlaceApariencia = document.getElementById('toggleAppearance');
     const logo = document.getElementById('logo');
     const menuIcon = document.getElementById('menu-icon');
+    const calendarContainer = document.getElementById('calendar-container');
 
     enlaceApariencia.addEventListener('click', (evento) => {
       evento.preventDefault();
@@ -40,6 +41,17 @@ class InteraccionesPagina {
 
       localStorage.setItem('theme', esTemaOscuro ? 'dark' : 'light');
     });
+      // Cambiar el tema del calendario
+      if (calendarContainer.classList.contains('initialized')) {
+        // Cambiar clase del calendario si ya está inicializado
+        if (esTemaOscuro) {
+          calendarContainer.classList.add('dark-theme');
+          calendarContainer.classList.remove('light-theme');
+        } else {
+          calendarContainer.classList.add('light-theme');
+          calendarContainer.classList.remove('dark-theme');
+        }
+      }
   }
 
   /**
@@ -50,6 +62,7 @@ class InteraccionesPagina {
     const enlaceApariencia = document.getElementById('toggleAppearance');
     const logo = document.getElementById('logo');
     const menuIcon = document.getElementById('menu-icon');
+    const calendarContainer = document.getElementById('calendar-container');
 
     if (temaGuardado === 'dark') {
       document.body.classList.add('dark-theme');
@@ -60,7 +73,11 @@ class InteraccionesPagina {
       enlaceApariencia.textContent = 'Tema Oscuro';
       logo.src = 'logo terminado.png';
       menuIcon.setAttribute('fill', 'black');
+        // Cambiar el tema del calendario
+        calendarContainer.classList.add('light-theme');
+        calendarContainer.classList.remove('dark-theme');
     }
+    
   }
 }
 document.addEventListener('DOMContentLoaded', () => {

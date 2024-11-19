@@ -60,6 +60,8 @@ main {
 h1 {
     text-align: center;
     margin-bottom: 10px;
+    margin-top: 6px;
+
 }
 
 .container {
@@ -201,7 +203,7 @@ h1 {
 
 .menu-lista {
     position: absolute;
- 
+
     width: 50px;
     /* Aumenta el ancho del menú */
     padding: 5px;
@@ -390,6 +392,88 @@ button:hover {
     color: #f1f1f1;
 }
 
+#calendar-container {
+    display: none;
+    /* Ocultar por defecto */
+    position: fixed;
+    /* Posición fija sobre todos los elementos */
+    top: 20px;
+    /* Puedes ajustar la distancia desde la parte superior */
+    left: 50%;
+    /* Centrar en el medio horizontalmente */
+    transform: translateX(-50%);
+    /* Asegura que se centre correctamente */
+    z-index: 9999;
+    /* Asegura que el calendario se muestre sobre otros elementos */
+    background-color: white;
+    /* Fondo blanco para el calendario */
+    padding: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    /* Agrega sombra para destacarlo */
+    width: 60%;
+    /* Ajusta el ancho del calendario (puedes cambiar el valor) */
+    max-width: 600px;
+    /* Limita el ancho máximo */
+    border-radius: 10px;
+    /* Bordes redondeados */
+    font-size: 14px;
+    /* Reduce el tamaño de la fuente */
+}
+
+/* Si deseas que el calendario también sea más pequeño en altura */
+.fc-view-container {
+    height: 450px;
+    /* Ajusta la altura del calendario */
+}
+
+
+#calendar-container table {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+/* Estilos del calendario en el tema claro */
+.light-theme #calendar-container {
+    background-color: #fff;
+    /* Fondo blanco */
+    color: #000;
+    /* Texto negro */
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.light-theme .fc-toolbar {
+    background-color: #f1f1f1;
+    /* Barra de herramientas clara */
+    color: #000;
+}
+
+.light-theme .fc-button {
+    background-color: #ddd;
+    /* Botones claros */
+    color: #000;
+    border: none;
+}
+
+.light-theme .fc-button:hover {
+    background-color: #ccc;
+    /* Hover de botones */
+}
+
+.light-theme .fc-day {
+    background-color: #fff;
+    /* Fondo blanco para los días */
+    color: #000;
+}
+
+.light-theme .fc-today {
+    background-color: #e0e0e0;
+    /* Resaltar el día actual en claro */
+}
+
+
+
 @media (max-width: 660px) {
 
     main {
@@ -496,6 +580,57 @@ button:hover {
         top: 0px;
         left: 40px;
     }
+
+   
+        /* Ajuste del contenedor principal del calendario */
+        #calendar-container {
+            width: 100% !important; /* Asegura que el calendario ocupe todo el ancho disponible */
+            max-width: 100% !important; /* Elimina cualquier límite de ancho */
+            height: auto !important; /* Ajusta la altura según el contenido */
+            overflow: visible !important; /* Permite que el contenido se expanda sin barra de desplazamiento */
+            margin: 0 auto !important; /* Centra el contenedor */
+        }
+    
+        /* Aumentar el tamaño de la vista del calendario */
+        .fc-view {
+            width: 100% !important; /* Asegura que la vista ocupe todo el ancho del contenedor */
+        }
+    
+        /* Ajuste de la vista mensual (fc-month-view) */
+        .fc-month-view {
+            font-size: 14px !important; /* Aumentar el tamaño de la fuente en la vista mensual */
+            padding: 10px !important; /* Aumenta el padding para que se vea más espacioso */
+        }
+    
+        /* Ajuste de las celdas de los días */
+        .fc-daygrid-day {
+            font-size: 14px !important; /* Aumenta el tamaño de los días */
+            padding: 10px !important; /* Aumenta el espacio alrededor de los días */
+        }
+    
+        .fc-daygrid-day-number {
+            font-size: 16px !important; /* Aumenta el tamaño de los números de los días */
+        }
+    
+        /* Aumentar el tamaño de los eventos */
+        .fc-event {
+            font-size: 14px !important; /* Aumentar el tamaño de los eventos */
+            padding: 6px !important; /* Aumenta el espacio alrededor de los eventos */
+        }
+    
+        /* Ajuste de los botones de navegación */
+        .fc-prev-button, .fc-next-button, .fc-today-button {
+            font-size: 14px !important; /* Aumentar el tamaño de los botones de navegación */
+            padding: 10px !important; /* Aumenta el tamaño de los botones */
+        }
+    
+        /* Aumento del tamaño de los botones de vista (Mes, Semana, Día) */
+        .fc-button-group {
+            font-size: 14px !important; /* Aumenta el tamaño de los botones de vista */
+        }
+    
+    
+
 }
 
 /* Estilos específicos para el tema oscuro */
@@ -604,4 +739,45 @@ body.dark-theme {
 
 .dark-theme .linea-guia {
     background-color: #007bff;
+}
+
+/* Estilos del calendario en el tema oscuro */
+.dark-theme #calendar-container {
+    background-color: #2c2f36;
+    /* Fondo oscuro */
+    color: #fff;
+    /* Texto blanco */
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.dark-theme .fc-toolbar {
+    background-color: #3a3f47;
+    /* Barra de herramientas oscura */
+    color: #fff;
+}
+
+.dark-theme .fc-button {
+    background-color: #89b5f1;
+    /* Botones oscuros */
+    color: #0a17d6;
+    border: none;
+}
+
+.dark-theme .fc-button:hover {
+    background-color: #555b61;
+    /* Hover de botones */
+}
+
+.dark-theme .fc-day {
+    background-color: #2c2f36;
+    /* Fondo oscuro para los días */
+    color: #fff;
+    /* Texto blanco para los días */
+}
+
+.dark-theme .fc-today {
+    background-color: #3487da;
+    /* Resaltar el día actual en oscuro */
+    color: #0a17d6;
 }
