@@ -13,7 +13,6 @@ class Diagrama {
         this.isMouseDown = false;
         this.init();
     }
-
     /**
      * Obtiene el título del mapa conceptual.
      * @returns {Object} Objeto que representa el título.
