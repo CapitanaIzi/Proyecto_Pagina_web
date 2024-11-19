@@ -1,3 +1,5 @@
+let menuListaAbierto = null;
+
 class Lista {
     constructor(titulo = "Título") {
         this.titulo = titulo;
@@ -85,17 +87,26 @@ class Lista {
         const opcionesBtn = document.createElement('button');
         opcionesBtn.textContent = '⋮';
         const menuLista = this.crearMenuOpciones();
+    
         opcionesBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            menuLista.style.display = menuLista.style.display === 'none' ? 'block' : 'none';
+            toggleMenu(menuLista); // Usa la función centralizada
         });
-        document.addEventListener('click', () => {
-            menuLista.style.display = 'none';
+    
+        // Cierra el menú al hacer clic fuera de él
+        document.addEventListener('click', (e) => {
+            if (!this.listaDiv.contains(e.target)) {
+                menuLista.style.display = 'none';
+                if (menuListaAbierto === menuLista) {
+                    menuListaAbierto = null; // Limpia la referencia
+                }
+            }
         });
-
+    
         opcionesBtn.appendChild(menuLista);
         return opcionesBtn;
     }
+    
 
     /**
      * Crea el menú de opciones que se desplegará al hacer clic en el botón de opciones.
@@ -213,4 +224,16 @@ class Lista {
             }
         });
     }
+}
+function toggleMenu(menu) {
+    if (menuListaAbierto && menuListaAbierto !== menu) {
+        menuListaAbierto.style.display = 'none'; // Cierra cualquier otro menú abierto
+    }
+
+    // Alterna la visibilidad del menú actual
+    const isMenuVisible = menu.style.display === 'block';
+    menu.style.display = isMenuVisible ? 'none' : 'block';
+
+    // Actualiza la referencia del menú abierto
+    menuListaAbierto = isMenuVisible ? null : menu;
 }

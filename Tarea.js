@@ -1,3 +1,4 @@
+let menuAbierto = null;
 class Tarea {
     constructor(nombre = "Tarea") {
         this.nombre = nombre;
@@ -92,20 +93,26 @@ class Tarea {
         const opcionesBtn = document.createElement('button');
         opcionesBtn.textContent = '⋮';
         const menuTarea = this.crearMenuOpciones(tareaDiv, listaDiv);
-
+    
         opcionesBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            toggleMenu(menuTarea);
+            toggleMenu(menuTarea); // Centraliza la lógica en `toggleMenu`
         });
-
+    
+        // Lógica para cerrar el menú al hacer clic fuera
         document.addEventListener('click', (e) => {
             if (!tareaDiv.contains(e.target)) {
                 menuTarea.style.display = 'none';
+                if (menuAbierto === menuTarea) {
+                    menuAbierto = null; // Limpiar la referencia si se cerró el menú
+                }
             }
         });
-
+    
         return { opcionesBtn, menuTarea };
     }
+    
+    
 
     /**
      * Crea el menú de opciones (Eliminar, Destacar, Duplicar) de la tarea.
@@ -190,8 +197,19 @@ class Tarea {
  * @param {HTMLElement} menu - El menú que se quiere mostrar u ocultar. Este debe ser un elemento HTML con una propiedad `style.display`.
  */
 function toggleMenu(menu) {
-    menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+    // Si ya hay un menú abierto y no es el actual, ciérralo
+    if (menuAbierto && menuAbierto !== menu) {
+        menuAbierto.style.display = 'none'; // Cerrar el menú previamente abierto
+    }
+
+    // Alternar el estado del menú actual
+    const isMenuVisible = menu.style.display === 'block';
+    menu.style.display = isMenuVisible ? 'none' : 'block';
+
+    // Actualizar el menú abierto: si se cerró el actual, resetear a null
+    menuAbierto = isMenuVisible ? null : menu;
 }
+
 
 /**
  * Obtiene la instancia de la clase `Tarea` correspondiente al ID de un elemento del DOM.
