@@ -14,11 +14,11 @@ class MapaConceptual {
         this.elementos.push(titulo);
 
         this.agregarElementosPorClase('cuadro', (element) => {
-            const cuadro = new Cuadro(element.innerText, element.style.left, element.style.top, element.style.backgroundColor);
+            const cuadro = new Cuadro (element.innerText, element.style.left, element.style.top, element.style.backgroundColor);
             this.elementos.push(cuadro.obtenerDatos());
         });
         this.agregarElementosPorClase('flecha', (element) => {
-            const flecha = new Flecha(element.style.width, element.style.left, element.style.top, element.style.transform);
+            const flecha = new Flecha (element.style.width, element.style.left, element.style.top, element.style.transform);
             this.elementos.push(flecha.obtenerDatos());
         });
         localStorage.setItem('mapaConceptual', JSON.stringify(this.elementos));
