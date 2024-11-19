@@ -157,3 +157,8 @@ class Diagrama {
         });
     }
 }
+
+// Inicia el diagrama directamente sin la necesidad de la clase MapaConceptual.
+document.addEventListener('DOMContentLoaded', () => {
+    new Diagrama();
+});
