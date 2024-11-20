@@ -104,10 +104,26 @@ class ListaSemanal {
     agregarDiasDeLaSemana(listaSemanalContainer) {
         const diasDeLaSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
         diasDeLaSemana.forEach(dia => {
+            // Crear el contenedor de la lista
             const lista = new Lista(dia);
-            listaSemanalContainer.appendChild(lista.crearListaElement());
+            const listaElement = lista.crearListaElement();
+    
+            // Buscar el input dentro de la lista
+            const inputTitulo = listaElement.querySelector('.titulo'); // Suponiendo que el título tiene la clase 'titulo'
+            if (inputTitulo) {
+                // Establecer el texto del día dentro del input y hacerlo no editable
+                inputTitulo.value = dia;
+                inputTitulo.setAttribute('readonly', 'true'); // Hace el input no editable
+            }
+    
+            // Añadir la lista al contenedor de la lista semanal
+            listaSemanalContainer.appendChild(listaElement);
             this.semanas.push(lista); // Agregar a la lista de semanas
         });
     }
+    
+    
+    
+    
 
 }

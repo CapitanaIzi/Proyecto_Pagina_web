@@ -16,9 +16,7 @@ body {
 main {
     margin-right: 10px;
     width: 100%;
-    /* Asegura que el main ocupe el 100% del ancho */
     height: 100%;
-    /* Asegura que el main ocupe el 100% de la altura */
 }
 
 #btn-guardar {
@@ -29,18 +27,15 @@ main {
     font-size: 16px;
     cursor: pointer;
     position: absolute;
-    /* Cambiado a relative */
     margin-top: 10px;
     width: auto;
     /* Se adapta al contenido */
     border-radius: 5px;
     display: inline-block;
-    /* Hace que el botón se comporte como un bloque, pero no ocupe todo el ancho */
 }
 
 #btn-guardar:hover {
     background-color: rgb(202, 20, 20);
-    /* Cambia el color al pasar el mouse */
 }
 
 .buttons {
@@ -54,25 +49,21 @@ main {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-
 }
 
 h1 {
     text-align: center;
     margin-bottom: 10px;
     margin-top: 6px;
-
 }
 
 .container {
-
     margin: 0 auto;
     padding: 5px;
     background-color: white;
     color: #333;
     width: 100%;
     box-sizing: border-box;
-    /* Incluye el padding dentro del tamaño total */
     display: flex;
     flex-direction: column;
 }
@@ -88,9 +79,7 @@ h1 {
     margin-bottom: 10px;
     position: relative;
     background-color: none;
-    /* Fondo claro */
     color: #000000;
-    /* Texto oscuro */
     padding: 5px;
     margin: 0px;
     border-radius: 5px;
@@ -116,7 +105,6 @@ h1 {
     margin-bottom: 2px;
     padding: 10px;
     border: 1px solid #ccc;
-    /* Agregamos un borde opcional */
     border-radius: 5px;
 }
 
@@ -133,7 +121,6 @@ h1 {
     font-size: 20px;
     cursor: pointer;
     color: #f44336;
-    /* Rojo para indicar eliminación */
     margin-left: 15px;
     /* Espacio entre el título y el icono */
 }
@@ -144,7 +131,6 @@ h1 {
     background-color: #e1eaf5;
     color: #0c0c0c;
     border-radius: 4px;
-
 }
 
 .non-editable-title {
@@ -166,9 +152,13 @@ h1 {
 
 .editable-title::placeholder {
     color: rgb(90, 88, 88);
-    /* Color del placeholder */
     opacity: 1;
-    /* Asegura que el color tenga la opacidad completa */
+}
+.titulo {
+    color: black;  /* Cambiar color de texto a negro */
+    background-color: #f0f0f0;  /* Color de fondo claro para el input */
+    border: 1px solid #ccc;  /* Añadir un borde para hacerlo visible */
+    padding: 5px;  /* Añadir algo de espacio dentro del input */
 }
 
 
@@ -191,7 +181,6 @@ h1 {
     background-color: #f9f9f9;
     color: #333;
     border: 1px solid #ccc;
-
     margin: 10px;
     padding: 10px;
     min-height: 100px;
@@ -203,21 +192,14 @@ h1 {
 
 .menu-lista {
     position: absolute;
-
     width: 50px;
-    /* Aumenta el ancho del menú */
     padding: 5px;
-    /* Añadir padding para un contenedor más grande */
     top: auto;
-    /* Ajusta la distancia desde la parte superior */
     right: 10px;
 }
 
 .menu-lista div:hover {
     background-color: #5fadee;
-    /* Color más oscuro al pasar el cursor */
-
-    /* Aumenta ligeramente el tamaño */
     color: #f1f1f1;
 }
 
@@ -225,7 +207,6 @@ h1 {
     margin-right: 8px;
     /* Espacio a la derecha del ícono */
     font-size: 17px;
-    /* Ajusta el tamaño del ícono */
 }
 
 button {
@@ -239,7 +220,6 @@ button {
 
 button:hover {
     background-color: #5fadee;
-    /* Color más oscuro al pasar el cursor */
     color: #f1f1f1;
 }
 
@@ -291,24 +271,15 @@ button:hover {
     transition: background-color 0.3s, border-color 0.3s;
 }
 
-.custom-checkbox input:checked+span {
-    background-color: #4caf50;
-    /* Color al marcar */
-
-}
-
 /* Estilo cuando el checkbox está marcado */
 .custom-checkbox input[type="checkbox"]:checked+span {
     background-color: #6eb1fd;
-    /* Cambia aquí el color de fondo */
     border-color: #0c0c0c;
-    /* Cambia aquí el color del borde */
 }
 
 /* Estilo opcional para agregar un símbolo o icono al marcar */
 .custom-checkbox input[type="checkbox"]:checked+span::after {
     content: '✔';
-    /* Caracter que aparece */
     color: white;
     font-size: 14px;
     display: flex;
@@ -328,9 +299,7 @@ button:hover {
 
 .tarea textarea::placeholder {
     color: #6e6c6c;
-    /* Cambia este color al que prefieras para el placeholder */
     opacity: 1;
-    /* Ajusta la opacidad si quieres que el texto sea más visible */
 }
 
 .tarea textarea.tachado {
@@ -351,7 +320,6 @@ button:hover {
 
 .destacada {
     background-color: #4cd3c1;
-    /* Color de fondo para tareas destacadas */
 }
 
 .menu-lista,
@@ -368,7 +336,6 @@ button:hover {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     width: 80px;
-    /* Aumenta el ancho del menú */
     padding: 8px;
     /* Añadir padding para un contenedor más grande */
     top: auto;
@@ -378,15 +345,12 @@ button:hover {
 
 .menuTarea div {
     padding: 5px;
-    /* Reduce el padding de cada opción */
     cursor: pointer;
     font-size: 12px;
-    /* Tamaño de letra más pequeño */
 }
 
 .menuTarea div:hover {
     background-color: #5fadee;
-    /* Color más oscuro al pasar el cursor */
     transform: scale(1.1);
     /* Aumenta ligeramente el tamaño */
     color: #f1f1f1;
@@ -394,19 +358,13 @@ button:hover {
 
 #calendar-container {
     display: none;
-    /* Ocultar por defecto */
     position: fixed;
-    /* Posición fija sobre todos los elementos */
     top: 20px;
-    /* Puedes ajustar la distancia desde la parte superior */
     left: 50%;
-    /* Centrar en el medio horizontalmente */
     transform: translateX(-50%);
     /* Asegura que se centre correctamente */
     z-index: 9999;
-    /* Asegura que el calendario se muestre sobre otros elementos */
     background-color: white;
-    /* Fondo blanco para el calendario */
     padding: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     /* Agrega sombra para destacarlo */
@@ -473,311 +431,3 @@ button:hover {
 }
 
 
-
-@media (max-width: 660px) {
-
-    main {
-        width: 100%;
-        /* El main ocupa el 100% del ancho en pantallas pequeñas */
-        height: auto;
-        /* Ajusta la altura del main automáticamente */
-        margin-right: 20px;
-        padding: 0 5px;
-        /* Ajusta el padding en pantallas pequeñas */
-    }
-
-    /* Ajusta otros elementos de la página si es necesario */
-    .contenedor {
-        width: 90%;
-        /* El contenedor ocupa el 100% del ancho en pantallas pequeñas */
-        padding: 10px;
-        /* Ajusta el padding del contenedor */
-        box-sizing: border-box;
-        /* Asegura que el padding no afecte el tamaño */
-    }
-
-    .buttons {
-        width: 70%;
-        /* Los botones ocupan el 50% del ancho del contenedor (ajústalo según necesites) */
-        max-width: 250px;
-        /* Limita el tamaño máximo de los botones */
-        margin: 0 auto;
-        /* Centra los botones horizontalmente */
-        display: flex;
-
-        /* Asegura que el padding no afecte el tamaño */
-        /
-    }
-
-    /* Estilo para los botones dentro del contenedor */
-    .buttons button {
-        font-size: 10px;
-        /* Cambia el tamaño de la fuente si es necesario */
-        padding: 4px 8px;
-        /* Ajusta el padding para hacer los botones más bajos */
-        width: auto;
-        line-height: 1.2;
-        box-sizing: border-box;
-        /* Asegura que el padding no afecte el tamaño del botón */
-    }
-}
-
-@media (max-width: 387px) {
-
-    /* hasta 387px */
-    h1 {
-        font-size: 30px;
-        margin-bottom: 0;
-        margin-top: 3px;
-        /* Ajusta la distancia desde la parte superior */
-
-
-    }
-
-    .buttons {
-        max-width: 850px;
-        margin: 20px auto;
-        display: flex;
-        margin-top: 0px;
-        /* Ajusta la distancia desde la parte superior */
-        margin-bottom: 50;
-    }
-
-    /* Estilo para los botones dentro del contenedor */
-    .buttons button {
-        width: 100%;
-        padding: 5px 5px;
-        /* Reduce el tamaño del botón */
-        font-size: 15px;
-        /* Reduce el tamaño de la fuente */
-        margin: 4px 0;
-    }
-
-    #btn-guardar {
-        background-color: rgb(233, 84, 84);
-        margin-top: 55px;
-        width: auto;
-        padding: 6px 10px;
-        /* Ajusta el tamaño del botón en pantallas pequeñas */
-        font-size: 12px;
-        left: 12px;
-
-    }
-
-
-
-
-    input[type="text" i] {
-        padding-block: 1px;
-        padding-inline: 2px;
-        position: relative;
-        font-size: 14px;
-    }
-
-    .menu-lista {
-        position: absolute;
-        width: 45px;
-        top: 0px;
-        right: -50px;
-    }
-
-   
-        /* Ajuste del contenedor principal del calendario */
-        #calendar-container {
-            width: 100% !important; /* Asegura que el calendario ocupe todo el ancho disponible */
-            max-width: 100% !important; /* Elimina cualquier límite de ancho */
-            height: auto !important; /* Ajusta la altura según el contenido */
-            overflow: visible !important; /* Permite que el contenido se expanda sin barra de desplazamiento */
-            margin: 0 auto !important; /* Centra el contenedor */
-        }
-    
-        /* Aumentar el tamaño de la vista del calendario */
-        .fc-view {
-            width: 100% !important; /* Asegura que la vista ocupe todo el ancho del contenedor */
-        }
-    
-        /* Ajuste de la vista mensual (fc-month-view) */
-        .fc-month-view {
-            font-size: 14px !important; /* Aumentar el tamaño de la fuente en la vista mensual */
-            padding: 10px !important; /* Aumenta el padding para que se vea más espacioso */
-        }
-    
-        /* Ajuste de las celdas de los días */
-        .fc-daygrid-day {
-            font-size: 14px !important; /* Aumenta el tamaño de los días */
-            padding: 10px !important; /* Aumenta el espacio alrededor de los días */
-        }
-    
-        .fc-daygrid-day-number {
-            font-size: 16px !important; /* Aumenta el tamaño de los números de los días */
-        }
-    
-        /* Aumentar el tamaño de los eventos */
-        .fc-event {
-            font-size: 14px !important; /* Aumentar el tamaño de los eventos */
-            padding: 6px !important; /* Aumenta el espacio alrededor de los eventos */
-        }
-    
-        /* Ajuste de los botones de navegación */
-        .fc-prev-button, .fc-next-button, .fc-today-button {
-            font-size: 14px !important; /* Aumentar el tamaño de los botones de navegación */
-            padding: 10px !important; /* Aumenta el tamaño de los botones */
-        }
-    
-        /* Aumento del tamaño de los botones de vista (Mes, Semana, Día) */
-        .fc-button-group {
-            font-size: 14px !important; /* Aumenta el tamaño de los botones de vista */
-        }
-    
-    
-
-}
-
-/* Estilos específicos para el tema oscuro */
-body.dark-theme {
-    background-color: #1b1b1b;
-    color: #f0f0f0;
-}
-
-.dark-theme .container {
-    background-color: #1b1b1b;
-    color: #f0f0f0;
-}
-
-.dark-theme .non-editable-title {
-    background-color: #1f1e1e;
-    color: #fff9f9;
-}
-
-.dark-theme .bloque {
-    background-color: #1b1b1b;
-    border: 1px solid #7e7c7c;
-    border-radius: 5px;
-}
-
-.dark-theme .editable-title {
-    background-color: rgb(121, 117, 117);
-    color: #141313;
-    border: none;
-    /* Sin borde */
-
-}
-
-.dark-theme .editable-title::placeholder {
-    color: rgb(41, 40, 40);
-    /* Color del placeholder */
-    opacity: 1;
-    /* Asegura que el color tenga la opacidad completa */
-}
-
-.dark-theme .lista-basica {
-    background-color: rgb(117, 117, 119);
-    /* Fondo oscuro */
-    border: 1px solid #afadad;
-    /* Borde más oscuro */
-}
-
-.dark-theme .lista-basica input::placeholder {
-    color: rgb(37, 35, 35);
-}
-
-.dark-theme .listas-basicas {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    position: relative;
-    background-color: #1b1b1b;
-
-}
-
-.dark-theme .tarea textarea::placeholder {
-    color: #c2bbbb;
-    /* Placeholder en tono más claro para destacar */
-    opacity: 1;
-}
-
-.dark-theme .menu-lista,
-.dark-theme .menuTarea {
-    background-color: #74aae4;
-    color: #333;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-}
-
-.dark-theme button {
-    background-color: #5495df;
-    color: rgb(19, 18, 18);
-    border: 1px solid #ccc;
-
-}
-
-.dark-theme button:hover {
-    background-color: #428dca;
-    color: #f0eaea;
-}
-
-.dark-theme .tarea button {
-    color: #f9f9f9;
-    /* Texto claro */
-    background: none;
-    /* Sin fondo para mantener consistencia */
-    border: none;
-    /* Sin borde */
-}
-
-.dark-theme .tarea textarea {
-    color: rgb(10, 10, 10);
-}
-
-.dark-theme .tarea textarea.tachado {
-    color: rgb(75, 74, 74);
-}
-
-.dark-theme .destacada {
-    background-color: #2098dd;
-}
-
-.dark-theme .linea-guia {
-    background-color: #007bff;
-}
-
-/* Estilos del calendario en el tema oscuro */
-.dark-theme #calendar-container {
-    background-color: #011a53;
-    /* Fondo oscuro */
-    color: #fcf7f7a2;
-    /* Texto blanco */
-    border-radius: 10px;
-    padding: 10px;
-}
-
-.dark-theme .fc-toolbar {
-    background-color: #164899;
-    /* Barra de herramientas oscura */
-    color: #fff;
-}
-
-.dark-theme .fc-button {
-    background-color: #89b5f1;
-    /* Botones oscuros */
-    color: #0a17d6;
-    border: none;
-}
-
-.dark-theme .fc-button:hover {
-    background-color: #555b61;
-    /* Hover de botones */
-}
-
-.dark-theme .fc-day {
-    background-color: #9bb8fc;
-    /* Fondo oscuro para los días */
-    color: #111010;
-    /* Texto blanco para los días */
-}
-
-.dark-theme .fc-today {
-    background-color: #3487da;
-    /* Resaltar el día actual en oscuro */
-    color: #0a17d6;
-}

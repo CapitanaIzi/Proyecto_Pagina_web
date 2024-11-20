@@ -1,4 +1,4 @@
-class Cuadro {
+class CuadroDiagrama {
     constructor(content = '', left = '50%', top = '50%', backgroundColor = 'white') {
         this.type = 'cuadro';
         this.content = content;

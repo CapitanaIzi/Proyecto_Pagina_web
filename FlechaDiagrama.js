@@ -1,4 +1,4 @@
-class Flecha {
+class FlechaDiagrama {
     constructor(width = '100px', left = '50%', top = '50%', rotation = 'rotate(0deg)') {
         this.type = 'flecha';
         this.width = width;
