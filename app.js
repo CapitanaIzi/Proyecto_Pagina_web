@@ -15,7 +15,6 @@ class App {
     this.configurarListaSemanal();
     this.configurarListaPersonal();
     this.configurarListaMensual();
-    this.agregarIconosExpandirContraer(); // Agregar iconos a los títulos no editables
     this.configurarBotonGuardar();
     this.listaSemanal.crearListaSemanal();
   }
@@ -49,45 +48,7 @@ class App {
     });
   }
 
-  /**
-   * Agrega iconos de expandir/contraer a los títulos no editables.
-   */
-  agregarIconosExpandirContraer() {
-    // Seleccionar los contenedores que tienen títulos no editables
-    const contenedores = document.querySelectorAll('.container');
-  
-    contenedores.forEach(contenedor => {
-      const titulo = contenedor.querySelector('.non-editable-title');
-      const contenido = contenedor.querySelector('.listas-basicas, .listas-basicas-container');
-  
-      if (titulo && contenido) {
-        // Crear el ícono de expandir/contraer
-        const iconoExpandir = document.createElement('span');
-        iconoExpandir.classList.add('icono-expandir', 'fas', 'fa-chevron-down');
-        iconoExpandir.style.cursor = 'pointer';
-        iconoExpandir.style.marginLeft = '10px';
-  
-        // Insertar el ícono al lado del título
-        titulo.appendChild(iconoExpandir);
-  
-        // Funcionalidad de expandir/contraer
-        iconoExpandir.addEventListener('click', () => {
-          const isCollapsed = contenido.classList.contains('colapsada');
-          if (isCollapsed) {
-            // Expander la lista
-            contenido.classList.remove('colapsada');
-            iconoExpandir.classList.remove('fa-chevron-up');
-            iconoExpandir.classList.add('fa-chevron-down');
-          } else {
-            // Colapsar la lista
-            contenido.classList.add('colapsada');
-            iconoExpandir.classList.remove('fa-chevron-down');
-            iconoExpandir.classList.add('fa-chevron-up');
-          }
-        });
-      }
-    });
-  }
+ 
   /**
    * Configura el evento para el botón Guardar.
    */

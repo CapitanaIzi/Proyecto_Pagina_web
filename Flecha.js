@@ -69,96 +69,178 @@ class Flecha {
         this.element.style.cursor = 'grab';
     }
 
+
     /**
-     * Habilita la rotación de la flecha.
-     */
+   * Habilita la funcionalidad de rotación de Flecha
+   */
     habilitarRotacion() {
-        const controlRotacion = document.createElement('div');
-        controlRotacion.classList.add('control-rotacion');
+        const controlRotacion = this.crearControlRotacion(); // Crear el control visual para rotar
         this.element.appendChild(controlRotacion);
 
-        let isRotating = false;
-        let lastAngle = 0;
+        const estadoRotacion = this.inicializarEstadoRotacion(); // Estado inicial para la rotación
 
-        controlRotacion.addEventListener('mousedown', (e) => {
-            isRotating = true;
-            e.stopPropagation();  // Evitar que el evento se propague al mover el cuadro
-        });
-
-        document.addEventListener('mousemove', (e) => {
-            if (isRotating) {
-                const rect = this.element.getBoundingClientRect();
-                const centerX = rect.left + rect.width / 2;
-                const centerY = rect.top + rect.height / 2;
-                const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX) * (180 / Math.PI);
-                this.element.style.transform = `rotate(${angle}deg)`;
-                lastAngle = angle;
-            }
-        });
-
-        document.addEventListener('mouseup', () => {
-            isRotating = false;
-        });
+        // Event listeners
+        controlRotacion.addEventListener('mousedown', (e) => this.iniciarRotacion(e, estadoRotacion));
+        document.addEventListener('mousemove', (e) => this.rotarElemento(e, estadoRotacion));
+        document.addEventListener('mouseup', () => this.terminarRotacion(estadoRotacion));
     }
 
     /**
-     * Habilita la funcionalidad de cambiar el tamaño de la flecha.
+     * Crea y retorna el control visual para rotación.
+     * @returns {HTMLElement} - El control de rotación.
+     */
+    crearControlRotacion() {
+        const controlRotacion = document.createElement('div');
+        controlRotacion.classList.add('control-rotacion');
+        return controlRotacion;
+    }
+
+    /**
+     * Inicializa el estado para la rotación.
+     * @returns {Object} - Objeto que contiene las propiedades iniciales de rotación.
+     */
+    inicializarEstadoRotacion() {
+        return {
+            isRotating: false,
+            lastAngle: 0,
+        };
+    }
+
+    /**
+     * Inicia el proceso de rotación.
+     * @param {MouseEvent} e - El evento del ratón.
+     * @param {Object} estadoRotacion - El estado actual de la rotación.
+     */
+    iniciarRotacion(e, estadoRotacion) {
+        estadoRotacion.isRotating = true;
+        e.stopPropagation(); // Evitar propagación del evento al mover el elemento
+    }
+
+    /**
+     * Rota el elemento según la posición del ratón.
+     * @param {MouseEvent} e - El evento del ratón.
+     * @param {Object} estadoRotacion - El estado actual de la rotación.
+     */
+    rotarElemento(e, estadoRotacion) {
+        if (!estadoRotacion.isRotating) return;
+
+        const rect = this.element.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        // Calcular el ángulo de rotación en grados
+        const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX) * (180 / Math.PI);
+        this.element.style.transform = `rotate(${angle}deg)`;
+        estadoRotacion.lastAngle = angle;
+    }
+
+    /**
+     * Termina el proceso de rotación.
+     * @param {Object} estadoRotacion - El estado actual de la rotación.
+     */
+    terminarRotacion(estadoRotacion) {
+        estadoRotacion.isRotating = false;
+    }
+
+
+
+    /**
+     * Habilita la funcionalidad de redimensionar un elemento con control visual.
      */
     habilitarTamano() {
-        const controlTamano = document.createElement('div');
-        controlTamano.classList.add('control-tamano');
+        const controlTamano = this.crearControlTamano(); // Crear el control visual
         this.element.appendChild(controlTamano);
 
-        let isResizing = false;
-        let initialMouseX = 0;
-        let initialMouseY = 0;
-        let initialWidth = 0;
-        let initialHeight = 0;
+        let estadoRedimension = this.inicializarEstadoRedimension(); // Estado inicial para el redimensionamiento
 
-        controlTamano.addEventListener('mousedown', (e) => {
-            isResizing = true;
-            e.stopPropagation();  // Evitar que el evento se propague al mover el cuadro
-            const rect = this.element.getBoundingClientRect();
-            initialMouseX = e.clientX;
-            initialMouseY = e.clientY;
-            initialWidth = rect.width;
-            initialHeight = rect.height;
-        });
-
-        document.addEventListener('mousemove', (e) => {
-            if (isResizing) {
-                const transform = window.getComputedStyle(this.element).transform;
-                let angle = 0;
-
-                // Obtener el ángulo de rotación si hay una transformación
-                if (transform !== 'none') {
-                    const values = transform.split('(')[1].split(')')[0].split(',');
-                    const a = values[0];
-                    const b = values[1];
-                    angle = Math.atan2(b, a); // Ángulo en radianes
-                }
-
-                const mouseDiffX = e.clientX - initialMouseX;
-                const mouseDiffY = e.clientY - initialMouseY;
-
-                // Ajustar el cálculo en función de la rotación
-                let deltaX = Math.cos(angle) * mouseDiffX + Math.sin(angle) * mouseDiffY;
-                let deltaY = Math.sin(angle) * mouseDiffX - Math.cos(angle) * mouseDiffY;
-
-                // Determinar si el ajuste se hace en el ancho o alto según la orientación
-                let newWidth = initialWidth + deltaX;
-
-                // Asegurar que el nuevo tamaño sea coherente (evitar valores negativos)
-                if (newWidth > 20) {
-                    this.element.style.width = Math.abs(newWidth) + 'px';
-                }
-            }
-        });
-
-        document.addEventListener('mouseup', () => {
-            isResizing = false;
-        });
+        // Event listeners
+        controlTamano.addEventListener('mousedown', (e) => this.iniciarRedimension(e, estadoRedimension));
+        document.addEventListener('mousemove', (e) => this.redimensionarElemento(e, estadoRedimension));
+        document.addEventListener('mouseup', () => this.terminarRedimension(estadoRedimension));
     }
+
+    /**
+     * Crea y retorna el control visual para redimensionar.
+     * @returns {HTMLElement} - El control de tamaño.
+     */
+    crearControlTamano() {
+        const controlTamano = document.createElement('div');
+        controlTamano.classList.add('control-tamano');
+        return controlTamano;
+    }
+
+    /**
+     * Inicializa el estado para el redimensionamiento.
+     * @returns {Object} - Objeto que contiene las propiedades iniciales.
+     */
+    inicializarEstadoRedimension() {
+        return {
+            isResizing: false,
+            initialMouseX: 0,
+            initialMouseY: 0,
+            initialWidth: 0,
+            initialHeight: 0,
+            rotationAngle: 0,
+        };
+    }
+
+    /**
+     * Inicia el proceso de redimensionar.
+     * @param {MouseEvent} e - El evento del ratón.
+     * @param {Object} estadoRedimension - El estado actual del redimensionamiento.
+     */
+    iniciarRedimension(e, estadoRedimension) {
+        estadoRedimension.isResizing = true;
+        e.stopPropagation();
+
+        const rect = this.element.getBoundingClientRect();
+        estadoRedimension.initialMouseX = e.clientX;
+        estadoRedimension.initialMouseY = e.clientY;
+        estadoRedimension.initialWidth = rect.width;
+        estadoRedimension.initialHeight = rect.height;
+
+        // Obtener ángulo de rotación si existe
+        const transform = window.getComputedStyle(this.element).transform;
+        if (transform !== 'none') {
+            const values = transform.split('(')[1].split(')')[0].split(',');
+            const a = values[0];
+            const b = values[1];
+            estadoRedimension.rotationAngle = Math.atan2(b, a); // Ángulo en radianes
+        } else {
+            estadoRedimension.rotationAngle = 0;
+        }
+    }
+
+    /**
+     * Redimensiona el elemento según el movimiento del ratón.
+     * @param {MouseEvent} e - El evento del ratón.
+     * @param {Object} estadoRedimension - El estado actual del redimensionamiento.
+     */
+    redimensionarElemento(e, estadoRedimension) {
+        if (!estadoRedimension.isResizing) return;
+
+        const { initialMouseX, initialMouseY, initialWidth, rotationAngle } = estadoRedimension;
+        const mouseDiffX = e.clientX - initialMouseX;
+        const mouseDiffY = e.clientY - initialMouseY;
+
+        // Calcular desplazamiento ajustado según el ángulo de rotación
+        const deltaX = Math.cos(rotationAngle) * mouseDiffX + Math.sin(rotationAngle) * mouseDiffY;
+
+        // Calcular el nuevo ancho asegurando un valor mínimo
+        const newWidth = initialWidth + deltaX;
+        if (newWidth > 20) {
+            this.element.style.width = `${Math.abs(newWidth)}px`;
+        }
+    }
+
+    /**
+     * Termina el proceso de redimensionamiento.
+     * @param {Object} estadoRedimension - El estado actual del redimensionamiento.
+     */
+    terminarRedimension(estadoRedimension) {
+        estadoRedimension.isResizing = false;
+    }
+
 
     /**
      * Obtiene los datos de la flecha como un objeto.

@@ -37,37 +37,60 @@ class Lista {
      * @returns {HTMLDivElement} El contenedor del título con el botón de opciones.
      */
     crearTituloContainer() {
-        const tituloContainer = document.createElement('div');
-        tituloContainer.classList.add('titulo-container');
-
-        const tituloInput = document.createElement('input');
-        tituloInput.type = 'text';
-        tituloInput.placeholder = this.titulo;
-        tituloInput.addEventListener('input', (e) => {
-            this.titulo = e.target.value; // Actualiza el título de la lista
-        });
-
-        // Crear el ícono para expandir/contraer la lista
-        const iconoExpandir = document.createElement('span');
-        iconoExpandir.classList.add('icono-expandir');
-        iconoExpandir.classList.add('fas', 'fa-chevron-down');  // Ícono para expandir
-        iconoExpandir.style.cursor = 'pointer';
-
-        // Cambiar el ícono al hacer clic
-        iconoExpandir.addEventListener('click', () => {
-            this.expandida = !this.expandida;
-            iconoExpandir.classList.toggle('fa-chevron-down', !this.expandida);  // Ícono de expandir
-            iconoExpandir.classList.toggle('fa-chevron-up', this.expandida);     // Ícono de contraer
-            this.actualizarVisibilidadTareas(); // Actualiza la visibilidad de las tareas
-        });
-
-        const opcionesBtn = this.crearBotonOpciones(); // Crear el botón de opciones
+        const tituloContainer = this.crearContenedorTitulo();
+        const tituloInput = this.crearTituloInput();
+        const iconoExpandir = this.crearIconoExpandir();
+        const opcionesBtn = this.crearBotonOpciones();
+    
         tituloContainer.appendChild(tituloInput);
-        tituloContainer.appendChild(iconoExpandir); // Añadir el ícono al contenedor
+        tituloContainer.appendChild(iconoExpandir);
         tituloContainer.appendChild(opcionesBtn);
-
+    
         return tituloContainer;
     }
+    
+    /**
+     * Función para crear el contenedor principal
+     * @returns el contenerdor
+     */
+    crearContenedorTitulo() {
+        const container = document.createElement('div');
+        container.classList.add('titulo-container');
+        return container;
+    }
+    /**
+     * Función para crear y configurar el input del título
+     * @returns el input
+     */
+    crearTituloInput() {
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.placeholder = this.titulo;
+        input.addEventListener('input', (e) => {
+            this.titulo = e.target.value; // Actualiza el título de la lista
+        });
+        return input;
+    }
+    
+     /**
+      * Función para crear y configurar el ícono de expandir/contraer
+      * @returns icono
+      */
+    crearIconoExpandir() {
+        const icono = document.createElement('span');
+        icono.classList.add('icono-expandir', 'fas', 'fa-chevron-down'); // Ícono inicial de expandir
+        icono.style.cursor = 'pointer';
+    
+        icono.addEventListener('click', () => {
+            this.expandida = !this.expandida;
+            icono.classList.toggle('fa-chevron-down', !this.expandida); // Ícono de expandir
+            icono.classList.toggle('fa-chevron-up', this.expandida);   // Ícono de contraer
+            this.actualizarVisibilidadTareas(); // Actualiza la visibilidad de las tareas
+        });
+    
+        return icono;
+    }
+    
 
     /**
      * Crea el botón de opciones, que despliega un menú al hacer clic.

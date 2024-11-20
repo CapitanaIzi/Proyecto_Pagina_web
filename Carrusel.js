@@ -30,6 +30,6 @@ class Carrusel {
   document.addEventListener('DOMContentLoaded', () => {
   // Instancia del carrusel si la clase Carrusel está definida
   if (typeof Carrusel === 'function') {
-    const carrusel = new Carrusel('.carousel-item');
+    new Carrusel('.carousel-item');
   }
 });

@@ -4,8 +4,8 @@ class Tarea {
         this.nombre = nombre;
         this.completada = false;
     }
-    
-    
+
+
     /**
      * Crea un checkbox para la tarea, el cual permite marcarla como completada.
      * Al marcar el checkbox, la tarea se tachará si se completa.
@@ -16,12 +16,12 @@ class Tarea {
     crearCheckbox(textArea) {
         const label = document.createElement('label');
         label.classList.add('custom-checkbox');
-    
+
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
-    
+
         const span = document.createElement('span');
-    
+
         // Agregar evento para marcar completada y tachar el texto
         checkbox.addEventListener('change', () => {
             this.completada = checkbox.checked;
@@ -29,14 +29,14 @@ class Tarea {
                 textArea.classList.toggle('tachado', this.completada);
             }
         });
-    
+
         // Estructura del checkbox personalizado
         label.appendChild(checkbox);
         label.appendChild(span);
-    
+
         return label;
     }
-    
+
     /**
      * Crea el área de texto que permite editar el nombre de la tarea.
      * 
@@ -50,36 +50,36 @@ class Tarea {
         });
         return textArea;
     }
- /**
- * Crea el `div` que representa visualmente la tarea. 
- * Este `div` contiene un área de texto para editar el nombre de la tarea, un checkbox para marcarla como completada,
- * y un botón con un menú de opciones que permite realizar varias acciones sobre la tarea (eliminar, destacar, duplicar).
- * 
- * @param {HTMLDivElement} listaDiv - El contenedor `div` que representa la lista de tareas a la cual se va a agregar la tarea.
- * @returns {HTMLDivElement} El `div` que representa la tarea con todos sus elementos hijos.
- */
- crearTarea(listaDiv) {
-    const tareaDiv = document.createElement('div');
-    tareaDiv.classList.add('tarea');
-    tareaDiv.draggable = true;
-    tareaDiv.id = `tarea-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    /**
+    * Crea el `div` que representa visualmente la tarea. 
+    * Este `div` contiene un área de texto para editar el nombre de la tarea, un checkbox para marcarla como completada,
+    * y un botón con un menú de opciones que permite realizar varias acciones sobre la tarea (eliminar, destacar, duplicar).
+    * 
+    * @param {HTMLDivElement} listaDiv - El contenedor `div` que representa la lista de tareas a la cual se va a agregar la tarea.
+    * @returns {HTMLDivElement} El `div` que representa la tarea con todos sus elementos hijos.
+    */
+    crearTarea(listaDiv) {
+        const tareaDiv = document.createElement('div');
+        tareaDiv.classList.add('tarea');
+        tareaDiv.draggable = true;
+        tareaDiv.id = `tarea-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
-    // Crear contenedor para checkbox, textarea y botón de opciones
-    const contenidoDiv = document.createElement('div');
-    contenidoDiv.classList.add('contenido-tarea'); // Clase para manejar estilos
+        // Crear contenedor para checkbox, textarea y botón de opciones
+        const contenidoDiv = document.createElement('div');
+        contenidoDiv.classList.add('contenido-tarea'); // Clase para manejar estilos
 
-    const textArea = this.crearTextArea();
-    const checkbox = this.crearCheckbox(textArea);
-    const { opcionesBtn, menuTarea } = this.crearBotonOpciones(tareaDiv, listaDiv);
+        const textArea = this.crearTextArea();
+        const checkbox = this.crearCheckbox(textArea);
+        const { opcionesBtn, menuTarea } = this.crearBotonOpciones(tareaDiv, listaDiv);
 
-    // Añadir checkbox, textarea y botón de opciones al contenedor
-    contenidoDiv.append(checkbox, textArea, opcionesBtn);
+        // Añadir checkbox, textarea y botón de opciones al contenedor
+        contenidoDiv.append(checkbox, textArea, opcionesBtn);
 
-    // Agregar contenedor de menú desplegable aparte (si es necesario)
-    tareaDiv.append(contenidoDiv, menuTarea);
+        // Agregar contenedor de menú desplegable aparte (si es necesario)
+        tareaDiv.append(contenidoDiv, menuTarea);
 
-    return tareaDiv;
-}
+        return tareaDiv;
+    }
 
     /**
      * Crea el botón de opciones (⋮) de la tarea, que permite mostrar un menú con acciones como eliminar,
@@ -93,12 +93,12 @@ class Tarea {
         const opcionesBtn = document.createElement('button');
         opcionesBtn.textContent = '⋮';
         const menuTarea = this.crearMenuOpciones(tareaDiv, listaDiv);
-    
+
         opcionesBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             toggleMenu(menuTarea); // Centraliza la lógica en `toggleMenu`
         });
-    
+
         // Lógica para cerrar el menú al hacer clic fuera
         document.addEventListener('click', (e) => {
             if (!tareaDiv.contains(e.target)) {
@@ -108,39 +108,78 @@ class Tarea {
                 }
             }
         });
-    
+
         return { opcionesBtn, menuTarea };
     }
-    
-    
+
+
+
 
     /**
-     * Crea el menú de opciones (Eliminar, Destacar, Duplicar) de la tarea.
-     * 
-     * @param {HTMLDivElement} tareaDiv - El elemento `div` que representa la tarea.
-     * @param {HTMLDivElement} listaDiv - El contenedor `div` que representa la lista de la tarea.
-     * @returns {HTMLDivElement} El menú con las opciones disponibles.
-     */
+    * Crea un menú de opciones para una tarea específica.
+    * @param {HTMLDivElement} tareaDiv - El elemento del DOM que representa la tarea.
+    * @param {HTMLDivElement} listaDiv - El contenedor de la lista donde se encuentra la tarea.
+    * @returns {HTMLDivElement} El menú de opciones creado.
+    */
     crearMenuOpciones(tareaDiv, listaDiv) {
-        const menuTarea = document.createElement('div');
-        menuTarea.classList.add('menuTarea');
-        menuTarea.style.display = 'none';
+        const menuTarea = this.crearMenuBase();
 
+        const eliminarOpcion = this.crearOpcionEliminar(tareaDiv);
+        const destacarOpcion = this.crearOpcionDestacar(tareaDiv);
+        const duplicarOpcion = this.crearOpcionDuplicar(listaDiv);
+
+        menuTarea.append(eliminarOpcion, destacarOpcion, duplicarOpcion);
+
+        return menuTarea;
+    }
+
+    /**
+     * Crea el contenedor base del menú de opciones.
+     * @returns {HTMLDivElement} El contenedor del menú de opciones.
+     */
+    crearMenuBase() {
+        const menu = document.createElement('div');
+        menu.classList.add('menuTarea');
+        menu.style.display = 'none';
+        return menu;
+    }
+
+    /**
+     * Crea la opción para eliminar una tarea.
+     * @param {HTMLDivElement} tareaDiv - El elemento del DOM que representa la tarea.
+     * @returns {HTMLDivElement} El elemento del menú para eliminar la tarea.
+     */
+    crearOpcionEliminar(tareaDiv) {
         const eliminarOpcion = document.createElement('div');
         eliminarOpcion.textContent = 'Eliminar';
         eliminarOpcion.addEventListener('click', () => this.eliminarTarea(tareaDiv));
+        return eliminarOpcion;
+    }
 
+    /**
+     * Crea la opción para destacar una tarea.
+     * @param {HTMLDivElement} tareaDiv - El elemento del DOM que representa la tarea.
+     * @returns {HTMLDivElement} El elemento del menú para destacar la tarea.
+     */
+    crearOpcionDestacar(tareaDiv) {
         const destacarOpcion = document.createElement('div');
         destacarOpcion.textContent = 'Destacar';
         destacarOpcion.addEventListener('click', () => tareaDiv.classList.toggle('destacada'));
+        return destacarOpcion;
+    }
 
+    /**
+     * Crea la opción para duplicar una tarea.
+     * @param {HTMLDivElement} listaDiv - El contenedor de la lista donde se encuentra la tarea.
+     * @returns {HTMLDivElement} El elemento del menú para duplicar la tarea.
+     */
+    crearOpcionDuplicar(listaDiv) {
         const duplicarOpcion = document.createElement('div');
         duplicarOpcion.textContent = 'Duplicar';
         duplicarOpcion.addEventListener('click', () => this.duplicarTarea(listaDiv));
-
-        menuTarea.append(eliminarOpcion, destacarOpcion, duplicarOpcion);
-        return menuTarea;
+        return duplicarOpcion;
     }
+
 
     /**
      * Duplicar la tarea actual. Crea una nueva instancia de la tarea con el mismo nombre
@@ -151,23 +190,23 @@ class Tarea {
     duplicarTarea(listaDiv) {
         // Crear una nueva tarea con el mismo nombre
         const nuevaTarea = new Tarea(this.nombre);
-        
+
         // Crear el elemento visual para la nueva tarea
         const nuevaTareaDiv = nuevaTarea.crearTarea(listaDiv);
-    
+
         // Establecer el texto de la tarea duplicada (no como placeholder)
         const textArea = nuevaTareaDiv.querySelector('textarea');
         if (textArea) {
             textArea.value = this.nombre; // Copiar el texto real de la tarea original
         }
-    
+
         // Asegurarse de que la tarea duplicada tenga su propio ID
         nuevaTarea.id = `tarea-${Date.now()}-${Math.random()}`; // Generar un ID único
-        
+
         // Añadir la nueva tarea al contenedor visual y a la lista de tareas
         listaDiv.appendChild(nuevaTareaDiv);
     }
-    
+
 
     /**
      * Elimina la tarea del DOM.
