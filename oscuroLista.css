@@ -78,14 +78,13 @@ body.dark-theme {
 .dark-theme .destacada {
     background-color: #2098dd;
 }
-.dark-theme .linea-guia {
-    background-color: #007bff;
-}
+
 
 /* Estilos del calendario en el tema oscuro */
 .dark-theme #calendar-container {
     background-color: #011a53;
-    color: #fcf7f7a2;
+    color: #f7f1f1;
+    box-shadow: 4px 14px 38px rgba(126, 125, 125, 0.952);
     border-radius: 10px;
     padding: 10px;
 }
@@ -102,15 +101,15 @@ body.dark-theme {
 }
 
 .dark-theme .fc-button:hover {
-    background-color: #555b61;
+    background-color: #bebfc0;
 }
 
 .dark-theme .fc-day {
-    background-color: #9bb8fc;
-    color: #111010;
+    background-color: #7c7d80;
+    color: #faf3f3;
 }
 
 .dark-theme .fc-today {
-    background-color: #3487da;
-    color: #0a17d6;
+    background-color: #0673e0 !important;
+    color: #f3f0f0;
 }
