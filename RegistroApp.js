@@ -82,5 +82,5 @@ class RegistroApp {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const app = new RegistroApp(); // Crea una nueva instancia de la aplicación de registro
+ new RegistroApp(); // Crea una nueva instancia de la aplicación de registro
 });

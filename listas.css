@@ -18,6 +18,11 @@ main {
     width: 100%;
     height: 100%;
 }
+h1 {
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 6px;
+}
 
 #btn-guardar {
     background-color: rgb(233, 84, 84);
@@ -46,15 +51,11 @@ main {
 
 .buttons button {
     margin: 0 10px;
+    margin-top: 10px;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-}
-
-h1 {
-    text-align: center;
-    margin-bottom: 10px;
-    margin-top: 6px;
+    background-color: #84a9f7;
 }
 
 .container {
@@ -68,6 +69,28 @@ h1 {
     flex-direction: column;
 }
 
+.editable-title,
+.non-editable-title {
+    background-color: #e1eaf5;
+    color: #0c0c0c;
+    border-radius: 4px;
+}
+
+.non-editable-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.icono-expandir {
+    font-size: 20px;
+    cursor: pointer;
+    color: #333;
+    margin-left: 2px;
+}
 .listas-basicas {
     width: 100%;
     display: flex;
@@ -94,8 +117,6 @@ h1 {
     /* Transición suave al colapsar */
 
 }
-
-
 .bloque {
     width: 100%;
     justify-content: space-between;
@@ -103,45 +124,10 @@ h1 {
     background-color: white;
     border: 1px solid #4e4c4c;
     margin-bottom: 2px;
-    padding: 10px;
+    padding: 0px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-
-.icono-expandir {
-    font-size: 20px;
-    cursor: pointer;
-    color: #333;
-    margin-left: 2px;
-}
-
-
-/* Estilo del icono de eliminar (tacho de basura) */
-.icono-eliminar {
-    font-size: 20px;
-    cursor: pointer;
-    color: #f44336;
-    margin-left: 15px;
-    /* Espacio entre el título y el icono */
-}
-
-
-.editable-title,
-.non-editable-title {
-    background-color: #e1eaf5;
-    color: #0c0c0c;
-    border-radius: 4px;
-}
-
-.non-editable-title {
-    font-size: 1.5em;
-    font-weight: bold;
-    padding: 0px;
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-}
-
 .editable-title {
     padding: 5px;
     font-size: 1.2em;
@@ -154,18 +140,21 @@ h1 {
     color: rgb(90, 88, 88);
     opacity: 1;
 }
-.titulo {
-    color: black;  /* Cambiar color de texto a negro */
-    background-color: #f0f0f0;  /* Color de fondo claro para el input */
-    border: 1px solid #ccc;  /* Añadir un borde para hacerlo visible */
-    padding: 5px;  /* Añadir algo de espacio dentro del input */
-}
 
+
+/* Estilo del icono de eliminar (tacho de basura) */
+.icono-eliminar {
+    font-size: 20px;
+    cursor: pointer;
+    color: #f44336;
+    margin-left: 15px;
+    /* Espacio entre el título y el icono */
+}
 
 .lista-basica {
     border-radius: 5px;
     position: relative;
-    background-color: #f0f0f0;
+    background-color: #faf5f5;
     color: #333;
     border: 1px solid #ccc;
 }
@@ -177,18 +166,32 @@ h1 {
     /* Opcional: también puedes aplicar otros estilos */
 }
 
-.lista {
-    background-color: #f9f9f9;
+
+/* .lista {
+    background-color: #31d610;
     color: #333;
     border: 1px solid #ccc;
     margin: 10px;
     padding: 10px;
     min-height: 100px;
-    /* Altura mínima para que se vea la lista */
     position: relative;
-    /* Para que la línea guía se posicione correctamente */
+}
+*/
+
+
+button { /* boton de Lista */
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #7db9fd;
+    color: rgb(8, 8, 8);
+    border-radius: 3px;
+    cursor: pointer;
 }
 
+button:hover {
+    background-color: #5fadee;
+    color: #f1f1f1;
+}
 
 .menu-lista {
     position: absolute;
@@ -209,31 +212,6 @@ h1 {
     font-size: 17px;
 }
 
-button {
-    margin-top: 10px;
-    padding: 5px 10px;
-    background-color: #7db9fd;
-    color: rgb(8, 8, 8);
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #5fadee;
-    color: #f1f1f1;
-}
-
-.tarea {
-    width: 100%;
-    cursor: grabbing;
-    display: flex;
-}
-
-/* Cambia a 'agarrando' cuando está en el proceso de arrastre */
-.tarea.arrastrando {
-    cursor: grab;
-}
-
 .contenido-tarea {
     display: flex;
     align-items: center;
@@ -241,24 +219,17 @@ button:hover {
     /* Espacio entre el checkbox y el texto */
 }
 
-/* Ocultar el checkbox original */
+/* Personalización del checkbox */
+.custom-checkbox input[type="checkbox"] {
+    display: none;
+    /* Oculta el checkbox predeterminado */
+}
 .custom-checkbox {
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     position: relative;
-}
-
-.custom-checkbox input {
-    display: none;
-    /* Oculta el checkbox estándar */
-}
-
-/* Personalización del checkbox */
-.custom-checkbox input[type="checkbox"] {
-    display: none;
-    /* Oculta el checkbox predeterminado */
 }
 
 .custom-checkbox span {
@@ -271,14 +242,10 @@ button:hover {
     transition: background-color 0.3s, border-color 0.3s;
 }
 
-/* Estilo cuando el checkbox está marcado */
-.custom-checkbox input[type="checkbox"]:checked+span {
-    background-color: #6eb1fd;
-    border-color: #0c0c0c;
-}
-
 /* Estilo opcional para agregar un símbolo o icono al marcar */
 .custom-checkbox input[type="checkbox"]:checked+span::after {
+    background-color: #6eb1fd;
+    border-color: #0c0c0c;
     content: '✔';
     color: white;
     font-size: 14px;
@@ -315,11 +282,6 @@ button:hover {
     /* Ajusta el tamaño del botón de opciones */
     cursor: pointer;
     margin-right: 0px;
-
-}
-
-.destacada {
-    background-color: #4cd3c1;
 }
 
 .menu-lista,
@@ -356,4 +318,6 @@ button:hover {
     color: #f1f1f1;
 }
 
-
+.destacada {
+    background-color: #4cd3c1;
+}

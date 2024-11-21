@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bloc de Notas</title>
     <link rel="stylesheet" href="encabezado.css">
-    <link rel="stylesheet" href="escritura.css">
+    <link rel="stylesheet" href="notas.css">
 </head>
 <body>
     <nav>
@@ -31,22 +31,20 @@
                 <li><a href="opiniones.html">Opiniones</a></li>
             </ul>
         </nav>
-    <div class="container">
-        <h1>Bloc de Notas</h1>
-        <div class="note-editor">
-            <input type="text" id="noteTitle" placeholder="Título de la nota" />
-            <textarea id="noteContent" placeholder="Escribe tu nota aquí..."></textarea>
-            <div class="buttons">
-                <!-- Los eventos se asignarán en el JS -->
-                <button id="saveNoteBtn">Guardar Nota</button>
-                <button id="clearNoteBtn">Borrar Nota</button>
-                <button class="add-button" id="addNoteBtn">+</button> <!-- Botón de agregar nota en la misma línea -->
+        <div class="contenedor">
+            <h1>Bloc de Notas</h1>
+            <div class="editor-notas">
+                <input type="text" id="titulo-nota" placeholder="Título de la nota" />
+                <textarea id="contenido-nota" placeholder="Escribe tu nota aquí..."></textarea>
+                <div class="botones">
+                    <button id="guardar-nota">Guardar Nota</button>
+                    <button class="boton-agregar" id="agregar-nota">+</button>
+                </div>
             </div>
-        </div>
-        <h2>Notas Guardadas</h2>
-        <ul id="notesList"></ul>
+            <h2>Notas Guardadas</h2>
+            <ul id="lista-notas"></ul>
     </div>
-    <script src="NoteApp.js"></script>
+    <script src="NotaApp.js"></script>
     <script src="InteraccionesPagina.js"></script>
 
 </body>

@@ -1,8 +1,6 @@
 
 body,
 html {
-    margin: 0;
-    padding: 0;
     width: 100%;
     height: 100%;
     font-family: Arial, sans-serif;
@@ -13,7 +11,6 @@ html {
 
 h1 {
     text-align: center;
-    margin: 0px;
     background-color: white;
     color: rgb(7, 7, 7);
 }
@@ -23,10 +20,7 @@ h1 {
     height: 50px;
     display: flex;
     align-items: center;
-    padding-left: 0px;
     position: relative;
-    margin-top: 0px;
-    border: none; /* Elimina todos los bordes */
     border-bottom: 2px solid #706f6f; 
    
 }
@@ -38,14 +32,23 @@ h1 {
     cursor: pointer;
     border-radius: 5px;
     background-color:#7db9fd;
-    border: none; /* Elimina todos los bordes */
-    
-
 }
 #barra-superior button:hover {
     background-color: #5fadee; /* Color más oscuro al pasar el cursor */
     transform: scale(1.1); /* Aumenta ligeramente el tamaño */
     color: #f1f1f1; /* Color de texto más claro */
+}
+.menu button {
+    background-color:#7db9fd;
+    color: white;
+    margin-bottom: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 12px;
+}
+.menu button:hover {
+    background-color: #5fadee;  /* Color más oscuro al pasar el cursor */
 }
 /* Menú desplegable */
 .menu {
@@ -75,33 +78,7 @@ h1 {
     left: -1px;
 
 }
-
-.menu button {
-    background-color:#7db9fd;
-    color: white;
-    margin-bottom: 5px;
-    cursor: pointer;
-    border-radius: 5px;
-    padding: 5px;
-    font-size: 12px;
-    
-    /* Tamaño de letra más pequeño */
-}
-.menu button:hover {
-    background-color: #5fadee;  /* Color más oscuro al pasar el cursor */
-}
-    
-/* Contenedor del mapa conceptual */
-#mapa-conceptual {
-    width: 100%;
-    /* 100% del ancho de la ventana */
-    height: 100%;
-    position: relative;
-    background-color: whitesmoke;
-    overflow: hidden;
-
-}
-/* Menú de color */
+    /* Menú de color */
 .color-option {
     width: 40px;
     height: 40px;
@@ -117,6 +94,17 @@ h1 {
     gap: 1px;
 
 }
+/* Contenedor del mapa conceptual */
+#mapa-conceptual {
+    width: 100%;
+    /* 100% del ancho de la ventana */
+    height: 100%;
+    position: relative;
+    background-color: whitesmoke;
+    overflow: hidden;
+
+}
+
 /* Estilos para el título editable */
 /* Estilos para el título editable alineado con la barra superior */
 #titulo {
@@ -148,19 +136,6 @@ h1 {
     pointer-events: none;
     /* Para evitar que se pueda seleccionar */
 }
-
-/* Botón Eliminar dentro del mapa conceptual */
-#btn-eliminar {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background-color: red;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-}
-
 /* Cuadro creado */
 .cuadro {
     min-width: 150px;
@@ -227,7 +202,17 @@ h1 {
     cursor: nwse-resize;
     /* Cambiar el cursor para redimensionar */
 }
-
+/* Botón Eliminar dentro del mapa conceptual */
+#btn-eliminar {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
 
 
 .dark-theme {
@@ -241,7 +226,6 @@ h1 {
 
 .dark-theme #titulo-diagrama {
     color: white;
-    font-size: 24px;
     text-align: center;
     background-color: #121212; /* Fondo oscuro */
 
@@ -260,12 +244,14 @@ h1 {
     border: 1px solid #dfdbdb; /* Borde más claro */
 
 }
-.dark-theme #mapa-conceptual {
-    background-color: #1c1c1c; /* Fondo oscuro para el tema oscuro */
-    color: #070707;
-
+.dark-theme .menu button {
+    background-color: #3a3a3a; /* Fondo oscuro */
+    color: #ffffff; /* Texto claro */
 }
 
+.dark-theme .menu button:hover {
+    background-color: #575757; /* Fondo más claro al pasar el cursor */
+}
 .dark-theme .menu {
     background-color:  #2d2d2d;  /* Fondo oscuro del menú */
     border: 2px solid #4a4a4a; /* Borde más claro */
@@ -276,23 +262,16 @@ h1 {
     border: 2px solid #505050; 
     background-color: #2d2d2d; /* Fondo oscuro */
 }
-
-.dark-theme .menu button {
-    background-color: #3a3a3a; /* Fondo oscuro */
-    color: #ffffff; /* Texto claro */
-}
-
-.dark-theme .menu button:hover {
-    background-color: #575757; /* Fondo más claro al pasar el cursor */
-}
-
-.dark-theme #btn-eliminar {
-    background-color: #b71c1c; /* Botón rojo oscuro */
-    color: #ffffff;
-}
-
 .dark-theme .cuadro {
     background-color: #f0e9e9; /* Fondo oscuro del cuadro */
     color: #080808;
     border: 2px solid #e0dcdc; /* Borde oscuro */
+}
+.dark-theme #mapa-conceptual {
+    background-color: #1c1c1c; /* Fondo oscuro para el tema oscuro */
+    color: #070707;
+}
+.dark-theme #btn-eliminar {
+    background-color: #b71c1c; /* Botón rojo oscuro */
+    color: #ffffff;
 }

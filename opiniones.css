@@ -6,7 +6,7 @@ body {
   color: black;
 }
 
-#opinionesSection {
+#seccionOpiniones {
   border: 1px solid #ccc;
   padding: 20px;
   width: 80%;
@@ -34,9 +34,11 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background-color: #5fadee; /* Color más oscuro al pasar el cursor */
-    transform: scale(1.1); /* Aumenta ligeramente el tamaño */
-    color: #f1f1f1; 
+  background-color: #5fadee;
+  /* Color más oscuro al pasar el cursor */
+  transform: scale(1.1);
+  /* Aumenta ligeramente el tamaño */
+  color: #f1f1f1;
 }
 
 .opinion {
@@ -50,112 +52,36 @@ button[type="submit"]:hover {
   font-weight: bold;
 }
 
-
-/* Estilos para el tema oscuro */
 .dark-theme {
   background-color: #131212;
-  /* Fondo oscuro */
   color: #f3eded;
-  /* Texto claro */
 }
 
 
-/* Estilos para las opiniones */
-.dark-theme #opinionesSection {
+.dark-theme #seccionOpiniones {
   border: 1px solid #555;
-  /* Borde oscuro */
-  padding: 20px;
-  width: 80%;
-  margin: 20px auto;
   background-color: #222;
-  /* Fondo oscuro */
-  border-radius: 8px;
 }
 
 .dark-theme textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  font-size: 16px;
-  border-radius: 5px;
   border: 1px solid #444;
-  /* Borde oscuro */
   background-color: #444;
-  /* Fondo oscuro */
   color: #f3eded;
-  /* Texto claro */
 }
 
 .dark-theme button[type="submit"] {
-    background-color:  #5495df;
+  background-color: #5495df;
   color: rgb(10, 10, 10);
 }
 
 .dark-theme button[type="submit"]:hover {
   background-color: #428dca;
-  transform: scale(1.1); /* Aumenta ligeramente el tamaño */
-  color: #f5eeee; 
+  transform: scale(1.1);
+  color: #f5eeee;
 }
 
-/* Opiniones en tema oscuro */
 .dark-theme .opinion {
-  margin-bottom: 15px;
-  padding: 10px;
   background-color: #333;
-  /* Fondo oscuro para las opiniones */
   color: #f3eded;
-  /* Texto claro */
-  border-radius: 5px;
-}
 
-.dark-theme .opinion strong {
-  font-weight: bold;
-}
-
-/* Media Query para dispositivos móviles */
-@media (max-width: 600px) {
-  .dark-theme .container {
-    width: 95%;
-    /* Ancho más grande para móviles */
-    padding: 15px;
-    /* Reducimos el padding en móviles */
-  }
-
-  .dark-theme input[type="text"],
-  .dark-theme textarea {
-    font-size: 16px;
-    /* Ajustamos el tamaño de fuente */
-  }
-
-  .dark-theme li {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .dark-theme .buttons {
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .dark-theme button,
-  .dark-theme .delete-button,
-  .dark-theme .add-button {
-    width: 100%;
-    /* Los botones ocupan todo el ancho */
-    padding: 10px;
-    font-size: 14px;
-    /* Reducimos el tamaño de fuente */
-  }
-
-  /* Ajustes específicos para los botones */
-  .dark-theme .add-button {
-    width: 35px;
-    height: 35px;
-    font-size: 18px;
-  }
-
-  .dark-theme .delete-button {
-    font-size: 12px;
-    padding: 5px 10px;
-  }
 }

@@ -11,10 +11,8 @@ body.dark-theme {
     background-color: #1f1e1e;
     color: #fff9f9;
 }
-.dark-theme .bloque {
+.dark-theme .listas-basicas {
     background-color: #1b1b1b;
-    border: 1px solid #7e7c7c;
-    border-radius: 5px;
 }
 .dark-theme .editable-title {
     background-color: rgb(121, 117, 117);
@@ -25,7 +23,11 @@ body.dark-theme {
     color: rgb(41, 40, 40);
     opacity: 1;
 }
-
+.dark-theme .bloque {
+    background-color: #1b1b1b;
+    border: 1px solid #7e7c7c;
+    border-radius: 5px;
+}
 .dark-theme .lista-basica {
     background-color: rgb(117, 117, 119);
     border: 1px solid #afadad;
@@ -34,26 +36,16 @@ body.dark-theme {
 .dark-theme .lista-basica input::placeholder {
     color: rgb(37, 35, 35);
 }
-
-.dark-theme .listas-basicas {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    position: relative;
-    background-color: #1b1b1b;
+.dark-theme .tarea textarea {
+    color: rgb(10, 10, 10);
 }
 
 .dark-theme .tarea textarea::placeholder {
     color: #c2bbbb;
     opacity: 1;
 }
-
-.dark-theme .menu-lista,
-.dark-theme .menuTarea {
-    background-color: #74aae4;
-    color: #333;
-    border: 1px solid #ccc;
-    border-radius: 3px;
+.dark-theme .tarea textarea.tachado {
+    color: rgb(75, 74, 74);
 }
 .dark-theme button {
     background-color: #5495df;
@@ -64,17 +56,20 @@ body.dark-theme {
     background-color: #428dca;
     color: #f0eaea;
 }
+.dark-theme .menu-lista,
+.dark-theme .menuTarea {
+    background-color: #74aae4;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
 .dark-theme .tarea button {
     color: #f9f9f9;
     background: none;
     border: none;
 }
-.dark-theme .tarea textarea {
-    color: rgb(10, 10, 10);
-}
-.dark-theme .tarea textarea.tachado {
-    color: rgb(75, 74, 74);
-}
+
 .dark-theme .destacada {
     background-color: #2098dd;
 }
