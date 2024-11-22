@@ -59,15 +59,12 @@ class GestorExpandirContraer {
     }
 }
 
-// Inicializa la clase pasando los selectores adecuados
 document.addEventListener('DOMContentLoaded', () => {
     const gestor = new GestorExpandirContraer(
-        '.container',                 // Selector del contenedor
-        '.non-editable-title',        // Selector del título no editable
-        '.listas-basicas, .listas-basicas-container' // Selector del contenido colapsable
+        '.container',                
+        '.non-editable-title',        
+        '.listas-basicas, .listas-basicas-container' 
     );
-
-    // Inicializa la funcionalidad
     gestor.agregarIconosExpandirContraer();
 });
    

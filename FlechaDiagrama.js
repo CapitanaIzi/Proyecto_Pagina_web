@@ -5,8 +5,6 @@ class FlechaDiagrama {
         this.left = left;
         this.top = top;
         this.rotation = rotation;
-
-        // Crear el elemento y añadirlo al DOM
         this.element = this.crearElemento();
         this.habilitarArrastre();
         this.habilitarRotacion();
@@ -25,7 +23,6 @@ class FlechaDiagrama {
         flecha.style.top = this.top;
         flecha.style.transform = this.rotation;
 
-        // Agregar al DOM
         document.getElementById('mapa-conceptual').appendChild(flecha);
         return flecha;
     }
@@ -74,12 +71,10 @@ class FlechaDiagrama {
    * Habilita la funcionalidad de rotación de Flecha
    */
     habilitarRotacion() {
-        const controlRotacion = this.crearControlRotacion(); // Crear el control visual para rotar
+        const controlRotacion = this.crearControlRotacion(); 
         this.element.appendChild(controlRotacion);
+        const estadoRotacion = this.inicializarEstadoRotacion(); 
 
-        const estadoRotacion = this.inicializarEstadoRotacion(); // Estado inicial para la rotación
-
-        // Event listeners
         controlRotacion.addEventListener('mousedown', (e) => this.iniciarRotacion(e, estadoRotacion));
         document.addEventListener('mousemove', (e) => this.rotarElemento(e, estadoRotacion));
         document.addEventListener('mouseup', () => this.terminarRotacion(estadoRotacion));
@@ -113,7 +108,7 @@ class FlechaDiagrama {
      */
     iniciarRotacion(e, estadoRotacion) {
         estadoRotacion.isRotating = true;
-        e.stopPropagation(); // Evitar propagación del evento al mover el elemento
+        e.stopPropagation(); 
     }
 
     /**
@@ -127,8 +122,6 @@ class FlechaDiagrama {
         const rect = this.element.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
-
-        // Calcular el ángulo de rotación en grados
         const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX) * (180 / Math.PI);
         this.element.style.transform = `rotate(${angle}deg)`;
         estadoRotacion.lastAngle = angle;
@@ -148,12 +141,10 @@ class FlechaDiagrama {
      * Habilita la funcionalidad de redimensionar un elemento con control visual.
      */
     habilitarTamano() {
-        const controlTamano = this.crearControlTamano(); // Crear el control visual
+        const controlTamano = this.crearControlTamano();
         this.element.appendChild(controlTamano);
 
-        let estadoRedimension = this.inicializarEstadoRedimension(); // Estado inicial para el redimensionamiento
-
-        // Event listeners
+        let estadoRedimension = this.inicializarEstadoRedimension();
         controlTamano.addEventListener('mousedown', (e) => this.iniciarRedimension(e, estadoRedimension));
         document.addEventListener('mousemove', (e) => this.redimensionarElemento(e, estadoRedimension));
         document.addEventListener('mouseup', () => this.terminarRedimension(estadoRedimension));
@@ -199,13 +190,12 @@ class FlechaDiagrama {
         estadoRedimension.initialWidth = rect.width;
         estadoRedimension.initialHeight = rect.height;
 
-        // Obtener ángulo de rotación si existe
         const transform = window.getComputedStyle(this.element).transform;
         if (transform !== 'none') {
             const values = transform.split('(')[1].split(')')[0].split(',');
             const a = values[0];
             const b = values[1];
-            estadoRedimension.rotationAngle = Math.atan2(b, a); // Ángulo en radianes
+            estadoRedimension.rotationAngle = Math.atan2(b, a); 
         } else {
             estadoRedimension.rotationAngle = 0;
         }
@@ -222,11 +212,7 @@ class FlechaDiagrama {
         const { initialMouseX, initialMouseY, initialWidth, rotationAngle } = estadoRedimension;
         const mouseDiffX = e.clientX - initialMouseX;
         const mouseDiffY = e.clientY - initialMouseY;
-
-        // Calcular desplazamiento ajustado según el ángulo de rotación
         const deltaX = Math.cos(rotationAngle) * mouseDiffX + Math.sin(rotationAngle) * mouseDiffY;
-
-        // Calcular el nuevo ancho asegurando un valor mínimo
         const newWidth = initialWidth + deltaX;
         if (newWidth > 20) {
             this.element.style.width = `${Math.abs(newWidth)}px`;

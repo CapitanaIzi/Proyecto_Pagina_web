@@ -30,12 +30,12 @@ class InteraccionesPagina {
 
     enlaceApariencia.addEventListener('click', (evento) => {
       evento.preventDefault();
-      const esTemaOscuro = this.toggleTema(); // Alternar tema
-      this.actualizarTextoTema(enlaceApariencia, esTemaOscuro); // Actualizar texto del enlace
-      this.actualizarLogo(logo, esTemaOscuro); // Actualizar logo
-      this.actualizarIconoMenu(menuIcon, esTemaOscuro); // Actualizar color del ícono del menú
-      this.actualizarCalendarioTema(calendarContainer, esTemaOscuro); // Actualizar tema del calendario
-      this.guardarTemaEnLocalStorage(esTemaOscuro); // Guardar preferencia en localStorage
+      const esTemaOscuro = this.toggleTema(); 
+      this.actualizarTextoTema(enlaceApariencia, esTemaOscuro); 
+      this.actualizarLogo(logo, esTemaOscuro); 
+      this.actualizarIconoMenu(menuIcon, esTemaOscuro); 
+      this.actualizarCalendarioTema(calendarContainer, esTemaOscuro); 
+      this.guardarTemaEnLocalStorage(esTemaOscuro); 
     });
   }
 
@@ -104,7 +104,6 @@ class InteraccionesPagina {
     const menuIcon = document.getElementById('menu-icon');
     const calendarContainer = document.getElementById('calendar-container');
 
-    // Aplicar tema al body y actualizar elementos relacionados
     document.body.classList.toggle('dark-theme', temaGuardado);
     this.actualizarTextoTema(enlaceApariencia, temaGuardado);
     this.actualizarLogo(logo, temaGuardado);

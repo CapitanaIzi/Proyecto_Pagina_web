@@ -54,11 +54,7 @@ class App {
    */
   configurarBotonGuardar() {
     document.getElementById('btn-guardar').addEventListener('click', () => {
-      // Aquí puedes agregar la lógica para guardar los datos
       alert('Cambios guardados exitosamente.');
-
-      // Ejemplo de lógica adicional (puedes adaptarlo a tu necesidad)
-      // Guarda las listas en el localStorage, servidor, etc.
       this.guardarListas();
     });
   }
@@ -68,11 +64,9 @@ class App {
    */
   guardarListas() {
     const listas = {
-      listaSemanal: this.listaSemanal.obtenerDatos(), // Aquí deberías tener un método en ListaSemanal que devuelva los datos
-      // Agregar otros métodos similares para las otras listas
+      listaSemanal: this.listaSemanal.obtenerDatos(),
     };
 
-    // Ejemplo: guardar en localStorage
     localStorage.setItem('listasPendientes', JSON.stringify(listas));
     console.log('Listas guardadas:', listas);
   }

@@ -30,9 +30,7 @@ class CuadroDiagrama {
      * Habilita la funcionalidad de arrastre en un elemento, en este caso el cuadro.
      */
     habilitarArrastre() {
-        const estadoArrastre = this.inicializarEstadoArrastre(); // Inicializa el estado de arrastre
-
-        // Event listeners para manejar el arrastre
+        const estadoArrastre = this.inicializarEstadoArrastre();
         this.element.addEventListener('mousedown', (e) => this.iniciarArrastre(e, estadoArrastre));
         document.addEventListener('mousemove', (e) => this.moverElemento(e, estadoArrastre));
         document.addEventListener('mouseup', () => this.terminarArrastre(estadoArrastre));
@@ -71,8 +69,6 @@ class CuadroDiagrama {
      */
     moverElemento(e, estadoArrastre) {
         if (!estadoArrastre.isDragging) return;
-
-        // Ajustar la posición del elemento
         this.element.style.left = `${e.pageX - estadoArrastre.offsetX}px`;
         this.element.style.top = `${e.pageY - estadoArrastre.offsetY}px`;
     }

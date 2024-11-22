@@ -16,15 +16,12 @@ class Lista {
     crearListaElement() {
         this.listaDiv = document.createElement('div');
         this.listaDiv.classList.add('lista-basica');
-
         const tituloContainer = this.crearTituloContainer();
         this.listaDiv.appendChild(tituloContainer);
-
-        // Crear las tareas y agregarlas al contenedor
         this.tareas.forEach((tarea) => {
             const tareaElement = tarea.crearTarea(this.listaDiv);
             tarea.element = tareaElement;
-            tareaElement.style.display = this.expandida ? 'block' : 'none'; // Controlar visibilidad
+            tareaElement.style.display = this.expandida ? 'block' : 'none'; 
             this.listaDiv.appendChild(tareaElement);
         });
 
@@ -67,7 +64,7 @@ class Lista {
         input.type = 'text';
         input.placeholder = this.titulo;
         input.addEventListener('input', (e) => {
-            this.titulo = e.target.value; // Actualiza el título de la lista
+            this.titulo = e.target.value; 
         });
         return input;
     }
@@ -78,14 +75,13 @@ class Lista {
       */
     crearIconoExpandir() {
         const icono = document.createElement('span');
-        icono.classList.add('icono-expandir', 'fas', 'fa-chevron-down'); // Ícono inicial de expandir
+        icono.classList.add('icono-expandir', 'fas', 'fa-chevron-down');
         icono.style.cursor = 'pointer';
-    
         icono.addEventListener('click', () => {
             this.expandida = !this.expandida;
-            icono.classList.toggle('fa-chevron-down', !this.expandida); // Ícono de expandir
-            icono.classList.toggle('fa-chevron-up', this.expandida);   // Ícono de contraer
-            this.actualizarVisibilidadTareas(); // Actualiza la visibilidad de las tareas
+            icono.classList.toggle('fa-chevron-down', !this.expandida); 
+            icono.classList.toggle('fa-chevron-up', this.expandida);  
+            this.actualizarVisibilidadTareas(); 
         });
     
         return icono;
@@ -99,20 +95,19 @@ class Lista {
      */
     crearBotonOpciones() {
         const opcionesBtn = document.createElement('button');
-        opcionesBtn.textContent = '⋮'; // Ícono de tres puntos para las opciones
-        const menuLista = this.crearMenuOpciones(); // Menú de opciones
+        opcionesBtn.textContent = '⋮'; 
+        const menuLista = this.crearMenuOpciones(); 
     
         opcionesBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            toggleMenu(menuLista); // Usar la función centralizada de toggleMenu
+            toggleMenu(menuLista); 
         });
     
-        // Cerrar el menú cuando se haga clic fuera de él
         document.addEventListener('click', (e) => {
             if (!this.listaDiv.contains(e.target)) {
-                menuLista.style.display = 'none'; // Ocultar el menú
+                menuLista.style.display = 'none'; 
                 if (menuListaAbierto === menuLista) {
-                    menuListaAbierto = null; // Limpiar la referencia del menú abierto
+                    menuListaAbierto = null; 
                 }
             }
         });
@@ -129,9 +124,8 @@ class Lista {
     crearMenuOpciones() {
         const menuLista = document.createElement('div');
         menuLista.classList.add('menu-lista');
-        menuLista.style.display = 'none'; // El menú está oculto por defecto
+        menuLista.style.display = 'none'; 
     
-        // Crear las opciones del menú
         const opcionEliminar = this.crearOpcionEliminar(menuLista);
         const opcionAgregar = this.crearOpcionAgregar(menuLista);
         const opcionOrdenar = this.crearOpcionOrdenar(menuLista);
@@ -149,14 +143,12 @@ class Lista {
     crearOpcionAgregar(menuLista) {
         const opcionAgregar = document.createElement('div');
         const iconoAgregar = document.createElement('i');
-        iconoAgregar.classList.add('fas', 'fa-plus'); // Ícono de agregar
+        iconoAgregar.classList.add('fas', 'fa-plus'); 
         opcionAgregar.appendChild(iconoAgregar);
-    
-        // Acción al hacer clic: agregar una nueva tarea
         opcionAgregar.addEventListener('click', () => {
             const nuevaTarea = new Tarea();
             this.agregarTarea(nuevaTarea);
-            menuLista.style.display = 'none'; // Cerrar el menú después de agregar
+            menuLista.style.display = 'none'; 
         });
     
         return opcionAgregar;
@@ -170,12 +162,11 @@ class Lista {
     crearOpcionEliminar() {
         const opcionEliminar = document.createElement('div');
         const iconoEliminar = document.createElement('i');
-        iconoEliminar.classList.add('fas', 'fa-trash'); // Ícono de eliminar
+        iconoEliminar.classList.add('fas', 'fa-trash'); 
         opcionEliminar.appendChild(iconoEliminar);
     
-        // Acción al hacer clic: eliminar la lista
         opcionEliminar.addEventListener('click', () => {
-            this.listaDiv.remove(); // Eliminar el contenedor de la lista
+            this.listaDiv.remove(); 
         });
     
         return opcionEliminar;
@@ -189,12 +180,11 @@ class Lista {
     crearOpcionOrdenar() {
         const opcionOrdenar = document.createElement('div');
         const iconoOrdenar = document.createElement('i');
-        iconoOrdenar.classList.add('fas', 'fa-sort'); // Ícono de ordenar
+        iconoOrdenar.classList.add('fas', 'fa-sort'); 
         opcionOrdenar.appendChild(iconoOrdenar);
     
-        // Acción al hacer clic: ordenar las tareas
         opcionOrdenar.addEventListener('click', () => {
-            this.ordenarTareas(); // Ordenar tareas
+            this.ordenarTareas(); 
         });
     
         return opcionOrdenar;
@@ -205,16 +195,14 @@ class Lista {
      * Las tareas completadas se colocan al final.
      */
     ordenarTareas() {
-        this.tareas.sort((a, b) => a.completada - b.completada); // Ordenar por estado de completado
+        this.tareas.sort((a, b) => a.completada - b.completada); 
     
-        // Limpiar las tareas actuales en el DOM
         this.tareas.forEach((tarea) => {
             if (tarea.element && tarea.element.parentElement === this.listaDiv) {
                 this.listaDiv.removeChild(tarea.element);
             }
         });
     
-        // Reagregar las tareas en el orden actualizado
         this.tareas.forEach((tarea) => {
             if (tarea.completada) {
                 tarea.element.querySelector('textarea').classList.add('tachado'); // Aplicar el estilo de tachado
@@ -231,12 +219,11 @@ class Lista {
     agregarTarea() {
         const nuevaTarea = new Tarea();
         const tareaElement = nuevaTarea.crearTarea();
-        tareaElement.style.display = this.expandida ? 'block' : 'none'; // Establecer visibilidad según el estado de expansión
+        tareaElement.style.display = this.expandida ? 'block' : 'none'; 
         nuevaTarea.element = tareaElement;
         this.tareas.push(nuevaTarea);
         this.listaDiv.appendChild(tareaElement);
 
-        // Asegurarse de que la visibilidad de todas las tareas se actualice
         this.actualizarVisibilidadTareas();
     }
     /**
@@ -258,13 +245,11 @@ class Lista {
  */
 function toggleMenu(menu) {
     if (menuListaAbierto && menuListaAbierto !== menu) {
-        menuListaAbierto.style.display = 'none'; // Cerrar el menú previamente abierto
+        menuListaAbierto.style.display = 'none'; 
     }
 
-    // Alternar visibilidad del menú actual
     const isMenuVisible = menu.style.display === 'block';
     menu.style.display = isMenuVisible ? 'none' : 'block';
 
-    // Actualizar la referencia del menú abierto
     menuListaAbierto = isMenuVisible ? null : menu;
 }

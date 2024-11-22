@@ -18,7 +18,7 @@ class Diagrama {
      * @returns {Object} Objeto que representa el título.
      */
     obtenerTitulo() {
-        const titulo = this.titulo.innerText || ''; // Obtener el texto del título
+        const titulo = this.titulo.innerText || '';
         return {
             type: 'titulo',
             content: titulo,
@@ -30,7 +30,7 @@ class Diagrama {
      * @param {string} content - El contenido del título.
      */
     cargarTitulo(content) {
-        this.titulo.innerText = content; // Establecer el nuevo texto del título
+        this.titulo.innerText = content;
     }
 
     init() {
@@ -67,7 +67,7 @@ class Diagrama {
      */
     configurarMenuDiagrama(button, menu) {
         button.addEventListener('click', (e) => {
-            e.stopPropagation();  // Previene que el evento se propague al documento
+            e.stopPropagation();
             menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
         });
 
@@ -157,7 +157,6 @@ class Diagrama {
     }
 }
 
-// Inicia el diagrama directamente sin la necesidad de la clase MapaConceptual.
 document.addEventListener('DOMContentLoaded', () => {
     new Diagrama();
 });
