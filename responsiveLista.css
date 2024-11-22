@@ -1,3 +1,51 @@
+@media (max-width: 865px) {
+    /* Ajuste del contenedor principal */
+    #calendar-container {
+        width: 90%; /* Ocupa todo el ancho disponible */
+        max-width: 100%;
+        height: 85%; /* Ajusta la altura dinámicamente */
+        margin: 0 auto; /* Centra el contenedor */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Asegura que el calendario ocupe el contenedor */
+    .fc-view {
+        width: 100%;
+        height: 75%; /* Se ajusta según el contenido */
+    }
+
+    /* Estilos de la tabla del calendario */
+    #calendar-container table {
+        width: 100%;
+        height: auto; /* Permite que la altura dependa del contenido */
+        background-color: rgb(202, 37, 37);
+        text-align: center;
+    }
+
+    /* Cuerpo del calendario */
+    .fc-body {
+        background-color: rgb(252, 237, 237);
+        height: auto; /* Ajusta la altura según el contenido */
+    }
+
+    /* Ajuste de la vista mensual */
+    .fc-month-view {
+        font-size: 1rem; /* Tamaño de fuente adaptativo */
+        padding: 0;
+        height: auto; /* La altura se ajusta automáticamente */
+    }
+
+    /* Celdas de los días */
+    .fc-daygrid-day {
+        font-size: 1rem; /* Tamaño de fuente adaptativo */
+        padding: 5px; /* Espaciado interno para celdas */
+        height: auto; /* Ajuste dinámico */
+    }
+}
+
+
 @media (max-width: 660px) {
 
     main {
@@ -43,6 +91,52 @@
         line-height: 1.2;
         box-sizing: border-box;
         /* Asegura que el padding no afecte el tamaño del botón */
+    }
+    /* Ajuste del contenedor principal del calendario */
+    #calendar-container {
+        width: 100% !important; /* Asegura que el calendario ocupe todo el ancho disponible */
+        max-width: 100% !important; /* Elimina cualquier límite de ancho */
+        height: auto !important; /* Ajusta la altura según el contenido */
+        overflow: visible !important; /* Permite que el contenido se expanda sin barra de desplazamiento */
+        margin: 0 auto !important; /* Centra el contenedor */
+    }
+
+    /* Aumentar el tamaño de la vista del calendario */
+    .fc-view {
+        width: 96% !important; /* Asegura que la vista ocupe todo el ancho del contenedor */
+    }
+
+    /* Ajuste de la vista mensual (fc-month-view) */
+    .fc-month-view {
+        font-size: 14px !important; /* Aumentar el tamaño de la fuente en la vista mensual */
+        padding: 10px !important; /* Aumenta el padding para que se vea más espacioso */
+    }
+
+    /* Ajuste de las celdas de los días */
+    .fc-daygrid-day {
+        font-size: 14px !important; /* Aumenta el tamaño de los días */
+        padding: 10px !important; /* Aumenta el espacio alrededor de los días */
+    }
+
+    .fc-daygrid-day-number {
+        font-size: 16px !important; /* Aumenta el tamaño de los números de los días */
+    }
+
+    /* Aumentar el tamaño de los eventos */
+    .fc-event {
+        font-size: 14px !important; /* Aumentar el tamaño de los eventos */
+        padding: 6px !important; /* Aumenta el espacio alrededor de los eventos */
+    }
+
+    /* Ajuste de los botones de navegación */
+    .fc-prev-button, .fc-next-button, .fc-today-button {
+        font-size: 14px !important; /* Aumentar el tamaño de los botones de navegación */
+        padding: 10px !important; /* Aumenta el tamaño de los botones */
+    }
+
+    /* Aumento del tamaño de los botones de vista (Mes, Semana, Día) */
+    .fc-button-group {
+        font-size: 14px !important; /* Aumenta el tamaño de los botones de vista */
     }
 }
 

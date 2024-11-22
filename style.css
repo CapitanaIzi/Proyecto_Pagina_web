@@ -1,3 +1,6 @@
+html {
+    scroll-behavior: smooth;
+}
 .container {
     text-align: center;
     background-color: white;
@@ -51,7 +54,7 @@ p {
     transform: scale(1.02);
     /* Efecto de zoom al pasar el cursor */
 }
-
+/* Contenedor de contenido */
 /* Estilo para la imagen y el contenido */
 .carousel-item {
     justify-content: center;
@@ -64,9 +67,37 @@ p {
 .carousel-item.active {
     display: flex;
     align-items: center;
+   
+    padding: 0px 30px;
+
 }
+.carousel-content {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 58px;
+    color: #333;
+    /* Color de texto */
+    font-family: 'Arial', sans-serif;
+    /* Fuente elegante */
+    justify-content: center;
 
-
+}
+.carousel-image {
+    width: 50%;
+    padding: 15px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+.carousel-item.active svg {
+    width: 200px;
+    /* Cambia este valor según el tamaño deseado */
+    height: 200px;
+    /* Aumenta este valor también */
+}
 /* SVG personalizados */
 .carousel-item.active .svg-top svg {
     margin-bottom: 10px;
@@ -86,77 +117,12 @@ p {
     transition: all 0.3s ease;
 }
 
-/* Efecto hover para SVG */
-.carousel-item.active .svg-top svg:hover,
-.carousel-item.active .svg-bottom svg:hover {
-    transform: scale(1.1);
-    /* Zoom ligero en el SVG al pasar el mouse */
-}
-
-.carousel-item.active svg {
-    width: 200px;
-    /* Cambia este valor según el tamaño deseado */
-    height: 200px;
-    /* Aumenta este valor también */
-}
-
-.carousel-image {
-    width: 50%;
-    padding: 15px;
-    display: flex;
-    justify-content: right;
-    align-items: center;
-}
-
-/* Contenedor de contenido */
-.carousel-content {
-    display: flex;
-
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    padding: 25px;
-    color: #333;
-    /* Color de texto */
-    font-family: 'Arial', sans-serif;
-    /* Fuente elegante */
-}
-
 .carousel-description {
     justify-content: left;
     width: 40%;
-    padding: 25px;
-}
-/* Media Queries */
-@media (max-width: 768px) {
-    .carousel {
-        width: 98%;
-        height: 300px;
-    }
-
-    .carousel-description {
-        font-size: 0.9rem;
-
-    }
-    .container {
-        padding: 0px;
-        width: 100%;
-       
-    }
-    
+    padding: 55px;
 }
 
-@media (max-width: 360px) {
-    .carousel {
-        width: 95%;
-        height: 250px;
-    }
-
-    .carousel-description {
-        font-size: 0.8rem;
-        padding: 10px;
-    }
-}
 
 
 button {
@@ -183,9 +149,6 @@ button:hover {
     background-color: #5f7ee6;
 }
 
-html {
-    scroll-behavior: smooth;
-}
 
 .dark-theme {
     background-color: #131212;
@@ -235,24 +198,30 @@ html {
 
 /* Media Queries */
 @media (max-width: 768px) {
-    .dark-theme .carousel {
+    .carousel {
         width: 98%;
         height: 300px;
     }
 
-    .dark-theme .carousel-description {
+    .carousel-description {
         font-size: 0.9rem;
 
     }
+    .container {
+        padding: 0px;
+        width: 100%;
+       
+    }
+    
 }
 
 @media (max-width: 360px) {
-    .dark-theme .carousel {
+    .carousel {
         width: 95%;
         height: 250px;
     }
 
-    .dark-theme .carousel-description {
+    .carousel-description {
         font-size: 0.8rem;
         padding: 10px;
     }
