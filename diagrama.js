@@ -10,6 +10,7 @@ class Diagrama {
         this.btnColor = document.getElementById('btn-color');
         this.menuColor = document.getElementById('menu-color');
         this.titulo = document.getElementById('titulo');
+        this.tituloPlaceholder = document.getElementById('titulo-placeholder');
         this.isMouseDown = false;
         this.init();
     }
@@ -34,10 +35,29 @@ class Diagrama {
     }
 
     init() {
+        this.configurarTitulo();
         this.configurarEventos();
         this.configurarMenu();
         this.configurarColor();
         this.seleccionarCuadroActivo();
+        this.configurarEventoEliminar();
+
+    }
+    /**
+     * Configura el comportamiento del título y su placeholder.
+     */
+    configurarTitulo() {
+        // Ocultar placeholder al hacer clic en el título
+        this.titulo.addEventListener('focus', () => {
+            this.tituloPlaceholder.style.display = 'none';
+        });
+
+        // Mostrar placeholder si el título está vacío al perder el foco
+        this.titulo.addEventListener('blur', () => {
+            if (!this.titulo.innerText.trim()) {
+                this.tituloPlaceholder.style.display = 'inline';
+            }
+        });
     }
 
     /**
@@ -47,7 +67,6 @@ class Diagrama {
         this.seleccionarCuadroActivo();
         document.getElementById('insertar-cuadro').addEventListener('click', () => this.crearCuadro());
         document.getElementById('insertar-flecha').addEventListener('click', () => this.crearFlecha());
-        this.configurarEventoEliminar();
     }
 
     /**
@@ -120,7 +139,7 @@ class Diagrama {
      * Crea un cuadro usando la clase Cuadro.
      */
     crearCuadro() {
-        const nuevoCuadro = new Cuadro();
+        const nuevoCuadro = new CuadroDiagrama();
         this.cuadroActivo = nuevoCuadro.element;
     }
 
@@ -128,7 +147,7 @@ class Diagrama {
      * Crea una flecha usando la clase Flecha.
      */
     crearFlecha() {
-        new Flecha();
+        new FlechaDiagrama();
     }
 
     /**
