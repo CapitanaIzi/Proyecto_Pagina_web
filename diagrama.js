@@ -101,27 +101,40 @@ class Diagrama {
      * Configura el evento eliminar para cuando el elemento pase sobre el botón de eliminación.
      */
     configurarEventoEliminar() {
-        document.addEventListener('mousedown', () => {
-            this.isMouseDown = true;
+        let elementoMoviendose = null;
+    
+        // Detectar inicio del arrastre
+        document.addEventListener('mousedown', (e) => {
+            if (e.target.classList.contains('cuadro') || e.target.classList.contains('flecha')) {
+                this.isMouseDown = true;
+                elementoMoviendose = e.target;
+            }
         });
-
-        document.addEventListener('mouseup', () => {
-            this.isMouseDown = false;
-        });
-
-        this.eliminarBtn.addEventListener('mousemove', (e) => {
-            if (this.isMouseDown && this.cuadroActivo) {
+    
+        // Detectar el movimiento del elemento
+        document.addEventListener('mousemove', (e) => {
+            if (this.isMouseDown && elementoMoviendose) {
+                elementoMoviendose.style.position = 'absolute';
+                elementoMoviendose.style.left = `${e.pageX - elementoMoviendose.offsetWidth / 2}px`;
+                elementoMoviendose.style.top = `${e.pageY - elementoMoviendose.offsetHeight / 2}px`;
+    
+                // Evaluar si el elemento está sobre el botón eliminar
                 const rectEliminarBtn = this.eliminarBtn.getBoundingClientRect();
-                const rectCuadroActivo = this.cuadroActivo.getBoundingClientRect();
-
-                if (this.ElementoSobreBotonEliminar(rectCuadroActivo, rectEliminarBtn)) {
-                    this.cuadroActivo.remove();
-                    this.cuadroActivo = null;
+                const rectElemento = elementoMoviendose.getBoundingClientRect();
+                if (this.ElementoSobreBotonEliminar(rectElemento, rectEliminarBtn)) {
+                    elementoMoviendose.remove();
+                    elementoMoviendose = null;
                 }
             }
         });
+    
+        // Detectar fin del arrastre
+        document.addEventListener('mouseup', () => {
+            this.isMouseDown = false;
+            elementoMoviendose = null;
+        });
     }
-
+    
     /**
      * Evalúa si el elemento está sobre el botón de eliminar.
      * @param {Object} rectElemento - Elemento que va a ser eliminado.
