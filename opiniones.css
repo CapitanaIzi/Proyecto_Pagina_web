@@ -35,9 +35,7 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
   background-color: #5fadee;
-  /* Color más oscuro al pasar el cursor */
   transform: scale(1.1);
-  /* Aumenta ligeramente el tamaño */
   color: #f1f1f1;
 }
 
@@ -83,5 +81,4 @@ button[type="submit"]:hover {
 .dark-theme .opinion {
   background-color: #333;
   color: #f3eded;
-
 }

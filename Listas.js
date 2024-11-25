@@ -1,6 +1,11 @@
 let menuListaAbierto = null;
 
 class Lista {
+   /**
+   * Constructor de la clase Lista.
+   * 
+   * @param {string} titulo - El título inicial de la lista (por defecto, "Título").
+   */
     constructor(titulo = "Título") {
         this.titulo = titulo;
         this.tareas = [new Tarea(), new Tarea(), new Tarea()]; 
@@ -186,7 +191,6 @@ class Lista {
         opcionOrdenar.addEventListener('click', () => {
             this.ordenarTareas(); 
         });
-    
         return opcionOrdenar;
     }
 
@@ -250,6 +254,5 @@ function toggleMenu(menu) {
 
     const isMenuVisible = menu.style.display === 'block';
     menu.style.display = isMenuVisible ? 'none' : 'block';
-
     menuListaAbierto = isMenuVisible ? null : menu;
 }

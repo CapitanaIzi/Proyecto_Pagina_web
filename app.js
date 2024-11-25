@@ -47,7 +47,6 @@ class App {
       this.listaMesContenedor.appendChild(nuevaLista.crearListaElement());
     });
   }
-
  
   /**
    * Configura el evento para el botón Guardar.

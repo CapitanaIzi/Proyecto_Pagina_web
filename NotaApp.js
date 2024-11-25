@@ -46,7 +46,7 @@ class NotaApp {
     botonEliminar.textContent = 'Eliminar';
     botonEliminar.classList.add('boton-eliminar');
     botonEliminar.onclick = (event) => {
-      event.stopPropagation(); // Evitar que se active `cargarNota`
+      event.stopPropagation();
       this.eliminaNota(posicion);
     };
 

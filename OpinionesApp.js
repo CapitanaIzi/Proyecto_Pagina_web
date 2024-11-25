@@ -3,14 +3,10 @@ class OpinionesApp {
     this.listaDeOpiniones = document.getElementById('listaDeOpiniones');
     this.formularioOpinion = document.getElementById('formularioOpinion');
     this.campoOpinion = document.getElementById('campoOpinion');
-
     this.cargarOpiniones();
-
-    // Configurar el manejo del envío del formulario
     this.formularioOpinion.addEventListener('submit', (evento) => this.manejarEnvioFormulario(evento));
   }
 
- 
 /**
  * Maneja el envío del formulario de opiniones.
  * 
@@ -75,5 +71,5 @@ manejarEnvioFormulario(evento) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const app = new OpinionesApp();
+ new OpinionesApp();
 });

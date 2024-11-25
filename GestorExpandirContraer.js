@@ -1,4 +1,11 @@
 class GestorExpandirContraer {
+    /**
+   * Constructor de la clase GestorExpandirContraer.
+   * 
+   * @param {string} contenedorSelector - Selector CSS del contenedor que agrupa el título y contenido.
+   * @param {string} tituloSelector - Selector CSS del elemento que actúa como título o encabezado del contenedor.
+   * @param {string} contenidoSelector - Selector CSS del elemento cuyo contenido puede expandirse o contraerse.
+   */
     constructor(contenedorSelector, tituloSelector, contenidoSelector) {
         this.contenedorSelector = contenedorSelector;
         this.tituloSelector = tituloSelector;

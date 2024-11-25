@@ -10,7 +10,6 @@ html {
     width: 80%;
     max-width: 600px;
     margin-top: 80px;
-    /* Espacio suficiente para que no quede cubierto por el header fijo */
 }
 
 h1 {
@@ -21,9 +20,7 @@ h1 {
 
 .highlight {
     font-weight: bold;
-    /* Aumenta la negrita */
     color: #4287f5;
-    /* Color más fuerte */
 }
 a{
     text-decoration: none;
@@ -33,7 +30,6 @@ p {
     color: #666;
 }
 
-
 .carousel {
     position: relative;
     width: 56%;
@@ -41,23 +37,15 @@ p {
     margin: 40px auto;
     overflow: hidden;
     border-radius: 15px;
-    /* Esquinas redondeadas */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    /* Sombra suave */
     background-color: #fff;
-    /* Fondo blanco */
     border: 2px solid #f0f0f0;
-    /* Borde gris claro */
     transition: transform 0.3s ease-in-out;
-    /* Transición suave */
 }
 
 .carousel:hover {
     transform: scale(1.02);
-    /* Efecto de zoom al pasar el cursor */
 }
-/* Contenedor de contenido */
-/* Estilo para la imagen y el contenido */
 .carousel-item {
     justify-content: center;
     display: none;
@@ -65,13 +53,10 @@ p {
     height: 100%;
     text-align: center;
 }
-
 .carousel-item.active {
     display: flex;
     align-items: center;
-   
     padding: 0px 30px;
-
 }
 .carousel-content {
     text-align: center;
@@ -81,11 +66,8 @@ p {
     height: 100%;
     padding: 58px;
     color: #333;
-    /* Color de texto */
     font-family: 'Arial', sans-serif;
-    /* Fuente elegante */
     justify-content: center;
-
 }
 .carousel-image {
     width: 50%;
@@ -96,11 +78,8 @@ p {
 }
 .carousel-item.active svg {
     width: 200px;
-    /* Cambia este valor según el tamaño deseado */
     height: 200px;
-    /* Aumenta este valor también */
 }
-/* SVG personalizados */
 .carousel-item.active .svg-top svg {
     margin-bottom: 10px;
     width: 140px;
@@ -111,9 +90,7 @@ p {
 .carousel-item.active .svg-bottom svg {
     display: flex;
     gap: 10px;
-    /* Espacio entre los dos SVG inferiores */
     justify-content: center;
-    /* Centra los dos SVG en la fila */
     width: 75px;
     height: 75px;
     transition: all 0.3s ease;
@@ -124,9 +101,6 @@ p {
     width: 40%;
     padding: 55px;
 }
-
-
-
 button {
     position: absolute;
     top: 50%;
@@ -166,19 +140,15 @@ button:hover {
 .dark-theme h1 {
     color: #e0e0e0;
 }
-
 .dark-theme .highlight {
     font-weight: bold;
-    /* Aumenta la negrita */
     color: #3c90d4;
-    /* Color amarillo dorado brillante para destacar la palabra */
 }
-
 .dark-theme p {
     color: #cec8c8;
 }
 .dark-theme .carousel-description p {
-    color: #1b1b1b; /* Color del texto */
+    color: #1b1b1b; 
 }
 .dark-theme .carousel {
     background-color: #a5a2a2;
@@ -198,7 +168,6 @@ button:hover {
     background-color: #666;
 }
 
-/* Media Queries */
 @media (max-width: 768px) {
     .carousel {
         width: 98%;

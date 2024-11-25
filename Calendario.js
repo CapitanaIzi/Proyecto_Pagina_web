@@ -97,5 +97,4 @@ class Calendario {
         });
     }
 }
-
 const calendario = new Calendario('btn-calendario', 'calendar-container');

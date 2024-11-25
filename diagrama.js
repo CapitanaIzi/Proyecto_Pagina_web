@@ -47,12 +47,10 @@ class Diagrama {
      * Configura el comportamiento del título y su placeholder.
      */
     configurarTitulo() {
-        // Ocultar placeholder al hacer clic en el título
         this.titulo.addEventListener('focus', () => {
             this.tituloPlaceholder.style.display = 'none';
         });
 
-        // Mostrar placeholder si el título está vacío al perder el foco
         this.titulo.addEventListener('blur', () => {
             if (!this.titulo.innerText.trim()) {
                 this.tituloPlaceholder.style.display = 'inline';

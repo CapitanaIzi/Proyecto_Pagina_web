@@ -1,4 +1,12 @@
 class CuadroDiagrama {
+   /**
+   * Constructor de la clase CuadroDiagrama.
+   * 
+   * @param {string} content - Texto inicial del cuadro (por defecto, vacío).
+   * @param {string} left - Posición horizontal del cuadro en la página (por defecto, '50%').
+   * @param {string} top - Posición vertical del cuadro en la página (por defecto, '50%').
+   * @param {string} backgroundColor - Color de fondo del cuadro (por defecto, 'white').
+   */
     constructor(content = '', left = '50%', top = '50%', backgroundColor = 'white') {
         this.type = 'cuadro';
         this.content = content;
@@ -59,7 +67,7 @@ class CuadroDiagrama {
         estadoArrastre.offsetY = e.offsetY;
 
         this.element.style.cursor = 'grabbing';
-        this.element.style.position = 'absolute'; // Asegurarse de que el elemento sea arrastrable
+        this.element.style.position = 'absolute';
     }
 
     /**

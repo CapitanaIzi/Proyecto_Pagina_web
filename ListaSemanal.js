@@ -1,4 +1,9 @@
 class ListaSemanal {
+    /**
+   * Constructor de la clase ListaSemanal.
+   * 
+   * @param {HTMLElement} container - Contenedor DOM donde se agregarán las listas semanales.
+   */
     constructor(container) {
         this.container = container;
         this.semanas = [];
@@ -14,16 +19,11 @@ class ListaSemanal {
         const iconoEliminar = this.crearIconoEliminar(nuevoContenedor);
         const listaSemanalContainer = this.crearListaSemanalContainer();
 
-        // Agregar elementos al contenedor principal
         nuevoContenedor.appendChild(tituloEditable);
         nuevoContenedor.appendChild(iconoExpandir);
         nuevoContenedor.appendChild(iconoEliminar);
         nuevoContenedor.appendChild(listaSemanalContainer);
-
-        // Añadir días de la semana al contenedor de listas
         this.agregarDiasDeLaSemana(listaSemanalContainer);
-
-        // Agregar el contenedor principal al DOM
         this.container.appendChild(nuevoContenedor);
     }
 
@@ -57,15 +57,12 @@ class ListaSemanal {
         const icono = document.createElement('span');
         icono.classList.add('icono-expandir', 'fas', 'fa-chevron-down');
         icono.style.cursor = 'pointer';
-
-        // Funcionalidad de expandir/contraer
         icono.addEventListener('click', () => {
             const listaSemanalContainer = nuevoContenedor.querySelector('.listas-basicas');
-            listaSemanalContainer.classList.toggle('colapsada'); // Alternar visibilidad
+            listaSemanalContainer.classList.toggle('colapsada');
             icono.classList.toggle('fa-chevron-down');
             icono.classList.toggle('fa-chevron-up');
         });
-
         return icono;
     }
 
@@ -78,12 +75,9 @@ class ListaSemanal {
         const icono = document.createElement('span');
         icono.classList.add('icono-eliminar', 'fas', 'fa-trash');
         icono.style.cursor = 'pointer';
-
-        // Funcionalidad de eliminar
         icono.addEventListener('click', () => {
             this.container.removeChild(nuevoContenedor);
         });
-
         return icono;
     }
 
@@ -104,22 +98,15 @@ class ListaSemanal {
     agregarDiasDeLaSemana(listaSemanalContainer) {
         const diasDeLaSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
         diasDeLaSemana.forEach(dia => {
-            // Crear el contenedor de la lista
             const lista = new Lista(dia);
             const listaElement = lista.crearListaElement();
-    
-            // Buscar el input dentro de la lista
-            const inputTitulo = listaElement.querySelector('.titulo'); // Suponiendo que el título tiene la clase 'titulo'
+            const inputTitulo = listaElement.querySelector('.titulo'); 
             if (inputTitulo) {
-                // Establecer el texto del día dentro del input y hacerlo no editable
                 inputTitulo.value = dia;
-                inputTitulo.setAttribute('readonly', 'true'); // Hace el input no editable
+                inputTitulo.setAttribute('readonly', 'true'); 
             }
-    
-            // Añadir la lista al contenedor de la lista semanal
             listaSemanalContainer.appendChild(listaElement);
-            this.semanas.push(lista); // Agregar a la lista de semanas
+            this.semanas.push(lista);
         });
     }
-    
 }

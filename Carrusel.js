@@ -1,4 +1,9 @@
 class Carrusel {
+   /**
+   * Constructor de la clase Carrusel.
+   * 
+   * @param {string} selector - Selector CSS que identifica los elementos del carrusel.
+   */
   constructor(selector) {
     this.elementos = document.querySelectorAll(selector);
     this.totalElementos = this.elementos.length;

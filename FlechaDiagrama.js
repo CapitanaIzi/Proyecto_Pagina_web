@@ -1,4 +1,12 @@
 class FlechaDiagrama {
+    /**
+   * Constructor de la clase FlechaDiagrama.
+   * 
+   * @param {string} width - Ancho inicial de la flecha (por defecto, '100px').
+   * @param {string} left - Posición horizontal inicial de la flecha en la página (por defecto, '50%').
+   * @param {string} top - Posición vertical inicial de la flecha en la página (por defecto, '50%').
+   * @param {string} rotation - Rotación inicial de la flecha, expresada en grados CSS (por defecto, 'rotate(0deg)').
+   */
     constructor(width = '100px', left = '50%', top = '50%', rotation = 'rotate(0deg)') {
         this.type = 'flecha';
         this.width = width;
@@ -134,8 +142,6 @@ class FlechaDiagrama {
     terminarRotacion(estadoRotacion) {
         estadoRotacion.isRotating = false;
     }
-
-
 
     /**
      * Habilita la funcionalidad de redimensionar un elemento con control visual.

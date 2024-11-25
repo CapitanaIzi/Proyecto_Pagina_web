@@ -1,10 +1,14 @@
 let menuAbierto = null;
 class Tarea {
+    /**
+   * Constructor de la clase Tarea.
+   * 
+   * @param {string} nombre - El nombre inicial de la tarea (por defecto, "Tarea").
+   */
     constructor(nombre = "Tarea") {
         this.nombre = nombre;
         this.completada = false;
     }
-
 
     /**
      * Crea un checkbox para la tarea, el cual permite marcarla como completada.
@@ -16,21 +20,15 @@ class Tarea {
     crearCheckbox(textArea) {
         const label = document.createElement('label');
         label.classList.add('custom-checkbox');
-
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
-
         const span = document.createElement('span');
-
-        // Agregar evento para marcar completada y tachar el texto
         checkbox.addEventListener('change', () => {
             this.completada = checkbox.checked;
             if (textArea) {
                 textArea.classList.toggle('tachado', this.completada);
             }
         });
-
-        // Estructura del checkbox personalizado
         label.appendChild(checkbox);
         label.appendChild(span);
 
@@ -64,18 +62,12 @@ class Tarea {
         tareaDiv.draggable = true;
         tareaDiv.id = `tarea-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
-        // Crear contenedor para checkbox, textarea y botón de opciones
         const contenidoDiv = document.createElement('div');
-        contenidoDiv.classList.add('contenido-tarea'); // Clase para manejar estilos
-
+        contenidoDiv.classList.add('contenido-tarea');   
         const textArea = this.crearTextArea();
         const checkbox = this.crearCheckbox(textArea);
         const { opcionesBtn, menuTarea } = this.crearBotonOpciones(tareaDiv, listaDiv);
-
-        // Añadir checkbox, textarea y botón de opciones al contenedor
         contenidoDiv.append(checkbox, textArea, opcionesBtn);
-
-        // Agregar contenedor de menú desplegable aparte (si es necesario)
         tareaDiv.append(contenidoDiv, menuTarea);
 
         return tareaDiv;
@@ -96,24 +88,18 @@ class Tarea {
 
         opcionesBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            toggleMenu(menuTarea); // Centraliza la lógica en `toggleMenu`
+            toggleMenu(menuTarea);
         });
-
-        // Lógica para cerrar el menú al hacer clic fuera
         document.addEventListener('click', (e) => {
             if (!tareaDiv.contains(e.target)) {
                 menuTarea.style.display = 'none';
                 if (menuAbierto === menuTarea) {
-                    menuAbierto = null; // Limpiar la referencia si se cerró el menú
+                    menuAbierto = null; 
                 }
             }
         });
-
         return { opcionesBtn, menuTarea };
     }
-
-
-
 
     /**
     * Crea un menú de opciones para una tarea específica.
@@ -188,22 +174,13 @@ class Tarea {
      * @param {HTMLDivElement} listaDiv - El contenedor `div` que representa la lista de tareas.
      */
     duplicarTarea(listaDiv) {
-        // Crear una nueva tarea con el mismo nombre
         const nuevaTarea = new Tarea(this.nombre);
-
-        // Crear el elemento visual para la nueva tarea
         const nuevaTareaDiv = nuevaTarea.crearTarea(listaDiv);
-
-        // Establecer el texto de la tarea duplicada (no como placeholder)
         const textArea = nuevaTareaDiv.querySelector('textarea');
         if (textArea) {
-            textArea.value = this.nombre; // Copiar el texto real de la tarea original
+            textArea.value = this.nombre; 
         }
-
-        // Asegurarse de que la tarea duplicada tenga su propio ID
-        nuevaTarea.id = `tarea-${Date.now()}-${Math.random()}`; // Generar un ID único
-
-        // Añadir la nueva tarea al contenedor visual y a la lista de tareas
+        nuevaTarea.id = `tarea-${Date.now()}-${Math.random()}`; 
         listaDiv.appendChild(nuevaTareaDiv);
     }
 
@@ -236,16 +213,11 @@ class Tarea {
  * @param {HTMLElement} menu - El menú que se quiere mostrar u ocultar. Este debe ser un elemento HTML con una propiedad `style.display`.
  */
 function toggleMenu(menu) {
-    // Si ya hay un menú abierto y no es el actual, ciérralo
     if (menuAbierto && menuAbierto !== menu) {
-        menuAbierto.style.display = 'none'; // Cerrar el menú previamente abierto
+        menuAbierto.style.display = 'none'; 
     }
-
-    // Alternar el estado del menú actual
     const isMenuVisible = menu.style.display === 'block';
     menu.style.display = isMenuVisible ? 'none' : 'block';
-
-    // Actualizar el menú abierto: si se cerró el actual, resetear a null
     menuAbierto = isMenuVisible ? null : menu;
 }
 

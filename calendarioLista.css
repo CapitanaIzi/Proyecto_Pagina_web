@@ -17,8 +17,8 @@
     width: 100%;
     height: 100%;
     text-align: center;
-    
 }
+
 .light-theme #calendar-container {
     background-color: #fff;
     color: #000;
@@ -56,4 +56,3 @@
 #cerrar-calendario:hover {
     color: red;
 }
-
