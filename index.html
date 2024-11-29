@@ -33,7 +33,14 @@
         </nav>
     <main>
         <div class="container">
-            <h1>Bienvenidos a <span class="highlight">IZIEL</span></h1>
+            <section id="bienvenidaDefault">
+                <h1>Bienvenidos a <span class="highlight">IZIEL</span></h1>
+            </section>
+            
+            <!-- Mensaje de Bienvenida con el nombre del usuario (se muestra cuando el usuario está logueado) -->
+            <section id="bienvenidaSection" style="display: none;">
+                <h1 id="bienvenida">Bienvenido <span id="nombreUsuario"></span> a <span class="highlight">IZIEL</span></h1>
+            </section>
             <p>Esta es una página de organización personal. Muy sencilla, útil para la vida diaria, y para proyectos
                 a futuro.</p>
         </div>
@@ -129,6 +136,7 @@
 
     <script src="Carrusel.js"></script>
     <script src="InteraccionesPagina.js"></script>
+    <script src="RegistroApp.js"></script>
 </body>
 
 </html>

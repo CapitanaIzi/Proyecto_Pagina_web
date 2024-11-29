@@ -1,68 +1,53 @@
+<!-- registro.html -->
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro </title>
-    <link rel="stylesheet" href="encabezado.css">
+    <title>Registro e Inicio de Sesión</title>
     <link rel="stylesheet" href="registro.css">
 </head>
-
 <body>
-    <nav>
-        <input type="checkbox" id="check">
-        <label for="check" class="menuPrincipal">
-            <svg id="menu-icon" viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg" width="24"
-                height="24">
-                <path d="M4 6H20M4 12H20M4 18H20" stroke="#000000" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round"></path>
-            </svg>
-        </label>
-        <a href="index.html" class="enlace">
-            <div class="logo-container">
-                <img id="logo" src="imagenes/logo terminado.png" alt="logo" class="logo">
-                <h1 class="nombre-marca">Iziel</h1>
-            </div>
-        </a>
-        <ul>
-
-            <li><a href="listas.html">Listas</a></li>
-            <li><a href="diagrama.html">Diagrama </a></li>
-            <li><a href="notas.html">Notas</a></li>
-            <li><a href="registro.html">Registrarse</a></li>
-            <li><a href="#" id="toggleAppearance">Tema Claro</a></li>
-            <li><a href="opiniones.html">Opiniones</a></li>
-        </ul>
-    </nav>
     <div class="container">
-        <section class="form-section" id="registroSection">
-            <form id="registroForm" aria-labelledby="registroTitle">
-                <h2 id="registroTitle">Registrarse</h2>
-                <label for="nombre" aria-label="Ingresa tu nombre completo">Nombre:</label>
+        <!-- Sección de Registro -->
+        <section id="registerSection">
+            <form id="registerForm">
+                <h2>Registrarse</h2>
+                <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" required placeholder="Escribe tu nombre">
 
-                <label for="email" aria-label="Ingresa tu correo electrónico">Correo Electrónico:</label>
-                <input type="email" id="email" name="email" required placeholder="Escribe tu correo">
+                <label for="emailRegister">Correo Electrónico:</label>
+                <input type="email" id="emailRegister" name="emailRegister" required placeholder="Escribe tu correo">
 
-                <label for="password" aria-label="Ingresa tu contraseña">Contraseña:</label>
-                <input type="password" id="password" name="password" required placeholder="Escribe tu contraseña">
+                <label for="passwordRegister">Contraseña:</label>
+                <input type="password" id="passwordRegister" name="passwordRegister" required placeholder="Escribe tu contraseña">
 
-                <button type="submit" class="btn" aria-label="Registrarse">Registrarse</button>
+                <label for="confirmPassword">Confirmar Contraseña:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirma tu contraseña">
+
+                <button type="submit" class="btn">Registrarse</button>
             </form>
+        </section>
 
-            <div id="registroExitoso" style="display:none;">
-                <h2>¡Registro exitoso!</h2>
-                <p>Gracias por registrarte. Ya puedes comenzar a usar la aplicación.</p>
-            </div>
+        <!-- Sección de Inicio de Sesión -->
+        <section id="loginSection">
+            <form id="loginForm">
+                <h2>Iniciar Sesión</h2>
+                <label for="emailLogin">Correo Electrónico:</label>
+                <input type="email" id="emailLogin" name="emailLogin" required placeholder="Escribe tu correo">
+
+                <label for="passwordLogin">Contraseña:</label>
+                <input type="password" id="passwordLogin" name="passwordLogin" required placeholder="Escribe tu contraseña">
+
+                <button type="submit" class="btn">Iniciar Sesión</button>
+            </form>
+        </section>
+        <section id="bienvenidaSection" style="display:none;">
+            <h1 id="bienvenida">Bienvenido <span id="nombreUsuario"></span> a <span class="highlight">IZIEL</span></h1>
+            <button onclick="cerrarSesion()">Cerrar sesión</button>
         </section>
     </div>
 
     <script src="RegistroApp.js"></script>
-    <script src="InteraccionesPagina.js"></script>
-
-
-
 </body>
-
 </html>
