@@ -1,93 +1,51 @@
 class RegistroApp {
     constructor() {
-        // Asegúrate de que los elementos existan antes de intentar usarlos
+        this.bienvenidaSection = document.getElementById("bienvenidaSection");
+        this.bienvenidaDefault = document.getElementById("bienvenidaDefault");
+        this.nombreUsuarioSpan = document.getElementById("nombreUsuario");
         this.registerForm = document.getElementById("registerForm");
         this.loginForm = document.getElementById("loginForm");
-        this.bienvenidaDefault = document.getElementById("bienvenidaDefault");
-        this.bienvenidaSection = document.getElementById("bienvenidaSection");
-        this.nombreUsuarioSpan = document.getElementById("nombreUsuario");
 
-        // Verifica el estado del usuario al cargar la página
+        // Inicializa el estado del usuario
         this.checkLoginStatus();
 
-        // Eventos
+        // Evento de envío de formulario de registro
         if (this.registerForm) {
-            this.registerForm.addEventListener("submit", (e) => this.registrarUsuario(e));
+            this.registerForm.addEventListener("submit", (event) => this.handleRegister(event));
         }
-
-        if (this.loginForm) {
-            this.loginForm.addEventListener("submit", (e) => this.iniciarSesion(e));
-        }
+         // Evento de envío de formulario de inicio de sesión
+    if (this.loginForm) {
+        this.loginForm.addEventListener("submit", (event) => this.handleLogin(event));
+    }
     }
 
-    // Revisa si ya hay un usuario logueado
-    checkLoginStatus() {
-        const usuario = JSON.parse(localStorage.getItem("usuarioLogueado"));
-        if (usuario) {
-            // Si el usuario está logueado, muestra el mensaje personalizado y esconde el mensaje por defecto
-            this.mostrarEstadoUsuario(usuario.nombre);
-        } else {
-            // Si no hay usuario logueado, muestra el mensaje por defecto
-            if (this.bienvenidaDefault) {
-                this.bienvenidaDefault.style.display = "block";
-            }
-            if (this.bienvenidaSection) {
-                this.bienvenidaSection.style.display = "none";
-            }
-        }
-    }
+    // Función para registrar y autenticar al usuario
+    handleRegister(event) {
+        event.preventDefault(); // Previene que el formulario se envíe de la forma tradicional
 
-    // Función para registrar usuario
-    registrarUsuario(e) {
-        e.preventDefault();
-
+        // Obtener los datos del formulario
         const nombre = document.getElementById("nombre").value;
         const email = document.getElementById("emailRegister").value;
         const password = document.getElementById("passwordRegister").value;
-        const confirmPassword = document.getElementById("confirmPassword").value;
 
-        // Verifica que las contraseñas coincidan
-        if (password !== confirmPassword) {
-            alert("Las contraseñas no coinciden");
-            return;
-        }
+        // Crear un objeto de usuario
+        const usuario = {
+            nombre: nombre,
+            email: email,
+            password: password, // En una implementación real, nunca debes guardar la contraseña sin encriptar.
+        };
 
-        // Guarda el usuario en localStorage
-        const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-        usuarios.push({ nombre, email, password });
-        localStorage.setItem("usuarios", JSON.stringify(usuarios));
+        // Guardar el usuario en localStorage (simula el inicio de sesión)
+        localStorage.setItem("usuarioLogueado", JSON.stringify(usuario));
 
-        alert("Usuario registrado con éxito");
+        // Mostrar estado del usuario
+        this.mostrarEstadoUsuario(nombre);
 
-        // Redirige al index.html después de registrarse
+        // Redirigir a la página principal o index.html automáticamente después del registro
         window.location.href = "index.html";
     }
 
-    // Función para iniciar sesión
-    iniciarSesion(e) {
-        e.preventDefault();
-
-        const email = document.getElementById("emailLogin").value;
-        const password = document.getElementById("passwordLogin").value;
-
-        // Verifica las credenciales
-        const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-        const usuario = usuarios.find((u) => u.email === email && u.password === password);
-
-        if (usuario) {
-            alert("Inicio de sesión exitoso");
-
-            // Guarda al usuario logueado en localStorage
-            localStorage.setItem("usuarioLogueado", JSON.stringify(usuario));
-
-            // Redirige al index.html después de iniciar sesión
-            window.location.href = "index.html";
-        } else {
-            alert("Correo o contraseña incorrectos");
-        }
-    }
-
-    // Muestra el estado de usuario en el index.html
+    // Función para mostrar el estado del usuario (bienvenida)
     mostrarEstadoUsuario(nombre) {
         // Se esconde el mensaje por defecto
         if (this.bienvenidaDefault) {
@@ -104,28 +62,76 @@ class RegistroApp {
         }
     }
 
+    // Verifica si el usuario ya está logueado
+    checkLoginStatus() {
+        const usuario = JSON.parse(localStorage.getItem("usuarioLogueado"));
+        if (usuario) {
+            this.mostrarEstadoUsuario(usuario.nombre); // Muestra el nombre si el usuario está logueado
+        } else {
+           
+            // Esconde la sección de bienvenida si no hay usuario logueado
+            if (this.bienvenidaSection) {
+                this.bienvenidaSection.style.display = "none";
+            }
+        }
+    }
+
     // Función para cerrar sesión
     cerrarSesion() {
-        // Elimina el usuario logueado de localStorage
+        // Elimina la información de sesión
         localStorage.removeItem("usuarioLogueado");
-
-        // Muestra nuevamente el mensaje por defecto y esconde el mensaje personalizado
-        if (this.bienvenidaDefault) {
-            this.bienvenidaDefault.style.display = "block";
-        }
+        // Esconde la sección de bienvenida
         if (this.bienvenidaSection) {
             this.bienvenidaSection.style.display = "none";
         }
 
-        // Redirige al registro o login (dependiendo de tu flujo de navegación)
+        // Redirige al usuario al formulario de registro (registro.html)
         window.location.href = "registro.html";
     }
+    handleLogin(event) {
+        event.preventDefault();
+    
+        // Obtener los datos del formulario de inicio de sesión
+        const email = document.getElementById("emailLogin").value;
+        const password = document.getElementById("passwordLogin").value;
+    
+        // Obtener los usuarios registrados de localStorage
+        const usuariosRegistrados = JSON.parse(localStorage.getItem("usuarios")) || [];
+    
+        // Buscar si el email existe en los usuarios registrados
+        const usuarioRegistrado = usuariosRegistrados.find(
+            (usuario) => usuario.email === email
+        );
+    
+        if (!usuarioRegistrado) {
+            alert("Este correo no está registrado. Por favor, regístrate antes de iniciar sesión.");
+            return;
+        }
+    
+        // Validar la contraseña del usuario
+        if (usuarioRegistrado.password !== password) {
+            alert("Contraseña incorrecta. Inténtalo de nuevo.");
+            return;
+        }
+    
+        // Guardar el usuario como logueado en localStorage
+        localStorage.setItem("usuarioLogueado", JSON.stringify(usuarioRegistrado));
+    
+        // Mostrar el estado del usuario en la interfaz
+        this.mostrarEstadoUsuario(usuarioRegistrado.nombre);
+    
+        // Redirigir al usuario a la página principal
+        window.location.href = "index.html";
+    }
+    
+    
 }
 
+// Espera a que el documento esté completamente cargado antes de inicializar la aplicación
 document.addEventListener("DOMContentLoaded", () => {
     const app = new RegistroApp();
-    
-    // Agrega el evento para el botón de "Cerrar sesión" 
+
+    // Si hay un botón de cerrar sesión, agrega el evento de cerrar sesión
     const cerrarSesionBtn = document.querySelector("button[onclick='cerrarSesion()']");
     if (cerrarSesionBtn) {
         cerrarSesionBtn.addEventListener("click", () => app.cerrarSesion());
