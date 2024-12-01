@@ -1,139 +1,127 @@
 class RegistroApp {
     constructor() {
-        this.bienvenidaSection = document.getElementById("bienvenidaSection");
-        this.bienvenidaDefault = document.getElementById("bienvenidaDefault");
-        this.nombreUsuarioSpan = document.getElementById("nombreUsuario");
-        this.registerForm = document.getElementById("registerForm");
-        this.loginForm = document.getElementById("loginForm");
+        this.seccionBienvenida = document.getElementById("seccionBienvenida");
+        this.bienvenidaDefault = document.getElementById("mensajeBienvenida");
+        this.spanNombreUsuario = document.getElementById("nombreUsuario");
+        this.formularioRegistro = document.getElementById("formularioRegistro");
+        this.formularioInicioSesion = document.getElementById("formularioInicioSesion");
+        this.verificarEstadoInicioSesion();
 
-        // Inicializa el estado del usuario
-        this.checkLoginStatus();
-
-        // Evento de envío de formulario de registro
-        if (this.registerForm) {
-            this.registerForm.addEventListener("submit", (event) => this.handleRegister(event));
+        if (this.formularioRegistro) {
+            this.formularioRegistro.addEventListener("submit", (event) => this.procesarRegistro(event));
         }
-         // Evento de envío de formulario de inicio de sesión
-    if (this.loginForm) {
-        this.loginForm.addEventListener("submit", (event) => this.handleLogin(event));
-    }
+        if (this.formularioInicioSesion) {
+            this.formularioInicioSesion.addEventListener("submit", (event) => this.procesarInicioSesion(event));
+        }
     }
 
-    // Función para registrar y autenticar al usuario
-    handleRegister(event) {
-        event.preventDefault(); // Previene que el formulario se envíe de la forma tradicional
-
-        // Obtener los datos del formulario
+    async procesarRegistro(event) {
+        event.preventDefault();
         const nombre = document.getElementById("nombre").value;
-        const email = document.getElementById("emailRegister").value;
-        const password = document.getElementById("passwordRegister").value;
+        const correo = document.getElementById("correoRegistro").value;
+        const contrasena = document.getElementById("contrasenaRegistro").value;
 
-        // Crear un objeto de usuario
-        const usuario = {
-            nombre: nombre,
-            email: email,
-            password: password, // En una implementación real, nunca debes guardar la contraseña sin encriptar.
-        };
-
-        // Guardar el usuario en localStorage (simula el inicio de sesión)
-        localStorage.setItem("usuarioLogueado", JSON.stringify(usuario));
-
-        // Mostrar estado del usuario
-        this.mostrarEstadoUsuario(nombre);
-
-        // Redirigir a la página principal o index.html automáticamente después del registro
-        window.location.href = "index.html";
+        try {
+            const response = await fetch('http://localhost:3000/api/user/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nombre, correo, contrasena })
+            });
+            // Verifica si la respuesta fue exitosa (status 2xx)
+            if (response.ok) {
+                const data = await response.json();
+                alert(data.mensaje || 'Usuario registrado con éxito');
+                this.mostrarEstadoUsuario(nombre); // Llamar para actualizar la interfaz
+                localStorage.setItem("usuarioLogueado", JSON.stringify({ nombre })); // Guardar en localStorage
+                window.location.href = "index.html"; // Redirigir si es necesario
+            } else {
+                const errorData = await response.json();
+                alert(errorData.error || 'Error al registrar usuario');
+            }
+        } catch (err) {
+            console.error('Error al registrar usuario:', err);
+            alert('Hubo un error. Intenta nuevamente.');
+        }
     }
 
-    // Función para mostrar el estado del usuario (bienvenida)
+    async procesarInicioSesion(event) {
+        event.preventDefault();
+        const correo = document.getElementById("correoInicioSesion").value;
+        const contrasena = document.getElementById("contrasenaInicioSesion").value;
+
+        try {
+            const response = await fetch('http://localhost:3000/api/user/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ correo, contrasena })
+            });
+
+
+            const data = await response.json();  // Intentando parsear la respuesta como JSON
+
+            if (response.ok) {
+                alert('Inicio de sesión exitoso');
+                this.mostrarEstadoUsuario(data.nombre); // Actualizar la interfaz con el nombre del usuario
+                localStorage.setItem("usuarioLogueado", JSON.stringify({ nombre: data.nombre })); // Guardar en localStorage
+                window.location.href = "index.html"; // Redirigir si es necesario
+            }
+            else {
+                alert(data.error || 'Error al iniciar sesión');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
     mostrarEstadoUsuario(nombre) {
-        // Se esconde el mensaje por defecto
         if (this.bienvenidaDefault) {
             this.bienvenidaDefault.style.display = "none";
         }
-        
-        // Se muestra el mensaje personalizado con el nombre del usuario
-        if (this.bienvenidaSection) {
-            this.bienvenidaSection.style.display = "block";
+        if (this.seccionBienvenida) {
+            this.seccionBienvenida.style.display = "block";
         }
-
-        if (this.nombreUsuarioSpan) {
-            this.nombreUsuarioSpan.textContent = nombre; // Aquí se agrega el nombre al h1
+        if (this.spanNombreUsuario) {
+            this.spanNombreUsuario.textContent = nombre;
         }
     }
 
-    // Verifica si el usuario ya está logueado
-    checkLoginStatus() {
+    verificarEstadoInicioSesion() {
         const usuario = JSON.parse(localStorage.getItem("usuarioLogueado"));
         if (usuario) {
-            this.mostrarEstadoUsuario(usuario.nombre); // Muestra el nombre si el usuario está logueado
+            this.mostrarEstadoUsuario(usuario.nombre);
+            const botonCerrarSesion = document.querySelector("button[onclick='cerrarSesion()']");
+            if (botonCerrarSesion) {
+                botonCerrarSesion.style.display = "block"; // Muestra el botón de cerrar sesión solo si hay un usuario logueado
+            }
         } else {
-           
-            // Esconde la sección de bienvenida si no hay usuario logueado
-            if (this.bienvenidaSection) {
-                this.bienvenidaSection.style.display = "none";
+            if (this.seccionBienvenida) {
+                this.seccionBienvenida.style.display = "none";  // Asegúrate de que no se muestre la bienvenida si no hay usuario logueado
+            }
+            if (this.bienvenidaDefault) {
+                this.bienvenidaDefault.style.display = "block"; // Muestra el mensaje de bienvenida predeterminado si no hay usuario logueado
             }
         }
     }
-
-    // Función para cerrar sesión
+    
     cerrarSesion() {
-        // Elimina la información de sesión
         localStorage.removeItem("usuarioLogueado");
-        // Esconde la sección de bienvenida
-        if (this.bienvenidaSection) {
-            this.bienvenidaSection.style.display = "none";
+        if (this.seccionBienvenida) {
+            this.seccionBienvenida.style.display = "none";
         }
-
-        // Redirige al usuario al formulario de registro (registro.html)
-        window.location.href = "registro.html";
+        if (this.bienvenidaDefault) {
+            this.bienvenidaDefault.style.display = "block";
+        }
+        window.location.href = "registro.html";  // Redirige al registro después de cerrar sesión
     }
-    handleLogin(event) {
-        event.preventDefault();
-    
-        // Obtener los datos del formulario de inicio de sesión
-        const email = document.getElementById("emailLogin").value;
-        const password = document.getElementById("passwordLogin").value;
-    
-        // Obtener los usuarios registrados de localStorage
-        const usuariosRegistrados = JSON.parse(localStorage.getItem("usuarios")) || [];
-    
-        // Buscar si el email existe en los usuarios registrados
-        const usuarioRegistrado = usuariosRegistrados.find(
-            (usuario) => usuario.email === email
-        );
-    
-        if (!usuarioRegistrado) {
-            alert("Este correo no está registrado. Por favor, regístrate antes de iniciar sesión.");
-            return;
-        }
-    
-        // Validar la contraseña del usuario
-        if (usuarioRegistrado.password !== password) {
-            alert("Contraseña incorrecta. Inténtalo de nuevo.");
-            return;
-        }
-    
-        // Guardar el usuario como logueado en localStorage
-        localStorage.setItem("usuarioLogueado", JSON.stringify(usuarioRegistrado));
-    
-        // Mostrar el estado del usuario en la interfaz
-        this.mostrarEstadoUsuario(usuarioRegistrado.nombre);
-    
-        // Redirigir al usuario a la página principal
-        window.location.href = "index.html";
-    }
-    
     
 }
 
-// Espera a que el documento esté completamente cargado antes de inicializar la aplicación
 document.addEventListener("DOMContentLoaded", () => {
     const app = new RegistroApp();
 
-    // Si hay un botón de cerrar sesión, agrega el evento de cerrar sesión
-    const cerrarSesionBtn = document.querySelector("button[onclick='cerrarSesion()']");
-    if (cerrarSesionBtn) {
-        cerrarSesionBtn.addEventListener("click", () => app.cerrarSesion());
+    // En lugar de usar 'onclick' en el HTML, vamos a agregar el evento aquí
+    const botonCerrarSesion = document.querySelector("button[onclick='cerrarSesion()']");
+    if (botonCerrarSesion) {
+        // Aseguramos que el evento use la instancia de 'app'
+        botonCerrarSesion.addEventListener("click", () => app.cerrarSesion());
     }
 });

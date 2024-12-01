@@ -1,53 +1,61 @@
 <!-- registro.html -->
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro e Inicio de Sesión</title>
     <link rel="stylesheet" href="registro.css">
 </head>
+
 <body>
-    <div class="container">
-        <!-- Sección de Registro -->
-        <section id="registerSection">
-            <form id="registerForm">
+    </div>
+    <div class="contenedorRegistro">
+        <section id="seccionRegistro">
+            <form id="formularioRegistro">
                 <h2>Registrarse</h2>
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" required placeholder="Escribe tu nombre">
 
-                <label for="emailRegister">Correo Electrónico:</label>
-                <input type="email" id="emailRegister" name="emailRegister" required placeholder="Escribe tu correo">
+                <label for="correoRegistro">Correo Electrónico:</label>
+                <input type="email" id="correoRegistro" name="correoRegistro" required placeholder="Escribe tu correo">
 
-                <label for="passwordRegister">Contraseña:</label>
-                <input type="password" id="passwordRegister" name="passwordRegister" required placeholder="Escribe tu contraseña">
+                <label for="contrasenaRegistro">Contraseña:</label>
+                <input type="password" id="contrasenaRegistro" name="contrasenaRegistro" required
+                    placeholder="Escribe tu contraseña">
 
-                <label for="confirmPassword">Confirmar Contraseña:</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirma tu contraseña">
+                <label for="confirmarContrasena">Confirmar Contraseña:</label>
+                <input type="password" id="confirmarContrasena" name="confirmarContrasena" required
+                    placeholder="Confirma tu contraseña">
 
-                <button type="submit" class="btn">Registrarse</button>
+                <button type="submit" class="boton">Registrarse</button>
             </form>
-        </section>
-
-        <!-- Sección de Inicio de Sesión -->
-        <section id="loginSection">
-            <form id="loginForm">
-                <h2>Iniciar Sesión</h2>
-                <label for="emailLogin">Correo Electrónico:</label>
-                <input type="email" id="emailLogin" name="emailLogin" required placeholder="Escribe tu correo">
-
-                <label for="passwordLogin">Contraseña:</label>
-                <input type="password" id="passwordLogin" name="passwordLogin" required placeholder="Escribe tu contraseña">
-
-                <button type="submit" class="btn">Iniciar Sesión</button>
-            </form>
-        </section>
-        <section id="bienvenidaSection" style="display:none;">
-            <h1 id="bienvenida">Bienvenido <span id="nombreUsuario"></span> a <span class="highlight">IZIEL</span></h1>
-            <button onclick="cerrarSesion()">Cerrar sesión</button>
         </section>
     </div>
+    <div class="contenedorInicioSesion">
+        <section id="seccionInicioSesion">
+            <form id="formularioInicioSesion">
+                <h2>Iniciar Sesión</h2>
+                <label for="correoInicioSesion">Correo Electrónico:</label>
+                <input type="email" id="correoInicioSesion" name="correoInicioSesion" required
+                    placeholder="Escribe tu correo">
 
+                <label for="contrasenaInicioSesion">Contraseña:</label>
+                <input type="password" id="contrasenaInicioSesion" name="contrasenaInicioSesion" required
+                    placeholder="Escribe tu contraseña">
+
+                <button type="submit" class="boton">Iniciar Sesión</button>
+            </form>
+        </section>
+    </div>
+    <div class="contenedorBienvenida">
+        <section id="seccionBienvenida" style="display:none;">
+            <h1 id="mensajeBienvenida">Bienvenido <span id="nombreUsuario"></span> a <span class="resaltado">IZIEL</span></h1>
+            <button id="cerrarSesionBtn">Cerrar sesión</button>
+        </section>
+    </div>
     <script src="RegistroApp.js"></script>
 </body>
+
 </html>

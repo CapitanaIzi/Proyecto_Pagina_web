@@ -4,19 +4,24 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
     background-color: #f7f7f7;
 }
 
-.container {
+/* Estilos para los contenedores generales */
+.contenedorRegistro,
+.contenedorInicioSesion,
+.contenedorBienvenida {
     width: 100%;
     max-width: 400px;
     padding: 20px;
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    margin-bottom: 20px; /* Espaciado entre los contenedores */
 }
 
 h2 {
@@ -58,7 +63,8 @@ button:hover {
     background-color: #45a049;
 }
 
-.hidden {
+/* Ocultar elementos */
+.oculto {
     display: none;
 }
 
@@ -73,4 +79,12 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+#seccionBienvenida {
+    display: block !important;
+}
+
+#mensajeBienvenida {
+    color: black !important; /* Asegúrate de que el texto sea visible */
+    font-size: 24px !important;
 }
