@@ -170,17 +170,19 @@ button:hover {
 
 @media (max-width: 768px) {
     .carousel {
-        width: 98%;
+        width: 97%;
         height: 300px;
     }
 
     .carousel-description {
-        font-size: 0.9rem;
-
+        font-size: 0.8rem;
+        justify-content: left;
+        width: 40%;
+        padding: 20px;
     }
     .container {
         padding: 0px;
-        width: 100%;
+        width: 90%;
        
     }
     
@@ -193,7 +195,10 @@ button:hover {
     }
 
     .carousel-description {
-        font-size: 0.8rem;
+        font-size: 0.7rem;
         padding: 10px;
+        justify-content: left;
+        width: 40%;
+       
     }
 }

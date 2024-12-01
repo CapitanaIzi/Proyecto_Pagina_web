@@ -1,4 +1,36 @@
 @media (max-width: 865px) {
+    .dark-theme #calendar-container {
+        background-color: #011a53;
+        color: #f7f1f1;
+        box-shadow: 4px 14px 38px rgba(126, 125, 125, 0.952);
+        border-radius: 10px;
+        padding: 10px;
+    }
+    
+    .dark-theme .fc-toolbar {
+        background-color: #164899;
+        color: #fff;
+    }
+    
+    .dark-theme .fc-button {
+        background-color: #89b5f1;
+        color: #0a17d6;
+        border: none;
+    }
+    
+    .dark-theme .fc-button:hover {
+        background-color: #bebfc0;
+    }
+    
+    .dark-theme .fc-day {
+        background-color: #7c7d80;
+        color: #faf3f3;
+    }
+    
+    .dark-theme .fc-today {
+        background-color: #0673e0 !important;
+        color: #f3f0f0;
+    }
     #calendar-container {
         width: 90%;
         max-width: 100%;
@@ -37,6 +69,8 @@
         padding: 5px;
         height: auto;
     }
+    
+    
 }
 
 @media (max-width: 660px) {
@@ -143,6 +177,38 @@
     #cerrar-calendario {
         top: -2px !important;
         right: 5px;
+    }
+    .dark-theme #calendar-container {
+        background-color: #011a53;
+        color: #f7f1f1;
+        box-shadow: 4px 14px 38px rgba(126, 125, 125, 0.952);
+        border-radius: 10px;
+        padding: 10px;
+    }
+    
+    .dark-theme .fc-toolbar {
+        background-color: #164899;
+        color: #fff;
+    }
+    
+    .dark-theme .fc-button {
+        background-color: #89b5f1;
+        color: #0a17d6;
+        border: none;
+    }
+    
+    .dark-theme .fc-button:hover {
+        background-color: #bebfc0;
+    }
+    
+    .dark-theme .fc-day {
+        background-color: #7c7d80;
+        color: #faf3f3;
+    }
+    
+    .dark-theme .fc-today {
+        background-color: #0673e0 !important;
+        color: #f3f0f0;
     }
 }
 
@@ -267,5 +333,37 @@
     #cerrar-calendario {
         right: 0px !important;
         top: -13px !important;
+    }
+    .dark-theme #calendar-container {
+        background-color: #011a53;
+        color: #f7f1f1;
+        box-shadow: 4px 14px 38px rgba(126, 125, 125, 0.952);
+        border-radius: 10px;
+        padding: 10px;
+    }
+    
+    .dark-theme .fc-toolbar {
+        background-color: #164899;
+        color: #fff;
+    }
+    
+    .dark-theme .fc-button {
+        background-color: #89b5f1;
+        color: #0a17d6;
+        border: none;
+    }
+    
+    .dark-theme .fc-button:hover {
+        background-color: #bebfc0;
+    }
+    
+    .dark-theme .fc-day {
+        background-color: #7c7d80;
+        color: #faf3f3;
+    }
+    
+    .dark-theme .fc-today {
+        background-color: #0673e0 !important;
+        color: #f3f0f0;
     }
 }
