@@ -188,7 +188,7 @@ button:hover {
     
 }
 
-@media (max-width: 360px) {
+@media (max-width: 450px) {
     .carousel {
         width: 95%;
         height: 250px;
@@ -199,6 +199,5 @@ button:hover {
         padding: 10px;
         justify-content: left;
         width: 40%;
-       
     }
 }
