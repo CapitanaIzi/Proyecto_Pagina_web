@@ -7,7 +7,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     background-color: #f7f7f7;
 }
 
@@ -80,11 +79,4 @@ a {
 a:hover {
     text-decoration: underline;
 }
-#seccionBienvenida {
-    display: block !important;
-}
 
-#mensajeBienvenida {
-    color: black !important; /* Asegúrate de que el texto sea visible */
-    font-size: 24px !important;
-}
