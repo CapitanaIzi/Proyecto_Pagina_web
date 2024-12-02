@@ -1,7 +1,7 @@
 class RegistroApp {
     constructor() {
         this.seccionBienvenida = document.getElementById("seccionBienvenida");
-        this.bienvenidaDefault = document.getElementById("mensajeBienvenida");
+        this.bienvenidaDefault = document.getElementById("bienvenidaDefault");
         this.spanNombreUsuario = document.getElementById("nombreUsuario");
         this.formularioRegistro = document.getElementById("formularioRegistro");
         this.formularioInicioSesion = document.getElementById("formularioInicioSesion");
@@ -58,7 +58,8 @@ class RegistroApp {
 
 
             const data = await response.json();  // Intentando parsear la respuesta como JSON
-
+            console.log("Respuesta del servidor:", data);
+            
             if (response.ok) {
                 alert('Inicio de sesión exitoso');
                 this.mostrarEstadoUsuario(data.nombre); // Actualizar la interfaz con el nombre del usuario
@@ -73,6 +74,7 @@ class RegistroApp {
         }
     }
     mostrarEstadoUsuario(nombre) {
+        console.log("Mostrando nombre de usuario:", nombre); 
         if (this.bienvenidaDefault) {
             this.bienvenidaDefault.style.display = "none";
         }
@@ -90,17 +92,18 @@ class RegistroApp {
             this.mostrarEstadoUsuario(usuario.nombre);
             const botonCerrarSesion = document.querySelector("button[onclick='cerrarSesion()']");
             if (botonCerrarSesion) {
-                botonCerrarSesion.style.display = "block"; // Muestra el botón de cerrar sesión solo si hay un usuario logueado
+                botonCerrarSesion.style.display = "block"; // Mostrar botón de cerrar sesión
             }
         } else {
             if (this.seccionBienvenida) {
-                this.seccionBienvenida.style.display = "none";  // Asegúrate de que no se muestre la bienvenida si no hay usuario logueado
+                this.seccionBienvenida.style.display = "none";  // Ocultar sección de bienvenida
             }
             if (this.bienvenidaDefault) {
-                this.bienvenidaDefault.style.display = "block"; // Muestra el mensaje de bienvenida predeterminado si no hay usuario logueado
+                this.bienvenidaDefault.style.display = "block"; // Mostrar mensaje predeterminado
             }
         }
     }
+    
     
     cerrarSesion() {
         localStorage.removeItem("usuarioLogueado");
@@ -117,11 +120,9 @@ class RegistroApp {
 
 document.addEventListener("DOMContentLoaded", () => {
     const app = new RegistroApp();
-
-    // En lugar de usar 'onclick' en el HTML, vamos a agregar el evento aquí
-    const botonCerrarSesion = document.querySelector("button[onclick='cerrarSesion()']");
+    const botonCerrarSesion = document.getElementById("cerrarSesion");
     if (botonCerrarSesion) {
-        // Aseguramos que el evento use la instancia de 'app'
         botonCerrarSesion.addEventListener("click", () => app.cerrarSesion());
     }
 });
+

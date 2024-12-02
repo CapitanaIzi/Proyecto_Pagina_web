@@ -62,10 +62,7 @@ button:hover {
     background-color: #45a049;
 }
 
-/* Ocultar elementos */
-.oculto {
-    display: none;
-}
+
 
 p {
     text-align: center;

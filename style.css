@@ -1,6 +1,7 @@
 html {
     scroll-behavior: smooth;
 }
+
 .container {
     text-align: center;
     background-color: white;
@@ -22,9 +23,11 @@ h1 {
     font-weight: bold;
     color: #4287f5;
 }
-a{
+
+a {
     text-decoration: none;
 }
+
 p {
     font-size: 1.2em;
     color: #666;
@@ -46,6 +49,7 @@ p {
 .carousel:hover {
     transform: scale(1.02);
 }
+
 .carousel-item {
     justify-content: center;
     display: none;
@@ -53,11 +57,13 @@ p {
     height: 100%;
     text-align: center;
 }
+
 .carousel-item.active {
     display: flex;
     align-items: center;
     padding: 0px 30px;
 }
+
 .carousel-content {
     text-align: center;
     display: flex;
@@ -69,6 +75,7 @@ p {
     font-family: 'Arial', sans-serif;
     justify-content: center;
 }
+
 .carousel-image {
     width: 50%;
     padding: 15px;
@@ -76,10 +83,12 @@ p {
     justify-content: right;
     align-items: center;
 }
+
 .carousel-item.active svg {
     width: 200px;
     height: 200px;
 }
+
 .carousel-item.active .svg-top svg {
     margin-bottom: 10px;
     width: 140px;
@@ -98,9 +107,10 @@ p {
 
 .carousel-description {
     justify-content: left;
-    width: 40%;
+    width: 50%;
     padding: 55px;
 }
+
 button {
     position: absolute;
     top: 50%;
@@ -140,32 +150,61 @@ button:hover {
 .dark-theme h1 {
     color: #e0e0e0;
 }
+
 .dark-theme .highlight {
     font-weight: bold;
     color: #3c90d4;
 }
+
 .dark-theme p {
     color: #cec8c8;
 }
+
 .dark-theme .carousel-description p {
-    color: #1b1b1b; 
+    color: #1b1b1b;
 }
+
 .dark-theme .carousel {
     background-color: #a5a2a2;
     border: 2px solid #444;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
 }
+
 .dark-theme .carousel:hover {
     transform: scale(1.02);
 }
+
 .dark-theme .carousel-content {
     color: #e0e0e0;
 }
+
 .dark-theme button {
     background-color: rgba(85, 85, 85, 0.7);
 }
+
 .dark-theme button:hover {
     background-color: #666;
+}
+
+@media (max-width: 1465px) {
+    .carousel-description {
+      
+        justify-content: left;
+        width: 50%;
+        padding: 5px;
+        font-size: 24px;
+
+    }
+}
+
+@media (max-width: 1125px) {
+    .carousel-description {
+        justify-content: left;
+        width: 50%;
+        padding: 5px;
+        font-size: 20px;
+
+    }
 }
 
 @media (max-width: 768px) {
@@ -175,17 +214,18 @@ button:hover {
     }
 
     .carousel-description {
-        font-size: 0.8rem;
+        font-size: 15px;
         justify-content: left;
         width: 40%;
-        padding: 20px;
+        padding: 5px;
     }
+
     .container {
         padding: 0px;
         width: 90%;
-       
+
     }
-    
+
 }
 
 @media (max-width: 450px) {
@@ -195,8 +235,8 @@ button:hover {
     }
 
     .carousel-description {
-        font-size: 0.7rem;
-        padding: 10px;
+        font-size: 13px;
+        padding: 5px;
         justify-content: left;
         width: 40%;
     }
